@@ -24,5 +24,97 @@
             @enderror
         </div>
 
+        <div class="col-md-6 mb-3">
+            <label for="last_name">{{trans('admin.academies.email')}}</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="{{trans('admin.academies.email')}}">
+            @error('email')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="phone">{{trans('admin.academies.phone')}}</label>
+            <input type="tel" name="phone" class="form-control" id="phone" placeholder="{{trans('admin.academies.phone')}}">
+            @error('phone')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="password">{{trans('admin.academies.password')}}</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="{{trans('admin.academies.password')}}">
+            @error('password')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="role">{{trans('admin.academies.role')}}</label>
+            <select name="role" class="form-control">
+                @foreach($roles as $role)
+                    <option value="{{$role}}">{{$role}}</option>
+                @endforeach
+            </select>
+            @error('role')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="commercial_name">{{trans('admin.academies.commercial_name')}}</label>
+            <input type="commercial_name" name="commercial_name" class="form-control" id="commercial_name" placeholder="{{trans('admin.academies.commercial_name')}}">
+            @error('commercial_name')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="commercial_name">{{trans('admin.academies.trade_license_number')}}</label>
+            <input type="text" name="trade_license_number" class="form-control" id="trade_license_number" placeholder="{{trans('admin.academies.trade_license_number')}}">
+            @error('trade_license_number')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="trade_license_expire_date">{{trans('admin.academies.trade_license_expire_date')}}</label>
+            <input type="date" name="trade_license_expire_date" class="form-control" id="trade_license_expire_date" placeholder="{{trans('admin.academies.trade_license_expire_date')}}">
+            @error('trade_license_expire_date')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="tax_number">{{trans('admin.academies.tax_number')}}</label>
+            <input type="text" name="tax_number" class="form-control" id="tax_number" placeholder="{{trans('admin.academies.tax_number')}}">
+            @error('tax_number')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="percentage">{{trans('admin.academies.percentage')}}</label>
+            <input type="text" name="percentage" class="form-control" id="percentage" placeholder="{{trans('admin.academies.percentage')}}">
+            @error('percentage')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="address">{{trans('admin.academies.address')}}</label>
+            <input type="text" name="address" class="form-control" id="address" placeholder="{{trans('admin.academies.address')}}">
+            @error('address')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+            <label for="percentage">{{trans('admin.academies.national_id_number')}}</label>
+            <input type="text" name="national_id_number" class="form-control" id="national_id_number" placeholder="{{trans('admin.academies.national_id_number')}}">
+            @error('national_id_number')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
     </div>
 </div>

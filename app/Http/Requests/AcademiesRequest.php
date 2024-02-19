@@ -11,7 +11,7 @@ class AcademiesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class AcademiesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'first_name'=>'required|string|min:3|max:255',
+            'last_name'=>'required|string|min:3|max:255',
+            'email'=>'required|string|email',
+            'full_name_arabic'=>'required|string|min:3|max:3|regex:/^[\p{L}\s\p{P}]+$/u',
+
         ];
     }
 }

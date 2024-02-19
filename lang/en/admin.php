@@ -43,5 +43,10 @@ return [
         'updated_successfully' => 'Area updated successfully',
         'deleted_successfully' => 'Area deleted successfully',
     ],
+    'academies'=>[
+        'academies'=>'academies',
+        'create'=>'Create',
+        ''
+    ]
 
 ];

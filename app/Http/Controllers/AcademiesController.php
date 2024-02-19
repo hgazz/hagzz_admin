@@ -22,7 +22,8 @@ class AcademiesController extends Controller
 
     public function create()
     {
-        return view('Admin.pages.academies.create');
+        $roles = ['manager', 'owner', 'partner'];
+        return view('Admin.pages.academies.create',compact('roles'));
     }
 
     public function store(AcademiesRequest $request)
