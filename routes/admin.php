@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
@@ -41,6 +42,16 @@ Route::group(
                 Route::get('/cities/edit/{city}', 'edit')->name('cities.edit');
                 Route::put('/cities/update/{city}', 'update')->name('cities.update');
                 Route::delete('/cities/delete/{city}', 'destroy')->name('cities.delete');
+            });
+
+            // area routes
+            Route::controller(AreaController::class)->group(function () {
+                Route::get('/areas', 'index')->name('areas.index');
+                Route::get('/areas/create', 'create')->name('areas.create');
+                Route::post('/areas/store', 'store')->name('areas.store');
+                Route::get('/areas/edit/{area}', 'edit')->name('areas.edit');
+                Route::put('/areas/update/{area}', 'update')->name('areas.update');
+                Route::delete('/areas/delete/{area}', 'destroy')->name('areas.delete');
             });
         });
 

@@ -13,7 +13,18 @@ class Area extends Model
 
     public $translatable = ['name'];
     protected $fillable = ['name', 'city_id'];
+    public static $translatableColumns = [
+        'name'=>[
+            'type'=>'text',
+            'validations'=>'required|string|max:255',
+            'is_textarea'=>false
+        ]
+    ];
 
+    public static function getTranslatableFields()
+    {
+        return array_keys(self::$translatableColumns);
+    }
     /**
      * Get the city associated with the user.
      *
