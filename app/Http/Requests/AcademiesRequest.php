@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AcademiesRequest extends FormRequest
@@ -17,7 +18,7 @@ class AcademiesRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
@@ -27,7 +28,7 @@ class AcademiesRequest extends FormRequest
             'email'=>'required|string|email',
             'full_name_arabic'=>'nullable|string|min:3|max:255|regex:/^[\p{Arabic}]+$/u',
             'phone'=>'required|string|min:7',
-            'password'=>'required|string|min:6',
+            'password'=> $this->validatePassword(),
             'role'=>'required',
             'commercial_name'=>'required|string|min:3|max:255',
             'trade_license_number'=>'required|numeric',
@@ -36,5 +37,10 @@ class AcademiesRequest extends FormRequest
             'national_id_number'=>'nullable|string',
             'address'=>'nullable|string:min:3|max:255',
         ];
+    }
+
+    private function validatePassword(): string
+    {
+        return request()->isMethod('POST') ? 'required|string|min:6' : 'nullable|string|min:6';
     }
 }

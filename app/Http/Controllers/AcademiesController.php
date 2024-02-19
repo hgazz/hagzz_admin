@@ -36,17 +36,19 @@ class AcademiesController extends Controller
     public function updateStatus(Academies $academies)
     {
         if ($academies->status == 'active'){
-            $academies->update([
-                'status'=> 'inactive',
-            ]);
-            session()->flash('success',trans('admin.academies.status inactive_successfully'));
-            return to_route('admin.academies.index');
+            $newStatus = 'inactive';
+            $successMessage = trans('admin.academies.status_inactive_successfully');
+        } else {
+            $newStatus = 'active';
+            $successMessage = trans('admin.academies.status_active_successfully');
         }
+
         $academies->update([
-            'status'=> 'active',
+            'status' => $newStatus,
         ]);
-        session()->flash('success',trans('admin.academies.status active successfully'));
-        return to_route('admin.academies.index');
+
+        session()->flash('success', $successMessage);
+        return redirect()->route('admin.academies.index');
     }
     public function edit(Academies $academies)
     {
