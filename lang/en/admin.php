@@ -29,4 +29,9 @@ return [
         'updated_successfully' => 'City updated successfully',
         'deleted_successfully' => 'City deleted successfully',
     ],
+    'academies'=>[
+        'academies'=>'academies',
+        'create'=>'Create',
+        ''
+    ]
 ];

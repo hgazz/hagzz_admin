@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AcademiesController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
@@ -41,6 +42,15 @@ Route::group(
                 Route::get('/cities/edit/{city}', 'edit')->name('cities.edit');
                 Route::put('/cities/update/{city}', 'update')->name('cities.update');
                 Route::delete('/cities/delete/{city}', 'destroy')->name('cities.delete');
+            });
+
+            Route::controller(AcademiesController::class)->group(function (){
+                Route::get('/academies', 'index')->name('academies.index');
+                Route::get('/academies/create','create')->name('academies.create');
+                Route::post('/academies/store','store')->name('academies.store');
+                Route::get('/academies/edit/{academies}','edit')->name('academies.edit');
+                Route::put('/academies/update/{academies}','update')->name('academies.update');
+                Route::delete('/academies/delete/{academies}','delete')->name('academies.delete');
             });
         });
 
