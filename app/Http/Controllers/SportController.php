@@ -7,7 +7,7 @@ use App\Http\Requests\SportRequest;
 use App\Http\Traits\FileUpload;
 use App\Models\Sport;
 use App\Services\TranslatableService;
-use Illuminate\Http\Request;
+
 
 class SportController extends Controller
 {
