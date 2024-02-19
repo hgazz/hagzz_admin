@@ -14,7 +14,18 @@ class City extends Model
     public $translatable = ['name'];
     protected $fillable = ['name'];
 
+    public static $translatableColumns = [
+        'name'=>[
+            'type'=>'text',
+            'validations'=>'required|string|max:255',
+            'is_textarea'=>false
+        ]
+    ];
 
+    public static function getTranslatableFields()
+    {
+        return array_keys(self::$translatableColumns);
+    }
     /**
      * Get the areas associated with the city.
      *

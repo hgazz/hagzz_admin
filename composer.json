@@ -13,6 +13,7 @@
         "league/flysystem-aws-s3-v3": "^3.0",
         "mcamara/laravel-localization": "^1.8",
         "spatie/laravel-translatable": "^6.5",
+        "php-flasher/flasher-toastr-laravel": "^1.15",
         "yajra/laravel-datatables": "^10.0",
         "yajra/laravel-datatables-oracle": "^10.3.1"
     },

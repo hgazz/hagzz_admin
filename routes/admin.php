@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -29,8 +30,18 @@ Route::group(
         });
         Route::post('/logout', 'logout')->name('logout')->middleware('auth:admin');
     });
-        Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
-            Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
+        Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', 'as' => 'admin.'], function () {
+            Route::get('/', [DashboardController::class, 'index'])->name('index');
+
+            // city routes
+            Route::controller(CityController::class)->group(function () {
+                Route::get('/cities', 'index')->name('cities.index');
+                Route::get('/cities/create', 'create')->name('cities.create');
+                Route::post('/cities/store', 'store')->name('cities.store');
+                Route::get('/cities/edit/{city}', 'edit')->name('cities.edit');
+                Route::put('/cities/update/{city}', 'update')->name('cities.update');
+                Route::delete('/cities/delete/{city}', 'destroy')->name('cities.delete');
+            });
         });
 
 });
