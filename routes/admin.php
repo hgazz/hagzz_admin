@@ -6,6 +6,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SportController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -74,6 +75,16 @@ Route::group(
                 Route::get('/banners/edit/{banner}', 'edit')->name('banners.edit');
                 Route::put('/banners/update/{banner}', 'update')->name('banners.update');
                 Route::delete('/banners/delete/{banner}', 'destroy')->name('banners.delete');
+            });
+
+            Route::controller(SportController::class)->group(function (){
+                Route::get('sport','index')->name('sport.index');
+                Route::get('sport/create','create')->name('sport.create');
+                Route::post('sport/store','store')->name('sport.store');
+                Route::get('sport/edit/{sport}','edit')->name('sport.edit');
+                Route::put('sport/update/{sport}','update')->name('sport.update');
+                Route::delete('sport/delete/{sport}','delete')->name('sport.delete');
+                Route::put('sport/updateStatus/{sport}','updateStatus')->name('sport.updateStatus');
             });
         });
 

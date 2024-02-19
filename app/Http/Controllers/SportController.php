@@ -45,10 +45,37 @@ class SportController extends Controller
     }
     public function update(Sport $sport , SportRequest $request)
     {
+        $imageName = $request->hasFile('icon') ? $this->upload($request->file('icon') , $this->sportModel::PATH,  $sport->getRawOriginal('icon')) : $sport->getRawOriginal('icon');
+        $translatable = TranslatableService::generateTranslatableFields($this->sportModel::getTranslatableFields() , $request->validated());
+        $sport->update(array_merge($translatable,[
+            'icon'=>$imageName
+        ]));
+        session()->flash('success','Successfully Updated');
+        return to_route('admin.sport.index');
+    }
 
+    public function updateStatus(Sport $sport)
+    {
+        if ($sport->status == 'active'){
+            $newStatus = 'inactive';
+            $successMessage = trans('admin.academies.status_inactive_successfully');
+        } else {
+            $newStatus = 'active';
+            $successMessage = trans('admin.sport.status_active_successfully');
+        }
+
+        $sport->update([
+            'status' => $newStatus,
+        ]);
+
+        session()->flash('success', $successMessage);
+        return redirect()->route('admin.sport.index');
     }
     public function delete(Sport $sport)
     {
-
+        $sport->delete();
+        $this->deleteFile($this->sportModel::PATH . $sport->getRawOriginal('icon'));
+        session()->flash('success', trans('admin.banners.deleted_successfully'));
+        return to_route('admin.sport.index');
     }
 }

@@ -9,7 +9,18 @@
             </svg>
         </a>
 
+        <form method="POST" action="{{ route('admin.sport.updateStatus', $sport) }}"  class="ms-2">
+            @csrf
+            @method('PUT')
 
+            <button class="btn bg-transparent">
+                @if($sport->status == 'active')
+                    <span class="text-success">Active</span>
+                @else
+                    <span class="text-danger">InActive</span>
+                @endif
+            </button>
+        </form>
 
         <form method="POST" action="{{ route('admin.sport.delete', $sport) }}" id="delete-form" class="ms-2">
             @csrf

@@ -21,9 +21,9 @@ class SportDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->editColumn('name', fn($raw) => $raw->name)
-        ->editColumn('icon', function ($raw) {
+        ->editColumn('icon', function (Sport $sport) {
 
-            return '<img src="'.asset($raw->icon).'" class="img-thumbnail" width="80" height="80">';
+            return '<img src="' . $sport->logo.$sport->icon . '" width="100" height="100">';
         })
             ->addColumn('action', function (Sport $sport) {
                 return view('Admin.pages.sport.datatable.actions', compact('sport'))->render();
@@ -67,9 +67,11 @@ class SportDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            ['data' => 'name', 'name' => 'name', 'title' => trans('admin.card.title')],
-            ['data' => 'icon', 'name' => 'icon', 'title' => trans('admin.card.icon')],
-            ['data' => 'level', 'name' => 'level', 'title' => trans('admin.card.level')],
+            ['data' => 'name', 'name' => 'name', 'title' => trans('admin.sport.title')],
+            ['data' => 'icon', 'name' => 'icon', 'title' => trans('admin.sport.icon')],
+            ['data' => 'level', 'name' => 'level', 'title' => trans('admin.sport.level')],
+            ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
+
         ];
     }
 

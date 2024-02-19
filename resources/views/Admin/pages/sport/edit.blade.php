@@ -36,14 +36,14 @@
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-bottom:24px;">
-                <form method="POST" action="{{ route('admin.academies.update', $academies) }}">
+                <form method="POST" action="{{ route('admin.sport.update', $sport) }}" enctype="multipart/form-data">
                     @method('PUT')
                     <div class="card">
                         <div class="card-header">
                             <h3>{{ trans('admin.academies.edit') }}</h3>
                         </div>
                         <div class="card-body">
-                            @include('Admin.pages.academies.partials._form')
+                            @include('Admin.pages.sport.partials._form')
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success mt-3">{{ trans('admin.submit') }}</button>
