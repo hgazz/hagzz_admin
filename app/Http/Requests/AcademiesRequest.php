@@ -25,8 +25,16 @@ class AcademiesRequest extends FormRequest
             'first_name'=>'required|string|min:3|max:255',
             'last_name'=>'required|string|min:3|max:255',
             'email'=>'required|string|email',
-            'full_name_arabic'=>'required|string|min:3|max:3|regex:/^[\p{L}\s\p{P}]+$/u',
-
+            'full_name_arabic'=>'nullable|string|min:3|max:255|regex:/^[\p{Arabic}]+$/u',
+            'phone'=>'required|string|min:7',
+            'password'=>'required|string|min:6',
+            'role'=>'required',
+            'commercial_name'=>'required|string|min:3|max:255',
+            'trade_license_number'=>'required|numeric',
+            'trade_license_expire_date'=>'required|date|after_or_equal:'. now()->toDateString(),
+            'tax_number'=>'numeric|numeric',
+            'national_id_number'=>'nullable|string',
+            'address'=>'nullable|string:min:3|max:255',
         ];
     }
 }

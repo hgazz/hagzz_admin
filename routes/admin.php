@@ -61,6 +61,7 @@ Route::group(
                 Route::post('/academies/store','store')->name('academies.store');
                 Route::get('/academies/edit/{academies}','edit')->name('academies.edit');
                 Route::put('/academies/update/{academies}','update')->name('academies.update');
+                Route::put('/academies/updateStatus/{academies}','updateStatus')->name('academies.updateStatus');
                 Route::delete('/academies/delete/{academies}','delete')->name('academies.delete');
             });
         });

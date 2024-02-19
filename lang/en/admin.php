@@ -46,7 +46,26 @@ return [
     'academies'=>[
         'academies'=>'academies',
         'create'=>'Create',
-        ''
+        'first_name'=>'First name',
+        'last_name'=>'Last name',
+        'email'=>'email',
+        'full_name_arabic'=>'full name arabic',
+        'phone'=>'phone',
+        'password'=>'password',
+        'role'=>'role',
+        'commercial_name'=>'commercial name',
+        'trade_license_number'=>'trade license number',
+        'trade_license_expire_date'=>'trade license expire date',
+        'tax_number'=>'tax number',
+        'percentage'=>'percentage',
+        'address'=>'address',
+        'national_id_number'=>'national id number',
+        'academies_created_successfully'=>'academies created successfully',
+        'status inactive_successfully'=>'status inactive successfully',
+        'status active successfully'=>'status active successfully',
+        'edit'=>'edit',
+        'academies updated successfully'=>'academies updated successfully',
+        'academies deleted successfully'=>'academies deleted successfully',
     ]
 
 ];

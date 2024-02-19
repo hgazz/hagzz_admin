@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.city.edit'))
+@section('title', trans('admin.academies.edit'))
 
 
 @section('content')
@@ -22,8 +22,8 @@
                             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.cities.index') }}">{{ trans('admin.city.cities') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.city.edit') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.academies.index') }}">{{ trans('admin.academies.academies') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.academies.edit') }}</li>
                                 </ol>
                             </nav>
 
@@ -36,14 +36,14 @@
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-bottom:24px;">
-                <form method="POST" action="{{ route('admin.cities.update', $city) }}">
+                <form method="POST" action="{{ route('admin.academies.update', $academies) }}">
                     @method('PUT')
                     <div class="card">
                         <div class="card-header">
-                            <h3>{{ trans('admin.city.edit') }}</h3>
+                            <h3>{{ trans('admin.academies.edit') }}</h3>
                         </div>
                         <div class="card-body">
-                            @include('Admin.pages.city.partials._form')
+                            @include('Admin.pages.academies.partials._form')
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success mt-3">{{ trans('admin.submit') }}</button>
