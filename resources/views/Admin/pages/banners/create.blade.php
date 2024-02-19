@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.banners.edit'))
+@section('title', trans('admin.banners.create'))
 
 
 @section('content')
@@ -23,7 +23,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
                                     <li class="breadcrumb-item"><a href="{{ route('admin.banners.index') }}">{{ trans('admin.banners.banners') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.banners.edit') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.banners.create') }}</li>
                                 </ol>
                             </nav>
 
@@ -36,11 +36,10 @@
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-bottom:24px;">
-                <form method="POST" action="{{ route('admin.banners.update', $banner) }}" enctype="multipart/form-data">
-                  @method('PUT')
+                <form method="POST" action="{{ route('admin.banners.store') }}" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
-                            <h3>{{ trans('admin.banners.edit') }}</h3>
+                            <h3>{{ trans('admin.banners.create') }}</h3>
                         </div>
                         <div class="card-body">
                             @include('Admin.pages.banners.partials._form')
