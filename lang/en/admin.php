@@ -29,9 +29,19 @@ return [
         'updated_successfully' => 'City updated successfully',
         'deleted_successfully' => 'City deleted successfully',
     ],
-    'academies'=>[
-        'academies'=>'academies',
-        'create'=>'Create',
-        ''
-    ]
+    'area' => [
+        'area' => 'Area',
+        'areas' => 'Areas',
+        'create' => 'Create Area',
+        'edit' => 'Edit Area',
+        'name' => 'Name',
+        'name_ar' => 'Name (Arabic)',
+        'name_en' => 'Name (English)',
+        'city' => 'City',
+        'select_city' => 'Select City',
+        'created_successfully' => 'Area created successfully',
+        'updated_successfully' => 'Area updated successfully',
+        'deleted_successfully' => 'Area deleted successfully',
+    ],
+
 ];

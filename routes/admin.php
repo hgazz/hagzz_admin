@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AcademiesController;
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
@@ -44,13 +44,14 @@ Route::group(
                 Route::delete('/cities/delete/{city}', 'destroy')->name('cities.delete');
             });
 
-            Route::controller(AcademiesController::class)->group(function (){
-                Route::get('/academies', 'index')->name('academies.index');
-                Route::get('/academies/create','create')->name('academies.create');
-                Route::post('/academies/store','store')->name('academies.store');
-                Route::get('/academies/edit/{academies}','edit')->name('academies.edit');
-                Route::put('/academies/update/{academies}','update')->name('academies.update');
-                Route::delete('/academies/delete/{academies}','delete')->name('academies.delete');
+            // area routes
+            Route::controller(AreaController::class)->group(function () {
+                Route::get('/areas', 'index')->name('areas.index');
+                Route::get('/areas/create', 'create')->name('areas.create');
+                Route::post('/areas/store', 'store')->name('areas.store');
+                Route::get('/areas/edit/{area}', 'edit')->name('areas.edit');
+                Route::put('/areas/update/{area}', 'update')->name('areas.update');
+                Route::delete('/areas/delete/{area}', 'destroy')->name('areas.delete');
             });
         });
 
