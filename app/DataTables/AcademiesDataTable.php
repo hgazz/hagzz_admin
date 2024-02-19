@@ -72,7 +72,6 @@ class AcademiesDataTable extends DataTable
             ['name' => 'email', 'data' => 'email', 'title' => trans('admin.academies.email')],
             ['name' => 'full_name_arabic', 'data' => 'full_name_arabic', 'title' => trans('admin.academies.full_name_arabic')],
             ['name' => 'phone', 'data' => 'phone', 'title' => trans('admin.academies.phone')],
-            ['name' => 'password', 'data' => 'password', 'title' => trans('admin.academies.password')],
             ['name' => 'role', 'data' => 'role', 'title' => trans('admin.academies.role')],
             ['name' => 'commercial_name', 'data' => 'commercial_name', 'title' => trans('admin.academies.commercial_name')],
             ['name' => 'trade_license_number', 'data' => 'trade_license_number', 'title' => trans('admin.academies.trade_license_number')],

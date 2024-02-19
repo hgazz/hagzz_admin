@@ -6,6 +6,7 @@ use App\DataTables\AcademiesDataTable;
 use App\Http\Requests\AcademiesRequest;
 use App\Models\Academies;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AcademiesController extends Controller
 {
@@ -28,7 +29,9 @@ class AcademiesController extends Controller
 
     public function store(AcademiesRequest $request)
     {
-        $this->academicModels->create($request->validated());
+        $data = $request->validated();
+        $data['password'] = Hash::make($request->password);
+        $this->academicModels->create($data);
         session()->flash('success', trans('admin.academies.academies_created_successfully'));
         return to_route('admin.academies.index');
     }
@@ -58,7 +61,9 @@ class AcademiesController extends Controller
 
     public function update(Academies $academies , AcademiesRequest $request)
     {
-        $academies->update($request->validated());
+        $data = $request->validated();
+        $data['password'] = Hash::make($request->password) ?? $academies->password;
+        $academies->update($data);
         session()->flash('success',trans('admin.academies.academies updated successfully'));
         return to_route('admin.academies.index');
     }

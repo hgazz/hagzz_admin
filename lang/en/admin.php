@@ -66,6 +66,8 @@ return [
         'edit'=>'edit',
         'academies updated successfully'=>'academies updated successfully',
         'academies deleted successfully'=>'academies deleted successfully',
+        'status_inactive_successfully'=>'status inactive successfully',
+
     ]
 
 ];
