@@ -16,7 +16,7 @@
                 <label for="role">{{trans('admin.sport.level')}}</label>
                 <select name="level" class="form-control">
                     @foreach($roles as $role)
-                        <option value="{{$role}}">{{$role}}</option>
+                        <option value="{{$role}}" @selected(old('level', isset($sport) ? $sport->level : '') == $role)>{{$role}}</option>
                     @endforeach
                 </select>
                 @error('level')

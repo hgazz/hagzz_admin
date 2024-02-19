@@ -48,7 +48,8 @@ class SportController extends Controller
         $imageName = $request->hasFile('icon') ? $this->upload($request->file('icon') , $this->sportModel::PATH,  $sport->getRawOriginal('icon')) : $sport->getRawOriginal('icon');
         $translatable = TranslatableService::generateTranslatableFields($this->sportModel::getTranslatableFields() , $request->validated());
         $sport->update(array_merge($translatable,[
-            'icon'=>$imageName
+            'icon'=>$imageName,
+            'level'=> $request->level
         ]));
         session()->flash('success','Successfully Updated');
         return to_route('admin.sport.index');
