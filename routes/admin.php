@@ -6,6 +6,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SportController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -85,6 +86,16 @@ Route::group(
                 Route::put('sport/update/{sport}','update')->name('sport.update');
                 Route::delete('sport/delete/{sport}','delete')->name('sport.delete');
                 Route::put('sport/updateStatus/{sport}','updateStatus')->name('sport.updateStatus');
+            });
+
+            Route::controller(SettingController::class)->group(function (){
+                Route::get('setting','index')->name('setting.index');
+                Route::get('setting/create','create')->name('setting.create');
+                Route::post('setting/store','store')->name('setting.store');
+                Route::get('setting/edit/{setting}','edit')->name('setting.edit');
+                Route::put('setting/update/{setting}','update')->name('setting.update');
+                Route::delete('setting/delete/{setting}','delete')->name('setting.delete');
+
             });
         });
 
