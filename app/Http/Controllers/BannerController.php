@@ -6,7 +6,6 @@ use App\DataTables\BannerDataTable;
 use App\Http\Requests\Banner\BannerRequest;
 use App\Http\Traits\FileUpload;
 use App\Models\Banner;
-use Illuminate\Http\Request;
 
 class BannerController extends Controller
 {
@@ -45,7 +44,7 @@ class BannerController extends Controller
 
     public function update(BannerRequest $request, Banner $banner)
     {
-        $image = $this->upload($request->file('image'), $this->bannerModel::PATH, $banner->getRawOriginal('logo'));
+        $image = $request->hasFile('image') ? $this->upload($request->file('image'), $this->bannerModel::PATH, $banner->getRawOriginal('logo')) : $banner->getRawOriginal('logo');
         $banner->update([
             'logo' => $image,
         ]);
