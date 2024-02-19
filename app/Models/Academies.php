@@ -26,4 +26,5 @@ class Academies extends Model
         'national_id_number',
         'address',
     ];
+
 }
