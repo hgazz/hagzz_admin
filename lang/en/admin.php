@@ -61,13 +61,11 @@ return [
         'address'=>'address',
         'national_id_number'=>'national id number',
         'academies_created_successfully'=>'academies created successfully',
-        'status inactive_successfully'=>'status inactive successfully',
-        'status active successfully'=>'status active successfully',
+        'status_inactive_successfully'=>'status inactive successfully',
+        'status_active successfully'=>'status active successfully',
         'edit'=>'edit',
         'academies updated successfully'=>'academies updated successfully',
         'academies deleted successfully'=>'academies deleted successfully',
-        'status_inactive_successfully'=>'status inactive successfully',
-
     ]
 
 ];
