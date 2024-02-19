@@ -9,6 +9,12 @@ use Spatie\Translatable\HasTranslations;
 class Sport extends Model
 {
     use HasFactory, HasTranslations;
+
+    const  PATH = 'images/sports/';
+    public function getLogoAttribute($value)
+    {
+        return  config('services.s3.url'). DIRECTORY_SEPARATOR . self::PATH . $value;
+    }
     public $translatable = ['name'];
     protected $fillable = [
             'name',
@@ -16,4 +22,16 @@ class Sport extends Model
             'status',
             'level',
     ];
+    public static $translatableColumns = [
+        'name'=>[
+            'type'=>'text',
+            'validations'=>'required|string|max:255',
+            'is_textarea'=>false
+        ]
+    ];
+
+    public static function getTranslatableFields()
+    {
+        return array_keys(self::$translatableColumns);
+    }
 }
