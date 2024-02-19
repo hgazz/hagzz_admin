@@ -5,6 +5,7 @@ use App\Http\Controllers\AcademiesController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SportController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -63,6 +64,16 @@ Route::group(
                 Route::put('/academies/update/{academies}','update')->name('academies.update');
                 Route::put('/academies/updateStatus/{academies}','updateStatus')->name('academies.updateStatus');
                 Route::delete('/academies/delete/{academies}','delete')->name('academies.delete');
+            });
+
+            Route::controller(SportController::class)->group(function (){
+                Route::get('sport','index')->name('sport.index');
+                Route::get('sport/create','create')->name('sport.create');
+                Route::post('sport/store','store')->name('sport.store');
+                Route::get('sport/edit/{sport}','edit')->name('sport.edit');
+                Route::put('sport/update/{sport}','update')->name('sport.update');
+                Route::delete('sport/delete/{sport}','delete')->name('sport.delete');
+
             });
         });
 

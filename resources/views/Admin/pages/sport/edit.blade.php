@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.area.create'))
+@section('title', trans('admin.academies.edit'))
 
 
 @section('content')
@@ -22,8 +22,8 @@
                             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.areas.index') }}">{{ trans('admin.area.areas') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.area.create') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.academies.index') }}">{{ trans('admin.academies.academies') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.academies.edit') }}</li>
                                 </ol>
                             </nav>
 
@@ -35,21 +35,22 @@
         <!--  END BREADCRUMBS  -->
 
         <div class="row layout-top-spacing">
-             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-bottom:24px;">
-        <form method="POST" action="{{ route('admin.areas.store') }}" enctype="multipart/form-data">
-            <div class="card">
-                <div class="card-header">
-                    <h3>{{ trans('admin.area.create') }}</h3>
-                </div>
-                <div class="card-body">
-                    @include('Admin.pages.area.partials._form')
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-success mt-3">{{ trans('admin.submit') }}</button>
-                </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-bottom:24px;">
+                <form method="POST" action="{{ route('admin.academies.update', $academies) }}">
+                    @method('PUT')
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>{{ trans('admin.academies.edit') }}</h3>
+                        </div>
+                        <div class="card-body">
+                            @include('Admin.pages.academies.partials._form')
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success mt-3">{{ trans('admin.submit') }}</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
         </div>
     </div>
 @endsection
