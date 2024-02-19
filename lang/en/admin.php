@@ -66,6 +66,18 @@ return [
         'edit'=>'edit',
         'academies updated successfully'=>'academies updated successfully',
         'academies deleted successfully'=>'academies deleted successfully',
-    ]
+    ],
+    'banners'=> [
+        'banners'=>'Banners',
+        'image'=>'Image',
+        'status'=>'Status',
+        'active'=>'Active',
+        'inactive'=>'Inactive',
+        'create'=>'Create Banner',
+        'edit'=>'Edit Banner',
+        'created_successfully'=>'Banner created successfully',
+        'updated_successfully'=>'Banner updated successfully',
+        'deleted_successfully'=>'Banner deleted successfully',
+    ],
 
 ];

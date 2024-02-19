@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AcademiesController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
@@ -63,6 +64,16 @@ Route::group(
                 Route::put('/academies/update/{academies}','update')->name('academies.update');
                 Route::put('/academies/updateStatus/{academies}','updateStatus')->name('academies.updateStatus');
                 Route::delete('/academies/delete/{academies}','delete')->name('academies.delete');
+            });
+
+            // banner routes
+            Route::controller(BannerController::class)->group(function () {
+                Route::get('/banners', 'index')->name('banners.index');
+                Route::get('/banners/create', 'create')->name('banners.create');
+                Route::post('/banners/store', 'store')->name('banners.store');
+                Route::get('/banners/edit/{banner}', 'edit')->name('banners.edit');
+                Route::put('/banners/update/{banner}', 'update')->name('banners.update');
+                Route::delete('/banners/delete/{banner}', 'destroy')->name('banners.delete');
             });
         });
 

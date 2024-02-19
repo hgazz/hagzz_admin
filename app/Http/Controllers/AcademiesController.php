@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\AcademiesDataTable;
-use App\Http\Requests\AcademiesRequest;
+use App\Http\Requests\Academies\AcademiesRequest;
 use App\Models\Academies;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AcademiesController extends Controller

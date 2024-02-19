@@ -22,8 +22,13 @@ class BannerDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'banner.action')
-            ->setRowId('id');
+            ->addColumn('logo', function (Banner $banner) {
+                return '<img src="' . $banner->logo . '" width="100" height="100">';
+            })
+            ->addColumn('action', function (Banner $banner) {
+                return view('Admin.pages.banners.datatable.actions', compact('banner'))->render();
+            })
+            ->rawColumns(['action', 'logo']);
     }
 
     /**
@@ -62,15 +67,9 @@ class BannerDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
+            ['name' => 'logo', 'data' => 'logo', 'title' => trans('admin.banners.image')],
+            ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }
 
