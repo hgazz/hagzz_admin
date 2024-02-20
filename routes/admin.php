@@ -35,7 +35,8 @@ Route::group(
         });
         Route::post('/logout', 'logout')->name('logout')->middleware('auth:admin');
     });
-        Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', 'as' => 'admin.'], function () {
+
+    Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', 'as' => 'admin.'], function () {
             Route::get('/', [DashboardController::class, 'index'])->name('index');
 
             // city routes

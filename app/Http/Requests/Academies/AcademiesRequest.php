@@ -26,7 +26,7 @@ class AcademiesRequest extends FormRequest
             'first_name'=>'required|string|min:3|max:255',
             'last_name'=>'required|string|min:3|max:255',
             'email'=>'required|string|email',
-            'full_name_arabic'=>'nullable|string|min:3|max:255|regex:/^[\p{Arabic}]+$/u',
+            'full_name_arabic'=>'nullable|string|min:3|max:255|regex:/\p{Arabic}/u',
             'phone'=>'required|string|min:7',
             'password'=> $this->validatePassword(),
             'role'=>'required',
