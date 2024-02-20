@@ -79,6 +79,7 @@ return [
         'updated_successfully'=>'Banner updated successfully',
         'deleted_successfully'=>'Banner deleted successfully',
     ],
+
     'sport'=>[
         'sport'=>'sport',
         'title'=>'Title',
@@ -87,6 +88,13 @@ return [
         'create'=>'Create',
         'status_active_successfully'=>'status_active_successfully',
         'status inactive successfully'=>'status inactive successfully'
+    ],
+    'setting'=>[
+        'setting'=>'settings',
+        'key'=>'key',
+        'value'=>'value',
+        'type'=>'type',
+        'ID'=>'ID'
     ]
 
 ];
