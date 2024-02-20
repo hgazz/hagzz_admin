@@ -25,7 +25,7 @@ class SportController extends Controller
     public function create()
     {
         $roles = ['beginner', 'intermediate', 'advanced'];
-        return view('admin.pages.sport.create',compact('roles'));
+        return view('Admin.pages.sport.create',compact('roles'));
     }
     public function store(SportRequest $request)
     {
@@ -41,7 +41,7 @@ class SportController extends Controller
     public function edit(Sport $sport)
     {
         $roles = ['beginner', 'intermediate', 'advanced'];
-        return view('admin.pages.sport.edit', compact('roles','sport'));
+        return view('Admin.pages.sport.edit', compact('roles','sport'));
     }
     public function update(Sport $sport , SportRequest $request)
     {
