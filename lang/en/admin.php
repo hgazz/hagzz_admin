@@ -95,6 +95,19 @@ return [
         'value'=>'value',
         'type'=>'type',
         'ID'=>'ID'
-    ]
+    ],
+    'coaches'=>[
+        'coaches'=>'coaches',
+        'create'=>'Create',
+        'name'=>'Name',
+        'description'=>'Description',
+        'image'=>'Image',
+        'active'=>'Active',
+        'inactive'=>'Inactive',
+        'academy_id'=>'Academy',
+        'created_successfully'=>'Coach created successfully',
+        'updated_successfully'=>'Coach updated successfully',
+        'deleted_successfully'=>'Coach deleted successfully',
+    ],
 
 ];
