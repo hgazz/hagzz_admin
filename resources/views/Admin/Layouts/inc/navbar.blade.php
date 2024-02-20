@@ -4,7 +4,7 @@
         <ul class="navbar-item theme-brand flex-row  text-center">
             <li class="nav-item theme-logo">
                 <a href="{{ route('admin.index') }}">
-                    <img src="{{ asset('assetsAdmin/src/assets/img/logo2.svg') }}" class="navbar-logo" alt="logo">
+                    <img src="{{ asset('assetsAdmin/src/assets/img/logo.svg') }}" class="navbar-logo" alt="logo">
                 </a>
             </li>
             <li class="nav-item theme-text">
@@ -12,16 +12,6 @@
             </li>
         </ul>
 
-        <div class="search-animated toggle-search">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <form class="form-inline search-full form-inline search" role="search">
-                <div class="search-bar">
-                    <input type="text" class="form-control search-form-control  ml-lg-auto" placeholder="Search...">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x search-close"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </div>
-            </form>
-            <span class="badge badge-secondary">Ctrl + /</span>
-        </div>
 
         <ul class="navbar-item flex-row ms-lg-auto ms-0 action-area">
 
@@ -176,7 +166,7 @@
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="avatar-container">
                         <div class="avatar avatar-sm avatar-indicators avatar-online">
-                            <img alt="avatar" src="../src/assets/img/profile-30.png" class="rounded-circle">
+                            <img alt="avatar" src="{{ asset('assetsAdmin/src/assets/img/profile-30.png') }}" class="rounded-circle">
                         </div>
                     </div>
                 </a>
@@ -188,8 +178,8 @@
                                 &#x1F44B;
                             </div>
                             <div class="media-body">
-                                <h5>Shaun Park</h5>
-                                <p>Project Leader</p>
+                                <h5>{{ auth()->user()->first_name }}</h5>
+                                <p>{{ auth()->user()->email }}</p>
                             </div>
                         </div>
                     </div>
@@ -198,16 +188,16 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span>Profile</span>
                         </a>
                     </div>
-                    <div class="dropdown-item">
-                        <a href="app-mailbox.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg> <span>Inbox</span>
-                        </a>
-                    </div>
-                    <div class="dropdown-item">
-                        <a href="auth-boxed-lockscreen.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> <span>Lock Screen</span>
-                        </a>
-                    </div>
+{{--                    <div class="dropdown-item">--}}
+{{--                        <a href="app-mailbox.html">--}}
+{{--                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg> <span>Inbox</span>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                    <div class="dropdown-item">--}}
+{{--                        <a href="auth-boxed-lockscreen.html">--}}
+{{--                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> <span>Lock Screen</span>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
                     <form method="POST" action="{{ route('admin.logout') }}" id="logout-form">
                         @csrf
                         <div class="dropdown-item" onclick="document.getElementById('logout-form').submit();">
