@@ -94,7 +94,9 @@ return [
         'key'=>'key',
         'value'=>'value',
         'type'=>'type',
-        'ID'=>'ID'
+        'ID'=>'ID',
+        'create'=>'Create',
+        'edit'=>'Edit',
     ],
     'coaches'=>[
         'coaches'=>'coaches',

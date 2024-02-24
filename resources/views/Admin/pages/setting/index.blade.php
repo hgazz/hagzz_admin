@@ -49,7 +49,7 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="{{route('admin.setting.create')}}">
-                        <h3>{{ trans('admin.academies.create') }}</h3>
+                        <h3>{{ trans('admin.setting.create') }}</h3>
                     </a>
                     <a href="{{route('admin.setting.create')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none"

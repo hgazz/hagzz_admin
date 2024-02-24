@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.academies.edit'))
+@section('title', trans('admin.setting.setting'))
 
 
 @section('content')
@@ -22,8 +22,8 @@
                             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.academies.index') }}">{{ trans('admin.academies.academies') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.academies.edit') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.setting.index') }}">{{ trans('admin.setting.setting') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.setting.edit') }}</li>
                                 </ol>
                             </nav>
 
@@ -40,7 +40,7 @@
                     @method('PUT')
                     <div class="card">
                         <div class="card-header">
-                            <h3>{{ trans('admin.academies.edit') }}</h3>
+                            <h3>{{ trans('admin.setting.edit') }}</h3>
                         </div>
                         <div class="card-body">
                             @include('Admin.pages.setting.partials._form')

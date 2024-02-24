@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.sport.create'))
+@section('title', trans('admin.setting.create'))
 
 
 @section('content')
@@ -23,7 +23,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
                                     <li class="breadcrumb-item"><a href="{{ route('admin.setting.index') }}">{{ trans('admin.setting.setting') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.sport.create') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.setting.create') }}</li>
                                 </ol>
                             </nav>
 
@@ -39,7 +39,7 @@
         <form method="POST" action="{{ route('admin.setting.store') }}" enctype="multipart/form-data">
             <div class="card">
                 <div class="card-header">
-                    <h3>{{ trans('admin.sport.create') }}</h3>
+                    <h3>{{ trans('admin.setting.create') }}</h3>
                 </div>
                 <div class="card-body">
                     @include('Admin.pages.setting.partials._form')
