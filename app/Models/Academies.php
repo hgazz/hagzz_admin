@@ -25,6 +25,9 @@ class Academies extends Model
         'percentage',
         'national_id_number',
         'address',
+        'contract_number',
+        'account_manager',
+        'is_registered'
     ];
 
 }

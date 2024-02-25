@@ -2,7 +2,6 @@
 
 namespace App\DataTables;
 
-use App\Models\City;
 use App\Models\Country;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -13,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CityDataTable extends DataTable
+class CountryDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -24,19 +23,17 @@ class CityDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->editColumn('name', fn($raw) => $raw->name)
-            ->addColumn('country_id', function (City $country) {
-                return $country->country->name;
+            ->addColumn('action', function (Country $country) {
+                return view('Admin.pages.country.datatable.actions', compact('country'))->render();
             })
-            ->addColumn('action', function (City $city) {
-                return view('Admin.pages.city.datatable.actions', compact('city'))->render();
-            })
-            ->rawColumns(['action','country_id']);
+            ->rawColumns(['action']);
+
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(City $model): QueryBuilder
+    public function query(Country $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -47,10 +44,10 @@ class CityDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('city-table')
+                    ->setTableId('country-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
+                    //->dom('Bfrtip')
                     ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
@@ -71,8 +68,8 @@ class CityDataTable extends DataTable
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
             ['name' => 'name', 'data' => 'name', 'title' => trans('admin.city.name')],
-            ['name' => 'county.id', 'data' => 'country_id', 'title' => trans('admin.city.country')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
+
         ];
     }
 
@@ -81,6 +78,6 @@ class CityDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'City_' . date('YmdHis');
+        return 'Country_' . date('YmdHis');
     }
 }

@@ -1,6 +1,6 @@
 <div class="row">
-    <div class="col-2 mx-3">
-        <a href="{{route('admin.cities.edit', $city)}}" class="btn btn-success mr-2" data-toggle="tooltip" data-placement="top" title="Show">
+    <div class="col-2 mx-5">
+        <a href="{{route('admin.faq.edit', $faq)}}" class="btn btn-success mr-2" data-toggle="tooltip" data-placement="top" title="Show">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                  class="feather feather-edit-3">
@@ -10,7 +10,7 @@
         </a>
     </div>
     <div class="col-2">
-        <form action="{{ route('admin.cities.delete', $city) }}" method="post">
+        <form action="{{ route('admin.faq.delete', $faq) }}" method="post">
             @csrf
             @method('DELETE')
             <button type="submit"

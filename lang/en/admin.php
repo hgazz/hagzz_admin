@@ -28,6 +28,8 @@ return [
         'created_successfully' => 'City created successfully',
         'updated_successfully' => 'City updated successfully',
         'deleted_successfully' => 'City deleted successfully',
+        'Select County'=>'Select County',
+        'country'=>'country'
     ],
     'area' => [
         'area' => 'Area',
@@ -66,6 +68,9 @@ return [
         'edit'=>'edit',
         'academies updated successfully'=>'academies updated successfully',
         'academies deleted successfully'=>'academies deleted successfully',
+        'contract_number'=>'contract number',
+        'account_manager'=>'account manager',
+        'is_registered'=>'is Registered',
     ],
     'banners'=> [
         'banners'=>'Banners',
@@ -86,6 +91,7 @@ return [
         'icon'=>'Icon',
         'level' =>'Level',
         'create'=>'Create',
+        'edit'=>'Edit',
         'status_active_successfully'=>'status_active_successfully',
         'status inactive successfully'=>'status inactive successfully'
     ],
@@ -111,5 +117,25 @@ return [
         'updated_successfully'=>'Coach updated successfully',
         'deleted_successfully'=>'Coach deleted successfully',
     ],
+
+    'faq'=>[
+        'faq'=>'faq',
+        'question'=>'question',
+        'answer'=>'answer',
+        'create'=>'create',
+        'create faq'=>'create faq',
+        'edit'=>'edit faq',
+        'faq created successfully'=>'faq created successfully',
+        'faq updated successfully'=>'faq updated successfully',
+        'faq deleted successfully'=>'faq deleted successfully',
+    ],
+    'country'=>[
+        'country'=>'country',
+        'create'=>'create country',
+        'edit'=>'edit country',
+        'Country created successfully'=>'Country created successfully',
+        'Country updated successfully'=>'Country updated successfully',
+        'Country deleted successfully'=>'Country deleted successfully'
+    ]
 
 ];

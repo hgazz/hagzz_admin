@@ -28,9 +28,10 @@ class AcademiesController extends Controller
 
     public function store(AcademiesRequest $request)
     {
-        $data = $request->validated();
-        $data['password'] = Hash::make($request->password);
-        $this->academicModels->create($data);
+        $this->academicModels->create(array_merge($request->validated(),[
+            'password'=> Hash::make($request->password),
+            'is_registered'=>$request->has('is_registered') ? 1 :0,
+        ]));
         session()->flash('success', trans('admin.academies.academies_created_successfully'));
         return to_route('admin.academies.index');
     }
@@ -60,9 +61,10 @@ class AcademiesController extends Controller
 
     public function update(Academies $academies , AcademiesRequest $request)
     {
-        $data = $request->validated();
-        $data['password'] = Hash::make($request->password) ?? $academies->password;
-        $academies->update($data);
+        $academies->update(array_merge($request->validated(),[
+            'password'=> Hash::make($request->password),
+            'is_registered'=>$request->has('is_registered') ? 1 : 0,
+        ]));
         session()->flash('success',trans('admin.academies.academies updated successfully'));
         return to_route('admin.academies.index');
     }

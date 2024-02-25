@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.sport.edit'))
+@section('title', trans('admin.faq.edit'))
 
 
 @section('content')
@@ -22,8 +22,8 @@
                             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.sport.index') }}">{{ trans('admin.sport.sport') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.sport.edit') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.cities.index') }}">{{ trans('admin.faq.faq') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.faq.edit') }}</li>
                                 </ol>
                             </nav>
 
@@ -36,14 +36,14 @@
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-bottom:24px;">
-                <form method="POST" action="{{ route('admin.sport.update', $sport) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.faq.update', $faq) }}">
                     @method('PUT')
                     <div class="card">
                         <div class="card-header">
-                            <h3>{{ trans('admin.academies.edit') }}</h3>
+                            <h3>{{ trans('admin.faq.edit') }}</h3>
                         </div>
                         <div class="card-body">
-                            @include('Admin.pages.sport.partials._form')
+                            @include('Admin.pages.faqs.partials._form')
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success mt-3">{{ trans('admin.submit') }}</button>
