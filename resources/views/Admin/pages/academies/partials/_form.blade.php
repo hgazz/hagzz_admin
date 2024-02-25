@@ -63,7 +63,7 @@
 
         <div class="col-md-6 mb-3">
             <label for="commercial_name">{{trans('admin.academies.commercial_name')}}</label>
-            <input type="commercial_name" value="{{isset($academies) ? $academies->commercial_name : old('commercial_name')}}" name="commercial_name" class="form-control" id="commercial_name" placeholder="{{trans('admin.academies.commercial_name')}}">
+            <input type="text" value="{{isset($academies) ? $academies->commercial_name : old('commercial_name')}}" name="commercial_name" class="form-control" id="commercial_name" placeholder="{{trans('admin.academies.commercial_name')}}">
             @error('commercial_name')
             <span class="text-danger">{{$message}}</span>
             @enderror

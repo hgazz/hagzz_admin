@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.academies.edit'))
+@section('title', trans('admin.sport.edit'))
 
 
 @section('content')
@@ -22,8 +22,8 @@
                             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.academies.index') }}">{{ trans('admin.academies.academies') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.academies.edit') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.sport.index') }}">{{ trans('admin.sport.sport') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.sport.edit') }}</li>
                                 </ol>
                             </nav>
 

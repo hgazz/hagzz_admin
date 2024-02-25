@@ -91,6 +91,7 @@ return [
         'icon'=>'Icon',
         'level' =>'Level',
         'create'=>'Create',
+        'edit'=>'Edit',
         'status_active_successfully'=>'status_active_successfully',
         'status inactive successfully'=>'status inactive successfully'
     ],

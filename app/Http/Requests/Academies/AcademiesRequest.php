@@ -33,10 +33,10 @@ class AcademiesRequest extends FormRequest
             'commercial_name'=>'required|string|min:3|max:255',
             'trade_license_number'=>'nullable|numeric',
             'trade_license_expire_date'=>'nullable|date|after_or_equal:'. now()->toDateString(),
-            'tax_number'=>'numeric|numeric',
+            'tax_number'=>'nullable|numeric',
             'national_id_number'=>'nullable|string',
             'address'=>'nullable|string:min:3|max:255',
-            'contract_number'=>'required|numeric',
+            'contract_number'=>'required|string',
             'account_manager'=>'required|string|min:3|max:255',
         ];
     }
