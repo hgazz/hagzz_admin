@@ -12,7 +12,7 @@ class City extends Model
     use HasFactory, HasTranslations;
 
     public $translatable = ['name'];
-    protected $fillable = ['name'];
+    protected $fillable = ['name','country_id'];
 
     public static $translatableColumns = [
         'name'=>[
@@ -34,5 +34,10 @@ class City extends Model
     public function areas(): HasMany
     {
         return $this->hasMany(Area::class, 'city_id', 'id');
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class,'country_id');
     }
 }

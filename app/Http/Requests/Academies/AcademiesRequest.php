@@ -31,11 +31,13 @@ class AcademiesRequest extends FormRequest
             'password'=> $this->validatePassword(),
             'role'=>'required',
             'commercial_name'=>'required|string|min:3|max:255',
-            'trade_license_number'=>'required|numeric',
-            'trade_license_expire_date'=>'required|date|after_or_equal:'. now()->toDateString(),
+            'trade_license_number'=>'nullable|numeric',
+            'trade_license_expire_date'=>'nullable|date|after_or_equal:'. now()->toDateString(),
             'tax_number'=>'numeric|numeric',
             'national_id_number'=>'nullable|string',
             'address'=>'nullable|string:min:3|max:255',
+            'contract_number'=>'required|numeric',
+            'account_manager'=>'required|string|min:3|max:255',
         ];
     }
 

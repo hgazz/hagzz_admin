@@ -117,5 +117,29 @@
             @enderror
         </div>
 
+        <div class="col-md-6 mb-3">
+            <label for="percentage">{{trans('admin.academies.contract_number')}}</label>
+            <input type="text" name="contract_number" value="{{isset($academies) ? $academies->contract_number : old('contract_number')}}" class="form-control" id="national_id_number" placeholder="{{trans('admin.academies.national_id_number')}}">
+            @error('contract_number')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="percentage">{{trans('admin.academies.account_manager')}}</label>
+            <input type="text" name="account_manager" value="{{isset($academies) ? $academies->account_manager : old('account_manager')}}" class="form-control" id="national_id_number" placeholder="{{trans('admin.academies.national_id_number')}}">
+            @error('account_manager')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="percentage">{{trans('admin.academies.is_registered')}}</label>
+            <input type="checkbox" name="is_registered" @if(isset($academies) && $academies->is_registered) checked  @endif class="form-check" id="national_id_number">
+            @error('is_registered')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
     </div>
 </div>

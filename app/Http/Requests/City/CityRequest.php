@@ -24,6 +24,9 @@ class CityRequest extends FormRequest
      */
     public function rules(): array
     {
-        return TranslatableService::validateTranslatableFields(City::$translatableColumns);
+        $rules = [
+            'country_id'=>'required|exists:countries,id',
+        ];
+        return TranslatableService::validateTranslatableFields(City::$translatableColumns) + $rules;
     }
 }

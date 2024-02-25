@@ -4,8 +4,10 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AcademiesController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SportController;
 use Illuminate\Support\Facades\Route;
@@ -97,6 +99,22 @@ Route::group(
                 Route::put('setting/update/{setting}','update')->name('setting.update');
                 Route::delete('setting/delete/{setting}','delete')->name('setting.delete');
 
+            });
+            Route::controller(FaqController::class)->group(function (){
+                Route::get('faq','index')->name('faq.index');
+                Route::get('faq/create','create')->name('faq.create');
+                Route::post('faq/store','store')->name('faq.store');
+                Route::get('faq/edit/{faq}','edit')->name('faq.edit');
+                Route::put('faq/update/{faq}','update')->name('faq.update');
+                Route::delete('faq/delete/{faq}','delete')->name('faq.delete');
+            });
+            Route::controller(CountryController::class)->group(function (){
+                Route::get('country','index')->name('country.index');
+                Route::get('country/create','create')->name('country.create');
+                Route::post('country/store','store')->name('country.store');
+                Route::get('country/edit/{country}','edit')->name('country.edit');
+                Route::put('country/update/{country}','update')->name('country.update');
+                Route::delete('country/delete/{country}','delete')->name('country.delete');
             });
         });
 

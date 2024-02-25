@@ -13,5 +13,16 @@
             </div>
         @endforeach
     </div>
+
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <select class="form-select" name="country_id">
+                <option value="">{{trans('admin.city.Select County')}}</option>
+                @foreach($countries as $country)
+                    <option value="{{$country->id}}"  @selected(old('city_id', isset($city) ? $city->country_id : '') == $country->id)>{{$country->name}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
 </div>
 
