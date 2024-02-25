@@ -84,7 +84,6 @@ return [
         'updated_successfully'=>'Banner updated successfully',
         'deleted_successfully'=>'Banner deleted successfully',
     ],
-
     'sport'=>[
         'sport'=>'sport',
         'title'=>'Title',
@@ -117,7 +116,6 @@ return [
         'updated_successfully'=>'Coach updated successfully',
         'deleted_successfully'=>'Coach deleted successfully',
     ],
-
     'faq'=>[
         'faq'=>'faq',
         'question'=>'question',
