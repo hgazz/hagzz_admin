@@ -23,7 +23,7 @@ class CountryController extends Controller
 
     public function create()
     {
-        return view('admin.pages.country.create');
+        return view('Admin.pages.country.create');
     }
 
     public function store(CountryRequest $request)
@@ -36,7 +36,7 @@ class CountryController extends Controller
 
     public function edit(Country $country)
     {
-        return view('admin.pages.country.edit',compact('country'));
+        return view('Admin.pages.country.edit',compact('country'));
     }
 
     public function update(Country $country , CountryRequest $request)
