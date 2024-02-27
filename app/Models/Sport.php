@@ -21,6 +21,7 @@ class Sport extends Model
             'icon',
             'status',
             'level',
+            'academy_id'
     ];
     public static $translatableColumns = [
         'name'=>[
@@ -33,5 +34,10 @@ class Sport extends Model
     public static function getTranslatableFields()
     {
         return array_keys(self::$translatableColumns);
+    }
+
+    public function academy()
+    {
+        return $this->belongsTo(Academies::class,'academy_id');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\SportDataTable;
 use App\Http\Requests\SportRequest;
 use App\Http\Traits\FileUpload;
+use App\Models\Academies;
 use App\Models\Sport;
 use App\Services\TranslatableService;
 
@@ -25,7 +26,8 @@ class SportController extends Controller
     public function create()
     {
         $roles = ['beginner', 'intermediate', 'advanced'];
-        return view('Admin.pages.sport.create',compact('roles'));
+        $academies = Academies::get(['id','first_name','last_name']);
+        return view('Admin.pages.sport.create',compact('roles','academies'));
     }
     public function store(SportRequest $request)
     {
@@ -33,7 +35,8 @@ class SportController extends Controller
         $translatable = TranslatableService::generateTranslatableFields($this->sportModel::getTranslatableFields() , $request->validated());
         $this->sportModel->create(array_merge($translatable , [
             'icon'=>$imageName,
-            'level'=>$request->level
+            'level'=>$request->level,
+            'academy_id'=>$request->academy_id,
         ]));
         session()->flash('success','Successfully created');
         return to_route('admin.sport.index');
@@ -41,7 +44,8 @@ class SportController extends Controller
     public function edit(Sport $sport)
     {
         $roles = ['beginner', 'intermediate', 'advanced'];
-        return view('Admin.pages.sport.edit', compact('roles','sport'));
+        $academies = Academies::get(['id','first_name','last_name']);
+        return view('Admin.pages.sport.edit', compact('roles','sport','academies'));
     }
     public function update(Sport $sport , SportRequest $request)
     {
