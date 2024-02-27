@@ -71,7 +71,7 @@ class CityDataTable extends DataTable
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
             ['name' => 'name', 'data' => 'name', 'title' => trans('admin.city.name')],
-            ['name' => 'county.name', 'data' => 'country_id', 'title' => trans('admin.city.country')],
+            ['name' => 'country.name', 'data' => 'country_id', 'title' => trans('admin.city.country')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }
