@@ -26,8 +26,7 @@ class SportController extends Controller
     public function create()
     {
         $roles = ['beginner', 'intermediate', 'advanced'];
-        $academies = Academies::get(['id','first_name','last_name']);
-        return view('Admin.pages.sport.create',compact('roles','academies'));
+        return view('Admin.pages.sport.create',compact('roles'));
     }
     public function store(SportRequest $request)
     {
@@ -36,7 +35,6 @@ class SportController extends Controller
         $this->sportModel->create(array_merge($translatable , [
             'icon'=>$imageName,
             'level'=>$request->level,
-            'academy_id'=>$request->academy_id,
         ]));
         session()->flash('success','Successfully created');
         return to_route('admin.sport.index');
@@ -44,8 +42,7 @@ class SportController extends Controller
     public function edit(Sport $sport)
     {
         $roles = ['beginner', 'intermediate', 'advanced'];
-        $academies = Academies::get(['id','first_name','last_name']);
-        return view('Admin.pages.sport.edit', compact('roles','sport','academies'));
+        return view('Admin.pages.sport.edit', compact('roles','sport'));
     }
     public function update(Sport $sport , SportRequest $request)
     {
@@ -63,7 +60,7 @@ class SportController extends Controller
     {
         if ($sport->status == 'active'){
             $newStatus = 'inactive';
-            $successMessage = trans('admin.academies.status_inactive_successfully');
+            $successMessage = trans('admin.sport.status_inactive_successfully');
         } else {
             $newStatus = 'active';
             $successMessage = trans('admin.sport.status_active_successfully');

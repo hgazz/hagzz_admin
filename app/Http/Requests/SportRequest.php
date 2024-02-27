@@ -26,7 +26,6 @@ class SportRequest extends FormRequest
         $rules = [
             'icon'=>$this->validateImage(),
             'level'=>'required',
-            'academy_id'=>'required|exists:academies,id'
         ];
         return TranslatableService::validateTranslatableFields(Sport::$translatableColumns) + $rules;
     }

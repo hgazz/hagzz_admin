@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('sports', function (Blueprint $table) {
-            $table->unsignedBigInteger('academy_id');
-            $table->foreign('academy_id')->references('id')->on('academies')->onDelete('cascade');
+        Schema::create('academy_sport', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('academy_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('sport_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
@@ -22,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('sports', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('table_academy_sport');
     }
 };

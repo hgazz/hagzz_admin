@@ -19,10 +19,7 @@ class SportDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('academy',function (Sport $sport){
-                return $sport->academy->first_name.' '.$sport->academy->last_name;
-            })
-            ->editColumn('name', fn($raw) => $raw->name)
+        ->editColumn('name', fn($raw) => $raw->name)
         ->editColumn('icon', function (Sport $sport) {
 
             return '<img src="' . $sport->logo.$sport->icon . '" width="100" height="100">';
@@ -69,9 +66,8 @@ class SportDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            ['data' => 'id', 'name' => 'id', 'title' => trans('admin.id')],
             ['data' => 'name', 'name' => 'name', 'title' => trans('admin.sport.title')],
-            ['data' => 'academy', 'name' => 'academy', 'title' => trans('admin.sport.Academic')],
-
             ['data' => 'icon', 'name' => 'icon', 'title' => trans('admin.sport.icon')],
             ['data' => 'level', 'name' => 'level', 'title' => trans('admin.sport.level')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],

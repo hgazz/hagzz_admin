@@ -71,6 +71,7 @@ return [
         'contract_number'=>'contract number',
         'account_manager'=>'account manager',
         'is_registered'=>'is Registered',
+        'select_sport' => 'Select Sport',
     ],
     'banners'=> [
         'banners'=>'Banners',
@@ -91,7 +92,7 @@ return [
         'level' =>'Level',
         'create'=>'Create',
         'edit'=>'Edit',
-        'status_active_successfully'=>'status_active_successfully',
+        'status_active_successfully'=>'status active successfully',
         'status inactive successfully'=>'status inactive successfully'
     ],
     'setting'=>[

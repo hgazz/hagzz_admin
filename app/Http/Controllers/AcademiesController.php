@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use App\DataTables\AcademiesDataTable;
 use App\Http\Requests\Academies\AcademiesRequest;
 use App\Models\Academies;
+use App\Models\Sport;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AcademiesController extends Controller
 {
-    private $academicModels;
-    public function __construct(Academies $models)
+    private $academicModels, $sportModel;
+    public function __construct(Academies $model, Sport $sport)
     {
-        $this->academicModels = $models;
+        $this->academicModels = $model;
+        $this->sportModel = $sport;
     }
 
     public function index(AcademiesDataTable $dataTable)
@@ -23,7 +26,8 @@ class AcademiesController extends Controller
     public function create()
     {
         $roles = ['manager', 'owner', 'partner'];
-        return view('Admin.pages.academies.create',compact('roles'));
+        $sports = $this->sportModel::get(['id', 'name']);
+        return view('Admin.pages.academies.create',compact('roles', 'sports'));
     }
 
     public function store(AcademiesRequest $request)
@@ -56,16 +60,22 @@ class AcademiesController extends Controller
     public function edit(Academies $academies)
     {
         $roles = ['manager', 'owner', 'partner'];
-        return view('Admin.pages.academies.edit',compact('academies','roles'));
+        $sports = $this->sportModel->get(['id','name']);
+        return view('Admin.pages.academies.edit',compact('academies','roles', 'sports'));
     }
 
     public function update(Academies $academies , AcademiesRequest $request)
     {
-        $academies->update(array_merge($request->validated(),[
-            'password'=> Hash::make($request->password),
-            'is_registered'=>$request->has('is_registered') ? 1 : 0,
-        ]));
-        session()->flash('success',trans('admin.academies.academies updated successfully'));
+
+        DB::transaction(function () use ($academies, $request) {
+            $academies->update(array_merge($request->validated(),[
+                'password'=> !is_null($request->password) ? Hash::make($request->password) : $academies->password,
+                'is_registered'=>$request->has('is_registered') ? 1 : 0,
+            ]));
+            $academies->sports()->sync($request->sport_id);
+            session()->flash('success',trans('admin.academies.academies updated successfully'));
+
+        });
         return to_route('admin.academies.index');
     }
 

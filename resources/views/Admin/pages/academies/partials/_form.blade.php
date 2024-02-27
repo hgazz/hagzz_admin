@@ -134,6 +134,18 @@
         </div>
 
         <div class="col-md-6 mb-3">
+            <select class="select2-default form-select" name="sport_id[]" multiple>
+                    <option value="">{{ trans('admin.academies.select_sport') }}</option>
+                    @foreach($sports as $sport)
+                        <option value="{{$sport->id}}" @selected(old('sport_id', isset($academies) ? in_array($sport->id, $academies->sports()->pluck('sport_id')->toArray()) : ''))>{{$sport->name}}</option>
+                    @endforeach
+           </select>
+            @error('academy_id')
+                <span class="text-danger" >{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
             <label for="percentage">{{trans('admin.academies.is_registered')}}</label>
             <input type="checkbox" name="is_registered" @if(isset($academies) && $academies->is_registered) checked  @endif class="form-check" id="national_id_number">
             @error('is_registered')

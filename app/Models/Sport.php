@@ -21,7 +21,6 @@ class Sport extends Model
             'icon',
             'status',
             'level',
-            'academy_id'
     ];
     public static $translatableColumns = [
         'name'=>[
