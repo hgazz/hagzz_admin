@@ -30,4 +30,8 @@ class Academies extends Model
         'is_registered'
     ];
 
+    public function sports()
+    {
+        return $this->hasMany(Sport::class,'academy_id');
+    }
 }

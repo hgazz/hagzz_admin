@@ -23,6 +23,10 @@ class Training extends Model
         return $this->belongsTo(Coach::class, 'coach_id');
     }
 
+    public function academy()
+    {
+        return $this->belongsTo(Academies::class,'academy_id');
+    }
     public function getImageAttribute($value)
     {
         return config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;

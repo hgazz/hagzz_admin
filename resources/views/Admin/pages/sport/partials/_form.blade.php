@@ -31,6 +31,17 @@
             <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
+        <div class="col-md-12">
+            <select class="form-select" name="academy_id">
+                <option value="">Select Academy</option>
+                @foreach($academies as $academy)
+                    <option value="{{$academy->id}}" @selected(old('academy_id', isset($sport) ? $sport->academy_id : '') == $academy->id)>{{$academy->first_name.' '.$academy->last_name}}</option>
+                @endforeach
+            </select>
+            @error('academy_id')
+            <span class="text-danger" >{{$message}}</span>
+            @enderror
+        </div>
 
     </div>
 </div>
