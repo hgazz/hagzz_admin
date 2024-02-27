@@ -22,6 +22,9 @@
                     <option value="{{$country->id}}"  @selected(old('city_id', isset($city) ? $city->country_id : '') == $country->id)>{{$country->name}}</option>
                 @endforeach
             </select>
+            @error('country_id')
+            <span class="text-danger">*{{$message}}</span>
+            @enderror
         </div>
     </div>
 </div>
