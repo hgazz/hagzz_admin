@@ -48,7 +48,7 @@ class CityController extends Controller
     public function update(CityRequest $request, City $city)
     {
         $translatableFields = TranslatableService::generateTranslatableFields($this->cityModel->getTranslatableFields(), $request->validated());
-        $city->update($translatableFields);
+        $city->update($translatableFields + ['country_id' => $request->country_id]);
         session()->flash('success',trans('admin.city.updated_successfully'));
         return to_route('admin.cities.index');
     }
