@@ -25,16 +25,17 @@ class CityRequest extends FormRequest
      */
     public function rules(): array
     {
-      return  [
-            'name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name')],
-            'name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name')],
-            'country_id' => 'required|exists:countries,id',
-      ];
+        return  request()->isMethod('PUT') ? $this->onUpdate() :  $this->onCreate();
+
     }
 
     protected function onCreate()
     {
-        return  request()->isMethod('PUT') ? $this->onUpdate() :  $this->onCreate();
+        return  [
+            'name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name')],
+            'name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name')],
+            'country_id' => 'required|exists:countries,id',
+        ];
     }
 
     protected function onUpdate()

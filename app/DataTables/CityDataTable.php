@@ -32,10 +32,9 @@ class CityDataTable extends DataTable
                 return view('Admin.pages.city.datatable.actions', compact('city'))->render();
             })
             ->filterColumn('country.name', function ($query, $keyword) {
-                $locale = app()->getLocale(); // Get the current application locale
-                $query->whereHas('country', function ($q) use ($keyword, $locale) {
-                    // Adjust the query to filter based on the JSON content for the current locale
-                    $q->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(name, '$.\"$locale\"')) LIKE ?", ["%{$keyword}%"]);
+                $query->whereHas('country', function ($q) use ($keyword) {
+                    // Adjust the query to filter based on the JSON content
+                    $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
                 });
             })
             ->rawColumns(['action','country.name', 'name.en', 'name.ar']);
@@ -50,7 +49,7 @@ class CityDataTable extends DataTable
         $country = request()->input('country.name');
         if ($country) {
             $query->whereHas('country', function ($q) use ($country) {
-                $q->where('name', 'like', '%' . $country . '%');
+                $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$country}%"]);
             });
         }
 

@@ -22,14 +22,20 @@ class AreaDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->editColumn('name', fn($raw) => $raw->name)
+            ->addColumn('name_en', fn($raw) => $raw->getTranslation('name', 'en'))
+            ->addColumn('name_ar', fn($raw) => $raw->getTranslation('name', 'ar'))
             ->addColumn('city_id', function (Area $area) {
                 return $area->city->name;
             })
             ->addColumn('action', function (Area $area) {
                 return view('Admin.pages.area.datatable.actions', compact('area'))->render();
             })
-            ->rawColumns(['action', 'city_id']);
+            ->filterColumn('city.name', function ($query, $keyword) {
+                $query->whereHas('city',function ($q) use($keyword){
+                    $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
+                });
+            })
+            ->rawColumns(['name_en', 'name_ar','action', 'city_id', 'city_id']);
     }
 
     /**
@@ -37,7 +43,16 @@ class AreaDataTable extends DataTable
      */
     public function query(Area $model): QueryBuilder
     {
-        return $model->newQuery()->with('city');
+        $query = $model->newQuery()->with('city');
+        $city = request()->input('city.name');
+        if ($city) {
+            $query->whereHas('city', function ($q) use ($city) {
+                // Use JSON_SEARCH to find any occurrence of $city within the JSON column, regardless of the key (locale)
+                $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$city}%"]);
+            });
+        }
+
+        return $query->select('areas.*');
     }
 
     /**
@@ -69,7 +84,8 @@ class AreaDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'name', 'data' => 'name', 'title' => trans('admin.city.name')],
+            ['name' => 'name->en', 'data' => 'name_en', 'title' => trans('admin.city.name_en')],
+            ['name' => 'name->ar', 'data' => 'name_ar', 'title' => trans('admin.city.name_ar')],
             ['name' => 'city.name', 'data' => 'city_id', 'title' => trans('admin.city.name')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
