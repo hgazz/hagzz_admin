@@ -8,6 +8,7 @@ use App\Http\Traits\FileUpload;
 use App\Models\Academies;
 use App\Models\Sport;
 use App\Services\TranslatableService;
+use Illuminate\Http\Request;
 
 
 class SportController extends Controller
@@ -73,11 +74,15 @@ class SportController extends Controller
         session()->flash('success', $successMessage);
         return redirect()->route('admin.sport.index');
     }
-    public function delete(Sport $sport)
+    public function delete(Request $request)
     {
+        $sport = $this->sportModel->findOrFail($request->id);
         $sport->delete();
         $this->deleteFile($this->sportModel::PATH . $sport->getRawOriginal('icon'));
-        session()->flash('success', trans('admin.banners.deleted_successfully'));
-        return to_route('admin.sport.index');
+        return response()->json(['data' => [
+            'status' => 'success',
+            'model'   => trans('admin.sport.sport'),
+            'message' => trans('admin.sport.deleted_successfully'),
+        ]]);
     }
 }

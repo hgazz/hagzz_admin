@@ -15,7 +15,6 @@ class Country extends Model
     public static $translatableColumns = [
         'name'=>[
             'type'=>'text',
-            'validations'=>'required|string|max:255',
             'is_textarea'=>false
         ],
     ];

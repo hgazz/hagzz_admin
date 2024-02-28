@@ -49,9 +49,14 @@ class AreaController extends Controller
         return to_route('admin.areas.index')->with('success', trans('admin.area.updated_successfully'));
     }
 
-    public function destroy(Area $area)
+    public function destroy(Request $request)
     {
+        $area = $this->areaModel->findOrFail($request->id);
         $area->delete();
-        return to_route('admin.areas.index')->with('success', trans('admin.area.deleted_successfully'));
+        return response()->json(['data' => [
+            'status' => 'success',
+            'model'   => 'Area',
+            'message' => trans('admin.area.deleted_successfully'),
+        ]]);
     }
 }

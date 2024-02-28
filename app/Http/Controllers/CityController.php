@@ -53,10 +53,14 @@ class CityController extends Controller
         return to_route('admin.cities.index');
     }
 
-    public function destroy(City $city)
+    public function destroy(Request $request)
     {
+        $city = $this->cityModel->findOrFail($request->id);
         $city->delete();
-        session()->flash('success',trans('admin.city.deleted_successfully'));
-        return to_route('admin.cities.index');
+        return response()->json(['data' => [
+            'status' => 'success',
+            'model'   => trans('admin.city.city'),
+            'message' => trans('admin.city.deleted_successfully'),
+        ]]);
     }
 }

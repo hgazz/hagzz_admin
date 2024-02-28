@@ -48,7 +48,7 @@ Route::group(
                 Route::post('/cities/store', 'store')->name('cities.store');
                 Route::get('/cities/edit/{city}', 'edit')->name('cities.edit');
                 Route::put('/cities/update/{city}', 'update')->name('cities.update');
-                Route::delete('/cities/delete/{city}', 'destroy')->name('cities.delete');
+                Route::delete('/cities/delete', 'destroy')->name('cities.delete');
             });
 
             // area routes
@@ -58,7 +58,7 @@ Route::group(
                 Route::post('/areas/store', 'store')->name('areas.store');
                 Route::get('/areas/edit/{area}', 'edit')->name('areas.edit');
                 Route::put('/areas/update/{area}', 'update')->name('areas.update');
-                Route::delete('/areas/delete/{area}', 'destroy')->name('areas.delete');
+                Route::delete('/areas/delete', 'destroy')->name('areas.delete');
             });
 
             Route::controller(AcademiesController::class)->group(function (){
@@ -68,7 +68,7 @@ Route::group(
                 Route::get('/academies/edit/{academies}','edit')->name('academies.edit');
                 Route::put('/academies/update/{academies}','update')->name('academies.update');
                 Route::put('/academies/updateStatus/{academies}','updateStatus')->name('academies.updateStatus');
-                Route::delete('/academies/delete/{academies}','delete')->name('academies.delete');
+                Route::delete('/academies/delete','delete')->name('academies.delete');
             });
 
             // banner routes
@@ -78,7 +78,7 @@ Route::group(
                 Route::post('/banners/store', 'store')->name('banners.store');
                 Route::get('/banners/edit/{banner}', 'edit')->name('banners.edit');
                 Route::put('/banners/update/{banner}', 'update')->name('banners.update');
-                Route::delete('/banners/delete/{banner}', 'destroy')->name('banners.delete');
+                Route::delete('/banners/delete', 'destroy')->name('banners.delete');
             });
 
             Route::controller(SportController::class)->group(function (){
@@ -87,7 +87,7 @@ Route::group(
                 Route::post('sport/store','store')->name('sport.store');
                 Route::get('sport/edit/{sport}','edit')->name('sport.edit');
                 Route::put('sport/update/{sport}','update')->name('sport.update');
-                Route::delete('sport/delete/{sport}','delete')->name('sport.delete');
+                Route::delete('sport/delete','delete')->name('sport.delete');
                 Route::put('sport/updateStatus/{sport}','updateStatus')->name('sport.updateStatus');
             });
 
@@ -97,7 +97,7 @@ Route::group(
                 Route::post('setting/store','store')->name('setting.store');
                 Route::get('setting/edit/{setting}','edit')->name('setting.edit');
                 Route::put('setting/update/{setting}','update')->name('setting.update');
-                Route::delete('setting/delete/{setting}','delete')->name('setting.delete');
+                Route::delete('setting/delete','delete')->name('setting.delete');
 
             });
             Route::controller(FaqController::class)->group(function (){
@@ -106,7 +106,7 @@ Route::group(
                 Route::post('faq/store','store')->name('faq.store');
                 Route::get('faq/edit/{faq}','edit')->name('faq.edit');
                 Route::put('faq/update/{faq}','update')->name('faq.update');
-                Route::delete('faq/delete/{faq}','delete')->name('faq.delete');
+                Route::delete('faq/delete','delete')->name('faq.delete');
             });
             Route::controller(CountryController::class)->group(function (){
                 Route::get('country','index')->name('country.index');
@@ -114,7 +114,7 @@ Route::group(
                 Route::post('country/store','store')->name('country.store');
                 Route::get('country/edit/{country}','edit')->name('country.edit');
                 Route::put('country/update/{country}','update')->name('country.update');
-                Route::delete('country/delete/{country}','delete')->name('country.delete');
+                Route::delete('country/delete','delete')->name('country.delete');
             });
         });
 

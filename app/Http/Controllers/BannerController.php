@@ -6,6 +6,7 @@ use App\DataTables\BannerDataTable;
 use App\Http\Requests\Banner\BannerRequest;
 use App\Http\Traits\FileUpload;
 use App\Models\Banner;
+use Illuminate\Http\Request;
 
 class BannerController extends Controller
 {
@@ -52,11 +53,16 @@ class BannerController extends Controller
         return to_route('admin.banners.index');
     }
 
-    public function destroy(Banner $banner)
+    public function destroy(Request $request)
     {
+        $banner = $this->bannerModel::find($request->id);
         $banner->delete();
         $this->deleteFile($this->bannerModel::PATH . $banner->getRawOriginal('logo'));
-        session()->flash('success', trans('admin.banners.deleted_successfully'));
-        return to_route('admin.banners.index');
+
+        return response()->json(['data' => [
+            'status' => 'success',
+            'model'   => trans('admin.banners.banners'),
+            'message' => trans('admin.banners.deleted_successfully'),
+        ]]);
     }
 }

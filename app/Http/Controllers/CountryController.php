@@ -30,7 +30,7 @@ class CountryController extends Controller
     {
       $translatable = TranslatableService::generateTranslatableFields($this->countryModel::getTranslatableFields() , $request->validated());
       $this->countryModel->create($translatable);
-      session()->flash('success', trans('admin.county.Country created successfully'));
+      session()->flash('success', trans('admin.country.Country created successfully'));
       return to_route('admin.country.index');
     }
 
@@ -43,14 +43,18 @@ class CountryController extends Controller
     {
         $translatable = TranslatableService::generateTranslatableFields($this->countryModel::getTranslatableFields() , $request->validated());
         $country->update($translatable);
-        session()->flash('success', trans('admin.county.Country updated successfully'));
+        session()->flash('success', trans('admin.country.Country updated successfully'));
         return to_route('admin.country.index');
     }
 
-    public function delete(Country $country)
+    public function delete(Request $request)
     {
+        $country = $this->countryModel->findOrFail($request->id);
         $country->delete();
-        session()->flash('success', trans('admin.country.Country deleted successfully'));
-        return to_route('admin.country.index');
+        return response()->json(['data' => [
+            'status' => 'success',
+            'model'   => trans('admin.country.country'),
+            'message' => trans('admin.country.Country deleted successfully'),
+        ]]);
     }
 }

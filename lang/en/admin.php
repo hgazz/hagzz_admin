@@ -93,7 +93,8 @@ return [
         'create'=>'Create',
         'edit'=>'Edit',
         'status_active_successfully'=>'status active successfully',
-        'status inactive successfully'=>'status inactive successfully'
+        'status inactive successfully'=>'status inactive successfully',
+        'deleted_successfully' => 'sport deleted successfully',
     ],
     'setting'=>[
         'setting'=>'settings',
@@ -103,6 +104,7 @@ return [
         'ID'=>'ID',
         'create'=>'Create',
         'edit'=>'Edit',
+        'deleted_successfully' => 'setting deleted successfully',
     ],
     'coaches'=>[
         'coaches'=>'coaches',

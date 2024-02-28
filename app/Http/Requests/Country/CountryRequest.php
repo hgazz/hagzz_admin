@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Country;
 
 use App\Models\Country;
+use App\Rules\UniqueTranslation;
 use App\Services\TranslatableService;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,6 +24,22 @@ class CountryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return TranslatableService::validateTranslatableFields(Country::$translatableColumns);
+        return  request()->isMethod('PUT') ? $this->onUpdate() :  $this->onCreate();
+    }
+
+    protected function onCreate(): array
+    {
+        return [
+            'name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('countries', 'name')],
+            'name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('countries', 'name')],
+        ];
+    }
+
+    protected function onUpdate(): array
+    {
+        return [
+            'name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('countries', 'name', request('id_unique'))],
+            'name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('countries', 'name', request('id_unique'))],
+        ];
     }
 }

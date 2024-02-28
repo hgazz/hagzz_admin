@@ -6,6 +6,7 @@ use App\DataTables\AcademiesDataTable;
 use App\Http\Requests\Academies\AcademiesRequest;
 use App\Models\Academies;
 use App\Models\Sport;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -79,10 +80,15 @@ class AcademiesController extends Controller
         return to_route('admin.academies.index');
     }
 
-    public function delete(Academies $academies)
+    public function delete(Request $request)
     {
+        $academies = $this->academicModels->find($request->id);
         $academies->delete();
-        session()->flash('success',trans('admin.academies.academies deleted successfully'));
-        return to_route('admin.academies.index');
+
+        return response()->json(['data' => [
+            'status' => 'success',
+            'model'   => trans('admin.academies.academies'),
+            'message' => trans('admin.academies.academies deleted successfully'),
+        ]]);
     }
 }

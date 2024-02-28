@@ -60,13 +60,18 @@ class SettingController extends Controller
         return to_route('admin.setting.index');
     }
 
-    public function delete(Setting $setting)
+    public function delete(Request $request)
     {
+        $setting = $this->settingModel->findOrFail($request->id);
         $setting->delete();
         if ($setting->type == 'image'){
             $this->deleteFile($this->settingModel::PATH . $setting->getRawOriginal('value'));
         }
-        session()->flash('success', trans('admin.banners.deleted_successfully'));
-        return to_route('admin.setting.index');
+        session()->flash('success', trans('admin.setting.'));
+        return response()->json(['data' => [
+            'status' => 'success',
+            'model'   => trans('admin.setting.setting'),
+            'message' => trans('admin.setting.deleted_successfully'),
+        ]]);
     }
 }

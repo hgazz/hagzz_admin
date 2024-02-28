@@ -45,10 +45,14 @@ class FaqController extends Controller
         session()->flash('success',trans('admin.faq.faq updated successfully'));
         return to_route('admin.faq.index');
     }
-    public function delete(Faq $faq)
+    public function delete(Request $request)
     {
+        $faq = $this->faqModel->findOrFail($request->id);
         $faq->delete();
-        session()->flash('success', trans('admin.faq.faq deleted successfully'));
-        return to_route('admin.faq.index');
+        return response()->json(['data' => [
+            'status' => 'success',
+            'model'   => trans('admin.faq.faq'),
+            'message' => trans('admin.faq.faq deleted successfully'),
+        ]]);
     }
 }
