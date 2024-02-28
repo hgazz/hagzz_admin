@@ -38,6 +38,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-bottom:24px;">
                 <form method="POST" action="{{ route('admin.cities.update', $city) }}">
                     @method('PUT')
+                    <input type="hidden" name="id_unique" value="{{ $city->id }}">
                     <div class="card">
                         <div class="card-header">
                             <h3>{{ trans('admin.city.edit') }}</h3>

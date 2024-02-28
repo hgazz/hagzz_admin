@@ -17,7 +17,6 @@ class City extends Model
     public static $translatableColumns = [
         'name'=>[
             'type'=>'text',
-            'validations'=>'required|string|max:255|unique:cities,name',
             'is_textarea'=>false
         ]
     ];

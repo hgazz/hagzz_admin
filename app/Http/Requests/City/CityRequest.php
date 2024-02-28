@@ -3,6 +3,7 @@
 namespace App\Http\Requests\City;
 
 use App\Models\City;
+use App\Rules\UniqueTranslation;
 use App\Services\TranslatableService;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,9 +25,24 @@ class CityRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
+      return  [
+            'name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name')],
+            'name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name')],
+            'country_id' => 'required|exists:countries,id',
+      ];
+    }
+
+    protected function onCreate()
+    {
+        return  request()->isMethod('PUT') ? $this->onUpdate() :  $this->onCreate();
+    }
+
+    protected function onUpdate()
+    {
+        return  [
+            'name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name', request('id_unique'))],
+            'name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name', request('id_unique'))],
             'country_id' => 'required|exists:countries,id',
         ];
-        return TranslatableService::validateTranslatableFields(City::$translatableColumns) + $rules;
     }
 }
