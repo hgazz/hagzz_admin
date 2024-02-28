@@ -23,14 +23,22 @@ class CityDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->editColumn('name', fn($raw) => $raw->name)
-            ->addColumn('country_id', function (City $country) {
-                return $country->country->name;
+            ->addColumn('name.en', fn($raw) => $raw->getTranslation('name', 'en'))
+            ->addColumn('name.ar', fn($raw) => $raw->getTranslation('name', 'ar'))
+            ->addColumn('country.name', function (City $country) {
+                return $country->country->getTranslation('name', app()->getLocale());
             })
             ->addColumn('action', function (City $city) {
                 return view('Admin.pages.city.datatable.actions', compact('city'))->render();
             })
-            ->rawColumns(['action','country_id']);
+            ->filterColumn('country.name', function ($query, $keyword) {
+                $locale = app()->getLocale(); // Get the current application locale
+                $query->whereHas('country', function ($q) use ($keyword, $locale) {
+                    // Adjust the query to filter based on the JSON content for the current locale
+                    $q->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(name, '$.\"$locale\"')) LIKE ?", ["%{$keyword}%"]);
+                });
+            })
+            ->rawColumns(['action','country.name', 'name.en', 'name.ar']);
     }
 
     /**
@@ -38,7 +46,16 @@ class CityDataTable extends DataTable
      */
     public function query(City $model): QueryBuilder
     {
-        return $model->newQuery()->with('country');
+        $query = $model->newQuery()->with('country:id,name');
+        $country = request()->input('country.name');
+        if ($country) {
+            $query->whereHas('country', function ($q) use ($country) {
+                $q->where('name', 'like', '%' . $country . '%');
+            });
+        }
+
+        return $query->select('cities.*');
+
     }
 
     /**
@@ -70,8 +87,9 @@ class CityDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'name', 'data' => 'name', 'title' => trans('admin.city.name')],
-            ['name' => 'country.name', 'data' => 'country_id', 'title' => trans('admin.city.country')],
+            ['name' => 'name->en', 'data' => 'name.en', 'title' => trans('admin.city.name_en')],
+            ['name' => 'name->ar', 'data' => 'name.ar', 'title' => trans('admin.city.name_ar')],
+            ['name' => 'country.name', 'data' => 'country.name', 'title' => trans('admin.city.country')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }
