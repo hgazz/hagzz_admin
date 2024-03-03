@@ -36,7 +36,7 @@
             <label for="value">{{trans('admin.setting.value')}}</label>
             <input type="text" name="value" id="value"  value="{{isset($setting) && $setting->type == 'text' ? $setting->value : old('value')}}" class="form-control"  placeholder="value">
             @error('value')
-            <span class="text-danger">{{$message}}</span>
+            <span class="text-danger">{{$message}}</span>z
             @enderror
         </div>
 
@@ -133,7 +133,7 @@
             imageDiv.style.display = "block";
         }else {
             typesSelect.innerHTML += `
-                    <option text="image" selected>text</option>
+                    <option text="text" selected>text</option>
                 `;
             textAreaDiv.style.display = "none";
             textDiv.style.display = "block";

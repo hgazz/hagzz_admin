@@ -24,22 +24,23 @@ class SettingRequest extends FormRequest
     {
         return [
             'key' => 'required',
-            'type' => 'required|string',
+            'type' => 'required|in:text,textarea,image',
             'text_value' => 'required_if:type,textarea',
-            'image_value' => $this->checkImage(),
             'value' => 'required_if:type,text',
+            'image_value' => 'required_if:type,image|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
     protected function checkImage()
     {
-        if (request()->type == 'image'){
+//        if (request()->type == 'image'){
             if(request()->isMethod('POST')){
                 return 'required,image|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
             }else{
                 return 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
             }
-        }
+//        }
     }
+
 
 }

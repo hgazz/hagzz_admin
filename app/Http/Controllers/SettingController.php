@@ -76,8 +76,7 @@ class SettingController extends Controller
 
     public function update(Setting $setting , SettingRequest $request)
     {
-       $value = ($request->type == 'image') ?  $request->hasFile('value') ?
-            $this->upload($request->file('value') , $this->settingModel::PATH,  $setting->getRawOriginal('value')) : $setting->getRawOriginal('value') : $request->value;
+        $value = $this->getValueBasedOnType($request);
             $setting->update([
                'key' => $request->key,
                 'value' => $value ,
