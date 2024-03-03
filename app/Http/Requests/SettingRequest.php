@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SettingRequest extends FormRequest
@@ -17,26 +18,28 @@ class SettingRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            'key' => 'required|string|min:3|max:255',
-            'type' =>'required|string|min:3|max:255',
-            'value' => $this->checkValue(),
+            'key' => 'required',
+            'type' => 'required|string',
+            'text_value' => 'required_if:type,textarea',
+            'image_value' => $this->checkImage(),
+            'value' => 'required_if:type,text',
         ];
     }
 
-    private function checkValue(){
-        if (request('type') =='text'){
-            return 'required|string|min:3|max:255';
-        }else{
-            if (request()->method() == 'POST'){
-                return 'required|image|mimes:jpg,png,gif,webp,svg,jpeg';
+    protected function checkImage()
+    {
+        if (request()->type == 'image'){
+            if(request()->isMethod('POST')){
+                return 'required,image|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
             }else{
-                return 'nullable|image|mimes:jpg,png,gif,webp,svg,jpeg';
+                return 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
             }
         }
     }
+
 }

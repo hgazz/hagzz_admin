@@ -104,6 +104,8 @@ return [
         'ID'=>'ID',
         'create'=>'Create',
         'edit'=>'Edit',
+        'created_successfully' => 'setting created successfully',
+        'updated_successfully' => 'setting updated successfully',
         'deleted_successfully' => 'setting deleted successfully',
     ],
     'coaches'=>[

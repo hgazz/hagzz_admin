@@ -24,27 +24,54 @@ class SettingController extends Controller
 
     public function create()
     {
-        $types = ['text', 'image'];
-        return view('Admin.pages.setting.create',compact('types'));
+        $types = ['text', 'image', 'textarea'];
+        $keys = [
+            'logo',
+            'phone',
+            'whatsapp',
+            'about',
+            'email',
+            'facebook',
+            'twitter',
+            'instagram',
+            'telegram',
+            'address',
+            'snapchat',
+            'youtube',
+        ];
+        return view('Admin.pages.setting.create',compact('types', 'keys'));
     }
 
     public function store(SettingRequest $request)
     {
-
-        ($request->type == 'image') ? $image =  $this->upload($request->file('value') , $this->settingModel::PATH ) : $value = $request->value;
+       $value = $this->getValueBasedOnType($request);
        $this->settingModel->create([
-           'value' => $image ?? $value,
            'key' => $request->key,
-           'type' =>$request->type
+           'type' =>$request->type,
+           'value' => $value
        ]);
-       session()->flash('success','successfully created');
+       session()->flash('success', trans('admin.setting.created_successfully'));
       return to_route('admin.setting.index');
     }
 
     public function edit(Setting $setting)
     {
-        $types = ['text', 'image'];
-        return view('Admin.pages.setting.edit',compact('setting','types'));
+        $types = ['text', 'image', 'textarea'];
+        $keys = [
+            'logo',
+            'phone',
+            'whatsapp',
+            'about',
+            'email',
+            'facebook',
+            'twitter',
+            'instagram',
+            'telegram',
+            'address',
+            'snapchat',
+            'youtube',
+        ];
+        return view('Admin.pages.setting.edit',compact('setting','types', 'keys'));
     }
 
     public function update(Setting $setting , SettingRequest $request)
@@ -73,5 +100,15 @@ class SettingController extends Controller
             'model'   => trans('admin.setting.setting'),
             'message' => trans('admin.setting.deleted_successfully'),
         ]]);
+    }
+
+    private function getValueBasedOnType(Request $request)
+    {
+        return match ($request->type) {
+            'image' => $this->upload($request->image_value, $this->settingModel::PATH),
+            'text' => $request->value,
+            'textarea' => $request->text_value,
+            default => null,
+        };
     }
 }
