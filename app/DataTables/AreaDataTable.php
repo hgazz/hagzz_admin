@@ -35,7 +35,7 @@ class AreaDataTable extends DataTable
                     $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
                 });
             })
-            ->rawColumns(['name_en', 'name_ar','action', 'city_id', 'city_id']);
+            ->rawColumns(['name_en', 'name_ar','action', 'city_id']);
     }
 
     /**

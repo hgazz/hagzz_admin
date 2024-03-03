@@ -34,6 +34,7 @@ class SportController extends Controller
         $translatable = TranslatableService::generateTranslatableFields($this->sportModel::getTranslatableFields() , $request->validated());
         $this->sportModel->create(array_merge($translatable , [
             'icon'=>$imageName,
+
         ]));
         session()->flash('success','Successfully created');
         return to_route('admin.sport.index');

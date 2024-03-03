@@ -4,7 +4,7 @@
         <ul class="navbar-item theme-brand flex-row  text-center">
             <li class="nav-item theme-logo">
                 <a href="{{ route('admin.index') }}">
-                    <img src="{{ asset('assetsAdmin/src/assets/img/logo.svg') }}" class="navbar-logo" alt="logo">
+                    <img src="{{ asset('assetsAdmin/logo.png') }}" width="80px" height="80px" class="navbar-logo" alt="logo">
                 </a>
             </li>
             <li class="nav-item theme-text">
@@ -166,7 +166,7 @@
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="avatar-container">
                         <div class="avatar avatar-sm avatar-indicators avatar-online">
-                            <img alt="avatar" src="{{ asset('assetsAdmin/src/assets/img/profile-30.png') }}" class="rounded-circle">
+                            <img alt="avatar" src="{{ asset('assetsAdmin/logo.png') }}" class="rounded-circle">
                         </div>
                     </div>
                 </a>
