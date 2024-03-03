@@ -26,8 +26,7 @@ class SportController extends Controller
     }
     public function create()
     {
-        $roles = ['beginner', 'intermediate', 'advanced'];
-        return view('Admin.pages.sport.create',compact('roles'));
+        return view('Admin.pages.sport.create');
     }
     public function store(SportRequest $request)
     {
@@ -35,15 +34,13 @@ class SportController extends Controller
         $translatable = TranslatableService::generateTranslatableFields($this->sportModel::getTranslatableFields() , $request->validated());
         $this->sportModel->create(array_merge($translatable , [
             'icon'=>$imageName,
-            'level'=>$request->level,
         ]));
         session()->flash('success','Successfully created');
         return to_route('admin.sport.index');
     }
     public function edit(Sport $sport)
     {
-        $roles = ['beginner', 'intermediate', 'advanced'];
-        return view('Admin.pages.sport.edit', compact('roles','sport'));
+        return view('Admin.pages.sport.edit', compact('sport'));
     }
     public function update(Sport $sport , SportRequest $request)
     {
@@ -51,7 +48,6 @@ class SportController extends Controller
         $translatable = TranslatableService::generateTranslatableFields($this->sportModel::getTranslatableFields() , $request->validated());
         $sport->update(array_merge($translatable,[
             'icon'=>$imageName,
-            'level'=> $request->level
         ]));
         session()->flash('success','Successfully Updated');
         return to_route('admin.sport.index');

@@ -12,17 +12,6 @@
                 @enderror
             </div>
         @endforeach
-        <div class="col-md-6 mb-3">
-            <label for="role">{{trans('admin.sport.level')}}</label>
-            <select name="level" class="form-control">
-                @foreach($roles as $role)
-                    <option value="{{$role}}" @selected(old('level', isset($sport) ? $sport->level : '') == $role)>{{$role}}</option>
-                @endforeach
-            </select>
-            @error('level')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
 
         <div class="col-md-6 mb-3">
             <label for="icon">{{trans('admin.sport.icon')}}</label>
