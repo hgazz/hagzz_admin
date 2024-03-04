@@ -56,6 +56,8 @@ return [
         'password'=>'password',
         'role'=>'role',
         'commercial_name'=>'commercial name',
+        'commercial_name_en'=>'commercial name (en)',
+        'commercial_name_ar'=>'commercial name (ar)',
         'trade_license_number'=>'trade license number',
         'trade_license_expire_date'=>'trade license expire date',
         'tax_number'=>'tax number',

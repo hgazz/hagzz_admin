@@ -38,7 +38,7 @@
 
         <div class="col-md-6 mb-3">
             <label for="role">{{trans('admin.academies.role')}}</label>
-            <select name="role" class="form-control">
+            <select id="role" name="role" class="form-control">
                 @foreach($roles as $role)
                     <option value="{{$role}}">{{$role}}</option>
                 @endforeach
@@ -49,10 +49,10 @@
         </div>
 
         <div class="col-md-6 mb-3">
-            <label for="commercial_name">{{trans('admin.academies.trade_license_number')}}</label>
+            <label for="trade_license_number">{{trans('admin.academies.trade_license_number')}}</label>
             <input type="text" name="trade_license_number" value="{{isset($academies) ? $academies->trade_license_number : old('trade_license_number')}}" class="form-control" id="trade_license_number" placeholder="{{trans('admin.academies.trade_license_number')}}">
             @error('trade_license_number')
-            <span class="text-danger">{{$message}}</span>
+                <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
 
@@ -89,7 +89,7 @@
 
 
         <div class="col-md-6 mb-3">
-            <label for="percentage">{{trans('admin.academies.national_id_number')}}</label>
+            <label for="national_id_number">{{trans('admin.academies.national_id_number')}}</label>
             <input type="text" name="national_id_number" value="{{isset($academies) ? $academies->national_id_number : old('national_id_number')}}" class="form-control" id="national_id_number" placeholder="{{trans('admin.academies.national_id_number')}}">
             @error('national_id_number')
             <span class="text-danger">{{$message}}</span>
@@ -97,16 +97,16 @@
         </div>
 
         <div class="col-md-6 mb-3">
-            <label for="percentage">{{trans('admin.academies.contract_number')}}</label>
-            <input type="text" name="contract_number" value="{{isset($academies) ? $academies->contract_number : old('contract_number')}}" class="form-control" id="national_id_number" placeholder="{{trans('admin.academies.national_id_number')}}">
+            <label for="contract_number">{{trans('admin.academies.contract_number')}}</label>
+            <input type="text" name="contract_number" value="{{isset($academies) ? $academies->contract_number : old('contract_number')}}" class="form-control" id="contract_number" placeholder="{{trans('admin.academies.national_id_number')}}">
             @error('contract_number')
             <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
 
         <div class="col-md-6 mb-3">
-            <label for="percentage">{{trans('admin.academies.account_manager')}}</label>
-            <input type="text" name="account_manager" value="{{isset($academies) ? $academies->account_manager : old('account_manager')}}" class="form-control" id="national_id_number" placeholder="{{trans('admin.academies.national_id_number')}}">
+            <label for="account_manager">{{trans('admin.academies.account_manager')}}</label>
+            <input type="text" name="account_manager" value="{{isset($academies) ? $academies->account_manager : old('account_manager')}}" class="form-control" id="account_manager" placeholder="{{trans('admin.academies.national_id_number')}}">
             @error('account_manager')
             <span class="text-danger">{{$message}}</span>
             @enderror
@@ -125,8 +125,8 @@
         </div>
 
         <div class="col-md-6 mb-3">
-            <label for="percentage">{{trans('admin.academies.is_registered')}}</label>
-            <input type="checkbox" name="is_registered" @if(isset($academies) && $academies->is_registered) checked  @endif class="form-check" id="national_id_number">
+            <label for="is_registered">{{trans('admin.academies.is_registered')}}</label>
+            <input type="checkbox" name="is_registered" @if(isset($academies) && $academies->is_registered) checked  @endif class="form-check" id="is_registered">
             @error('is_registered')
             <span class="text-danger">{{$message}}</span>
             @enderror
