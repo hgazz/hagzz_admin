@@ -16,6 +16,7 @@ class Training extends Model
         'end_date',
         'description',
         'coach_id',
+        'active'
     ];
 
     public function coach()
