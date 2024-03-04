@@ -70,13 +70,10 @@ class AcademiesDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'first_name', 'data' => 'first_name', 'title' => trans('admin.academies.first_name')],
-            ['name' => 'last_name', 'data' => 'last_name', 'title' => trans('admin.academies.last_name')],
+            ['name' => 'commercial_name', 'data' => 'commercial_name', 'title' => trans('admin.academies.commercial_name')],
             ['name' => 'email', 'data' => 'email', 'title' => trans('admin.academies.email')],
-            ['name' => 'full_name_arabic', 'data' => 'full_name_arabic', 'title' => trans('admin.academies.full_name_arabic')],
             ['name' => 'phone', 'data' => 'phone', 'title' => trans('admin.academies.phone')],
             ['name' => 'role', 'data' => 'role', 'title' => trans('admin.academies.role')],
-            ['name' => 'commercial_name', 'data' => 'commercial_name', 'title' => trans('admin.academies.commercial_name')],
             ['name' => 'trade_license_number', 'data' => 'trade_license_number', 'title' => trans('admin.academies.trade_license_number')],
             ['name' => 'trade_license_expire_date', 'data' => 'trade_license_expire_date', 'title' => trans('admin.academies.trade_license_expire_date')],
             ['name' => 'tax_number', 'data' => 'tax_number', 'title' => trans('admin.academies.tax_number')],

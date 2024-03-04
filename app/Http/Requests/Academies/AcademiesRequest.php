@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Academies;
 
+use App\Rules\UniqueTranslation;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,15 +23,18 @@ class AcademiesRequest extends FormRequest
      */
     public function rules(): array
     {
+        return request()->isMethod('PUT') ? $this->onUpdate() : $this->onCreate();
+    }
+
+    public function onCreate()
+    {
         return [
-            'first_name'=>'required|string|min:3|max:255',
-            'last_name'=>'required|string|min:3|max:255',
+            'commercial_name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name')],
+            'commercial_name_ar' => ['required', 'regex:/\p{Arabic}/u', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name')],
             'email'=>'required|string|email',
-            'full_name_arabic'=>'nullable|string|min:3|max:255|regex:/\p{Arabic}/u',
             'phone'=>'required|string|numeric',
             'password'=> $this->validatePassword(),
             'role'=>'required',
-            'commercial_name'=>'required|string|min:3|max:255',
             'trade_license_number'=>'nullable|numeric',
             'trade_license_expire_date'=>'nullable|date|after_or_equal:'. now()->toDateString(),
             'tax_number'=>'nullable|numeric',
@@ -41,6 +45,23 @@ class AcademiesRequest extends FormRequest
         ];
     }
 
+    public function onUpdate()
+    {
+        return [
+            'commercial_name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name', request('id_unique'))],
+            'commercial_name_ar' => ['required', 'regex:/\p{Arabic}/u', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name', request('id_unique'))],
+            'email'=>'required|string|email',
+            'phone'=>'required|string|numeric',
+            'role'=>'required',
+            'trade_license_number'=>'nullable|numeric',
+            'trade_license_expire_date'=>'nullable|date|after_or_equal:'. now()->toDateString(),
+            'tax_number'=>'nullable|numeric',
+            'national_id_number'=>'nullable|string',
+            'address'=>'nullable|string|min:3|max:255',
+            'contract_number'=>'required|string',
+            'account_manager'=>'required|string|min:3|max:255',
+        ];
+    }
     private function validatePassword(): string
     {
         return request()->isMethod('POST') ? 'required|string|min:6' : 'nullable|string|min:6';

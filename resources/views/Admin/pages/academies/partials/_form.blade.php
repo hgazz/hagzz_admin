@@ -1,32 +1,19 @@
 @csrf
 <div class="row">
     <div class="row">
+        @foreach (\App\Services\TranslatableService::getTranslatableInputs(App\Models\Academies::class) as $name => $data)
+            <div class="col-md-6 mb-3">
+                <label for="{{$name}}" class="form-label">{{$name}}</label>
+                <input type="text" id="{{$name}}" name="{{$name}}" maxlength="50" class="form-control"
+                       value="@if ($name == 'commercial_name_en') {{old($name, isset($academies) ? $academies->getTranslation('commercial_name','en')  : '')}} @else {{old($name, isset($academies) ? $academies->getTranslation('commercial_name','ar')  : '')}} @endif"
+                       placeholder="Enter {{$name}}" data-parsley-required-message="Please enter {{$name}}">
+                @error($name)
+                <span class="text-danger">*{{$message}}</span>
+                @enderror
+            </div>
+        @endforeach
         <div class="col-md-6 mb-3">
-            <label for="first_name">{{trans('admin.academies.first_name')}}</label>
-            <input type="text" name="first_name" class="form-control" value="{{isset($academies) ? $academies->first_name : old('first_name')}}" id="first_name" placeholder="{{trans('admin.academies.first_name')}}">
-            @error('first_name')
-                <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label for="last_name">{{trans('admin.academies.last_name')}}</label>
-            <input type="text" name="last_name" value="{{isset($academies) ? $academies->last_name : old('last_name')}}" class="form-control" id="last_name" placeholder="{{trans('admin.academies.last_name')}}">
-            @error('last_name')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label for="last_name">{{trans('admin.academies.full_name_arabic')}}</label>
-            <input type="text" name="full_name_arabic" value="{{isset($academies) ? $academies->full_name_arabic : old('full_name_arabic')}}" class="form-control" id="full_name_arabic" placeholder="{{trans('admin.academies.full_name_arabic')}}">
-            @error('full_name_arabic')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label for="last_name">{{trans('admin.academies.email')}}</label>
+            <label for="email">{{trans('admin.academies.email')}}</label>
             <input type="email" name="email" class="form-control" value="{{isset($academies) ? $academies->email : old('email')}}" id="email" placeholder="{{trans('admin.academies.email')}}">
             @error('email')
             <span class="text-danger">{{$message}}</span>
@@ -57,14 +44,6 @@
                 @endforeach
             </select>
             @error('role')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label for="commercial_name">{{trans('admin.academies.commercial_name')}}</label>
-            <input type="text" value="{{isset($academies) ? $academies->commercial_name : old('commercial_name')}}" name="commercial_name" class="form-control" id="commercial_name" placeholder="{{trans('admin.academies.commercial_name')}}">
-            @error('commercial_name')
             <span class="text-danger">{{$message}}</span>
             @enderror
         </div>

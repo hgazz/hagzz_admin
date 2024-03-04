@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Academies extends Model
 {
-    use HasFactory;
+    use HasTranslations;
+
+    public $translatable = ['commercial_name'];
+
 
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'full_name_arabic',
         'email',
         'phone',
         'password',
@@ -27,8 +27,21 @@ class Academies extends Model
         'address',
         'contract_number',
         'account_manager',
-        'is_registered'
+        'is_registered',
+        'logo'
     ];
+
+    public static $translatableColumns = [
+        'commercial_name'=>[
+            'type'=>'text',
+            'is_textarea'=>false
+        ]
+    ];
+
+    public static function getTranslatableFields()
+    {
+        return array_keys(self::$translatableColumns);
+    }
 
     public function sports()
     {

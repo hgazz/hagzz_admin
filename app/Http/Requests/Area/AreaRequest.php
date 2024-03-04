@@ -32,7 +32,7 @@ class AreaRequest extends FormRequest
     {
         return  [
             'name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('areas', 'name')],
-            'name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('areas', 'name')],
+            'name_ar' => ['required', 'regex:/\p{Arabic}/u','string', 'min:3', 'max:255', new UniqueTranslation('areas', 'name')],
             'city_id' => 'required|exists:cities,id'
         ];
     }
@@ -41,7 +41,7 @@ class AreaRequest extends FormRequest
     {
         return  [
             'name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('areas', 'name', request('id_unique'))],
-            'name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('areas', 'name', request('id_unique'))],
+            'name_ar' => ['required', 'regex:/\p{Arabic}/u','string', 'min:3', 'max:255', new UniqueTranslation('areas', 'name', request('id_unique'))],
             'city_id' => 'required|exists:cities,id'
         ];
     }
