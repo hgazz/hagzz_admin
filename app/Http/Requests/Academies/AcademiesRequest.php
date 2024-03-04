@@ -42,6 +42,8 @@ class AcademiesRequest extends FormRequest
             'address'=>'nullable|string:min:3|max:255',
             'contract_number'=>'required|string',
             'account_manager'=>'required|string|min:3|max:255',
+            'sport_id'=>'required|array',
+            'sport_id.*'=>'required|exists:sports,id',
         ];
     }
 
@@ -60,6 +62,8 @@ class AcademiesRequest extends FormRequest
             'address'=>'nullable|string|min:3|max:255',
             'contract_number'=>'required|string',
             'account_manager'=>'required|string|min:3|max:255',
+            'sport_id'=>'required|array',
+            'sport_id.*'=>'required|exists:sports,id',
         ];
     }
     private function validatePassword(): string

@@ -22,13 +22,15 @@ class AcademiesDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('commercial_name_en', fn($raw) => $raw->getTranslation('commercial_name', 'en'))
+            ->addColumn('commercial_name_ar', fn($raw) => $raw->getTranslation('commercial_name', 'ar'))
             ->addColumn('sports', function ($query) {
                 return $query->sports->pluck('name')->implode(', ');
             })
             ->addColumn('action', function (Academies $academies) {
                 return view('Admin.pages.academies.datatable.actions', compact('academies'))->render();
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'commercial_name_en', 'commercial_name_ar']);
     }
 
     /**
@@ -70,7 +72,8 @@ class AcademiesDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'commercial_name', 'data' => 'commercial_name', 'title' => trans('admin.academies.commercial_name')],
+            ['name' => 'commercial_name_en', 'data' => 'commercial_name_en', 'title' => trans('admin.academies.commercial_name_en')],
+            ['name' => 'commercial_name_ar', 'data' => 'commercial_name_ar', 'title' => trans('admin.academies.commercial_name_ar')],
             ['name' => 'email', 'data' => 'email', 'title' => trans('admin.academies.email')],
             ['name' => 'phone', 'data' => 'phone', 'title' => trans('admin.academies.phone')],
             ['name' => 'role', 'data' => 'role', 'title' => trans('admin.academies.role')],
