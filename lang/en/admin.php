@@ -141,6 +141,17 @@ return [
         'Country created successfully'=>'Country created successfully',
         'Country updated successfully'=>'Country updated successfully',
         'Country deleted successfully'=>'Country deleted successfully'
+    ],
+    'profile'=>[
+        'profile'=>'profile',
+        'profile updated successfully'=>'profile updated successfully',
+        'Settings'=>'Settings',
+        'General Information'=>'General Information',
+        'first_name'=>'first name',
+        'last_name'=>'last name',
+        'email'=>'email',
+        'phone'=>'phone',
+        'save'=>'save'
     ]
 
 ];
