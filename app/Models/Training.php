@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Training extends Model
 {
-    use HasFactory;
+    use HasFactory,HasTranslations;
     const PATH = 'images/trainings';
     protected $fillable = [
         'name',
@@ -18,6 +19,8 @@ class Training extends Model
         'coach_id',
         'active'
     ];
+
+    public  $translatable = ['name','description'];
 
     public function coach()
     {
