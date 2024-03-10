@@ -11,6 +11,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SportController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -120,6 +121,10 @@ Route::group(
             Route::controller(ProfileController::class)->group(function (){
                Route::get('profile','index')->name('profile.index');
                Route::put('profile/update/{id}','update')->name('profile.update');
+            });
+            Route::controller(UserController::class)->group(function (){
+                Route::get('user','index')->name('user.index');
+                Route::get('user/show/{user}','show')->name('user.show');
             });
         });
 
