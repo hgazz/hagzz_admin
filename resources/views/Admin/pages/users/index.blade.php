@@ -32,7 +32,7 @@
                             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.sport.sport') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.user.user') }}</li>
                                 </ol>
                             </nav>
 
@@ -46,22 +46,6 @@
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
         <div class="card">
-            <div class="card-header">
-                <div class="d-flex justify-content-between align-items-center">
-                    <a href="{{route('admin.sport.create')}}">
-                        <h3>{{ trans('admin.academies.create') }}</h3>
-                    </a>
-                    <a href="{{route('admin.sport.create')}}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="feather feather-plus">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                    </a>
-                </div>
-
-            </div>
             <div class="card-body">
                 {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
             </div>
@@ -70,8 +54,6 @@
         </div>
     </div>
 @endsection
-
-
 
 @push('js')
     <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/datatables.min.js"></script>

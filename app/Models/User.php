@@ -14,6 +14,10 @@ class User extends Authenticatable
 
     const PATH = 'images/users';
 
+    public function getImageAttribute($value)
+    {
+        return is_null($value) ? null : config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -65,8 +69,19 @@ class User extends Authenticatable
         return $this->belongsTo(Area::class, 'area_id');
     }
 
-    public function getImageAttribute($value)
+    public function sports()
     {
-        return is_null($value) ? null : config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
+        return $this->belongsToMany(Sport::class, 'user_sport', 'user_id', 'sport_id');
     }
+
+    public function follows()
+    {
+        return $this->hasMany(Follow::class, 'user_id');
+    }
+
+    public function joins()
+    {
+        return $this->hasMany(Join::class, 'user_id');
+    }
+
 }

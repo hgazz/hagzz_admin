@@ -31,10 +31,13 @@ class UserDataTable extends DataTable
             ->addColumn('area',function (User $user){
                 return $user->area->name;
             })
-            ->addColumn('action', function (User $user) {
-//                return view('Admin.pages.academies.datatable.actions', compact('user'))->render();
+            ->addColumn('image', function (User $user) {
+                return '<img src="'. $user->image . '" width="100" height="100">';
             })
-            ->rawColumns(['action']);
+            ->addColumn('action', function (User $user) {
+                return view('Admin.pages.users.datatable.actions', compact('user'))->render();
+            })
+            ->rawColumns(['action','image']);
     }
 
     /**
@@ -76,14 +79,15 @@ class UserDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'name', 'data' => 'name', 'title' => trans('admin.academies.name')],
-            ['name' => 'phone', 'data' => 'phone', 'title' => trans('admin.academies.phone')],
-            ['name' => 'gender', 'data' => 'gender', 'title' => trans('admin.academies.gender')],
-            ['name' => 'birth_date', 'data' => 'birth_date', 'title' => trans('admin.academies.gender')],
-            ['name' => 'country', 'data' => 'country', 'title' => trans('admin.academies.country')],
-            ['name' => 'city', 'data' => 'city', 'title' => trans('admin.academies.city')],
-            ['name' => 'area', 'data' => 'area', 'title' => trans('admin.academies.area')],
-
+            ['name' => 'image', 'data' => 'image', 'title' => trans('admin.banners.image')],
+            ['name' => 'name', 'data' => 'name', 'title' => trans('admin.user.name')],
+            ['name' => 'phone', 'data' => 'phone', 'title' => trans('admin.user.phone')],
+            ['name' => 'gender', 'data' => 'gender', 'title' => trans('admin.user.gender')],
+            ['name' => 'birth_date', 'data' => 'birth_date', 'title' => trans('admin.user.birth_date')],
+            ['name' => 'country', 'data' => 'country', 'title' => trans('admin.user.country')],
+            ['name' => 'city', 'data' => 'city', 'title' => trans('admin.user.city')],
+            ['name' => 'area', 'data' => 'area', 'title' => trans('admin.user.area')],
+            ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
 
         ];
     }
