@@ -12,6 +12,12 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const PATH = 'images/users';
+
+    public function getImageAttribute($value)
+    {
+        return is_null($value) ? null : config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -47,4 +53,35 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'area_id');
+    }
+
+    public function sports()
+    {
+        return $this->belongsToMany(Sport::class, 'user_sport', 'user_id', 'sport_id');
+    }
+
+    public function follows()
+    {
+        return $this->hasMany(Follow::class, 'user_id');
+    }
+
+    public function joins()
+    {
+        return $this->hasMany(Join::class, 'user_id');
+    }
+
 }

@@ -152,6 +152,19 @@ return [
         'email'=>'email',
         'phone'=>'phone',
         'save'=>'save'
+    ],
+    'user'=>[
+        'user'=>'users',
+        'name'=>'name',
+        'phone'=>'phone',
+        'gender'=>'gender',
+        'birth_date'=>'birth_date',
+        'country'=>'country',
+        'city'=>'city',
+        'area'=>'area',
+        'Trainings'=>'Trainings',
+        'Sports'=>'Sports',
+        'User deleted successfully'=>'User deleted successfully'
     ]
 
 ];
