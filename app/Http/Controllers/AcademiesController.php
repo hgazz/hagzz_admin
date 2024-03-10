@@ -29,7 +29,8 @@ class AcademiesController extends Controller
     {
         $roles = ['manager', 'owner', 'partner'];
         $sports = $this->sportModel::get(['id', 'name']);
-        return view('Admin.pages.academies.create',compact('roles', 'sports'));
+        $allAcademies = $this->academicModels->get(['id','commercial_name']);
+        return view('Admin.pages.academies.create',compact('roles', 'sports','allAcademies'));
     }
 
     public function store(AcademiesRequest $request)
@@ -50,6 +51,7 @@ class AcademiesController extends Controller
                     'contract_number' => $request->contract_number,
                     'account_manager' => $request->account_manager,
                     'is_registered'=>$request->has('is_registered') ? 1 :0,
+                    'branch_to'=>$request->branch_to,
                 ]);
             $academy->sports()->attach($request->sport_id);
             DB::commit();
@@ -83,7 +85,8 @@ class AcademiesController extends Controller
     {
         $roles = ['manager', 'owner', 'partner'];
         $sports = $this->sportModel->get(['id','name']);
-        return view('Admin.pages.academies.edit',compact('academies','roles', 'sports'));
+        $allAcademies = $this->academicModels->get(['id','commercial_name']);
+        return view('Admin.pages.academies.edit',compact('academies','roles', 'sports','allAcademies'));
     }
 
     public function update(Academies $academies , AcademiesRequest $request)
@@ -104,6 +107,7 @@ class AcademiesController extends Controller
                     'contract_number' => $request->contract_number,
                     'account_manager' => $request->account_manager,
                     'is_registered'=>$request->has('is_registered') ? 1 :0,
+                    'branch_to'=>$request->branch_to,
             ]);
             $academies->sports()->sync($request->sport_id);
             session()->flash('success',trans('admin.academies.academies updated successfully'));

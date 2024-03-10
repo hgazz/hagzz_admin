@@ -30,6 +30,9 @@ class AcademiesDataTable extends DataTable
             ->addColumn('action', function (Academies $academies) {
                 return view('Admin.pages.academies.datatable.actions', compact('academies'))->render();
             })
+            ->addColumn('branch_to',function (Academies $academies){
+                return $academies->academy->commercial_name ?? '';
+            })
             ->rawColumns(['action', 'commercial_name_en', 'commercial_name_ar']);
     }
 
@@ -77,6 +80,7 @@ class AcademiesDataTable extends DataTable
             ['name' => 'email', 'data' => 'email', 'title' => trans('admin.academies.email')],
             ['name' => 'phone', 'data' => 'phone', 'title' => trans('admin.academies.phone')],
             ['name' => 'role', 'data' => 'role', 'title' => trans('admin.academies.role')],
+            ['name' => 'branch_to', 'data' => 'branch_to', 'title' => trans('admin.academies.branch_to')],
             ['name' => 'trade_license_number', 'data' => 'trade_license_number', 'title' => trans('admin.academies.trade_license_number')],
             ['name' => 'trade_license_expire_date', 'data' => 'trade_license_expire_date', 'title' => trans('admin.academies.trade_license_expire_date')],
             ['name' => 'tax_number', 'data' => 'tax_number', 'title' => trans('admin.academies.tax_number')],

@@ -119,10 +119,23 @@
                         <option value="{{$sport->id}}" @selected(old('sport_id', isset($academies) ? in_array($sport->id, $academies->sports()->pluck('sport_id')->toArray()) : ''))>{{$sport->name}}</option>
                     @endforeach
            </select>
-            @error('academy_id')
+            @error('sport_id')
                 <span class="text-danger" >{{$message}}</span>
             @enderror
         </div>
+
+            <div class="col-md-6 mb-3">
+                <label>{{trans('admin.academies.Select branch')}}</label>
+                <select class="select2-default form-select" name="branch_to">
+                    <option value="">{{ trans('admin.academies.academies') }}</option>
+                    @foreach($allAcademies as $academy)
+                        <option value="{{$academy->id}}"  @selected(old('branch_to', isset($academies) ? $academies->branch_to : '') == $academy->id) >{{$academy->commercial_name}}</option>
+                    @endforeach
+                </select>
+                @error('branch_to')
+                <span class="text-danger" >{{$message}}</span>
+                @enderror
+            </div>
 
         <div class="col-md-6 mb-3">
             <label for="is_registered">{{trans('admin.academies.is_registered')}}</label>

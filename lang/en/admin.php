@@ -74,6 +74,8 @@ return [
         'account_manager'=>'account manager',
         'is_registered'=>'is Registered',
         'select_sport' => 'Select Sport',
+        'Select branch'=>'Select branch',
+        'branch_to'=>'branch_to'
     ],
     'banners'=> [
         'banners'=>'Banners',
