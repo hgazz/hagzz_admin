@@ -127,7 +127,7 @@
             <div class="col-md-6 mb-3">
                 <label>{{trans('admin.academies.Select branch')}}</label>
                 <select class="select2-default form-select" name="branch_to">
-                    <option value="">{{ trans('admin.academies.academies') }}</option>
+                    <option value="">{{ trans('admin.academies.select_academy') }}</option>
                     @foreach($allAcademies as $academy)
                         <option value="{{$academy->id}}"  @selected(old('branch_to', isset($academies) ? $academies->branch_to : '') == $academy->id) >{{$academy->commercial_name}}</option>
                     @endforeach

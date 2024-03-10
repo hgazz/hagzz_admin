@@ -25,13 +25,14 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'phone',
         'gender',
         'birth_date',
         'image',
         'country_id',
         'city_id',
         'area_id',
+        'language'
     ];
 
     /**
@@ -69,11 +70,6 @@ class User extends Authenticatable
         return $this->belongsTo(Area::class, 'area_id');
     }
 
-    public function sports()
-    {
-        return $this->belongsToMany(Sport::class, 'user_sport', 'user_id', 'sport_id');
-    }
-
     public function follows()
     {
         return $this->hasMany(Follow::class, 'user_id');
@@ -84,4 +80,8 @@ class User extends Authenticatable
         return $this->hasMany(Join::class, 'user_id');
     }
 
+    public function sports()
+    {
+        return $this->belongsToMany(Sport::class, 'user_sport', 'user_id', 'sport_id');
+    }
 }

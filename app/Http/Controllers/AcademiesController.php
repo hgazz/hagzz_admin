@@ -85,7 +85,7 @@ class AcademiesController extends Controller
     {
         $roles = ['manager', 'owner', 'partner'];
         $sports = $this->sportModel->get(['id','name']);
-        $allAcademies = $this->academicModels->get(['id','commercial_name']);
+        $allAcademies = $this->academicModels->where('id','!=',$academies->id)->get(['id','commercial_name']);
         return view('Admin.pages.academies.edit',compact('academies','roles', 'sports','allAcademies'));
     }
 

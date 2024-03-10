@@ -73,6 +73,7 @@ return [
         'contract_number'=>'contract number',
         'account_manager'=>'account manager',
         'is_registered'=>'is Registered',
+        'select_academy' => 'Select Academy',
         'select_sport' => 'Select Sport',
         'Select branch'=>'Select branch',
         'branch_to'=>'branch_to'
