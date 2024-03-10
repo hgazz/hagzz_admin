@@ -44,6 +44,7 @@ class AcademiesRequest extends FormRequest
             'account_manager'=>'required|string|min:3|max:255',
             'sport_id'=>'required|array',
             'sport_id.*'=>'required|exists:sports,id',
+            'branch_to'=>'nullable|exists:academies,id',
         ];
     }
 

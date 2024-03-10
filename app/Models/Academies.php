@@ -28,7 +28,8 @@ class Academies extends Model
         'contract_number',
         'account_manager',
         'is_registered',
-        'logo'
+        'logo',
+        'branch_to'
     ];
 
     public static $translatableColumns = [
@@ -46,5 +47,10 @@ class Academies extends Model
     public function sports()
     {
         return $this->belongsToMany(Sport::class,'academy_sport','academy_id','sport_id');
+    }
+
+    public function academy()
+    {
+        return $this->belongsTo(Academies::class , 'branch_to');
     }
 }
