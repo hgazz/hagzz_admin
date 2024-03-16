@@ -54,7 +54,7 @@ class AcademiesRequest extends FormRequest
             'commercial_name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name', request('id_unique'))],
             'commercial_name_ar' => ['required', 'regex:/\p{Arabic}/u', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name', request('id_unique'))],
             'email'=>'required|string|email',
-            'phone'=>'required|string|numeric',
+            'phone'=> $this->validatePhone(),
             'role'=>'required',
             'trade_license_number'=>'nullable|numeric',
             'trade_license_expire_date'=>'nullable|date|after_or_equal:'. now()->toDateString(),
@@ -71,6 +71,11 @@ class AcademiesRequest extends FormRequest
     private function validatePassword(): string
     {
         return request()->isMethod('POST') ? 'required|string|min:6' : 'nullable|string|min:6';
+    }
+
+    private function validatePhone()
+    {
+        return request()->isMethod('POST') ? 'required|string|unique:academies,phone' : 'nullable|string|numeric|unique:academies,phone,'.request('id_unique');
     }
 
 }
