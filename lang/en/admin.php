@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'dashboard' => 'Dashboard',
     'bokit' => 'Bokit',
+    'dashboard' => 'Dashboard',
     'id' => 'ID',
     'actions' => 'Actions',
     'submit' => 'Submit',
