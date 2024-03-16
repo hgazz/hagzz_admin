@@ -22,7 +22,7 @@
 
         <div class="col-md-6 mb-3">
             <label for="phone">{{trans('admin.academies.phone')}}</label>
-            <input type="tel" name="phone" class="form-control" value="{{isset($academies) ? $academies->phone : old('phone')}}" id="phone" placeholder="{{trans('admin.academies.phone')}}">
+            <input type="text" name="phone" class="form-control" value="{{isset($academies) ? $academies->phone : old('phone')}}" id="phone" placeholder="{{trans('admin.academies.phone')}}">
             @error('phone')
             <span class="text-danger">{{$message}}</span>
             @enderror
