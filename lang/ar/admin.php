@@ -137,6 +137,10 @@ return [
         'faq created successfully'=>'تم إنشاء السؤال والجواب بنجاح',
         'faq updated successfully'=>'تم تحديث السؤال والجواب بنجاح',
         'faq deleted successfully'=>'تم حذف السؤال والجواب بنجاح',
+        'question_ar' => 'السؤال (عربي)',
+        'question_en' => 'السؤال (إنجليزي)',
+        'answer_ar' => 'الاجابه (عربي)',
+        'answer_en' => 'الاجابه (إنجليزي)',
     ],
     'country'=>[
         'country' => 'دولة',

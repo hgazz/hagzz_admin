@@ -129,7 +129,11 @@ return [
     'faq'=>[
         'faq'=>'faq',
         'question'=>'question',
+        'question_ar' => 'Question (Arabic)',
+        'question_en' => 'Question (English)',
         'answer'=>'answer',
+        'answer_en' => 'Answer (English)',
+        'answer_ar' => 'Answer (Arabic)',
         'create'=>'create',
         'create faq'=>'create faq',
         'edit'=>'edit faq',

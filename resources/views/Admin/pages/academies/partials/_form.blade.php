@@ -3,7 +3,7 @@
     <div class="row">
         @foreach (\App\Services\TranslatableService::getTranslatableInputs(App\Models\Academies::class) as $name => $data)
             <div class="col-md-6 mb-3">
-                <label for="{{$name}}" class="form-label">{{$name}}</label>
+                <label for="{{$name}}" class="form-label">{{trans('admin.academies.'.$name)}}</label>
                 <input type="text" id="{{$name}}" name="{{$name}}" maxlength="50" class="form-control"
                        value="@if ($name == 'commercial_name_en') {{old($name, isset($academies) ? $academies->getTranslation('commercial_name','en')  : '')}} @else {{old($name, isset($academies) ? $academies->getTranslation('commercial_name','ar')  : '')}} @endif"
                        placeholder="Enter {{$name}}" data-parsley-required-message="Please enter {{$name}}">
