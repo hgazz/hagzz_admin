@@ -160,7 +160,8 @@ return [
         'last_name'=>'last name',
         'email'=>'email',
         'phone'=>'phone',
-        'save'=>'save'
+        'save'=>'save',
+        'user'=>'User',
     ],
     'user'=>[
         'user'=>'users',
