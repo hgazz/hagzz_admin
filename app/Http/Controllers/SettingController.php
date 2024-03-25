@@ -38,6 +38,8 @@ class SettingController extends Controller
             'address',
             'snapchat',
             'youtube',
+            'terms',
+            'privacy'
         ];
         return view('Admin.pages.setting.create',compact('types', 'keys'));
     }
@@ -70,6 +72,8 @@ class SettingController extends Controller
             'address',
             'snapchat',
             'youtube',
+            'terms',
+            'privacy'
         ];
         return view('Admin.pages.setting.edit',compact('setting','types', 'keys'));
     }
