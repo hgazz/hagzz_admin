@@ -3,13 +3,13 @@
 namespace App\DataTables;
 
 use App\Http\Traits\DataTablesTrait;
-use App\Models\Area;
+use App\Models\Invoice;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
 
-class AreaDataTable extends DataTable
+class InvoiceDataTable extends DataTable
 {
     use DataTablesTrait;
     /**
@@ -20,37 +20,41 @@ class AreaDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('name_en', fn($raw) => $raw->getTranslation('name', 'en'))
-            ->addColumn('name_ar', fn($raw) => $raw->getTranslation('name', 'ar'))
-            ->addColumn('city_id', function (Area $area) {
-                return $area->city->name;
+            ->editColumn('user_id', function ($row) {
+                return $row->user->name;
             })
-            ->addColumn('action', function (Area $area) {
-                return view('Admin.pages.area.datatable.actions', compact('area'))->render();
+            ->editColumn('training_id', function ($row) {
+                return $row->training->name;
             })
-            ->filterColumn('city.name', function ($query, $keyword) {
-                $query->whereHas('city',function ($q) use($keyword){
+            ->editColumn('is_canceled', function ($row) {
+                return $row->is_canceled ? trans('admin.bookings.cancelled') : 'N/A';
+            })
+            ->filterColumn('training.name', function ($query, $keyword) {
+                $query->whereHas('training',function ($q) use($keyword){
                     $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
                 });
             })
-            ->rawColumns(['name_en', 'name_ar','action', 'city_id']);
+            ->addColumn('action', function (Invoice $invoice) {
+                return view('Admin.pages.booking.datatable.actions', compact('invoice'));
+            })
+            ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Area $model): QueryBuilder
+    public function query(Invoice $model): QueryBuilder
     {
-        $query = $model->newQuery()->with('city');
-        $city = request()->input('city.name');
-        if ($city) {
-            $query->whereHas('city', function ($q) use ($city) {
+        $query = $model->newQuery()->with(['user', 'training']);
+        $training = request()->input('training.name');
+        if ($training) {
+            $query->whereHas('training', function ($q) use ($training) {
                 // Use JSON_SEARCH to find any occurrence of $city within the JSON column, regardless of the key (locale)
-                $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$city}%"]);
+                $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$training}%"]);
             });
         }
 
-        return $query->select('areas.*');
+        return $query->select('invoices.*');
     }
 
     /**
@@ -61,7 +65,7 @@ class AreaDataTable extends DataTable
         $hideButtonsArray = array_column($this->getColumns(), 'title');
         $hideButtonsArray = $this->makeHideButtons($hideButtonsArray);
         return $this->builder()
-                    ->setTableId('area-table')
+                    ->setTableId('invoice-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -98,9 +102,11 @@ class AreaDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'name->en', 'data' => 'name_en', 'title' => trans('admin.city.name_en')],
-            ['name' => 'name->ar', 'data' => 'name_ar', 'title' => trans('admin.city.name_ar')],
-            ['name' => 'city.name', 'data' => 'city_id', 'title' => trans('admin.city.name')],
+            ['name' => 'user.name', 'data' => 'user_id', 'title' => trans('admin.bookings.user')],
+            ['name' => 'training.name', 'data' => 'training_id', 'title' => trans('admin.bookings.training')],
+            ['name' => 'amount', 'data' => 'amount', 'title' => trans('admin.bookings.amount')],
+            ['name' => 'status', 'data' => 'status', 'title' => trans('admin.bookings.status')],
+            ['name' => 'is_canceled', 'data' => 'is_canceled', 'title' => trans('admin.bookings.is_canceled')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }
@@ -110,6 +116,6 @@ class AreaDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Area_' . date('YmdHis');
+        return 'Invoice_' . date('YmdHis');
     }
 }

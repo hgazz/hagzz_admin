@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SportController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -127,7 +128,12 @@ Route::group(
                 Route::get('user/show/{user}','show')->name('user.show');
                 Route::delete('user/delete/{user}','delete')->name('user.delete');
             });
-        });
+
+            Route::controller(BookingController::class)->group(function (){
+                Route::get('bookings','index')->name('booking.index');
+                Route::put('bookings/cancel/{invoice}','cancelBooking')->name('booking.cancel');
+            });
+    });
 
 });
 

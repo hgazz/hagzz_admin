@@ -173,6 +173,18 @@ return [
         'Trainings' => 'البرامج التدريبية',
         'Sports' => 'الرياضات',
         'User deleted successfully' => 'تم حذف المستخدم بنجاح',
+    ],
+    'bookings' => [
+        'bookings' => 'الحجوزات',
+        'create' => 'إنشاء حجز',
+        'edit' => 'تعديل حجز',
+        'booking cancelled successfully' => 'تم الغاء الحجز بنجاح',
+        'training' => 'برامج التدريبية',
+        'user' => 'المستخدم',
+        'status' => 'الحالة',
+        'pending' => 'قيد الانتظار',
+        'paid' => 'مدفوعة',
+        'cancelled' => 'ملغية',
     ]
 
 ];

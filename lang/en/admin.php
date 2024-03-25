@@ -6,6 +6,8 @@ return [
     'id' => 'ID',
     'actions' => 'Actions',
     'submit' => 'Submit',
+    'total_income' => 'Total Income',
+    'users' => 'Users',
     'auth' => [
         'sign_in' => 'Sign In',
         'enter_your_email_and_password' => 'Enter your email and password to login',
@@ -172,6 +174,18 @@ return [
         'Trainings'=>'Trainings',
         'Sports'=>'Sports',
         'User deleted successfully'=>'User deleted successfully'
+    ],
+    'bookings' => [
+        'bookings' => 'Bookings',
+        'booking cancelled successfully' => 'Booking cancelled successfully',
+        'training' => 'Training',
+        'user' => 'User',
+        'status' => 'Status',
+        'pending' => 'Pending',
+        'paid' => 'Paid',
+        'cancelled' => 'Cancelled',
+        'is_canceled' => 'Is Canceled',
+        'amount' => 'Amount',
     ]
 
 ];
