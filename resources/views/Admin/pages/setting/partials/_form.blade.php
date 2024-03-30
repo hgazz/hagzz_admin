@@ -40,7 +40,7 @@
             @enderror
         </div>
 
-        <div class="col-md-6 mb-3" style="display: none" id="textAreaDiv">
+        <div class="col-md-12 mb-3" style="display: none" id="textAreaDiv">
             <label for="body">{{ trans('admin.setting.value') }}</label>
             <textarea class="form-control @error('text_value') is-invalid fparsley-error parsley-error @enderror" id="body" name="text_value" rows="5">{{ isset($setting) && $setting->type == 'textarea' ? $setting->value : old('text_value') }}</textarea>
             @error('text_value')
@@ -90,7 +90,7 @@
     let imageDiv = document.getElementById("imageDiv");
     document.addEventListener('DOMContentLoaded', function(){
         var key = keySelect.value;
-        if(key === "about"){
+        if(key === "about" || key === "terms" || key === "privacy"){
             typesSelect.innerHTML += `
                     <option value="textarea">textarea</option>
                 `;
@@ -117,7 +117,7 @@
 
     keySelect.addEventListener('change', function(){
         let key = keySelect.value;
-        if(key === "about"){
+        if(key === "about" || "terms" || key === "privacy"){
             typesSelect.innerHTML += `
                     <option value="textarea" selected>textarea</option>
                 `;
