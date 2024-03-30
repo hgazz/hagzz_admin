@@ -33,7 +33,7 @@ class CityRequest extends FormRequest
     {
         return  [
             'name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name')],
-            'name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name')],
+            'name_ar' => ['required', 'regex:/\p{Arabic}/u','string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name')],
             'country_id' => 'required|exists:countries,id',
         ];
     }
@@ -42,7 +42,7 @@ class CityRequest extends FormRequest
     {
         return  [
             'name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name', request('id_unique'))],
-            'name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name', request('id_unique'))],
+            'name_ar' => ['required', 'regex:/\p{Arabic}/u', 'string', 'min:3', 'max:255', new UniqueTranslation('cities', 'name', request('id_unique'))],
             'country_id' => 'required|exists:countries,id',
         ];
     }

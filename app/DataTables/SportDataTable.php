@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Http\Traits\DataTablesTrait;
 use App\Models\Sport;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -11,6 +12,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class SportDataTable extends DataTable
 {
+    use DataTablesTrait;
     /**
      * Build the DataTable class.
      *
@@ -43,20 +45,36 @@ class SportDataTable extends DataTable
      */
     public function html(): HtmlBuilder
     {
+        $hideButtonsArray = array_column($this->getColumns(), 'title');
+        $hideButtonsArray = $this->makeHideButtons($hideButtonsArray);
         return $this->builder()
                     ->setTableId('sport-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    //->dom('Bfrtip')
+                    ->dom('Bfrtip')
                     ->orderBy(1)
                     ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
+                    ->parameters([
+                        'scrollX' => true,
+                        'scrollY' => true,
+                        'responsive' => true,
+                        'autoWidth' => false,
+                        'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
+                        'buttons' => [
+                            $hideButtonsArray,
+                        ],
+                        'order' => [
+                            0, 'desc'
+                        ],
+                        'language' =>
+                            (app()->getLocale() === 'ar') ?
+                                [
+                                    'url' => url('//cdn.datatables.net/plug-ins/1.13.8/i18n/ar.json')
+                                ] :
+                                [
+                                    'url' => url('//cdn.datatables.net/plug-ins/1.13.8/i18n/English.json')
+                                ]
+
                     ]);
     }
 
@@ -69,7 +87,6 @@ class SportDataTable extends DataTable
             ['data' => 'id', 'name' => 'id', 'title' => trans('admin.id')],
             ['data' => 'name', 'name' => 'name', 'title' => trans('admin.sport.title')],
             ['data' => 'icon', 'name' => 'icon', 'title' => trans('admin.sport.icon')],
-            ['data' => 'level', 'name' => 'level', 'title' => trans('admin.sport.level')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
 
         ];

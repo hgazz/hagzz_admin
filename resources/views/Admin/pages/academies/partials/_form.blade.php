@@ -1,32 +1,19 @@
 @csrf
 <div class="row">
     <div class="row">
+        @foreach (\App\Services\TranslatableService::getTranslatableInputs(App\Models\Academies::class) as $name => $data)
+            <div class="col-md-6 mb-3">
+                <label for="{{$name}}" class="form-label">{{trans('admin.academies.'.$name)}}</label>
+                <input type="text" id="{{$name}}" name="{{$name}}" maxlength="50" class="form-control"
+                       value="@if ($name == 'commercial_name_en') {{old($name, isset($academies) ? $academies->getTranslation('commercial_name','en')  : '')}} @else {{old($name, isset($academies) ? $academies->getTranslation('commercial_name','ar')  : '')}} @endif"
+                       placeholder="Enter {{$name}}" data-parsley-required-message="Please enter {{$name}}">
+                @error($name)
+                <span class="text-danger">*{{$message}}</span>
+                @enderror
+            </div>
+        @endforeach
         <div class="col-md-6 mb-3">
-            <label for="first_name">{{trans('admin.academies.first_name')}}</label>
-            <input type="text" name="first_name" class="form-control" value="{{isset($academies) ? $academies->first_name : old('first_name')}}" id="first_name" placeholder="{{trans('admin.academies.first_name')}}">
-            @error('first_name')
-                <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label for="last_name">{{trans('admin.academies.last_name')}}</label>
-            <input type="text" name="last_name" value="{{isset($academies) ? $academies->last_name : old('last_name')}}" class="form-control" id="last_name" placeholder="{{trans('admin.academies.last_name')}}">
-            @error('last_name')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label for="last_name">{{trans('admin.academies.full_name_arabic')}}</label>
-            <input type="text" name="full_name_arabic" value="{{isset($academies) ? $academies->full_name_arabic : old('full_name_arabic')}}" class="form-control" id="full_name_arabic" placeholder="{{trans('admin.academies.full_name_arabic')}}">
-            @error('full_name_arabic')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label for="last_name">{{trans('admin.academies.email')}}</label>
+            <label for="email">{{trans('admin.academies.email')}}</label>
             <input type="email" name="email" class="form-control" value="{{isset($academies) ? $academies->email : old('email')}}" id="email" placeholder="{{trans('admin.academies.email')}}">
             @error('email')
             <span class="text-danger">{{$message}}</span>
@@ -35,7 +22,7 @@
 
         <div class="col-md-6 mb-3">
             <label for="phone">{{trans('admin.academies.phone')}}</label>
-            <input type="tel" name="phone" class="form-control" value="{{isset($academies) ? $academies->phone : old('phone')}}" id="phone" placeholder="{{trans('admin.academies.phone')}}">
+            <input type="text" name="phone" class="form-control" value="{{isset($academies) ? $academies->phone : old('phone')}}" id="phone" placeholder="{{trans('admin.academies.phone')}}">
             @error('phone')
             <span class="text-danger">{{$message}}</span>
             @enderror
@@ -51,7 +38,7 @@
 
         <div class="col-md-6 mb-3">
             <label for="role">{{trans('admin.academies.role')}}</label>
-            <select name="role" class="form-control">
+            <select id="role" name="role" class="form-control">
                 @foreach($roles as $role)
                     <option value="{{$role}}">{{$role}}</option>
                 @endforeach
@@ -62,18 +49,10 @@
         </div>
 
         <div class="col-md-6 mb-3">
-            <label for="commercial_name">{{trans('admin.academies.commercial_name')}}</label>
-            <input type="text" value="{{isset($academies) ? $academies->commercial_name : old('commercial_name')}}" name="commercial_name" class="form-control" id="commercial_name" placeholder="{{trans('admin.academies.commercial_name')}}">
-            @error('commercial_name')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label for="commercial_name">{{trans('admin.academies.trade_license_number')}}</label>
+            <label for="trade_license_number">{{trans('admin.academies.trade_license_number')}}</label>
             <input type="text" name="trade_license_number" value="{{isset($academies) ? $academies->trade_license_number : old('trade_license_number')}}" class="form-control" id="trade_license_number" placeholder="{{trans('admin.academies.trade_license_number')}}">
             @error('trade_license_number')
-            <span class="text-danger">{{$message}}</span>
+                <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
 
@@ -110,7 +89,7 @@
 
 
         <div class="col-md-6 mb-3">
-            <label for="percentage">{{trans('admin.academies.national_id_number')}}</label>
+            <label for="national_id_number">{{trans('admin.academies.national_id_number')}}</label>
             <input type="text" name="national_id_number" value="{{isset($academies) ? $academies->national_id_number : old('national_id_number')}}" class="form-control" id="national_id_number" placeholder="{{trans('admin.academies.national_id_number')}}">
             @error('national_id_number')
             <span class="text-danger">{{$message}}</span>
@@ -118,16 +97,16 @@
         </div>
 
         <div class="col-md-6 mb-3">
-            <label for="percentage">{{trans('admin.academies.contract_number')}}</label>
-            <input type="text" name="contract_number" value="{{isset($academies) ? $academies->contract_number : old('contract_number')}}" class="form-control" id="national_id_number" placeholder="{{trans('admin.academies.national_id_number')}}">
+            <label for="contract_number">{{trans('admin.academies.contract_number')}}</label>
+            <input type="text" name="contract_number" value="{{isset($academies) ? $academies->contract_number : old('contract_number')}}" class="form-control" id="contract_number" placeholder="{{trans('admin.academies.national_id_number')}}">
             @error('contract_number')
             <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
 
         <div class="col-md-6 mb-3">
-            <label for="percentage">{{trans('admin.academies.account_manager')}}</label>
-            <input type="text" name="account_manager" value="{{isset($academies) ? $academies->account_manager : old('account_manager')}}" class="form-control" id="national_id_number" placeholder="{{trans('admin.academies.national_id_number')}}">
+            <label for="account_manager">{{trans('admin.academies.account_manager')}}</label>
+            <input type="text" name="account_manager" value="{{isset($academies) ? $academies->account_manager : old('account_manager')}}" class="form-control" id="account_manager" placeholder="{{trans('admin.academies.national_id_number')}}">
             @error('account_manager')
             <span class="text-danger">{{$message}}</span>
             @enderror
@@ -140,14 +119,27 @@
                         <option value="{{$sport->id}}" @selected(old('sport_id', isset($academies) ? in_array($sport->id, $academies->sports()->pluck('sport_id')->toArray()) : ''))>{{$sport->name}}</option>
                     @endforeach
            </select>
-            @error('academy_id')
+            @error('sport_id')
                 <span class="text-danger" >{{$message}}</span>
             @enderror
         </div>
 
+            <div class="col-md-6 mb-3">
+                <label>{{trans('admin.academies.Select branch')}}</label>
+                <select class="select2-default form-select" name="branch_to">
+                    <option value="">{{ trans('admin.academies.select_academy') }}</option>
+                    @foreach($allAcademies as $academy)
+                        <option value="{{$academy->id}}"  @selected(old('branch_to', isset($academies) ? $academies->branch_to : '') == $academy->id) >{{$academy->commercial_name}}</option>
+                    @endforeach
+                </select>
+                @error('branch_to')
+                <span class="text-danger" >{{$message}}</span>
+                @enderror
+            </div>
+
         <div class="col-md-6 mb-3">
-            <label for="percentage">{{trans('admin.academies.is_registered')}}</label>
-            <input type="checkbox" name="is_registered" @if(isset($academies) && $academies->is_registered) checked  @endif class="form-check" id="national_id_number">
+            <label for="is_registered">{{trans('admin.academies.is_registered')}}</label>
+            <input type="checkbox" name="is_registered" @if(isset($academies) && $academies->is_registered) checked  @endif class="form-check" id="is_registered">
             @error('is_registered')
             <span class="text-danger">{{$message}}</span>
             @enderror

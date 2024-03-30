@@ -1,11 +1,13 @@
 <?php
 
 return [
-    'dashboard' => 'Dashboard',
     'bokit' => 'Bokit',
+    'dashboard' => 'Dashboard',
     'id' => 'ID',
     'actions' => 'Actions',
     'submit' => 'Submit',
+    'total_income' => 'Total Income',
+    'users' => 'Users',
     'auth' => [
         'sign_in' => 'Sign In',
         'enter_your_email_and_password' => 'Enter your email and password to login',
@@ -56,6 +58,8 @@ return [
         'password'=>'password',
         'role'=>'role',
         'commercial_name'=>'commercial name',
+        'commercial_name_en'=>'commercial name (en)',
+        'commercial_name_ar'=>'commercial name (ar)',
         'trade_license_number'=>'trade license number',
         'trade_license_expire_date'=>'trade license expire date',
         'tax_number'=>'tax number',
@@ -71,7 +75,10 @@ return [
         'contract_number'=>'contract number',
         'account_manager'=>'account manager',
         'is_registered'=>'is Registered',
+        'select_academy' => 'Select Academy',
         'select_sport' => 'Select Sport',
+        'Select branch'=>'Select branch',
+        'branch_to'=>'branch_to'
     ],
     'banners'=> [
         'banners'=>'Banners',
@@ -124,7 +131,11 @@ return [
     'faq'=>[
         'faq'=>'faq',
         'question'=>'question',
+        'question_ar' => 'Question (Arabic)',
+        'question_en' => 'Question (English)',
         'answer'=>'answer',
+        'answer_en' => 'Answer (English)',
+        'answer_ar' => 'Answer (Arabic)',
         'create'=>'create',
         'create faq'=>'create faq',
         'edit'=>'edit faq',
@@ -139,6 +150,43 @@ return [
         'Country created successfully'=>'Country created successfully',
         'Country updated successfully'=>'Country updated successfully',
         'Country deleted successfully'=>'Country deleted successfully'
+    ],
+    'profile'=>[
+        'profile'=>'profile',
+        'profile updated successfully'=>'profile updated successfully',
+        'Settings'=>'Settings',
+        'General Information'=>'General Information',
+        'first_name'=>'first name',
+        'last_name'=>'last name',
+        'email'=>'email',
+        'phone'=>'phone',
+        'save'=>'save',
+        'user'=>'User',
+    ],
+    'user'=>[
+        'user'=>'users',
+        'name'=>'name',
+        'phone'=>'phone',
+        'gender'=>'gender',
+        'birth_date'=>'birth_date',
+        'country'=>'country',
+        'city'=>'city',
+        'area'=>'area',
+        'Trainings'=>'Trainings',
+        'Sports'=>'Sports',
+        'User deleted successfully'=>'User deleted successfully'
+    ],
+    'bookings' => [
+        'bookings' => 'Bookings',
+        'booking cancelled successfully' => 'Booking cancelled successfully',
+        'training' => 'Training',
+        'user' => 'User',
+        'status' => 'Status',
+        'pending' => 'Pending',
+        'paid' => 'Paid',
+        'cancelled' => 'Cancelled',
+        'is_canceled' => 'Is Canceled',
+        'amount' => 'Amount',
     ]
 
 ];

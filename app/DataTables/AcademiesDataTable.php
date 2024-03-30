@@ -2,18 +2,16 @@
 
 namespace App\DataTables;
 
+use App\Http\Traits\DataTablesTrait;
 use App\Models\Academies;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class AcademiesDataTable extends DataTable
 {
+    use DataTablesTrait;
     /**
      * Build the DataTable class.
      *
@@ -22,13 +20,18 @@ class AcademiesDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('commercial_name_en', fn($raw) => $raw->getTranslation('commercial_name', 'en'))
+            ->addColumn('commercial_name_ar', fn($raw) => $raw->getTranslation('commercial_name', 'ar'))
             ->addColumn('sports', function ($query) {
                 return $query->sports->pluck('name')->implode(', ');
             })
             ->addColumn('action', function (Academies $academies) {
                 return view('Admin.pages.academies.datatable.actions', compact('academies'))->render();
             })
-            ->rawColumns(['action']);
+            ->addColumn('branch_to',function (Academies $academies){
+                return $academies->academy->commercial_name ?? '';
+            })
+            ->rawColumns(['action', 'commercial_name_en', 'commercial_name_ar']);
     }
 
     /**
@@ -44,22 +47,35 @@ class AcademiesDataTable extends DataTable
      */
     public function html(): HtmlBuilder
     {
+        $hideButtonsArray = array_column($this->getColumns(), 'title');
+        $hideButtonsArray = $this->makeHideButtons($hideButtonsArray);
         return $this->builder()
                     ->setTableId('academies-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->scrollX()
-                    ->scrollY()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->dom('Bfrtip')
                     ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
+                    ->parameters([
+                        'scrollX' => true,
+                        'scrollY' => true,
+                        'responsive' => true,
+                        'autoWidth' => false,
+                        'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
+                        'buttons' => [
+                            $hideButtonsArray,
+                        ],
+                        'order' => [
+                            0, 'desc'
+                        ],
+                        'language' =>
+                            (app()->getLocale() === 'ar') ?
+                                [
+                                    'url' => url('//cdn.datatables.net/plug-ins/1.13.8/i18n/ar.json')
+                                ] :
+                                [
+                                    'url' => url('//cdn.datatables.net/plug-ins/1.13.8/i18n/English.json')
+                                ]
+
                     ]);
     }
 
@@ -70,13 +86,12 @@ class AcademiesDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'first_name', 'data' => 'first_name', 'title' => trans('admin.academies.first_name')],
-            ['name' => 'last_name', 'data' => 'last_name', 'title' => trans('admin.academies.last_name')],
+            ['name' => 'commercial_name_en', 'data' => 'commercial_name_en', 'title' => trans('admin.academies.commercial_name_en')],
+            ['name' => 'commercial_name_ar', 'data' => 'commercial_name_ar', 'title' => trans('admin.academies.commercial_name_ar')],
             ['name' => 'email', 'data' => 'email', 'title' => trans('admin.academies.email')],
-            ['name' => 'full_name_arabic', 'data' => 'full_name_arabic', 'title' => trans('admin.academies.full_name_arabic')],
             ['name' => 'phone', 'data' => 'phone', 'title' => trans('admin.academies.phone')],
             ['name' => 'role', 'data' => 'role', 'title' => trans('admin.academies.role')],
-            ['name' => 'commercial_name', 'data' => 'commercial_name', 'title' => trans('admin.academies.commercial_name')],
+            ['name' => 'branch_to', 'data' => 'branch_to', 'title' => trans('admin.academies.branch_to')],
             ['name' => 'trade_license_number', 'data' => 'trade_license_number', 'title' => trans('admin.academies.trade_license_number')],
             ['name' => 'trade_license_expire_date', 'data' => 'trade_license_expire_date', 'title' => trans('admin.academies.trade_license_expire_date')],
             ['name' => 'tax_number', 'data' => 'tax_number', 'title' => trans('admin.academies.tax_number')],

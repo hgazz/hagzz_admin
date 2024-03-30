@@ -6,6 +6,7 @@ use App\DataTables\AcademiesDataTable;
 use App\Http\Requests\Academies\AcademiesRequest;
 use App\Models\Academies;
 use App\Models\Sport;
+use App\Services\TranslatableService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -28,17 +29,39 @@ class AcademiesController extends Controller
     {
         $roles = ['manager', 'owner', 'partner'];
         $sports = $this->sportModel::get(['id', 'name']);
-        return view('Admin.pages.academies.create',compact('roles', 'sports'));
+        $allAcademies = $this->academicModels->get(['id','commercial_name']);
+        return view('Admin.pages.academies.create',compact('roles', 'sports','allAcademies'));
     }
 
     public function store(AcademiesRequest $request)
     {
-        $this->academicModels->create(array_merge($request->validated(),[
-            'password'=> Hash::make($request->password),
-            'is_registered'=>$request->has('is_registered') ? 1 :0,
-        ]));
-        session()->flash('success', trans('admin.academies.academies_created_successfully'));
-        return to_route('admin.academies.index');
+        try {
+            DB::beginTransaction();
+            $translatableFields = TranslatableService::generateTranslatableFields($this->academicModels->getTranslatableFields(), $request->validated());
+            $academy = $this->academicModels->create($translatableFields + [
+                    'password'=> Hash::make($request->password),
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'role' => $request->role,
+                    'trade_license_number' => $request->trade_license_number,
+                    'trade_license_expire_date' => $request->trade_license_expire_date,
+                    'tax_number' => $request->tax_number,
+                    'national_id_number' => $request->national_id_number,
+                    'address' => $request->address,
+                    'contract_number' => $request->contract_number,
+                    'account_manager' => $request->account_manager,
+                    'is_registered'=>$request->has('is_registered') ? 1 :0,
+                    'branch_to'=>$request->branch_to,
+                ]);
+            $academy->sports()->attach($request->sport_id);
+            DB::commit();
+            session()->flash('success', trans('admin.academies.academies_created_successfully'));
+            return to_route('admin.academies.index');
+        }catch (\Exception $e) {
+            DB::rollBack();
+            session()->flash('error', $e->getMessage());
+            return back();
+        }
     }
 
     public function updateStatus(Academies $academies)
@@ -62,17 +85,30 @@ class AcademiesController extends Controller
     {
         $roles = ['manager', 'owner', 'partner'];
         $sports = $this->sportModel->get(['id','name']);
-        return view('Admin.pages.academies.edit',compact('academies','roles', 'sports'));
+        $allAcademies = $this->academicModels->where('id','!=',$academies->id)->get(['id','commercial_name']);
+        return view('Admin.pages.academies.edit',compact('academies','roles', 'sports','allAcademies'));
     }
 
     public function update(Academies $academies , AcademiesRequest $request)
     {
 
         DB::transaction(function () use ($academies, $request) {
-            $academies->update(array_merge($request->validated(),[
+            $translatableFields = TranslatableService::generateTranslatableFields($this->academicModels->getTranslatableFields(), $request->validated());
+            $academies->update($translatableFields + [
                 'password'=> !is_null($request->password) ? Hash::make($request->password) : $academies->password,
-                'is_registered'=>$request->has('is_registered') ? 1 : 0,
-            ]));
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'role' => $request->role,
+                    'trade_license_number' => $request->trade_license_number,
+                    'trade_license_expire_date' => $request->trade_license_expire_date,
+                    'tax_number' => $request->tax_number,
+                    'national_id_number' => $request->national_id_number,
+                    'address' => $request->address,
+                    'contract_number' => $request->contract_number,
+                    'account_manager' => $request->account_manager,
+                    'is_registered'=>$request->has('is_registered') ? 1 :0,
+                    'branch_to'=>$request->branch_to,
+            ]);
             $academies->sports()->sync($request->sport_id);
             session()->flash('success',trans('admin.academies.academies updated successfully'));
 
@@ -82,9 +118,9 @@ class AcademiesController extends Controller
 
     public function delete(Request $request)
     {
-        $academies = $this->academicModels->find($request->id);
+        $academies = $this->academicModels->findOrFail($request->id);
         $academies->delete();
-
+        $academies->sports()->detach($request->id);
         return response()->json(['data' => [
             'status' => 'success',
             'model'   => trans('admin.academies.academies'),

@@ -23,7 +23,7 @@ class FaqController extends Controller
 
     public function create()
     {
-        return view('admin.pages.faqs.create');
+        return view('Admin.pages.faqs.create');
     }
     public function store(FaqRequest $request)
     {
@@ -35,7 +35,7 @@ class FaqController extends Controller
 
     public function edit(Faq $faq)
     {
-        return view('admin.pages.faqs.edit',compact('faq'));
+        return view('Admin.pages.faqs.edit',compact('faq'));
     }
 
     public function update(Faq $faq , FaqRequest $request)
