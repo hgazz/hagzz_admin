@@ -53,6 +53,7 @@ return [
         'first_name'=>'First name',
         'last_name'=>'Last name',
         'email'=>'email',
+        'email_hint' => 'This Email will be used for login',
         'full_name_arabic'=>'full name arabic',
         'phone'=>'phone',
         'password'=>'password',

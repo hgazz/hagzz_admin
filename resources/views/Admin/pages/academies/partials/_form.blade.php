@@ -13,7 +13,7 @@
             </div>
         @endforeach
         <div class="col-md-6 mb-3">
-            <label for="email">{{trans('admin.academies.email')}}</label>
+            <label for="email">{{trans('admin.academies.email')}} <code>{{ trans('admin.academies.email_hint') }}</code></label>
             <input type="email" name="email" class="form-control" value="{{isset($academies) ? $academies->email : old('email')}}" id="email" placeholder="{{trans('admin.academies.email')}}">
             @error('email')
             <span class="text-danger">{{$message}}</span>
