@@ -117,7 +117,7 @@
 
     keySelect.addEventListener('change', function(){
         let key = keySelect.value;
-        if(key === "about" || "terms" || key === "privacy"){
+        if(key === "about" || key === "terms" || key === "privacy"){
             typesSelect.innerHTML += `
                     <option value="textarea" selected>textarea</option>
                 `;
