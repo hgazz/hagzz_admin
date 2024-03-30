@@ -42,7 +42,7 @@
 
         <div class="col-md-12 mb-3" style="display: none" id="textAreaDiv">
             <label for="body">{{ trans('admin.setting.value') }}</label>
-            <textarea class="form-control @error('text_value') is-invalid fparsley-error parsley-error @enderror" id="body" name="text_value" rows="5">{{ isset($setting) && $setting->type == 'textarea' ? $setting->value : old('text_value') }}</textarea>
+            <textarea class="form-control @error('text_value') is-invalid fparsley-error parsley-error @enderror" id="body" name="text_value" rows="5">{!! isset($setting) && $setting->type == 'textarea' ? $setting->value : old('text_value') !!}</textarea>
             @error('text_value')
             <div class="invalid-feedback">
                 {{ $message }}
