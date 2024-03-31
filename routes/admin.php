@@ -8,9 +8,11 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SportController;
+use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
@@ -72,6 +74,10 @@ Route::group(
                 Route::put('/academies/update/{academies}','update')->name('academies.update');
                 Route::put('/academies/updateStatus/{academies}','updateStatus')->name('academies.updateStatus');
                 Route::delete('/academies/delete','delete')->name('academies.delete');
+                Route::get('academies/area/{city}','getAreaByCity')->name('area.getAreaByCity');
+                Route::get('academies/edit/area/{city}','getAreaByCity')->name('area.getAreaByCity');
+                Route::get('academies/country/{country}','getAllCountry')->name('country.getCountry');
+                Route::get('academies/edit/country/{country}','getAllCountry')->name('country.getCountry');
             });
 
             // banner routes
@@ -132,6 +138,16 @@ Route::group(
             Route::controller(BookingController::class)->group(function (){
                 Route::get('bookings','index')->name('booking.index');
                 Route::put('bookings/cancel/{invoice}','cancelBooking')->name('booking.cancel');
+            });
+
+            Route::controller(TrainingController::class)->group(function (){
+                Route::get('trainings','index')->name('training.index');
+                Route::put('trainings/active/{training}','updateTrainingStatus')->name('training.active');
+            });
+
+            Route::controller(GalleryController::class)->group(function (){
+                Route::get('galleries','index')->name('gallery.index');
+                Route::put('galleries/active/{gallery}','makeActive')->name('gallery.active');
             });
     });
 

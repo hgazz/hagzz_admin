@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\DataTables\AcademiesDataTable;
 use App\Http\Requests\Academies\AcademiesRequest;
 use App\Models\Academies;
+use App\Models\Area;
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Sport;
 use App\Services\TranslatableService;
 use Illuminate\Http\Request;
@@ -13,11 +16,14 @@ use Illuminate\Support\Facades\Hash;
 
 class AcademiesController extends Controller
 {
-    private $academicModels, $sportModel;
-    public function __construct(Academies $model, Sport $sport)
+    private $academicModels, $sportModel, $countryModel, $cityModel, $areaModel;
+    public function __construct(Academies $model, Sport $sport, Country $country, City $city, Area $area)
     {
         $this->academicModels = $model;
         $this->sportModel = $sport;
+        $this->countryModel = $country;
+        $this->cityModel = $city;
+        $this->areaModel = $area;
     }
 
     public function index(AcademiesDataTable $dataTable)
@@ -30,7 +36,10 @@ class AcademiesController extends Controller
         $roles = ['manager', 'owner', 'partner'];
         $sports = $this->sportModel::get(['id', 'name']);
         $allAcademies = $this->academicModels->where('branch_to', null)->get(['id','commercial_name']);
-        return view('Admin.pages.academies.create',compact('roles', 'sports','allAcademies'));
+        $countries = $this->countryModel->get(['id', 'name']);
+        $cities = $this->cityModel->get(['id', 'name']);
+        $areas = $this->areaModel->get(['id', 'name']);
+        return view('Admin.pages.academies.create',get_defined_vars());
     }
 
     public function store(AcademiesRequest $request)
@@ -52,6 +61,9 @@ class AcademiesController extends Controller
                     'account_manager' => $request->account_manager,
                     'is_registered'=>$request->has('is_registered') ? 1 :0,
                     'branch_to'=>$request->branch_to,
+                    'country_id' => $request->country_id,
+                    'city_id' => $request->city_id,
+                    'area_id' => $request->area_id,
                 ]);
             $academy->sports()->attach($request->sport_id);
             DB::commit();
@@ -86,7 +98,10 @@ class AcademiesController extends Controller
         $roles = ['manager', 'owner', 'partner'];
         $sports = $this->sportModel->get(['id','name']);
         $allAcademies = $this->academicModels->where('id','!=',$academies->id)->get(['id','commercial_name']);
-        return view('Admin.pages.academies.edit',compact('academies','roles', 'sports','allAcademies'));
+        $countries = $this->countryModel->get(['id', 'name']);
+        $cities = $this->cityModel->get(['id', 'name']);
+        $areas = $this->areaModel->get(['id', 'name']);
+        return view('Admin.pages.academies.edit', get_defined_vars());
     }
 
     public function update(Academies $academies , AcademiesRequest $request)
@@ -108,6 +123,9 @@ class AcademiesController extends Controller
                     'account_manager' => $request->account_manager,
                     'is_registered'=>$request->has('is_registered') ? 1 :0,
                     'branch_to'=>$request->branch_to,
+                    'country_id' => $request->country_id,
+                    'city_id' => $request->city_id,
+                    'area_id' => $request->area_id,
             ]);
             $academies->sports()->sync($request->sport_id);
             session()->flash('success',trans('admin.academies.academies updated successfully'));
@@ -126,5 +144,19 @@ class AcademiesController extends Controller
             'model'   => trans('admin.academies.academies'),
             'message' => trans('admin.academies.academies deleted successfully'),
         ]]);
+    }
+
+    public function getAreaByCity($city)
+    {
+        $city = $this->cityModel::findOrFail($city);
+        $areas = $this->areaModel::where('city_id', $city->id)->get();
+        return response()->json($areas);
+    }
+
+    public function getAllCountry($country)
+    {
+        $country = $this->countryModel::findOrFail($country);
+        $cities = $this->cityModel::where('country_id', $country->id)->get();
+        return response()->json($cities);
     }
 }

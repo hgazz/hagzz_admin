@@ -53,12 +53,11 @@ class AcademiesDataTable extends DataTable
                     ->setTableId('academies-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
+                    ->dom('Bfltip')
                     ->selectStyleSingle()
                     ->parameters([
                         'scrollX' => true,
                         'scrollY' => true,
-                      //  'responsive' => true,
                         'autoWidth' => false,
                         'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                         'buttons' => [

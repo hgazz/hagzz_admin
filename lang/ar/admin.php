@@ -61,7 +61,7 @@ return [
         'trade_license_number' => 'رقم الرخصة التجارية',
         'trade_license_expire_date' => 'تاريخ انتهاء الرخصة التجارية',
         'tax_number' => 'الرقم الضريبي',
-        'percentage' => 'النسبة المئوية',
+        'percentage' => ' النسبة المئوية الضريبيه',
         'address' => 'العنوان',
         'national_id_number' => 'الرقم الوطني',
         'academies_created_successfully' => 'تم إنشاء الأكاديمية بنجاح',

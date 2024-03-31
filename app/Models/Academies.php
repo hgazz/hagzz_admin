@@ -29,10 +29,13 @@ class Academies extends Model
         'account_manager',
         'is_registered',
         'logo',
-        'branch_to'
+        'branch_to',
+        'country_id',
+        'city_id',
+        'area_id',
     ];
 
-    public static $translatableColumns = [
+    public static array $translatableColumns = [
         'commercial_name'=>[
             'type'=>'text',
             'is_textarea'=>false

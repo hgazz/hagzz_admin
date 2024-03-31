@@ -42,7 +42,7 @@
                @foreach($showUser->joins as $join)
                    <div class="col-md-4">
                        <div class="card" style="width: 18rem;">
-                           <img src="{{$join->training->image}}" class="card-img-top" alt="...">
+                           <img src="{{$join->training->sport->icon}}" class="card-img-top" alt="...">
                            <div class="card-body">
                                <h5 class="card-title">{{$join->training->name}}</h5>
                                <p class="card-text">{{$join->training->description}}</p>
@@ -50,7 +50,7 @@
                                 /
                                <span class="text-danger">{{$join->training->end_date}}</span>
                                <br>
-                               <span>coach -{{$join->training->coach->name}} </span>
+                               <span>{{trans('admin.user.coach')}} :{{$join->training->coach->name}} </span>
                            </div>
                        </div>
                    </div>
@@ -62,7 +62,7 @@
                @foreach($showUser->sports as $sport)
                    <div class="col-md-4">
                        <div class="card" style="width: 18rem;">
-                           <img src="https://bokit-app.s3.eu-north-1.amazonaws.com/images/sports/{{$sport->icon}}" class="card-img-top" alt="...">
+                           <img src="{{$sport->icon}}" class="card-img-top" alt="...">
                            <div class="card-body">
                                <h5 class="card-title">{{$sport->name}}</h5>
                                @if($sport->status == 'active')
@@ -70,7 +70,7 @@
                                @else
                                    <p class="card-text text-danger">{{$sport->status}}</p>
                                @endif
-                               <span class="">Academy - {{$sport->academy->commercial_name ?? 'Not Academy'}}</span>
+                               <span class="">{{ trans('admin.academies.academies') }} - {{$sport->academy->commercial_name ?? 'Not Academy'}}</span>
                            </div>
                        </div>
                    </div>

@@ -54,13 +54,11 @@ class SettingDataTable extends DataTable
                     ->setTableId('setting-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->dom('Bfltip')
                     ->selectStyleSingle()
                     ->parameters([
                         'scrollX' => true,
                         'scrollY' => true,
-                        'responsive' => true,
                         'autoWidth' => false,
                         'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                         'buttons' => [

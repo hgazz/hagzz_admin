@@ -45,6 +45,9 @@ class AcademiesRequest extends FormRequest
             'sport_id'=>'required|array',
             'sport_id.*'=>'required|exists:sports,id',
             'branch_to'=>'nullable|exists:academies,id',
+            'country_id'=>'required|exists:countries,id',
+            'city_id'=>'required|exists:cities,id',
+            'area_id'=>'required|exists:areas,id',
         ];
     }
 
@@ -66,6 +69,9 @@ class AcademiesRequest extends FormRequest
             'sport_id'=>'required|array',
             'sport_id.*'=>'required|exists:sports,id',
             'branch_to'=>'nullable|exists:academies,id',
+            'country_id'=>'required|exists:countries,id',
+            'city_id'=>'required|exists:cities,id',
+            'area_id'=>'required|exists:areas,id',
         ];
     }
     private function validatePassword(): string

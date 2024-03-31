@@ -11,7 +11,7 @@ class Sport extends Model
     use HasFactory, HasTranslations;
 
     const  PATH = 'images/sports';
-    public function getLogoAttribute($value)
+    public function getIconAttribute($value)
     {
         return config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
     }

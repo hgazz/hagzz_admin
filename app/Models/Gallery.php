@@ -9,7 +9,19 @@ class Gallery extends Model
 {
     use HasFactory;
 
+    const PATH = 'images/gallery';
     protected $fillable = [
         'image',
+        'academy_id',
     ];
+
+    public function academy()
+    {
+        return $this->belongsTo(Academies::class);
+    }
+
+    public function getImageAttribute($value)
+    {
+        return config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
+    }
 }

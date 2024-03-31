@@ -57,12 +57,13 @@ class UserDataTable extends DataTable
                     ->setTableId('user-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
+                    ->dom('Bfltip')
                     ->scrollX()
                     ->scrollY()
                     ->selectStyleSingle()
                     ->parameters([
-                        'responsive' => true,
+                        'scrollX' => true,
+                        'scrollY' => true,
                         'autoWidth' => false,
                         'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                         'buttons' => [

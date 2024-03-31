@@ -3,13 +3,14 @@
 namespace App\DataTables;
 
 use App\Http\Traits\DataTablesTrait;
-use App\Models\Area;
+use App\Models\Gallery;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Services\DataTable;
 
-class AreaDataTable extends DataTable
+class GalleryDataTable extends DataTable
 {
     use DataTablesTrait;
     /**
@@ -20,37 +21,39 @@ class AreaDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('name_en', fn($raw) => $raw->getTranslation('name', 'en'))
-            ->addColumn('name_ar', fn($raw) => $raw->getTranslation('name', 'ar'))
-            ->addColumn('city_id', function (Area $area) {
-                return $area->city->name;
+            ->addColumn('image', function (Gallery $gallery) {
+                return '<img src="' . $gallery->image . '" width="120" height="80">';
             })
-            ->addColumn('action', function (Area $area) {
-                return view('Admin.pages.area.datatable.actions', compact('area'))->render();
+            ->editColumn('academy.commercial_name', function (Gallery $gallery) {
+                return $gallery->academy->commercial_name;
             })
-            ->filterColumn('city.name', function ($query, $keyword) {
-                $query->whereHas('city',function ($q) use($keyword){
-                    $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
+            ->addColumn('action', function (Gallery $gallery) {
+                return view('Admin.pages.gallery.datatable.actions', compact('gallery'))->render();
+            })
+            ->filterColumn('academy.commercial_name', function ($query, $keyword) {
+                $query->whereHas('academy', function ($q) use ($keyword) {
+                    // Adjust the query to filter based on the JSON content
+                    $q->whereRaw("JSON_SEARCH(lower(commercial_name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
                 });
             })
-            ->rawColumns(['name_en', 'name_ar','action', 'city_id']);
+            ->rawColumns(['action', 'image','academy.commercial_name']);
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Area $model): QueryBuilder
+    public function query(Gallery $model): QueryBuilder
     {
-        $query = $model->newQuery()->with('city');
-        $city = request()->input('city.name');
-        if ($city) {
-            $query->whereHas('city', function ($q) use ($city) {
-                // Use JSON_SEARCH to find any occurrence of $city within the JSON column, regardless of the key (locale)
-                $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$city}%"]);
+        $query = $model->newQuery()->with('academy:id,commercial_name');
+        $academy = request()->input('academy.commercial_name');
+        if ($academy) {
+            $query->whereHas('academy', function ($q) use ($academy) {
+                $q->whereRaw("JSON_SEARCH(lower(commercial_name), 'one', lower(?)) IS NOT NULL", ["%{$academy}%"]);
             });
         }
 
-        return $query->select('areas.*');
+        return $query->select('galleries.*');
+
     }
 
     /**
@@ -61,11 +64,10 @@ class AreaDataTable extends DataTable
         $hideButtonsArray = array_column($this->getColumns(), 'title');
         $hideButtonsArray = $this->makeHideButtons($hideButtonsArray);
         return $this->builder()
-                    ->setTableId('area-table')
+                    ->setTableId('gallery-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfltip')
-                    ->orderBy(1)
                     ->selectStyleSingle()
                     ->parameters([
                         'scrollX' => true,
@@ -97,9 +99,8 @@ class AreaDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'name->en', 'data' => 'name_en', 'title' => trans('admin.city.name_en')],
-            ['name' => 'name->ar', 'data' => 'name_ar', 'title' => trans('admin.city.name_ar')],
-            ['name' => 'city.name', 'data' => 'city_id', 'title' => trans('admin.city.name')],
+            ['name' => 'academy.commercial_name', 'data' => 'academy.commercial_name', 'title' => trans('admin.training.academy')],
+            ['name' => 'image', 'data' => 'image', 'title' => trans('admin.gallery.image')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }
@@ -109,6 +110,6 @@ class AreaDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Area_' . date('YmdHis');
+        return 'Gallery_' . date('YmdHis');
     }
 }

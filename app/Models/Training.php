@@ -9,15 +9,21 @@ use Spatie\Translatable\HasTranslations;
 class Training extends Model
 {
     use HasFactory,HasTranslations;
-    const PATH = 'images/trainings';
+
     protected $fillable = [
         'name',
-        'image',
         'start_date',
         'end_date',
         'description',
         'coach_id',
-        'active'
+        'active',
+        'sport_id',
+        'academy_id',
+        'max_players',
+        'level',
+        'gender',
+        'age_group',
+        'address_id'
     ];
 
     public  $translatable = ['name','description'];
@@ -31,8 +37,9 @@ class Training extends Model
     {
         return $this->belongsTo(Academies::class,'academy_id');
     }
-    public function getImageAttribute($value)
+
+    public function sport()
     {
-        return config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
+        return $this->belongsTo(Sport::class,'sport_id');
     }
 }

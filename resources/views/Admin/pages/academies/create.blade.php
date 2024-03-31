@@ -53,3 +53,48 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        var country = document.getElementById('country');
+        var city = document.getElementById('city');
+        var areaSelect = document.getElementById('areaSelect');
+        var local = document.getElementById('local');
+
+        country.addEventListener('change', function(){
+            var countryId = country.value;
+            fetch(`country/${countryId}`)
+                .then(response =>response.json())
+                .then(cities=>{
+                    city.innerHTML = '<option value="" disabled selected>{{ trans('admin.area.select_city') }}</option>';
+                    cities.forEach(el=> {
+                        const option = document.createElement('option');
+                        option.value = el.id;
+                        option.textContent = (local.value == 'en')  ? `${el.name.en}` : `${el.name.ar}`;
+                        city.appendChild(option);
+
+                    })
+                    city.disabled = false;
+                })
+        });
+
+        city.addEventListener('change',function (){
+            var cityId = city.value;
+
+            fetch(`area/${cityId}`)
+                .then(response => response.json())
+                .then(data =>{
+                    areaSelect.innerHTML = '<option value="" disabled selected>{{ trans('admin.academies.select_area') }}</option>';
+
+                    // Populate the area select with fetched areas
+                    data.forEach(area => {
+                        const option = document.createElement('option');
+                        option.value = area.id;
+                        option.textContent = (local.value == 'en')  ? `${area.name.en}` : `${area.name.ar}`;
+                        areaSelect.appendChild(option);
+                    });
+                    // Enable the area select
+                    areaSelect.disabled = false;
+                })
+        })
+    </script>
+@endpush

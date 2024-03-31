@@ -2,14 +2,16 @@
 
 namespace App\DataTables;
 
+
 use App\Http\Traits\DataTablesTrait;
-use App\Models\Area;
+use App\Models\Training;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Services\DataTable;
 
-class AreaDataTable extends DataTable
+class TrainingDataTable extends DataTable
 {
     use DataTablesTrait;
     /**
@@ -20,37 +22,27 @@ class AreaDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('name_en', fn($raw) => $raw->getTranslation('name', 'en'))
-            ->addColumn('name_ar', fn($raw) => $raw->getTranslation('name', 'ar'))
-            ->addColumn('city_id', function (Area $area) {
-                return $area->city->name;
+            ->editColumn('name', fn($raw) => $raw->name)
+            ->editColumn('description', fn($raw) => $raw->description)
+            ->editColumn('coach_id', function (Training $training) {
+                return $training->coach->name;
             })
-            ->addColumn('action', function (Area $area) {
-                return view('Admin.pages.area.datatable.actions', compact('area'))->render();
+            ->editColumn('academy_id', function (Training $training) {
+                return $training->academy->commercial_name;
             })
-            ->filterColumn('city.name', function ($query, $keyword) {
-                $query->whereHas('city',function ($q) use($keyword){
-                    $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
-                });
+            ->addColumn('action', function (Training $training) {
+                return view('Admin.pages.training.datatable.actions', compact('training'))->render();
             })
-            ->rawColumns(['name_en', 'name_ar','action', 'city_id']);
+            ->rawColumns(['action', 'coach_id', 'academy_id','image','class']);
+
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Area $model): QueryBuilder
+    public function query(Training $model): QueryBuilder
     {
-        $query = $model->newQuery()->with('city');
-        $city = request()->input('city.name');
-        if ($city) {
-            $query->whereHas('city', function ($q) use ($city) {
-                // Use JSON_SEARCH to find any occurrence of $city within the JSON column, regardless of the key (locale)
-                $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$city}%"]);
-            });
-        }
-
-        return $query->select('areas.*');
+        return $model->newQuery()->with(['coach', 'academy', 'sport']);
     }
 
     /**
@@ -61,11 +53,12 @@ class AreaDataTable extends DataTable
         $hideButtonsArray = array_column($this->getColumns(), 'title');
         $hideButtonsArray = $this->makeHideButtons($hideButtonsArray);
         return $this->builder()
-                    ->setTableId('area-table')
+                    ->setTableId('training-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->scrollX()
+                    ->scrollY()
                     ->dom('Bfltip')
-                    ->orderBy(1)
                     ->selectStyleSingle()
                     ->parameters([
                         'scrollX' => true,
@@ -97,9 +90,13 @@ class AreaDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'name->en', 'data' => 'name_en', 'title' => trans('admin.city.name_en')],
-            ['name' => 'name->ar', 'data' => 'name_ar', 'title' => trans('admin.city.name_ar')],
-            ['name' => 'city.name', 'data' => 'city_id', 'title' => trans('admin.city.name')],
+            ['name' => 'name', 'data' => 'name', 'title' => trans('admin.training.name')],
+            ['name' => 'price', 'data' => 'price', 'title' => trans('admin.training.price')],
+            ['name' => 'academy.commercial_name', 'data' => 'academy_id', 'title' => trans('admin.training.academy')],
+            ['name' => 'coach.name', 'data' => 'coach_id', 'title' => trans('admin.training.coach')],
+            ['name' => 'start_date', 'data' => 'start_date', 'title' => trans('admin.training.start_date')],
+            ['name' => 'end_date', 'data' => 'end_date', 'title' => trans('admin.training.end_date')],
+            ['name' => 'description', 'data' => 'description', 'title' => trans('admin.training.description')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }
@@ -109,6 +106,6 @@ class AreaDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Area_' . date('YmdHis');
+        return 'Training_' . date('YmdHis');
     }
 }

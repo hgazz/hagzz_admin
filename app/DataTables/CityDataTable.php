@@ -66,13 +66,12 @@ class CityDataTable extends DataTable
                     ->setTableId('city-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
+                    ->dom('Bfltip')
                     ->orderBy(1)
                     ->selectStyleSingle()
                     ->parameters([
                         'scrollX' => true,
                         'scrollY' => true,
-                        'responsive' => true,
                         'autoWidth' => false,
                         'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                         'buttons' => [
