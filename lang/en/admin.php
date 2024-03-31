@@ -81,6 +81,9 @@ return [
         'Select branch'=>'Select branch',
         'branch_to'=>'Branch To',
         'select_area' => 'Select Area',
+        'show'=>'show',
+        'Account Manger'=>'Account Manger',
+
     ],
     'banners'=> [
         'banners'=>'Banners',

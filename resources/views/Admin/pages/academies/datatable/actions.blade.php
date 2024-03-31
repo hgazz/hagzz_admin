@@ -1,5 +1,21 @@
 <td class="text-center">
     <div class="action-btns d-flex">
+
+
+
+        <form method="POST" action="{{ route('admin.academies.updateStatus', $academies) }}" id="updateStatus" class="me-1">
+            @csrf
+            @method('PUT')
+
+            <button type="submit" class="btn bg-transparent text-{{ $academies->status == 'active' ? 'success' : 'danger' }}" title="{{ $academies->status }}">
+                @if($academies->status == 'active')
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                @else
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+                @endif
+            </button>
+        </form>
+
         <a href="{{ route('admin.academies.edit', $academies) }}" class="text-warning me-2" data-toggle="tooltip"
            data-placement="top"
            title="{{ trans('admin.academies.edit') }}">
@@ -9,19 +25,11 @@
             </svg>
         </a>
 
-        <form method="POST" action="{{ route('admin.academies.updateStatus', $academies) }}" id="updateStatus" class="me-1">
-            @csrf
-            @method('PUT')
-
-            <button type="submit" class="text-{{ $academies->status == 'active' ? 'success' : 'danger' }}" title="{{ $academies->status }}">
-                @if($academies->status == 'active')
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-                @else
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
-                @endif
-            </button>
-        </form>
-
+        <a href="{{route('admin.academies.show',$academies)}}" class="text-success mx-2" data-toggle="tooltip"
+           data-placement="top"
+           title="{{ trans('admin.academies.show') }}">
+            <i class="fa-regular fa-eye">{{ trans('admin.academies.show') }}</i>
+        </a>
 
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <a href="javascript:void(0)" data-href="{{ route('admin.academies.delete', $academies) }}"  data-id="{{ $academies->id }}" data-name="Academy" type="submit"
@@ -35,6 +43,7 @@
                 <line x1="14" y1="11" x2="14" y2="17"></line>
             </svg>
         </a>
+
 
 
 

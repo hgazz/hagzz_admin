@@ -159,4 +159,9 @@ class AcademiesController extends Controller
         $cities = $this->cityModel::where('country_id', $country->id)->get();
         return response()->json($cities);
     }
+
+    public function show(Academies $academies)
+    {
+        return view('Admin.pages.academies.show',compact('academies'));
+    }
 }

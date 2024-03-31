@@ -47,6 +47,15 @@ class Academies extends Model
         return array_keys(self::$translatableColumns);
     }
 
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
     public function sports()
     {
         return $this->belongsToMany(Sport::class,'academy_sport','academy_id','sport_id');
