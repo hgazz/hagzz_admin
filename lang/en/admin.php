@@ -176,11 +176,12 @@ return [
         'birth_date'=>'Birth_date',
         'country'=>'Country',
         'city'=>'City',
-        'area'=>'rea',
+        'area'=>'Area',
         'Trainings'=>'Trainings',
         'Sports'=>'Sports',
         'User deleted successfully'=>'User deleted successfully',
         'coach'=> 'Coach',
+        'fcm_token'=> 'FCM Token',
     ],
     'bookings' => [
         'bookings' => 'Bookings',
