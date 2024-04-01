@@ -47,6 +47,10 @@ class Academies extends Model
         return array_keys(self::$translatableColumns);
     }
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
     public function city()
     {
         return $this->belongsTo(City::class);
