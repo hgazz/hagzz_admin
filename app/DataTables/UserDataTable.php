@@ -99,7 +99,7 @@ class UserDataTable extends DataTable
             ['name' => 'country', 'data' => 'country', 'title' => trans('admin.user.country')],
             ['name' => 'city', 'data' => 'city', 'title' => trans('admin.user.city')],
             ['name' => 'area', 'data' => 'area', 'title' => trans('admin.user.area')],
-            ['name' => 'fcm_token', 'data' => 'fcm_token', 'title' => trans('admin.user.fcm_token')],
+//            ['name' => 'fcm_token', 'data' => 'fcm_token', 'title' => trans('admin.user.fcm_token')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
 
         ];
