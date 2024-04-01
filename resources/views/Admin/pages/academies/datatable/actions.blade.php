@@ -1,8 +1,5 @@
 <td class="text-center">
     <div class="action-btns d-flex">
-
-
-
         <form method="POST" action="{{ route('admin.academies.updateStatus', $academies) }}" id="updateStatus" class="me-1">
             @csrf
             @method('PUT')
@@ -25,10 +22,11 @@
             </svg>
         </a>
 
-        <a href="{{route('admin.academies.show',$academies)}}" class="text-success mx-2" data-toggle="tooltip"
+        <a href="{{route('admin.academies.show',$academies)}}" class="text-primary mx-2" data-toggle="tooltip"
            data-placement="top"
            title="{{ trans('admin.academies.show') }}">
-            <i class="fa-regular fa-eye">{{ trans('admin.academies.show') }}</i>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
         </a>
 
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -43,9 +41,5 @@
                 <line x1="14" y1="11" x2="14" y2="17"></line>
             </svg>
         </a>
-
-
-
-
     </div>
 </td>
