@@ -77,6 +77,8 @@ return [
         'select_sport' => 'إختر الرياضة',
         'Select branch' => 'إختر الفرع',
         'branch_to' => 'فرع إلى',
+        'show' => 'إظهار',
+        'Account Manager' => 'مدير الحساب'
     ],
     'banners'=> [
         'banners' => 'اللافتات',
