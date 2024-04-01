@@ -31,6 +31,6 @@ class SportRequest extends FormRequest
 
     private function validateImage(): string
     {
-        return request()->isMethod('POST') ? 'required|image|mimes:jpg,png,gif,webp,svg,jpeg' : 'nullable|image|mimes:jpg,png,gif,webp,svg,jpeg';
+        return request()->isMethod('POST') ? 'required|image|mimes:svg' : 'nullable|image|mimes:svg';
     }
 }
