@@ -79,6 +79,7 @@ Route::group(
                 Route::get('academies/country/{country}','getAllCountry')->name('country.getCountry');
                 Route::get('academies/edit/country/{country}','getAllCountry')->name('country.getCountry');
                 Route::get('academies/show/{academies}','show')->name('academies.show');
+                Route::get('academies/export','export')->name('academies.export');
             });
 
             // banner routes
@@ -134,16 +135,19 @@ Route::group(
                 Route::get('user','index')->name('user.index');
                 Route::get('user/show/{user}','show')->name('user.show');
                 Route::delete('user/delete/{user}','delete')->name('user.delete');
+                Route::get('user.export','export')->name('user.export');
             });
 
             Route::controller(BookingController::class)->group(function (){
                 Route::get('bookings','index')->name('booking.index');
                 Route::put('bookings/cancel/{invoice}','cancelBooking')->name('booking.cancel');
+                Route::get('bookings/export','export')->name('booking.export');
             });
 
             Route::controller(TrainingController::class)->group(function (){
                 Route::get('trainings','index')->name('training.index');
                 Route::put('trainings/active/{training}','updateTrainingStatus')->name('training.active');
+                Route::get('trainings/export','export')->name('training.export');
             });
 
             Route::controller(GalleryController::class)->group(function (){

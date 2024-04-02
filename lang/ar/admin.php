@@ -3,6 +3,7 @@
 return [
     'bokit' => 'Bokit',
     'dashboard' => 'لوحة التحكم',
+    'Export'=>'تصدير',
     'id' => 'معرف',
     'actions' => 'الإجراءات',
     'submit' => 'إرسال',
