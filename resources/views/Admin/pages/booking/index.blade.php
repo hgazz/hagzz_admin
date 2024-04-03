@@ -46,26 +46,19 @@
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                <a class="btn btn-success w-25 mt-1 mb-2" href="{{route('admin.booking.export')}}">
+                    {{trans('admin.Export')}}
+                </a>
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="{{ URL::current() }}">
                         <h3>{{ trans('admin.bookings.bookings') }}</h3>
                     </a>
-                    <a href="{{ URL::current() }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="feather feather-plus">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                    </a>
                 </div>
 
             </div>
-            <a class="btn btn-primary w-25 mt-3" href="{{route('admin.booking.export')}}">
-                {{trans('admin.Export')}}
-            </a>
+
             <div class="card-body">
                 {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
             </div>
