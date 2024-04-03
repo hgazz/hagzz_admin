@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "league/flysystem-aws-s3-v3": "^3.0",
+        "maatwebsite/excel": "^3.1",
         "mcamara/laravel-localization": "^1.8",
         "php-flasher/flasher-toastr-laravel": "^1.15",
         "spatie/laravel-translatable": "^6.5",

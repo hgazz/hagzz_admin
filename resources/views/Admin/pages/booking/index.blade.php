@@ -63,6 +63,9 @@
                 </div>
 
             </div>
+            <a class="btn btn-primary w-25 mt-3" href="{{route('admin.booking.export')}}">
+                {{trans('admin.Export')}}
+            </a>
             <div class="card-body">
                 {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
             </div>

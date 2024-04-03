@@ -3,6 +3,7 @@
 return [
     'bokit' => 'Bokit',
     'dashboard' => 'Dashboard',
+    'Export'=>'Export',
     'id' => 'ID',
     'actions' => 'Actions',
     'submit' => 'Submit',

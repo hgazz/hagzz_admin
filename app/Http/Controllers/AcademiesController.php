@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\AcademiesDataTable;
+use App\Exports\AcademiesExport;
 use App\Http\Requests\Academies\AcademiesRequest;
 use App\Models\Academies;
 use App\Models\Area;
@@ -13,6 +14,7 @@ use App\Services\TranslatableService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AcademiesController extends Controller
 {
@@ -163,5 +165,10 @@ class AcademiesController extends Controller
     public function show(Academies $academies)
     {
         return view('Admin.pages.academies.show',compact('academies'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new AcademiesExport(),'academies.xlsx');
     }
 }

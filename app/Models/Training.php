@@ -33,6 +33,10 @@ class Training extends Model
         return $this->belongsTo(Coach::class, 'coach_id');
     }
 
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
     public function academy()
     {
         return $this->belongsTo(Academies::class,'academy_id');

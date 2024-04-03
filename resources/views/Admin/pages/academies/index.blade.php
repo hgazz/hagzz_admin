@@ -56,11 +56,19 @@
                             <line x1="5" y1="12" x2="19" y2="12"></line>
                         </svg>
                     </a>
+
+
                 </div>
 
+
             </div>
+            <a class="btn btn-primary w-25 mt-3" href="{{route('admin.academies.export')}}">
+                {{trans('admin.Export')}}
+            </a>
             <div class="card-body">
+
                 {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
+
             </div>
         </div>
     </div>
