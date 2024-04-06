@@ -183,6 +183,9 @@ return [
         'User deleted successfully'=>'User deleted successfully',
         'coach'=> 'Coach',
         'fcm_token'=> 'FCM Token',
+        'male' => 'Male',
+        'female' => 'Female',
+        'select_gender' => 'Select Gender',
     ],
     'bookings' => [
         'bookings' => 'Bookings',
@@ -195,6 +198,7 @@ return [
         'cancelled' => 'Cancelled',
         'is_canceled' => 'Is Canceled',
         'amount' => 'Amount',
+        'user_type' => 'User Type',
     ],
     'training'=>[
         'training'=>'Trainings',
@@ -255,6 +259,10 @@ return [
         'Followers'=>'Followers',
         'academy'=>'Academy',
         'Training Status Updated'=>'Training Status Updated Successfully',
+        'create_booking' => 'Create Booking',
+        'select_city' =>'Select City',
+        'training_name' =>'Training Name',
+        'Booking created successfully' => 'Booking created successfully',
     ],
     'gallery'=> [
         'gallery'=>'Gallery',

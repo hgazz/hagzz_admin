@@ -148,6 +148,10 @@ Route::group(
                 Route::get('trainings','index')->name('training.index');
                 Route::put('trainings/active/{training}','updateTrainingStatus')->name('training.active');
                 Route::get('trainings/export','export')->name('training.export');
+                Route::get('trainings/booking/{training}','createBooking')->name('training.createBooking');
+                Route::post('trainings/booking','storeBooking')->name('training.storeBooking');
+                Route::post('trainings/areas','getAreaByCity')->name('training.getAreaByCity');
+                Route::post('trainings/cities','getCityByCountry')->name('training.getCities');
             });
 
             Route::controller(GalleryController::class)->group(function (){
