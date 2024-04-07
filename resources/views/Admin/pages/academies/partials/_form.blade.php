@@ -19,8 +19,12 @@
             <div class="col-md-6 mb-3">
                 <label for="{{$name}}" class="form-label">{{trans('admin.academies.'.$name)}}</label>
                 <input type="text" id="{{$name}}" name="{{$name}}" maxlength="50" class="form-control"
-                       value="@if ($name == 'commercial_name_en') {{old($name, isset($academies) ? $academies->getTranslation('commercial_name','en')  : '')}} @else {{old($name, isset($academies) ? $academies->getTranslation('commercial_name','ar')  : '')}} @endif"
-                       placeholder="Enter {{$name}}" data-parsley-required-message="Please enter {{$name}}">
+                       @php
+                           $language = $name == 'commercial_name_en' ? 'en' : 'ar';
+                           $defaultValue = isset($academies) ? $academies->getTranslation('commercial_name', $language) : '';
+                       @endphp
+                       value="{{ old($name, $defaultValue) }}"
+                       placeholder="{{trans('admin.academies.'.$name)}}" data-parsley-required-message="Please enter {{$name}}">
                 @error($name)
                 <span class="text-danger">*{{$message}}</span>
                 @enderror
