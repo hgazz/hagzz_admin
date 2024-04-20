@@ -3,6 +3,9 @@
 return [
     'bokit' => 'Bokit',
     'dashboard' => 'Dashboard',
+    'location_management'=>'Location Management',
+    'partner_management'=>'Partner Management',
+    'preferences'=>'preferences',
     'Export'=>'Export',
     'id' => 'ID',
     'actions' => 'Actions',
