@@ -49,21 +49,21 @@
                 <a class="btn btn-success w-25 mt-1 mb-2" href="{{route('admin.booking.export')}}">
                     {{trans('admin.Export')}}
                 </a>
-        <div class="card">
-            <div class="card-header">
-                <div class="d-flex justify-content-between align-items-center">
-                    <a href="{{ URL::current() }}">
-                        <h3>{{ trans('admin.bookings.bookings') }}</h3>
-                    </a>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{{ URL::current() }}">
+                                <h3>{{ trans('admin.bookings.bookings') }}</h3>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
+                        {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
+                    </div>
                 </div>
-
             </div>
-
-            <div class="card-body">
-                {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
-            </div>
-        </div>
-    </div>
         </div>
     </div>
 @endsection

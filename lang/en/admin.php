@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'bokit' => 'Bokit',
+    'bokit' => 'Hagzz',
     'dashboard' => 'Dashboard',
     'location_management'=>'Location Management',
     'partner_management'=>'Partner Management',

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'bokit' => 'Bokit',
+    'bokit' => 'حجز',
     'dashboard' => 'لوحة التحكم',
     'Export'=>'تصدير',
     'id' => 'معرف',
