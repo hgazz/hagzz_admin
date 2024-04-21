@@ -1,0 +1,125 @@
+<?php
+
+namespace App\DataTables;
+
+use App\Http\Traits\DataTablesTrait;
+use App\Models\Coach;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Yajra\DataTables\Services\DataTable;
+
+class CoachDataTable extends DataTable
+{
+    use DataTablesTrait;
+    /**
+     * Build the DataTable class.
+     *
+     * @param QueryBuilder $query Results from query() method.
+     */
+    public function dataTable(QueryBuilder $query): EloquentDataTable
+    {
+        return (new EloquentDataTable($query))
+            ->editColumn('academy_id', function ($raw){
+                return $raw->academy->commercial_name;
+            })
+            ->editColumn('image', function (Coach $coach) {
+                return '<img src="' . $coach->image . '" width="90" height="70" class="img-thumbnail">';
+            })
+            ->editColumn('license', fn($raw) => $raw->license ? trans('admin.coaches.is_licensed') : trans('admin.coaches.no_licensed'))
+            ->editColumn('active', function (Coach $coach) {
+                return $coach->active ? trans('admin.address.active') : trans('admin.address.inactive');
+            })
+            ->filterColumn('active', function ($query, $keyword) {
+                $query->where('active', $keyword === 'active' ? 1 : 0);
+            })
+            ->filterColumn('academy.commercial_name', function ($query, $keyword) {
+                $query->whereHas('academy',function ($q) use($keyword){
+                    $q->whereRaw("JSON_SEARCH(lower(commercial_name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
+                });
+            })
+            ->rawColumns(['image', 'academy_id']);
+    }
+
+    /**
+     * Get the query source of dataTable.
+     */
+    public function query(Coach $model): QueryBuilder
+    {
+        $query = $model->newQuery()->with(['academy:id,commercial_name']);
+
+        $academy = request()->input('academy.commercial_name');
+        if ($academy) {
+            $query->whereHas('academy', function ($q) use ($academy) {
+                // Use JSON_SEARCH to find any occurrence of $city within the JSON column, regardless of the key (locale)
+                $q->whereRaw("JSON_SEARCH(lower(commercial_name), 'one', lower(?)) IS NOT NULL", ["%{$academy}%"]);
+            });
+        }
+
+        $active = request()->input('active');
+        if ($active) {
+            $query->where('active', $active === 'active' ? 1 : 0);
+        }
+        return $query->select('coaches.*');
+    }
+
+    /**
+     * Optional method if you want to use the html builder.
+     */
+    public function html(): HtmlBuilder
+    {
+        $hideButtonsArray = array_column($this->getColumns(), 'title');
+        $hideButtonsArray = $this->makeHideButtons($hideButtonsArray);
+        return $this->builder()
+                    ->setTableId('coach-table')
+                    ->columns($this->getColumns())
+                    ->minifiedAjax()
+                    ->dom('Bfrtip')
+                    ->selectStyleSingle()
+                    ->parameters([
+                        'scrollX' => true,
+                        'scrollY' => true,
+                        'autoWidth' => false,
+                        'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
+                        'buttons' => [
+                            $hideButtonsArray,
+                        ],
+                        'order' => [
+                            0, 'desc'
+                        ],
+                        'language' =>
+                            (app()->getLocale() === 'ar') ?
+                                [
+                                    'url' => url('//cdn.datatables.net/plug-ins/1.13.8/i18n/ar.json')
+                                ] :
+                                [
+                                    'url' => url('//cdn.datatables.net/plug-ins/1.13.8/i18n/English.json')
+                                ]
+
+                    ]);
+    }
+
+    /**
+     * Get the dataTable columns definition.
+     */
+    public function getColumns(): array
+    {
+        return [
+            ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
+            ['name' => 'name', 'data' => 'name', 'title' => trans('admin.coaches.name')],
+            ['name' => 'description', 'data' => 'description', 'title' => trans('admin.coaches.description')],
+            ['name' => 'image', 'data' => 'image', 'title' => trans('admin.coaches.image')],
+            ['name' => 'license', 'data' => 'license', 'title' => trans('admin.coaches.is_licensed'), 'orderable' => false, 'searchable' => false],
+            ['name' => 'academy.commercial_name', 'data' => 'academy_id', 'title' => trans('admin.coaches.academy_id')],
+            ['name' => 'active', 'data' => 'active', 'title' => trans('admin.coaches.active'), 'orderable' => false, 'searchable' => false],
+        ];
+    }
+
+    /**
+     * Get the filename for export.
+     */
+    protected function filename(): string
+    {
+        return 'Coach_' . date('YmdHis');
+    }
+}

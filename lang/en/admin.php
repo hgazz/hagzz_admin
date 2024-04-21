@@ -4,6 +4,7 @@ return [
     'bokit' => 'Hagzz',
     'dashboard' => 'Dashboard',
     'location_management'=>'Location Management',
+    'partner' =>'Partners',
     'partner_management'=>'Partner Management',
     'preferences'=>'preferences',
     'Export'=>'Export',
@@ -12,6 +13,8 @@ return [
     'submit' => 'Submit',
     'total_income' => 'Total Income',
     'users' => 'Users',
+    'partner_location' => 'Partner Location',
+    'partner_coaches' => 'Partner Coaches',
     'auth' => [
         'sign_in' => 'Sign In',
         'enter_your_email_and_password' => 'Enter your email and password to login',
@@ -136,6 +139,8 @@ return [
         'created_successfully'=>'Coach created successfully',
         'updated_successfully'=>'Coach updated successfully',
         'deleted_successfully'=>'Coach deleted successfully',
+        'is_licensed' => 'Is Licensed',
+        'no_licensed' => 'No Licensed',
     ],
     'faq'=>[
         'faq'=>'Faq',
@@ -271,6 +276,25 @@ return [
         'gallery'=>'Gallery',
         'image' => 'Image',
         'status_updated_successfully' => 'Status Updated Successfully',
-    ]
+    ],
+    'address'=>[
+        'address'=>'Locations',
+        'address_en'=>'Location (english)',
+        'address_ar'=>'Location (arabic)',
+        'create'=>'create',
+        'area'=>'area',
+        'academy'=>'academy',
+        'longitude'=>'longitude',
+        'latitude'=>'latitude',
+        'city'=>'city',
+        'active' => 'active',
+        'inactive' => 'Inactive',
+        'select_address'=>'select academy',
+        'address successfully update'=>'address successfully update',
+        'address successfully deleted'=>'address successfully deleted',
+        'address successfully created'=>'address successfully created',
+        'country'=>'country',
+        'edit'=>'edit',
+    ],
 
 ];

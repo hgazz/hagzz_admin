@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Translatable\HasTranslations;
 
 class Address extends Model
@@ -21,18 +22,23 @@ class Address extends Model
     ];
 
     public  $translatable = ['address'];
-    public function academy()
+    public function academy(): BelongsTo
     {
         return $this->belongsTo(Academies::class, 'academy_id');
     }
 
-    public function city()
+    public function city(): BelongsTo
     {
         return $this->belongsTo(City::class, 'city_id');
     }
 
-    public function area()
+    public function area(): BelongsTo
     {
         return $this->belongsTo(Area::class, 'area_id');
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'country_id');
     }
 }

@@ -80,6 +80,8 @@ Route::group(
                 Route::get('academies/edit/country/{country}','getAllCountry')->name('country.getCountry');
                 Route::get('academies/show/{academies}','show')->name('academies.show');
                 Route::get('academies/export','export')->name('academies.export');
+                Route::get('partner/locations','partnerLocation')->name('academies.locations');
+                Route::get('partner/coaches','partnerCoach')->name('academies.coaches');
             });
 
             // banner routes

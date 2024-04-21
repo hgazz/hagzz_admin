@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\AcademiesDataTable;
+use App\DataTables\AddressDataTable;
+use App\DataTables\CoachDataTable;
 use App\Exports\AcademiesExport;
 use App\Http\Requests\Academies\AcademiesRequest;
 use App\Models\Academies;
@@ -170,5 +172,15 @@ class AcademiesController extends Controller
     public function export()
     {
         return Excel::download(new AcademiesExport(),'academies.xlsx');
+    }
+
+    public function partnerLocation(AddressDataTable $dataTable)
+    {
+        return $dataTable->render('Admin.pages.partnerLocation.index');
+    }
+
+    public function partnerCoach(CoachDataTable $dataTable)
+    {
+        return $dataTable->render('Admin.pages.partnerLocation.coaches');
     }
 }

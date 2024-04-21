@@ -128,6 +128,8 @@ return [
         'created_successfully'=>'تم إنشاء المدرب بنجاح',
         'updated_successfully'=>'تم تحديث المدرب بنجاح',
         'deleted_successfully'=>'تم حذف المدرب بنجاح',
+        'is_licensed' => 'لديه رخصه تدريبيه',
+        'no_licensed' => 'بدون رخصه تدريب',
     ],
     'faq'=>[
         'faq'=>'أسئلة متكررة',
@@ -188,6 +190,25 @@ return [
         'pending' => 'قيد الانتظار',
         'paid' => 'مدفوعة',
         'cancelled' => 'ملغية',
-    ]
+    ],
+    'address' => [
+        'address' => 'العنوان',
+        'address_en'=>'العنوان (انجليزي)',
+        'address_ar'=>'العنوان  (عربي)',
+        'create' => 'إنشاء',
+        'area' => 'المنطقة',
+        'academy' => 'الأكاديمية',
+        'longitude' => 'خط الطول',
+        'latitude' => 'خط العرض',
+        'city' => 'المدينة',
+        'active' => 'نشط',
+        'inactive' => 'غير نشط',
+        'select_address' => 'اختر أكاديمية',
+        'address successfully update' => 'تم تحديث العنوان بنجاح',
+        'address successfully deleted' => 'تم حذف العنوان بنجاح',
+        'address successfully created' => 'تم إنشاء العنوان بنجاح',
+        'country' => 'البلد',
+        'edit' => 'تعديل',
+    ],
 
 ];
