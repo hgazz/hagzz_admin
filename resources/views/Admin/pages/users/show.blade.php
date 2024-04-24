@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.sport.sport'))
+@section('title', trans('admin.user.show_details'))
 
 @push('css')
 
@@ -25,7 +25,7 @@
                             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.sport.sport') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.user.user') }}</li>
                                 </ol>
                             </nav>
 

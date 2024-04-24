@@ -50,15 +50,10 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="{{route('admin.areas.create')}}">
-                        <h3>{{ trans('admin.area.create') }}</h3>
+                        <h3>{{ trans('admin.area.areas') }}</h3>
                     </a>
-                    <a href="{{route('admin.areas.create')}}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="feather feather-plus">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
+                    <a class="btn btn-primary" href="{{route('admin.areas.create')}}">
+                        {{ trans('admin.area.create') }}
                     </a>
                 </div>
 

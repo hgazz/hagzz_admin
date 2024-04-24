@@ -31,7 +31,7 @@ class CountryRequest extends FormRequest
     {
         return [
             'name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('countries', 'name')],
-            'name_ar' => ['required', 'regex:/\p{Arabic}/u', 'string', 'min:3', 'max:255', new UniqueTranslation('countries', 'name')],
+            'name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('countries', 'name')],
         ];
     }
 

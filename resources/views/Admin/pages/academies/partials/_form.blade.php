@@ -65,7 +65,7 @@
             <label for="role">{{trans('admin.academies.role')}}</label>
             <select id="role" name="role" class="form-control">
                 @foreach($roles as $role)
-                    <option value="{{$role}}">{{$role}}</option>
+                    <option value="{{$role}}" @selected(old('role', isset($academies) ? $academies->role : '') == $role)>{{$role}}</option>
                 @endforeach
             </select>
             @error('role')

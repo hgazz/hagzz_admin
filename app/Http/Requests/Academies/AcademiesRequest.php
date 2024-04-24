@@ -29,7 +29,7 @@ class AcademiesRequest extends FormRequest
     public function onCreate()
     {
         return [
-            'commercial_name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name')],
+            'commercial_name_en' => ['required', 'string', 'regex:/(^([a-zA-Z 0-9 - , & \']+)(\d+)?$)/u', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name')],
             'commercial_name_ar' => ['required', 'regex:/\p{Arabic}/u', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name')],
             'email'=>'required|string|email',
             'phone'=>'required|string|unique:academies,phone',

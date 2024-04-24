@@ -46,7 +46,7 @@
                             @include('Admin.pages.setting.partials._form')
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success mt-3">{{ trans('admin.submit') }}</button>
+                            <button type="submit" class="btn btn-success mt-3">{{ trans('admin.save_changes') }}</button>
                         </div>
                     </div>
                 </form>

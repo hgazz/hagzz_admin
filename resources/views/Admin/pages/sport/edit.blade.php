@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.sport.edit'))
+@section('title', trans('admin.sport.edit') . $sport->name)
 
 
 @section('content')
@@ -23,7 +23,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
                                     <li class="breadcrumb-item"><a href="{{ route('admin.sport.index') }}">{{ trans('admin.sport.sport') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.sport.edit') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.sport.edit') . ' ' . $sport->name }}</li>
                                 </ol>
                             </nav>
 
@@ -40,13 +40,13 @@
                     @method('PUT')
                     <div class="card">
                         <div class="card-header">
-                            <h3>{{ trans('admin.academies.edit') }}</h3>
+                            <h3>{{ trans('admin.academies.edit') . ' ' . $sport->name}}</h3>
                         </div>
                         <div class="card-body">
                             @include('Admin.pages.sport.partials._form')
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success mt-3">{{ trans('admin.submit') }}</button>
+                            <button type="submit" class="btn btn-success mt-3">{{ trans('admin.save_changes') }}</button>
                         </div>
                     </div>
                 </form>

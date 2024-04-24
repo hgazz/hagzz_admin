@@ -40,8 +40,8 @@
         <label for="gender">{{trans('admin.user.gender')}}</label>
         <select id="gender" name="gender" class="form-control">
             <option value="">{{ trans('admin.user.select_gender') }}</option>
-            <option value="male">{{ trans('admin.user.male') }}</option>
-            <option value="female">{{ trans('admin.user.female') }}</option>
+            <option value="male" @selected(old('gender') == 'male' )>{{ trans('admin.user.male') }}</option>
+            <option value="female" @selected(old('gender') == 'female' )>{{ trans('admin.user.female') }}</option>
         </select>
         @error('gender')
         <span class="text-danger">{{$message}}</span>

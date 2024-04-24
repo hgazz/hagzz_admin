@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.city.edit'))
+@section('title', trans('admin.city.edit') . ' | ' .  $city->name)
 
 
 @section('content')
@@ -23,7 +23,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
                                     <li class="breadcrumb-item"><a href="{{ route('admin.cities.index') }}">{{ trans('admin.city.cities') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.city.edit') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.city.edit') . ' | ' . $city->name }}</li>
                                 </ol>
                             </nav>
 
@@ -47,7 +47,7 @@
                             @include('Admin.pages.city.partials._form')
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success mt-3">{{ trans('admin.submit') }}</button>
+                            <button type="submit" class="btn btn-success mt-3">{{ trans('admin.save_changes') }}</button>
                         </div>
                     </div>
                 </form>

@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.academies.edit'))
+@section('title', trans('admin.academies.edit'). $academies->commercial_name)
 
 
 @section('content')
@@ -23,7 +23,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
                                     <li class="breadcrumb-item"><a href="{{ route('admin.academies.index') }}">{{ trans('admin.academies.academies') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.academies.edit') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.academies.edit'). ' ' . $academies->commercial_name }}</li>
                                 </ol>
                             </nav>
 
@@ -41,13 +41,13 @@
                     <input type="hidden" name="id_unique" value="{{ $academies->id }}">
                     <div class="card">
                         <div class="card-header">
-                            <h3>{{ trans('admin.academies.edit') }}</h3>
+                            <h3>{{ trans('admin.academies.edit') .' '. $academies->commercial_name }}</h3>
                         </div>
                         <div class="card-body">
                             @include('Admin.pages.academies.partials._form')
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success mt-3">{{ trans('admin.submit') }}</button>
+                            <button type="submit" class="btn btn-success mt-3">{{ trans('admin.save_changes') }}</button>
                         </div>
                     </div>
                 </form>

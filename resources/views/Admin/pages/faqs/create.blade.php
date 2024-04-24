@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.faq.create'))
+@section('title', trans('admin.faq.create faq'))
 
 
 @section('content')
@@ -23,7 +23,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
                                     <li class="breadcrumb-item"><a href="{{ route('admin.cities.index') }}">{{ trans('admin.faq.faq') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.faq.create') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.faq.create faq') }}</li>
                                 </ol>
                             </nav>
 
@@ -45,7 +45,7 @@
                     @include('Admin.pages.faqs.partials._form')
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-success mt-3">{{ trans('admin.submit') }}</button>
+                    <button type="submit" class="btn btn-success mt-3">{{ trans('admin.save_changes') }}</button>
                 </div>
             </div>
         </form>

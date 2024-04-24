@@ -23,10 +23,12 @@ class SportRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
+        return [
+            'name_en' => ['required','regex:/(^([a-zA-Z 0-9 - , & \']+)(\d+)?$)/u','string','min:3','max:255'],
+            'name_ar' => ['required', 'regex:/\p{Arabic}/u','string','min:3','max:255'],
             'icon'=>$this->validateImage(),
         ];
-        return TranslatableService::validateTranslatableFields(Sport::$translatableColumns) + $rules;
+
     }
 
     private function validateImage(): string

@@ -44,12 +44,12 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-6 mb-3">
                                     <h2>{{ trans('admin.auth.sign_in') }}</h2>
                                     <p>{{ trans('admin.auth.enter_your_email_and_password') }}</p>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <img src="{{ asset('assetsAdmin/logo/Icon-Primary.svg') }}" class="img-fluid w-100 h100" alt="hagzz">
+                                <div class="col-6">
+                                    <img src="{{ asset('assetsAdmin/logo/Icon-Primary.svg') }}" class="img-thumbnail mx-auto" width="120px" height="80px" alt="hagzz">
                                 </div>
                             </div>
                             @if(session()->has('error'))

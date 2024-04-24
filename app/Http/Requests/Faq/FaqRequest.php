@@ -23,6 +23,11 @@ class FaqRequest extends FormRequest
      */
     public function rules(): array
     {
-        return TranslatableService::validateTranslatableFields(Faq::$translatableColumns);
+        return [
+            'question_en' => ['required','regex:/(^([a-zA-Z 0-9 - , & \']+)(\d+)?$)/u','string','min:3','max:255'],
+            'question_ar' => ['required', 'regex:/\p{Arabic}/u','string','min:3','max:255'],
+            'answer_en' => ['required','regex:/(^([a-zA-Z 0-9 - , & \']+)(\d+)?$)/u','string'],
+            'answer_ar' => ['required', 'regex:/\p{Arabic}/u','string'],
+        ];
     }
 }
