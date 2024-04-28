@@ -28,7 +28,9 @@ class FaqController extends Controller
     public function store(FaqRequest $request)
     {
         $translatable = TranslatableService::generateTranslatableFields($this->faqModel::getTranslatableFields() , $request->validated());
-        $this->faqModel->create($translatable);
+        $this->faqModel->create($translatable + [
+            'answer' => ['en' => $request->answer_en, 'ar' => $request->answer_ar],
+            ]);
         session()->flash('success',trans('admin.faq.faq created successfully'));
         return to_route('admin.faq.index');
     }
@@ -41,7 +43,9 @@ class FaqController extends Controller
     public function update(Faq $faq , FaqRequest $request)
     {
         $translatable = TranslatableService::generateTranslatableFields($this->faqModel::getTranslatableFields() , $request->validated());
-        $faq->update($translatable);
+        $faq->update($translatable+ [
+                'answer' => ['en' => $request->answer_en, 'ar' => $request->answer_ar],
+            ]);
         session()->flash('success',trans('admin.faq.faq updated successfully'));
         return to_route('admin.faq.index');
     }

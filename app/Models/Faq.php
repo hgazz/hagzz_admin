@@ -17,11 +17,6 @@ class Faq extends Model
             'validations'=>'required|string|max:255',
             'is_textarea'=>false
         ],
-        'answer'=>[
-            'type'=>'text',
-            'validations'=>'required|string|max:255',
-            'is_textarea'=>false
-        ]
     ];
 
     public static function getTranslatableFields()
