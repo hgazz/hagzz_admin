@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.sport.edit') . $sport->name)
+@section('title', trans('admin.sport.edit') . ' ' . $sport->name)
 
 
 @section('content')
