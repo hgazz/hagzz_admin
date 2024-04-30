@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
 
 class Training extends Model
 {
-    use HasFactory,HasTranslations;
+    use HasFactory,HasTranslations,SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -31,6 +32,11 @@ class Training extends Model
     public function coach()
     {
         return $this->belongsTo(Coach::class, 'coach_id');
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Invoice::class , 'training_id');
     }
 
     public function address()

@@ -154,6 +154,7 @@ Route::group(
                 Route::post('trainings/booking','storeBooking')->name('training.storeBooking');
                 Route::post('trainings/areas','getAreaByCity')->name('training.getAreaByCity');
                 Route::post('trainings/cities','getCityByCountry')->name('training.getCities');
+                Route::delete('trainings/delete','delete')->name('trainings.delete');
             });
 
             Route::controller(GalleryController::class)->group(function (){

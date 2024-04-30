@@ -61,7 +61,9 @@ class TrainingController extends Controller
                 'gender' => $request->gender,
                 'country_id' => $request->country_id,
                 'city_id' => $request->city_id,
-                'area_id' => $request->area_id
+                'area_id' => $request->area_id,
+                'user_type'=> 'system',
+                'birth_date'=>$request->birth_date,
             ]);
             $booking = Invoice::create([
                 'user_id' => $user->id,
@@ -95,5 +97,22 @@ class TrainingController extends Controller
     {
         $cities = $this->cityModel::where('country_id', $request->country_id)->get();
         return response()->json($cities);
+    }
+
+    public function delete(Request $request)
+    {
+        try {
+            $training = Training::findOrFail($request->id);
+            $training->delete();
+            return response()->json(['data' => [
+                'status' => 'success',
+                'model'   => trans('admin.training.training'),
+                'message' => trans('admin.training.deleted_successfully'),
+            ]]);
+        }catch (\Exception $e) {
+            return response()->json(['data' => [
+                'status' => 'failed',
+            ]]);
+        }
     }
 }

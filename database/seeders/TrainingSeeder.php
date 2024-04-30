@@ -20,7 +20,7 @@ class TrainingSeeder extends Seeder
             'end_date'=>fake()->date,
             'description'=>fake()->text,
             'coach_id'=>4,
-            'academy_id'=>4,
+            'academy_id'=>3,
             'max_players'=>10,
             'level'=>'Beginner',
             'gender'=>'All',
