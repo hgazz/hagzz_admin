@@ -142,7 +142,7 @@ Route::group(
 
             Route::controller(BookingController::class)->group(function (){
                 Route::get('bookings','index')->name('booking.index');
-                Route::put('bookings/cancel/{invoice}','cancelBooking')->name('booking.cancel');
+                Route::get('bookings/cancel/','cancelBooking')->name('booking.cancel');
                 Route::get('bookings/export','export')->name('booking.export');
             });
 

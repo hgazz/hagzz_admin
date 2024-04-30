@@ -6,7 +6,7 @@ use App\DataTables\InvoiceDataTable;
 use App\Exports\InvoiceExport;
 use App\Models\Invoice;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
@@ -15,13 +15,18 @@ class BookingController extends Controller
         return $dataTable->render('Admin.pages.booking.index');
     }
 
-    public function cancelBooking(Invoice $invoice)
+    public function cancelBooking(Request $request)
     {
+        $invoice = Invoice::findOrFail($request->id);
         $invoice->update([
             'is_canceled' => true
         ]);
-        session()->flash('success', __('admin.bookings.booking cancelled successfully'));
-        return back();
+
+        return response()->json(['data' => [
+            'status' => 'success',
+            'model'   => trans('admin.bookings.bookings'),
+            'message' => trans('admin.bookings.booking cancelled successfully'),
+        ]]);
     }
 
     public function export()
