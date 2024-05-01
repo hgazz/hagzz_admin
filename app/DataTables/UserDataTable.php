@@ -95,6 +95,7 @@ class UserDataTable extends DataTable
             ['name' => 'name', 'data' => 'name', 'title' => trans('admin.user.name')],
             ['name' => 'phone', 'data' => 'phone', 'title' => trans('admin.user.phone')],
             ['name' => 'gender', 'data' => 'gender', 'title' => trans('admin.user.gender')],
+            ['name' => 'user_type', 'data' => 'user_type', 'title' => trans('admin.user.user_type')],
             ['name' => 'birth_date', 'data' => 'birth_date', 'title' => trans('admin.user.birth_date')],
             ['name' => 'country', 'data' => 'country', 'title' => trans('admin.user.country')],
             ['name' => 'city', 'data' => 'city', 'title' => trans('admin.user.city')],

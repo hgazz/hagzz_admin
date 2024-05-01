@@ -78,5 +78,124 @@
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
     <script src="/vendor/datatables/buttons.server-side.js"></script>
+
+<script>
+    let lang = $('meta[name="lang"]').attr('content');
+    translate  ={
+        "title_del" : {
+            'en': 'Are you sure ?',
+            'ar': "هل أنت متأكد ؟",
+        },
+        "text_del" :{
+            'en':'You will not be able to recover this ',
+            'ar':'لن تتمكن من استرداد هذا'
+        },
+        "cancel_btn" :{
+            'en':'Cancel' ,
+            'ar':'إلغاء'
+        },
+        'submit_btn':{
+            'en':'Submit' ,
+            'ar':'إرسال'
+        },
+        "confirm_del":{
+            'en':'Yes, Cancel it!' ,
+            'ar':'نعم , قم بالغائه !'
+        },
+        "title_del2" : {
+            'en': 'Are you sure you want to Cancel this record?',
+            'ar': "هل أنت متأكد أنك تريد الغاء هذا السجل؟",
+        },
+
+        "text_del2" : {
+            // 'en': 'If you delete this, it will be gone forever',
+            // 'ar': "إذا حذفت هذا ، فسيختفي إلى الأبد",
+        },
+        "removed" : {
+            'en': 'Canceled!',
+            'ar': 'الغاء!',
+        },
+        "messageSuccess" : {
+            'en': 'Record Has Been Canceled !',
+            'ar': '! تم الغاء السجل ',
+        },
+
+        "messageError" : {
+            'en': 'Record Removed Failed',
+            'ar': 'فشل حذف السجل',
+        },
+    }
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $('.table').on('init.dt', function () {
+
+            $(document).on('click', '.show_confirm_two',function (event) {
+                var url = $(this).data('href');
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                var token = $('#token').val();
+                var parent = $(this).parent();
+
+
+                Swal.fire({
+                    title: translate.title_del2[lang],
+                    text: translate.text_del2[lang],
+                    icon: 'warning',
+                    padding: '3em',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: translate.confirm_del[lang],
+                    cancelButtonText: translate.cancel_btn[lang],
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let temp = `#${name}-${id}`;
+
+                        $.ajax({
+                            url: url,
+                            type: 'GET',
+                            data: { id: id },
+                            dataType: 'json'
+                            , success: function (res) {
+                                if (res.data.status === 'success'){
+                                    $(temp).remove();
+                                    Swal.fire(
+                                        res.data.model,
+                                        res.data.message,
+                                        'success'
+                                    )
+                                    location.reload();
+                                } else {
+                                    Swal.fire(
+                                        'Error!',
+                                        `Error : ${res.message} !`,
+                                        'error'
+                                    )
+                                }
+
+
+                            }, error: function (resp) {
+                                Swal.fire(
+                                    translate.removed[lang],
+                                    translate.messageError[lang],
+                                    `error`,
+                                )
+                            }
+                        });
+                    }
+                });
+            });
+
+        })
+    });
+
+</script>
+
     {!! $dataTable->scripts() !!}
 @endpush

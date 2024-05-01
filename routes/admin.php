@@ -142,7 +142,7 @@ Route::group(
 
             Route::controller(BookingController::class)->group(function (){
                 Route::get('bookings','index')->name('booking.index');
-                Route::put('bookings/cancel/{invoice}','cancelBooking')->name('booking.cancel');
+                Route::get('bookings/cancel/','cancelBooking')->name('booking.cancel');
                 Route::get('bookings/export','export')->name('booking.export');
             });
 
@@ -154,6 +154,7 @@ Route::group(
                 Route::post('trainings/booking','storeBooking')->name('training.storeBooking');
                 Route::post('trainings/areas','getAreaByCity')->name('training.getAreaByCity');
                 Route::post('trainings/cities','getCityByCountry')->name('training.getCities');
+                Route::delete('trainings/delete','delete')->name('trainings.delete');
             });
 
             Route::controller(GalleryController::class)->group(function (){

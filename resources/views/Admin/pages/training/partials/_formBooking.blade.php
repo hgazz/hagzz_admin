@@ -80,4 +80,14 @@
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
+
+    <div class="col-md-12 mb-3">
+        <label for="phone">{{trans('admin.user.birth_date')}}</label>
+        <input type="date" name="birth_date" class="form-control"
+               value="{{ old('birth_date') }}" id="phone"
+               placeholder="{{trans('admin.academies.birth_date')}}">
+        @error('birth_date')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
+    </div>
 </div>

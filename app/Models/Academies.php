@@ -9,34 +9,23 @@ class Academies extends Model
 {
     use HasTranslations;
 
-    public $translatable = ['commercial_name'];
+    const  PATH = 'images/academies';
+    public function getImageAttribute($value)
+    {
+        return config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
+    }
+
+    public $translatable = ['commercial_name','app_name'];
 
 
-    protected $fillable = [
-        'email',
-        'phone',
-        'password',
-        'status',
-        'role',
-        'commercial_name',
-        'trade_license_number',
-        'trade_license_expire_date',
-        'tax_number',
-        'percentage',
-        'national_id_number',
-        'address',
-        'contract_number',
-        'account_manager',
-        'is_registered',
-        'logo',
-        'branch_to',
-        'country_id',
-        'city_id',
-        'area_id',
-    ];
+    protected $guarded = [];
 
     public static array $translatableColumns = [
         'commercial_name'=>[
+            'type'=>'text',
+            'is_textarea'=>false
+        ],
+        'app_name'=>[
             'type'=>'text',
             'is_textarea'=>false
         ]

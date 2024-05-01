@@ -7,6 +7,7 @@ use App\DataTables\AddressDataTable;
 use App\DataTables\CoachDataTable;
 use App\Exports\AcademiesExport;
 use App\Http\Requests\Academies\AcademiesRequest;
+use App\Http\Traits\FileUpload;
 use App\Models\Academies;
 use App\Models\Area;
 use App\Models\City;
@@ -20,6 +21,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AcademiesController extends Controller
 {
+    use FileUpload;
     private $academicModels, $sportModel, $countryModel, $cityModel, $areaModel;
     public function __construct(Academies $model, Sport $sport, Country $country, City $city, Area $area)
     {
@@ -50,6 +52,7 @@ class AcademiesController extends Controller
     {
         try {
             DB::beginTransaction();
+            $imageName =  $this->upload($request->file('image') , $this->academicModels::PATH );
             $translatableFields = TranslatableService::generateTranslatableFields($this->academicModels->getTranslatableFields(), $request->validated());
             $academy = $this->academicModels->create($translatableFields + [
                     'password'=> Hash::make($request->password),
@@ -59,15 +62,26 @@ class AcademiesController extends Controller
                     'trade_license_number' => $request->trade_license_number,
                     'trade_license_expire_date' => $request->trade_license_expire_date,
                     'tax_number' => $request->tax_number,
-                    'national_id_number' => $request->national_id_number,
-                    'address' => $request->address,
                     'contract_number' => $request->contract_number,
                     'account_manager' => $request->account_manager,
                     'is_registered'=>$request->has('is_registered') ? 1 :0,
                     'branch_to'=>$request->branch_to,
-                    'country_id' => $request->country_id,
-                    'city_id' => $request->city_id,
-                    'area_id' => $request->area_id,
+                    'first_name'=>$request->first_name,
+                    'last_name'=>$request->last_name,
+                    'facebook'=>$request->facebook,
+                    'instagram'=>$request->instagram,
+                    'website'=>$request->website,
+                    'linkedin'=>$request->linkedin,
+                    'contract_date'=>$request->contract_date,
+                    'start_date'=>$request->start_date,
+                    'end_date'=>$request->end_date,
+                    'image'=>$imageName,
+                    'bank_account_type'=>$request->bank_account_type,
+                    'bank_name'=>$request->bank_name,
+                    'beneficiary_name'=>$request->beneficiary_name,
+                    'commission_percentage'=>$request->commission_percentage,
+                    'bank_account_number'=>$request->bank_account_number,
+                    'name'=>$request->name,
                 ]);
             $academy->sports()->attach($request->sport_id);
             DB::commit();
@@ -110,8 +124,8 @@ class AcademiesController extends Controller
 
     public function update(Academies $academies , AcademiesRequest $request)
     {
-
         DB::transaction(function () use ($academies, $request) {
+            $imageName = $request->hasFile('image') ? $this->upload($request->file('image') , $this->academicModels::PATH,  $academies->getRawOriginal('image')) : $academies->getRawOriginal('icon');
             $translatableFields = TranslatableService::generateTranslatableFields($this->academicModels->getTranslatableFields(), $request->validated());
             $academies->update($translatableFields + [
                 'password'=> !is_null($request->password) ? Hash::make($request->password) : $academies->password,
@@ -121,15 +135,26 @@ class AcademiesController extends Controller
                     'trade_license_number' => $request->trade_license_number,
                     'trade_license_expire_date' => $request->trade_license_expire_date,
                     'tax_number' => $request->tax_number,
-                    'national_id_number' => $request->national_id_number,
-                    'address' => $request->address,
                     'contract_number' => $request->contract_number,
                     'account_manager' => $request->account_manager,
                     'is_registered'=>$request->has('is_registered') ? 1 :0,
                     'branch_to'=>$request->branch_to,
-                    'country_id' => $request->country_id,
-                    'city_id' => $request->city_id,
-                    'area_id' => $request->area_id,
+                    'first_name'=>$request->first_name,
+                    'last_name'=>$request->last_name,
+                    'facebook'=>$request->facebook,
+                    'instagram'=>$request->instagram,
+                    'website'=>$request->website,
+                    'linkedin'=>$request->linkedin,
+                    'contract_date'=>$request->contract_date,
+                    'start_date'=>$request->start_date,
+                    'end_date'=>$request->end_date,
+                    'image'=>$imageName,
+                    'bank_account_type'=>$request->bank_account_type,
+                    'bank_name'=>$request->bank_name,
+                    'beneficiary_name'=>$request->beneficiary_name,
+                    'commission_percentage'=>$request->commission_percentage,
+                    'bank_account_number'=>$request->bank_account_number,
+                    'name'=>$request->name,
             ]);
             $academies->sports()->sync($request->sport_id);
             session()->flash('success',trans('admin.academies.academies updated successfully'));

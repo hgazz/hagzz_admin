@@ -70,5 +70,6 @@
 
 @push('js')
     <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/datatables.min.js"></script>
+    <script src="{{ asset('assetsAdmin/confirmationDelete.js') }}"></script>
     {!! $dataTable->scripts() !!}
 @endpush

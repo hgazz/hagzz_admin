@@ -94,8 +94,6 @@ class AcademiesDataTable extends DataTable
             ['name' => 'trade_license_number', 'data' => 'trade_license_number', 'title' => trans('admin.academies.trade_license_number')],
             ['name' => 'trade_license_expire_date', 'data' => 'trade_license_expire_date', 'title' => trans('admin.academies.trade_license_expire_date')],
             ['name' => 'tax_number', 'data' => 'tax_number', 'title' => trans('admin.academies.tax_number')],
-            ['name' => 'national_id_number', 'data' => 'national_id_number', 'title' => trans('admin.academies.national_id_number')],
-            ['name' => 'address', 'data' => 'address', 'title' => trans('admin.academies.address')],
             ['name' => 'sports', 'data' => 'sports', 'title' => trans('admin.sport.sport')],
             ['name' => 'contract_number', 'data' => 'contract_number', 'title' => trans('admin.academies.contract_number')],
             ['name' => 'account_manager', 'data' => 'account_manager', 'title' => trans('admin.academies.account_manager')],
