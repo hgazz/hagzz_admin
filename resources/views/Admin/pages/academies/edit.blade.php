@@ -44,6 +44,7 @@
         <div class="w-100">
             <form id="signUpForm" action="{{route('admin.academies.update',$academies)}}" method="post" enctype="multipart/form-data">
                 @method('PUT')
+                <input type="hidden" name="id_unique" value="{{ $academies->id }}">
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>

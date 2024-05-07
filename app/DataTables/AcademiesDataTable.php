@@ -58,7 +58,8 @@ class AcademiesDataTable extends DataTable
                     ->parameters([
                         'scrollX' => true,
                         'scrollY' => true,
-                        'autoWidth' => false,
+                        'autoWidth' => true,
+                        'responsive' => false,
                         'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                         'buttons' => [
                             $hideButtonsArray,
@@ -97,6 +98,7 @@ class AcademiesDataTable extends DataTable
             ['name' => 'sports', 'data' => 'sports', 'title' => trans('admin.sport.sport')],
             ['name' => 'contract_number', 'data' => 'contract_number', 'title' => trans('admin.academies.contract_number')],
             ['name' => 'account_manager', 'data' => 'account_manager', 'title' => trans('admin.academies.account_manager')],
+            ['name' => 'status', 'data' => 'status', 'title' => trans('admin.academies.status')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
 
         ];

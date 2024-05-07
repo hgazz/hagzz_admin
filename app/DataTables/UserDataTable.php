@@ -21,13 +21,13 @@ class UserDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('country',function (User $user){
-              return $user->country->name;
+              return $user?->country?->name;
             })
             ->addColumn('city',function (User $user){
-                return $user->city->name;
+                return $user?->city?->name;
             })
             ->addColumn('area',function (User $user){
-                return $user->area->name;
+                return $user?->area?->name;
             })
             ->addColumn('image', function (User $user) {
                 return '<img src="'. $user->image . '" width="100" height="100">';
