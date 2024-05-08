@@ -23,8 +23,7 @@ class SportDataTable extends DataTable
         return (new EloquentDataTable($query))
         ->editColumn('name', fn($raw) => $raw->name)
         ->editColumn('icon', function (Sport $sport) {
-
-            return '<img src="' . $sport->logo.$sport->icon . '" width="100" height="100">';
+            return '<img src="' . $sport->logo.$sport->icon . '" width="100" height="80" class="img-thumbnail"/>';
         })
             ->addColumn('action', function (Sport $sport) {
                 return view('Admin.pages.sport.datatable.actions', compact('sport'))->render();

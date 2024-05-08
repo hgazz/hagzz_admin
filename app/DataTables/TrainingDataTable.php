@@ -30,10 +30,25 @@ class TrainingDataTable extends DataTable
             ->editColumn('academy_id', function (Training $training) {
                 return $training->academy->commercial_name;
             })
+            ->editColumn('sport_id', function (Training $training) {
+                return $training->sport->name;
+            })
+            ->editColumn('address_id', function (Training $training) {
+                return $training->address->address;
+            })
+            ->editColumn('active', function (Training $training) {
+                return $training->active ? trans('admin.academies.active') : trans('admin.academies.inactive');
+            })
+            ->addColumn('classes', function (Training $training) {
+                return $training->classes->count();
+            })
+            ->addColumn('subscribed', function (Training $training) {
+                return $training->joins->count();
+            })
             ->addColumn('action', function (Training $training) {
                 return view('Admin.pages.training.datatable.actions', compact('training'))->render();
             })
-            ->rawColumns(['action', 'coach_id', 'academy_id','image','class']);
+            ->rawColumns(['action', 'coach_id', 'academy_id','image','sport_id', 'classes', 'subscribed', 'active']);
 
     }
 
@@ -42,7 +57,7 @@ class TrainingDataTable extends DataTable
      */
     public function query(Training $model): QueryBuilder
     {
-        return $model->newQuery()->with(['coach', 'academy', 'sport']);
+        return $model->newQuery()->with(['coach', 'academy', 'sport', 'classes', 'joins', 'address']);
     }
 
     /**
@@ -96,7 +111,16 @@ class TrainingDataTable extends DataTable
             ['name' => 'coach.name', 'data' => 'coach_id', 'title' => trans('admin.training.coach')],
             ['name' => 'start_date', 'data' => 'start_date', 'title' => trans('admin.training.start_date')],
             ['name' => 'end_date', 'data' => 'end_date', 'title' => trans('admin.training.end_date')],
+            ['name' => 'age_group', 'data' => 'age_group', 'title' => trans('admin.training.age_group')],
+            ['name' => 'gender', 'data' => 'gender', 'title' => trans('admin.training.gender')],
+            ['name' => 'max_players', 'data' => 'max_players', 'title' => trans('admin.training.max_players')],
+            ['name' => 'level', 'data' => 'level', 'title' => trans('admin.training.level')],
+            ['name' => 'address.address', 'data' => 'address_id', 'title' => trans('admin.training.address')],
+            ['name' => 'subscribed', 'data' => 'subscribed', 'title' => trans('admin.training.subscribed')],
+            ['name' => 'active', 'data' => 'active', 'title' => trans('admin.training.active')],
             ['name' => 'description', 'data' => 'description', 'title' => trans('admin.training.description')],
+            ['name' => 'sport.name', 'data' => 'sport_id', 'title' => trans('admin.training.sport')],
+            ['name' => 'classes', 'data' => 'classes', 'title' => trans('admin.training.classes_count')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }

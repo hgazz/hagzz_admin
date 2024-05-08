@@ -52,4 +52,14 @@ class Training extends Model
     {
         return $this->belongsTo(Sport::class,'sport_id');
     }
+
+    public function classes()
+    {
+        return $this->hasMany(TClass::class,'training_id');
+    }
+
+    public function joins()
+    {
+        return $this->hasMany(Join::class,'training_id');
+    }
 }

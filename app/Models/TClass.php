@@ -12,7 +12,12 @@ class TClass extends Model
     protected $fillable = [
         'title',
         'subtitle',
-        'date'
+        'date',
+        'start_time',
+        'end_time',
+        'training_id',
+        'out_comes',
+        'bring_with_me'
     ];
 
 }

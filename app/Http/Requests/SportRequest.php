@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Sport;
 use App\Services\TranslatableService;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SportRequest extends FormRequest
@@ -19,12 +20,12 @@ class SportRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            'name_en' => ['required','regex:/(^([a-zA-Z 0-9 - , & \']+)(\d+)?$)/u','string','min:3','max:255'],
+            'name_en' => ['required','regex:/^[a-zA-Z 0-9\s]*$/','string','min:3','max:255'],
             'name_ar' => ['required', 'regex:/\p{Arabic}/u','string','min:3','max:255'],
             'icon'=>$this->validateImage(),
         ];
