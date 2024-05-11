@@ -26,7 +26,7 @@ class SportRequest extends FormRequest
     {
         return [
             'name_en' => ['required','regex:/^[a-zA-Z 0-9\s]*$/','string','min:3','max:255'],
-            'name_ar' => ['required', 'regex:/\p{Arabic}/u','string','min:3','max:255'],
+            'name_ar' => ['required', 'regex:/^[\p{Arabic}]+$/u','string','min:3','max:255'],
             'icon'=>$this->validateImage(),
         ];
 
