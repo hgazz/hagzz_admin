@@ -107,7 +107,12 @@
         <div>
             <select class="js-example-basic-multiple w-100 form-select form-control formInput basic" name="sport_id[]" multiple id="sports">
                 @foreach($sports as $sport)
-                    <option value="{{$sport->id}}" @selected((isset($academies) ? in_array($sport->id, $academies->sports()->pluck('sport_id')->toArray()): '') )>{{$sport->name}}</option>
+                    <option value="{{ $sport->id }}"
+                        @selected(
+                            (is_array(old('sport_id')) && in_array($sport->id, old('sport_id'))) ||
+                            (isset($academies) && in_array($sport->id, $academies->sports()->pluck('sport_id')->toArray()))
+                        )
+                    >{{ $sport->name }}</option>
                 @endforeach
             </select>
         </div>
