@@ -105,9 +105,9 @@
     <div class="mb-3 d-flex flex-column align-items-start">
         <label for="sports">{{ trans('admin.sport.sport') }}</label>
         <div>
-            <select class="js-example-basic-multiple w-100 form-select form-control  basic" name="sport_id[]" multiple id="sports">
+            <select class="js-example-basic-multiple w-100 form-select form-control formInput basic" name="sport_id[]" multiple id="sports">
                 @foreach($sports as $sport)
-                    <option value="{{$sport->id}}" @selected(old('sport_id', isset($academies) ? in_array($sport->id, $academies->sports()->pluck('sport_id')->toArray()) : ''))>{{$sport->name}}</option>
+                    <option value="{{$sport->id}}" @selected(old('sport_id',isset($academies) ? in_array($sport->id, $academies->sports()->pluck('sport_id')->toArray()): '') )>{{$sport->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -200,7 +200,7 @@
     @enderror
     <div class="mb-3">
         <label for="tax_number">{{ trans('admin.academies.tax_number') }}</label>
-        <input id="tax_number" type="number" class="formInput" placeholder="{{trans('admin.academies.tax_number')}}" oninput="this.className = ''" value="{{(old('tax_number', isset($academies) ? $academies->tax_number : ''))}}" name="tax_number">
+        <input id="tax_number" type="number" placeholder="{{trans('admin.academies.tax_number')}}" oninput="this.className = ''" value="{{(old('tax_number', isset($academies) ? $academies->tax_number : ''))}}" name="tax_number">
     </div>
     @error('tax_number')
     <p class="text-danger">{{$message}}</p>
