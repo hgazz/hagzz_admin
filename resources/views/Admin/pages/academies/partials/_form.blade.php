@@ -237,7 +237,7 @@
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="bank_account_number">{{trans('admin.academies.Bank account number')}}</label>
+        <label for="bank_account_number">{{trans('admin.academies.Beneficiary Name')}}</label>
         <input id="beneficiary_name" type="text" class="formInput" placeholder="{{trans('admin.academies.Beneficiary Name')}}" oninput="this.className = ''" value="{{(old('beneficiary_name', isset($academies) ? $academies->beneficiary_name : ''))}}" name="beneficiary_name">
     </div>
     @error('beneficiary_name')
