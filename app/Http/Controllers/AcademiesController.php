@@ -82,6 +82,7 @@ class AcademiesController extends Controller
                     'commission_percentage'=>$request->commission_percentage,
                     'bank_account_number'=>$request->bank_account_number,
                     'name'=>$request->name,
+                    'status' => $request->status,
                 ]);
             $academy->sports()->attach($request->sport_id);
             DB::commit();
@@ -155,6 +156,7 @@ class AcademiesController extends Controller
                     'commission_percentage'=>$request->commission_percentage,
                     'bank_account_number'=>$request->bank_account_number,
                     'name'=>$request->name,
+                    'status' => $request->status,
             ]);
             $academies->sports()->sync($request->sport_id);
             session()->flash('success',trans('admin.academies.academies updated successfully'));
