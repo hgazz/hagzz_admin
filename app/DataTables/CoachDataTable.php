@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Http\Traits\DataTablesTrait;
 use App\Models\Coach;
+use App\Models\Follow;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,6 +13,24 @@ use Yajra\DataTables\Services\DataTable;
 class CoachDataTable extends DataTable
 {
     use DataTablesTrait;
+
+    protected $query;
+
+    /**
+     * Set a custom query.
+     *
+     * @param  array|string  $key
+     * @param  mixed  $value
+     * @return static
+     */
+    public function with(array|string $key, mixed $value = null): static
+    {
+        if (is_string($key) && $key === 'query') {
+            $this->query = $value;
+        }
+
+        return $this;
+    }
     /**
      * Build the DataTable class.
      *
@@ -38,7 +57,13 @@ class CoachDataTable extends DataTable
                     $q->whereRaw("JSON_SEARCH(lower(commercial_name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
                 });
             })
-            ->rawColumns(['image', 'academy_id']);
+            ->addColumn('training_count',function($q){
+               return $q->academy->trainings->count();
+            })
+            ->addColumn('follow_count',function($q){
+                return Follow::where('followable_id',$q->id)->count();
+            })
+            ->rawColumns(['image', 'academy_id','training_count','follow_count']);
     }
 
     /**
@@ -46,21 +71,11 @@ class CoachDataTable extends DataTable
      */
     public function query(Coach $model): QueryBuilder
     {
-        $query = $model->newQuery()->with(['academy:id,commercial_name']);
-
-        $academy = request()->input('academy.commercial_name');
-        if ($academy) {
-            $query->whereHas('academy', function ($q) use ($academy) {
-                // Use JSON_SEARCH to find any occurrence of $city within the JSON column, regardless of the key (locale)
-                $q->whereRaw("JSON_SEARCH(lower(commercial_name), 'one', lower(?)) IS NOT NULL", ["%{$academy}%"]);
-            });
+        if ($this->query) {
+            return $this->query;
         }
 
-        $active = request()->input('active');
-        if ($active) {
-            $query->where('active', $active === 'active' ? 1 : 0);
-        }
-        return $query->select('coaches.*');
+        return $model->newQuery();
     }
 
     /**
@@ -111,6 +126,8 @@ class CoachDataTable extends DataTable
             ['name' => 'image', 'data' => 'image', 'title' => trans('admin.coaches.image')],
             ['name' => 'license', 'data' => 'license', 'title' => trans('admin.coaches.is_licensed'), 'orderable' => false, 'searchable' => false],
             ['name' => 'academy.commercial_name', 'data' => 'academy_id', 'title' => trans('admin.coaches.academy_id')],
+            ['name' => 'training_count', 'data' => 'training_count', 'title' => trans('admin.training_count')],
+            ['name' => 'follow_count', 'data' => 'follow_count', 'title' => trans('admin.follow_count')],
             ['name' => 'active', 'data' => 'active', 'title' => trans('admin.coaches.active'), 'orderable' => false, 'searchable' => false],
         ];
     }

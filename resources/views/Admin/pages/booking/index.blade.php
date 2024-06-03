@@ -46,11 +46,25 @@
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-                <a class="btn btn-success w-25 mt-1 mb-2" href="{{route('admin.booking.export')}}">
+                <a class="btn btn-success w-25 mt-1 mb-2" href="{{route('admin.report.booking.export')}}">
                     {{trans('admin.Export')}}
                 </a>
                 <div class="card">
                     <div class="card-header">
+
+                        <div class="row">
+                            <form method="GET" action="{{ route('admin.report.invoice.filter') }}">
+                                <div class="col-md-5">
+                                    <label>Start Date</label>
+                                    <input type="date" name="start_date" class="form-control">
+                                </div>
+                                <div class="col-md-5">
+                                    <label>End Date</label>
+                                    <input type="date" name="end_date" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-2">Apply</button>
+                            </form>
+                        </div>
                         <div class="d-flex justify-content-between align-items-center">
                             <a href="{{ URL::current() }}">
                                 <h3>{{ trans('admin.bookings.bookings') }}</h3>

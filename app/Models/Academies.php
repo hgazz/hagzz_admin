@@ -58,4 +58,9 @@ class Academies extends Model
     {
         return $this->belongsTo(Academies::class , 'branch_to');
     }
+
+    public function trainings()
+    {
+        return $this->hasMany(Training::class,'academy_id');
+    }
 }

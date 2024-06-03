@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'latest_settlement_amount'=>'latest settlement amount',
+    'next_settlement_date'=>'next settlement date',
+    'apply_filter'=>'apply filter',
+    'select_start_date'=>'select start date',
+    'select_end_date'=>'select end date',
     'bokit' => 'Hagzz',
     'delete'=>'Delete',
     'edit'=>'Edit',
@@ -339,4 +344,26 @@ return [
         'edit'=>'edit',
     ],
 
+    'balance'=>'balance',
+    'refunds'=>'refunds',
+    'refund_amount'=>'refund amount',
+    'booking_count'=>'booking count',
+    'revenue'=>'revenue',
+    'total_users'=>'total users',
+    'sports_level'=>'sports level',
+    'customers_count'=>'customers count',
+    'new_customers_count'=>'new customers count',
+    'settlement'=>'settlement',
+    'total_amount'=>'total_amount',
+    'settlement_date'=>'settlement date',
+    'status'=>'status',
+    'report'=>'report',
+    'transaction'=>'transaction',
+    'joins'=>'joins',
+    'Coaches'=>'Coaches',
+    'training_count'=>'training count',
+    'follow_count'=>'follow count',
+    'classes'=>'classes',
+    'count'=>'count',
+    'discount_price'=>'discount_price',
 ];
