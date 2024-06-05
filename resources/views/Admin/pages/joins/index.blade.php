@@ -50,20 +50,12 @@
             <div class="card-header">
                 <div class="row">
                     <form method="GET" action="{{ route('admin.report.join.filter') }}">
-                        <div class="col-md-5">
-                            <label>Start Date</label>
-                            <input type="date" name="start_date" class="form-control">
-                        </div>
-                        <div class="col-md-5">
-                            <label>End Date</label>
-                            <input type="date" name="end_date" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-2">Apply</button>
+                        @include('Admin.pages.filter._form_filter')
                     </form>
                 </div>
             </div>
             <div class="card-body">
-                <a class="btn btn-primary" href="{{route('admin.report.join.export')}}">Export</a>
+                <a class="btn btn-primary" href="{{route('admin.report.join.export')}}">{{ trans('admin.Export') }}</a>
 
                 {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
             </div>

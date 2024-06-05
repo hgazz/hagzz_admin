@@ -54,15 +54,7 @@
 
                         <div class="row">
                             <form method="GET" action="{{ route('admin.report.invoice.filter') }}">
-                                <div class="col-md-5">
-                                    <label>Start Date</label>
-                                    <input type="date" name="start_date" class="form-control">
-                                </div>
-                                <div class="col-md-5">
-                                    <label>End Date</label>
-                                    <input type="date" name="end_date" class="form-control">
-                                </div>
-                                <button type="submit" class="btn btn-primary mt-2">Apply</button>
+                                @include('Admin.pages.filter._form_filter')
                             </form>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
