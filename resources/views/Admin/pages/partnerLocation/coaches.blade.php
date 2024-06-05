@@ -57,15 +57,18 @@
                     <div class="card-header">
                         <div class="row">
                             <form method="GET" action="{{ route('admin.report.coach.filter') }}">
-                                <div class="col-md-5">
-                                    <label>Start Date</label>
-                                    <input type="date" name="start_date" class="form-control">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label>Start Date</label>
+                                        <input type="date" name="start_date" class="form-control">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label>End Date</label>
+                                        <input type="date" name="end_date" class="form-control">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mt-2">Apply</button>
                                 </div>
-                                <div class="col-md-5">
-                                    <label>End Date</label>
-                                    <input type="date" name="end_date" class="form-control">
-                                </div>
-                                <button type="submit" class="btn btn-primary mt-2">Apply</button>
+
                             </form>
                         </div>
                     </div>
