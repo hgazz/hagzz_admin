@@ -80,25 +80,6 @@
                         </div>
                     </div>
 
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
-                        <div class="widget widget-one_hybrid widget-followers">
-                            <div class="widget-heading p-2">
-                                <div class="w-title d-flex align-items-start justify-content-start m-0">
-                                    <div class="w-icon bg-transparent p-0">
-                                        <img width="48" height="48" src="https://img.icons8.com/color/48/today.png"
-                                             alt="today" />
-                                    </div>
-                                    <div
-                                        class="d-flex flex-column align-items-center justify-content-between gap-1 flex-shrink-1 flex-grow-1">
-                                        <h5 class="fs-6">{{ trans('admin.next_settlement_date') }}</h5>
-                                        <p class="w-value">
-                                            {{ $settlements ? \Illuminate\Support\Carbon::now($settlements->settlement_date)->addDays(auth()->user()->settlement_days_count) : '-' }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
             </div>
@@ -138,6 +119,57 @@
                         </div>
                     </div>
                 </div> --}}
+            </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="row widget-statistic">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+                        <div class="widget widget-one_hybrid widget-followers">
+                            <div class="widget-heading">
+                                <div class="w-title m-0">
+                                    <div class="w-icon p-0 bg-transparent">
+                                        <img width="48" height="48" src="https://img.icons8.com/color/48/conference-background-selected.png" alt="conference-background-selected"/>
+                                    </div>
+                                    <div class="">
+                                        <p class="w-value">{{ count($usersBooking) }}</p>
+                                        <h5 class="">{{ trans('admin.customers_count') }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+                        <div class="widget widget-one_hybrid widget-followers">
+                            <div class="widget-heading">
+                                <div class="w-title m-0">
+                                    <div class="w-icon p-0 bg-transparent">
+                                        <img width="48" height="48" src="https://img.icons8.com/color/48/add-user-male--v1.png" alt="add-user-male--v1"/>
+                                    </div>
+                                    <div class="">
+                                        <p class="w-value">{{ count($newCustomers) }}</p>
+                                        <h5 class="">{{ trans('admin.new_customers_count') }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+                        <div class="widget widget-one_hybrid widget-followers">
+                            <div class="widget-heading">
+                                <div class="w-title m-0">
+                                    <div class="w-icon p-0 bg-transparent">
+                                        <img width="48" height="48" src="https://img.icons8.com/color/48/collaborating-in-circle.png" alt="collaborating-in-circle"/>
+                                    </div>
+                                    <div class="">
+                                        <p class="w-value">{{ $follows }}</p>
+                                        <h5 class="">{{ trans('admin.training.Followers') }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="container">
                 <div class="card">
@@ -317,57 +349,6 @@
                                 </div>
                             </div>
                             <div id="sportChartDiv"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="row widget-statistic">
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
-                        <div class="widget widget-one_hybrid widget-followers">
-                            <div class="widget-heading">
-                                <div class="w-title m-0">
-                                    <div class="w-icon p-0 bg-transparent">
-                                        <img width="48" height="48" src="https://img.icons8.com/color/48/conference-background-selected.png" alt="conference-background-selected"/>
-                                    </div>
-                                    <div class="">
-                                        <p class="w-value">{{ count($usersBooking) }}</p>
-                                        <h5 class="">{{ trans('admin.customers_count') }}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
-                        <div class="widget widget-one_hybrid widget-followers">
-                            <div class="widget-heading">
-                                <div class="w-title m-0">
-                                    <div class="w-icon p-0 bg-transparent">
-                                        <img width="48" height="48" src="https://img.icons8.com/color/48/add-user-male--v1.png" alt="add-user-male--v1"/>
-                                    </div>
-                                    <div class="">
-                                        <p class="w-value">{{ count($newCustomers) }}</p>
-                                        <h5 class="">{{ trans('admin.new_customers_count') }}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
-                        <div class="widget widget-one_hybrid widget-followers">
-                            <div class="widget-heading">
-                                <div class="w-title m-0">
-                                    <div class="w-icon p-0 bg-transparent">
-                                        <img width="48" height="48" src="https://img.icons8.com/color/48/collaborating-in-circle.png" alt="collaborating-in-circle"/>
-                                    </div>
-                                    <div class="">
-                                        <p class="w-value">{{ $follows }}</p>
-                                        <h5 class="">{{ trans('admin.training.Followers') }}</h5>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

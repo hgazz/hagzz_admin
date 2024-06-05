@@ -8,7 +8,6 @@ use App\DataTables\JoinDataTable;
 use App\DataTables\SettlementDataTable;
 use App\Exports\CoachExport;
 use App\Exports\InvoiceExport;
-use App\Exports\JoinEsport;
 use App\Exports\JoinExport;
 use App\Exports\SettlementExport;
 use App\Http\Controllers\Controller;
@@ -21,7 +20,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
-    protected $settlementData = [];
+    protected array $settlementData = [];
     public function settlement(SettlementDataTable $dataTable )
     {
 
@@ -30,18 +29,23 @@ class ReportController extends Controller
 
     public function filter(Request $request, SettlementDataTable $dataTable)
     {
+
         $query = Settlement::query();
 
+
         if ($request->has('start_date') && $request->has('end_date')) {
+
             $startDate = $request->input('start_date');
             $endDate = $request->input('end_date');
 
-           $data =  $query->whereBetween('created_at', [$startDate, $endDate]);
-           $settlement = $data->get();
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+
+            $settlement = $query->get();
+
             session(['settlementData' => $settlement]);
         }
 
-        return $dataTable->with('query', $data)->render('Admin.pages.settlement.index');
+        return $dataTable->with('query', $query)->render('Admin.pages.settlement.index');
     }
 
     public function export()
@@ -134,9 +138,8 @@ class ReportController extends Controller
 
     public function change(Settlement $settlement)
     {
-       $status = ($settlement->status === "settled") ? 'pending' : 'settled';
-       $settlement->update(['status'=>$status]);
-        session()->flash('success','Settlement Status updated successfully Is '.$status);
+        $settlement->update(['status'=> "settled"]);
+        session()->flash('success','Settlement Status updated successfully');
         return back();
     }
 }

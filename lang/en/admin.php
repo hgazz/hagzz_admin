@@ -24,6 +24,8 @@ return [
     'partner_location' => 'Partner Location',
     'partner_coaches' => 'Partner Coaches',
     'save_changes' => 'Save Changes',
+    'settlement_days_count' => 'Settlement Days Count',
+    'non_refund_days_count' => 'Non Refund Days Count',
     'auth' => [
         'sign_in' => 'Sign In',
         'enter_your_email_and_password' => 'Enter your email and password to login',
