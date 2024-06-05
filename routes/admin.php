@@ -183,6 +183,7 @@ Route::group(
                     Route::get('coach','coach')->name('coach');
                     Route::get('coach/filter','coachFilter')->name('coach.filter');
                     Route::get('coach/export','coachExport')->name('coach.export');
+                    Route::put('settlement/change/{settlement}','change')->name('settlement.change');
                 });
     });
 

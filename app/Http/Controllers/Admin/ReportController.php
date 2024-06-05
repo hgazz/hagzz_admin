@@ -147,4 +147,11 @@ class ReportController extends Controller
         }
     }
 
+    public function change(Settlement $settlement)
+    {
+       $status = ($settlement->status === "settled") ? 'pending' : 'settled';
+       $settlement->update(['status'=>$status]);
+        session()->flash('success','Settlement Status updated successfully Is '.$status);
+        return back();
+    }
 }

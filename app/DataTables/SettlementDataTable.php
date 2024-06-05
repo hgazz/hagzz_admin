@@ -38,7 +38,10 @@ class SettlementDataTable extends DataTable
             ->addColumn('partner',function ($q){
              return $q->partner->name ?? '';
             })
-            ->rawColumns(['partner']);
+            ->addColumn('action',function (Settlement $settlement){
+                return view('Admin.pages.settlement.action',compact('settlement'));
+            })
+            ->rawColumns(['partner','action']);
     }
 
     /**
@@ -86,6 +89,7 @@ class SettlementDataTable extends DataTable
             ['name' => 'total_amount', 'data' => 'total_amount', 'title' => trans('admin.total_amount')],
             ['name' => 'settlement_date', 'data' => 'settlement_date', 'title' => trans('admin.settlement_date')],
             ['name' => 'status', 'data' => 'status', 'title' => trans('admin.status')],
+            ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }
 
