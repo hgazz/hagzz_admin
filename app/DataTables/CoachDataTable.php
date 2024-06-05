@@ -63,7 +63,7 @@ class CoachDataTable extends DataTable
             ->addColumn('follow_count',function($q){
                 return Follow::where('followable_id',$q->id)->count();
             })
-            ->rawColumns(['image', 'academy_id','training_count','follow_count']);
+            ->rawColumns(['image', 'academy_id','training_count','follow_count', 'active', 'license']);
     }
 
     /**
@@ -75,7 +75,7 @@ class CoachDataTable extends DataTable
             return $this->query;
         }
 
-        return $model->newQuery();
+        return $model->newQuery()->with(['academy']);
     }
 
     /**
@@ -124,11 +124,11 @@ class CoachDataTable extends DataTable
             ['name' => 'name', 'data' => 'name', 'title' => trans('admin.coaches.name')],
             ['name' => 'description', 'data' => 'description', 'title' => trans('admin.coaches.description')],
             ['name' => 'image', 'data' => 'image', 'title' => trans('admin.coaches.image')],
-            ['name' => 'license', 'data' => 'license', 'title' => trans('admin.coaches.is_licensed'), 'orderable' => false, 'searchable' => false],
+            ['name' => 'license', 'data' => 'license', 'title' => trans('admin.coaches.is_licensed'), 'orderable' => true, 'searchable' => true, ''],
             ['name' => 'academy.commercial_name', 'data' => 'academy_id', 'title' => trans('admin.coaches.academy_id')],
             ['name' => 'training_count', 'data' => 'training_count', 'title' => trans('admin.training_count')],
             ['name' => 'follow_count', 'data' => 'follow_count', 'title' => trans('admin.follow_count')],
-            ['name' => 'active', 'data' => 'active', 'title' => trans('admin.coaches.active'), 'orderable' => false, 'searchable' => false],
+            ['name' => 'active', 'data' => 'active', 'title' => trans('admin.coaches.active'), 'orderable' => true, 'searchable' => true],
         ];
     }
 
