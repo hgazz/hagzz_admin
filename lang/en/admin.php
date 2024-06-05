@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'home' => 'Home',
     'latest_settlement_amount'=>'latest settlement amount',
     'next_settlement_date'=>'next settlement date',
     'apply_filter'=>'apply filter',
