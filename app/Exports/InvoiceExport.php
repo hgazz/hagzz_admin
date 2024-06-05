@@ -10,9 +10,21 @@ use Maatwebsite\Excel\Concerns\FromView;
 class InvoiceExport implements FromView
 {
 
+    protected  $data;
+
+    public function __construct()
+    {
+        $invoiceData = session('invoiceData', []);
+        $invoices = Invoice::with(['training','user'])->get();
+        if (!empty($invoiceData) && count($invoiceData) > 0){
+            $this->data = $invoiceData;
+        }else{
+            $this->data = $invoices;
+        }
+    }
+
     public function view(): View
     {
-        $invoices = Invoice::with(['training','user'])->get();
-        return view('Admin.pages.booking.export',compact('invoices'));
+        return view('Admin.pages.booking.export',with(['invoices'=>$this->data]));
     }
 }

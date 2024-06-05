@@ -291,6 +291,20 @@
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
+        <label for="settlement_days_count">{{trans('admin.settlement_days_count')}}</label>
+        <input id="settlement_days_count" type="text" class="formInput" placeholder="{{trans('admin.settlement_days_count')}}" oninput="this.className = ''" value="{{(old('settlement_days_count',isset($academies) ? $academies->settlement_days_count : ''))}}" name="settlement_days_count" required>
+    </div>
+    @error('settlement_days_count')
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+    <div class="mb-3">
+        <label for="non_refund_days_count">{{trans('admin.non_refund_days_count')}}</label>
+        <input id="non_refund_days_count" type="text" class="formInput" placeholder="{{trans('admin.non_refund_days_count')}}" oninput="this.className = ''" value="{{(old('non_refund_days_count',isset($academies) ? $academies->non_refund_days_count : ''))}}" name="non_refund_days_count" required>
+    </div>
+    @error('non_refund_days_count')
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+    <div class="mb-3">
         <label for="image">{{trans('admin.academies.image')}}</label>
         <input id="image" type="file" class=" form-control" oninput="this.className = ''" name="image">
     </div>

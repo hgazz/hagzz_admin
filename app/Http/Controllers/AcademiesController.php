@@ -157,6 +157,8 @@ class AcademiesController extends Controller
                     'bank_account_number'=>$request->bank_account_number,
                     'name'=>$request->name,
                     'status' => $request->status,
+                    'settlement_days_count' => $request->settlement_days_count,
+                    'non_refund_days_count' => $request->non_refund_days_count
             ]);
             $academies->sports()->sync($request->sport_id);
             session()->flash('success',trans('admin.academies.academies updated successfully'));

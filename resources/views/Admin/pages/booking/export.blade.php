@@ -15,9 +15,9 @@
             <td>{{ $invoice->user->name ?? 'null'}}</td>
             <td>{{ $invoice->user->phone ?? 'null'}}</td>
             <td>{{ $invoice->training->name ?? 'null' }}</td>
-            <td>{{ $invoice->order_number }}</td>
-            <td>{{ $invoice->status }}</td>
-            <td>{{ $invoice->amount }}</td>
+            <td>{{ $invoice->order_number ?? 'null' }}</td>
+            <td>{{ $invoice->status ?? 'null' }}</td>
+            <td>{{ $invoice->amount ?? 'null'}}</td>
         </tr>
     @endforeach
     </tbody>

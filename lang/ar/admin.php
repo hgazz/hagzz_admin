@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'latest_settlement_amount' => 'مبلغ التسوية الأخيرة',
+    'next_settlement_date' => 'تاريخ التسوية التالي',
+    'apply_filter' => 'تطبيق الفلتر',
+    'select_start_date' => 'اختر تاريخ البدء',
+    'select_end_date' => 'اختر تاريخ الانتهاء',
     'bokit' => 'حجز',
     'dashboard' => 'لوحة التحكم',
     'Export'=>'تصدير',
@@ -210,5 +215,28 @@ return [
         'country' => 'البلد',
         'edit' => 'تعديل',
     ],
+
+    'balance' => 'الرصيد',
+    'refunds' => 'المبالغ المستردة',
+    'refund_amount' => 'مبلغ الاسترداد',
+    'booking_count' => 'عدد الحجوزات',
+    'revenue' => 'الإيرادات',
+    'total_users' => 'إجمالي المستخدمين',
+    'sports_level' => 'مستوى الرياضة',
+    'customers_count' => 'عدد العملاء',
+    'new_customers_count' => 'عدد العملاء الجدد',
+    'settlement' => 'التسوية',
+    'total_amount' => 'المبلغ الإجمالي',
+    'settlement_date' => 'تاريخ التسوية',
+    'status' => 'الحالة',
+    'report' => 'تقرير',
+    'transaction' => 'معاملة',
+    'joins' => 'الانضمامات',
+    'Coaches' => 'المدربون',
+    'training_count' => 'عدد التدريبات',
+    'follow_count' => 'عدد المتابعين',
+    'classes' => 'الفصول',
+    'count' => 'العدد',
+    'discount_price' => 'سعر الخصم',
 
 ];

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AcademiesController;
 use App\Http\Controllers\BannerController;
@@ -44,7 +45,14 @@ Route::group(
     });
 
     Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', 'as' => 'admin.'], function () {
-            Route::get('/', [DashboardController::class, 'index'])->name('index');
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
+        Route::get('booking/filter', [DashboardController::class, 'filterBookings'])->name('filter-bookings');
+        Route::get('/revenue-data', [DashboardController::class, 'getRevenueDataByMonth'])->name('revenue-data');
+        Route::get('/chart/users-by-month', [DashboardController::class, 'getUserDataByMonthAjax'])->name('getUserDataByMonth');
+        Route::get('/chart/users-by-year', [DashboardController::class, 'getUserDataByYearAjax'])->name('getUserDataByYear');
+        Route::get('/beginner/sports', [DashboardController::class, 'getBeginnerSportsCount'])->name('beginner.sports');
+        Route::get('/intermediate/sports', [DashboardController::class, 'getIntermediateSportsCount'])->name('intermediate.sports');
+        Route::get('/advanced/sports', [DashboardController::class, 'getAdvancedSportsCount'])->name('advanced.sports');
 
             // city routes
             Route::controller(CityController::class)->group(function () {
@@ -143,8 +151,8 @@ Route::group(
             Route::controller(BookingController::class)->group(function (){
                 Route::get('bookings','index')->name('booking.index');
                 Route::get('bookings/cancel/','cancelBooking')->name('booking.cancel');
-                Route::get('bookings/export','export')->name('booking.export');
             });
+
 
             Route::controller(TrainingController::class)->group(function (){
                 Route::get('trainings','index')->name('training.index');
@@ -161,6 +169,22 @@ Route::group(
                 Route::get('galleries','index')->name('gallery.index');
                 Route::put('galleries/active/{gallery}','makeActive')->name('gallery.active');
             });
+
+            Route::prefix('report')->as('report.')->controller(ReportController::class)
+                ->group(function (){
+                    Route::get('settlement','settlement')->name('settlement');
+                    Route::get('settlement/filter','filter')->name('settlement.filter');
+                    Route::get('settlement/export','export')->name('settlement.export');
+                    Route::get('invoice','invoice')->name('invoice.filter');
+                    Route::get('bookings/export','bookingExport')->name('booking.export');
+                    Route::get('joins','joins')->name('joins');
+                    Route::get('joins/filter','joinFilter')->name('join.filter');
+                    Route::get('joins/export','joinExport')->name('join.export');
+                    Route::get('coach','coach')->name('coach');
+                    Route::get('coach/filter','coachFilter')->name('coach.filter');
+                    Route::get('coach/export','coachExport')->name('coach.export');
+                    Route::put('settlement/change/{settlement}','change')->name('settlement.change');
+                });
     });
 
 });
