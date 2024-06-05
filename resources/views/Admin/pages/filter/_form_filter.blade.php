@@ -8,6 +8,7 @@
         <input type="date" name="end_date" class="form-control">
     </div>
     <div class="col-md-2">
+        <label>&nbsp;</label>
         <button type="submit" class="btn btn-primary mt-4">{{ trans('admin.apply') }}</button>
     </div>
 </div>
