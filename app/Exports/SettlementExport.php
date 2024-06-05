@@ -10,9 +10,15 @@ use Maatwebsite\Excel\Concerns\FromView;
 class SettlementExport implements FromView
 {
     protected  $data = [];
-    public function __construct($settlement)
+    public function __construct()
     {
-        $this->data = $settlement;
+        $settlementData = session('settlementData', []);
+        $settlements = Settlement::get();
+        if (!empty($settlementData) && count($settlementData) > 0){
+            $this->data = $settlementData;
+        }else{
+            $this->data = $settlements;
+        }
     }
 
 

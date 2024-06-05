@@ -11,9 +11,15 @@ class JoinExport implements FromView
 {
     protected $joins;
 
-    public function __construct($joins)
+    public function __construct()
     {
-        $this->joins = $joins;
+        $joinsData = session('joinsData', []);
+        if (!empty($joinsData) && count($joinsData) > 0) {
+            $this->joins = $joinsData;
+        } else {
+            $joins = Join::get();
+            $this->joins = $joins;
+        }
     }
 
 

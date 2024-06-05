@@ -12,9 +12,15 @@ class InvoiceExport implements FromView
 
     protected  $data;
 
-    public function __construct($invoices)
+    public function __construct()
     {
-        $this->data = $invoices;
+        $invoiceData = session('invoiceData', []);
+        $invoices = Invoice::with(['training','user'])->get();
+        if (!empty($invoiceData) && count($invoiceData) > 0){
+            $this->data = $invoiceData;
+        }else{
+            $this->data = $invoices;
+        }
     }
 
     public function view(): View

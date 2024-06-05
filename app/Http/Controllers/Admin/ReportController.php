@@ -46,11 +46,8 @@ class ReportController extends Controller
 
     public function export()
     {
-        $settlementData= session('settlementData', []);
-        if (!empty($settlementData) && count($settlementData) > 0){
-            return Excel::download(new SettlementExport($this->settlementData),'settlement.xlsx');
-        }
-        return Excel::download(new SettlementExport(Settlement::get()),'settlement.xlsx');
+
+        return Excel::download(new SettlementExport(),'settlement.xlsx');
     }
 
 
@@ -72,13 +69,7 @@ class ReportController extends Controller
 
     public function bookingExport()
     {
-        $invoiceData = session('invoiceData', []);
-        if (!empty($invoiceData) && count($invoiceData) > 0) {
-            return Excel::download(new InvoiceExport($invoiceData), 'invoice.xlsx');
-        } else {
-            $invoices = Invoice::with(['training', 'user'])->get();
-            return Excel::download(new InvoiceExport($invoices), 'invoice.xlsx');
-        }
+            return Excel::download(new InvoiceExport(), 'invoice.xlsx');
     }
 
     public function joins(JoinDataTable $dataTable)
@@ -105,13 +96,7 @@ class ReportController extends Controller
 
     public function joinExport()
     {
-        $joinsData = session('joinsData', []);
-        if (!empty($joinsData) && count($joinsData) > 0) {
-            return Excel::download(new JoinExport($joinsData), 'booking.xlsx');
-        } else {
-            $joins = Join::with('training')->get();
-            return Excel::download(new JoinExport($joins), 'booking.xlsx');
-        }
+        return Excel::download(new JoinExport(), 'booking.xlsx');
     }
 
     public function coach(CoachDataTable $dataTable)

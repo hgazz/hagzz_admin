@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th>Partner</th>
-        <th>description</th>
+        <th>Licence</th>
         <th>Partner Name</th>
         <th>Training Count</th>
         <th>Status</th>
