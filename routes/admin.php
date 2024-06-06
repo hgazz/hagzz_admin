@@ -175,6 +175,7 @@ Route::group(
                     Route::get('settlement','settlement')->name('settlement');
                     Route::get('settlement/filter','filter')->name('settlement.filter');
                     Route::get('settlement/export','export')->name('settlement.export');
+                    Route::get('transactions','transactions')->name('transactions');
                     Route::get('invoice','invoice')->name('invoice.filter');
                     Route::get('bookings/export','bookingExport')->name('booking.export');
                     Route::get('joins','joins')->name('joins');
