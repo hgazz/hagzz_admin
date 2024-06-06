@@ -46,7 +46,9 @@
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-        <div class="card">
+                <a class="btn btn-success" href="{{route('admin.report.settlement.export')}}">{{ trans('admin.Export') }}</a>
+
+                <div class="card">
             <div class="card-header">
                 <div class="row">
                     <form method="GET" action="{{ route('admin.report.settlement.filter') }}">
@@ -55,7 +57,6 @@
                 </div>
             </div>
             <div class="card-body">
-                <a class="btn btn-primary" href="{{route('admin.report.settlement.export')}}">{{ trans('admin.Export') }}</a>
 
                 {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
             </div>
