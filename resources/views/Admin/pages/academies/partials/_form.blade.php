@@ -305,6 +305,13 @@
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
+        <label for="contract_link">{{trans('admin.contract_link')}}</label>
+        <input id="contract_link" type="text"  placeholder="{{trans('admin.contract_link')}}" oninput="this.className = ''" value="{{(old('contract_link',isset($academies) ? $academies->contract_link : ''))}}" name="contract_link">
+    </div>
+    @error('contract_link')
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+    <div class="mb-3">
         <label for="image">{{trans('admin.academies.image')}}</label>
         <input id="image" type="file" class=" form-control" oninput="this.className = ''" name="image">
     </div>

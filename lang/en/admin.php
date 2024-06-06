@@ -29,6 +29,7 @@ return [
     'start_date' => 'Start Date',
     'end_date' => 'End Date',
     'apply' => 'Apply',
+    'contract_link' => 'Contract Link',
     'auth' => [
         'sign_in' => 'Sign In',
         'enter_your_email_and_password' => 'Enter your email and password to login',

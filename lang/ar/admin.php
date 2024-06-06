@@ -29,6 +29,7 @@ return [
     'start_date' => 'تاريخ البدء',
     'end_date' => 'تاريخ الانتهاء',
     'apply' => 'تطبيق',
+    'contract_link' => 'رابط العقد',
     'auth' => [
         'sign_in' => 'تسجيل الدخول',
         'enter_your_email_and_password' => 'أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول',
