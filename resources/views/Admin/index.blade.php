@@ -83,25 +83,7 @@
 
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
-                    <div class="widget widget-one_hybrid widget-followers">
-                        <div class="widget-heading p-2">
-                            <div class="w-title d-flex align-items-start justify-content-start m-0">
-                                <div class="w-icon bg-transparent p-0">
-                                    <img width="48" height="48" src="https://img.icons8.com/color/48/cash-in-hand.png"
-                                         alt="cash-in-hand" />
-                                </div>
-                                <div
-                                    class="d-flex flex-column align-items-center justify-content-between gap-1 flex-shrink-1 flex-grow-1">
-                                    <h5 class="fs-6">{{ trans('admin.training.Total Balance') }}</h5>
-                                    <p class="w-value">{{ $totalSettlements ?: 0 }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-
-            </div>
         </div>
     </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
