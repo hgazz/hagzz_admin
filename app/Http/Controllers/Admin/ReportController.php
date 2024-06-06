@@ -78,7 +78,7 @@ class ReportController extends Controller
 
     public function transactions(InvoiceDataTable $dataTable)
     {
-        return $dataTable->render('Admin.pages.booking.index');
+        return $dataTable->render('Admin.pages.booking.transactions');
     }
 
     public function joins(JoinDataTable $dataTable)
