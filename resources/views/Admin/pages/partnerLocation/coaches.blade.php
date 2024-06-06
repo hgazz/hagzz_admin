@@ -53,6 +53,8 @@
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                <a class="btn btn-success w-25 mt-1 mb-2" href="{{route('admin.report.coach.export')}}">{{ trans('admin.Export') }}</a>
+
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
@@ -63,7 +65,6 @@
                     </div>
 
                     <div class="card-body">
-                        <a class="btn btn-primary my-3" href="{{route('admin.report.coach.export')}}">{{ trans('admin.Export') }}</a>
                         {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
                     </div>
                 </div>
