@@ -30,6 +30,7 @@ return [
     'end_date' => 'تاريخ الانتهاء',
     'apply' => 'تطبيق',
     'contract_link' => 'رابط العقد',
+    'created_at' => 'تاريخ الانشاء',
     'auth' => [
         'sign_in' => 'تسجيل الدخول',
         'enter_your_email_and_password' => 'أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول',
@@ -258,6 +259,8 @@ return [
         'amount' => 'المبلغ',
         'user_type' => 'نوع المستخدم',
         'partner' => 'الشركة',
+        'order_number' => 'رقم الطلب',
+        'payment_type' => 'نوع الدفع',
     ],
     'training' => [
         'training' => 'التدريبات',

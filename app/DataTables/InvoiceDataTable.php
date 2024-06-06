@@ -38,6 +38,9 @@ class InvoiceDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->editColumn('created_at', function ($data) {
+                return $data->created_at->format('Y-m-d');
+            })
             ->editColumn('user_id', function ($row) {
                 return $row->user->name;
             })
@@ -121,8 +124,10 @@ class InvoiceDataTable extends DataTable
             ['name' => 'training.name', 'data' => 'training_id', 'title' => trans('admin.bookings.training')],
             ['name' => 'amount', 'data' => 'amount', 'title' => trans('admin.bookings.amount')],
             ['name' => 'status', 'data' => 'status', 'title' => trans('admin.bookings.status')],
-            ['name' => 'user_type', 'data' => 'user_type', 'title' => trans('admin.bookings.user_type')],
+            ['name' => 'order_number', 'data' => 'order_number', 'title' => trans('admin.bookings.order_number')],
+            ['name' => 'user_type', 'data' => 'user_type', 'title' => trans('admin.bookings.payment_type')],
             ['name' => 'is_canceled', 'data' => 'is_canceled', 'title' => trans('admin.bookings.is_canceled')],
+            ['name' => 'created_at', 'data' => 'created_at', 'title' => trans('admin.created_at'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }

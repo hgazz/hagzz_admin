@@ -30,6 +30,7 @@ return [
     'end_date' => 'End Date',
     'apply' => 'Apply',
     'contract_link' => 'Contract Link',
+    'created_at' => 'Created At',
     'auth' => [
         'sign_in' => 'Sign In',
         'enter_your_email_and_password' => 'Enter your email and password to login',
@@ -258,6 +259,8 @@ return [
         'amount' => 'Amount',
         'user_type' => 'User Type',
         'academy_partner' => 'Partner',
+        'order_number' => 'Order Number',
+        'payment_type' => 'Payment Type',
     ],
     'training'=>[
         'training'=>'Trainings',
