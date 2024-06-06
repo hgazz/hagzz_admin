@@ -138,6 +138,7 @@ return [
         'active' => 'نشط',
         'inactive' => 'غير نشط',
         'status' => 'الحالة',
+        'balance' => 'الرصيد',
     ],
     'banners' => [
         'banners' => 'اللافتات',

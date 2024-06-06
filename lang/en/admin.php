@@ -138,6 +138,7 @@ return [
         'active'=>'Active',
         'inactive'=>'Inactive',
         'status'=>'Status',
+        'balance'=>'Balance',
     ],
     'banners'=> [
         'banners'=>'Banners',

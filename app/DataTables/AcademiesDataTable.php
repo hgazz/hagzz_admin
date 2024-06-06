@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Http\Traits\DataTablesTrait;
 use App\Models\Academies;
+use App\Models\Join;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -30,6 +31,11 @@ class AcademiesDataTable extends DataTable
             })
             ->addColumn('branch_to',function (Academies $academies){
                 return $academies->academy->commercial_name ?? '';
+            })
+            ->addColumn('balance',function (Academies $academies){
+                return Join::whereHas('training', function ($query) use ($academies) {
+                    $query->where('academy_id', $academies->id);
+                })->sum('price');
             })
             ->rawColumns(['action', 'commercial_name_en', 'commercial_name_ar']);
     }
@@ -98,6 +104,7 @@ class AcademiesDataTable extends DataTable
             ['name' => 'sports', 'data' => 'sports', 'title' => trans('admin.sport.sport')],
             ['name' => 'contract_number', 'data' => 'contract_number', 'title' => trans('admin.academies.contract_number')],
             ['name' => 'account_manager', 'data' => 'account_manager', 'title' => trans('admin.academies.account_manager')],
+            ['name' => 'balance', 'data' => 'balance', 'title' => trans('admin.academies.balance'),false, 'orderable' => false, 'searchable' => false],
             ['name' => 'status', 'data' => 'status', 'title' => trans('admin.academies.status')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
 
