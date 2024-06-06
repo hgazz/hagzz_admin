@@ -76,7 +76,7 @@ class ReportController extends Controller
             return Excel::download(new InvoiceExport(), 'invoice.xlsx');
     }
 
-    public function transactions(JoinDataTable $dataTable)
+    public function transactions(InvoiceDataTable $dataTable)
     {
         return $dataTable->render('Admin.pages.booking.index');
     }
