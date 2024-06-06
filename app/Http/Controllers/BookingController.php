@@ -29,8 +29,5 @@ class BookingController extends Controller
         ]]);
     }
 
-    public function export()
-    {
-        return Excel::download(new InvoiceExport(),'invoice.xlsx');
-    }
+
 }

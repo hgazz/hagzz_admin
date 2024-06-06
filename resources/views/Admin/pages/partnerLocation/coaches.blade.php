@@ -4,10 +4,14 @@
 
 @push('css')
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assetsAdmin/src/plugins/src/table/datatable/datatables.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assetsAdmin/src/plugins/css/dark/table/datatable/dt-global_style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assetsAdmin/src/plugins/css/dark/table/datatable/custom_dt_miscellaneous.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('assetsAdmin/src/plugins/src/table/datatable/datatables.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('assetsAdmin/src/plugins/css/dark/table/datatable/dt-global_style.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('assetsAdmin/src/plugins/css/dark/table/datatable/custom_dt_miscellaneous.css') }}">
 @endpush
 @section('content')
     <div class="middle-content container-xxl p-0">
@@ -17,7 +21,13 @@
             <div class="breadcrumbs-container" data-page-heading="Analytics">
                 <header class="header navbar navbar-expand-sm">
                     <a href="javascript:void(0);" class="btn-toggle sidebarCollapse" data-placement="bottom">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-menu">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
                     </a>
                     <div class="d-flex breadcrumb-content">
                         <div class="page-header">
@@ -27,8 +37,10 @@
 
                             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.partner_location') }}</li>
+                                    <li class="breadcrumb-item"><a
+                                            href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
+                                    <li class="breadcrumb-item active"
+                                        aria-current="page">{{ trans('admin.partner_location') }}</li>
                                 </ol>
                             </nav>
 
@@ -43,15 +55,16 @@
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                 <div class="card">
                     <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4>{{ trans('admin.partner_coaches') }}</h4>
+                        <div class="row">
+                            <form method="GET" action="{{ route('admin.report.coach.filter') }}">
+                                @include('Admin.pages.filter._form_filter')
+                            </form>
                         </div>
                     </div>
 
                     <div class="card-body">
-
+                        <a class="btn btn-primary my-3" href="{{route('admin.report.coach.export')}}">{{ trans('admin.Export') }}</a>
                         {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
-
                     </div>
                 </div>
             </div>

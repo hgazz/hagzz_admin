@@ -75,13 +75,17 @@ class AcademiesController extends Controller
                     'contract_date'=>$request->contract_date,
                     'start_date'=>$request->start_date,
                     'end_date'=>$request->end_date,
-                    'image'=>$imageName,
+                    'logo'=>$imageName,
                     'bank_account_type'=>$request->bank_account_type,
                     'bank_name'=>$request->bank_name,
                     'beneficiary_name'=>$request->beneficiary_name,
                     'commission_percentage'=>$request->commission_percentage,
                     'bank_account_number'=>$request->bank_account_number,
                     'name'=>$request->name,
+                    'status' => $request->status,
+                    'settlement_days_count' => $request->settlement_days_count,
+                    'non_refund_days_count' => $request->non_refund_days_count,
+                    'contract_link'=>$request->contract_link
                 ]);
             $academy->sports()->attach($request->sport_id);
             DB::commit();
@@ -148,13 +152,17 @@ class AcademiesController extends Controller
                     'contract_date'=>$request->contract_date,
                     'start_date'=>$request->start_date,
                     'end_date'=>$request->end_date,
-                    'image'=>$imageName,
+                    'logo'=>$imageName,
                     'bank_account_type'=>$request->bank_account_type,
                     'bank_name'=>$request->bank_name,
                     'beneficiary_name'=>$request->beneficiary_name,
                     'commission_percentage'=>$request->commission_percentage,
                     'bank_account_number'=>$request->bank_account_number,
                     'name'=>$request->name,
+                    'status' => $request->status,
+                    'settlement_days_count' => $request->settlement_days_count,
+                    'non_refund_days_count' => $request->non_refund_days_count,
+                    'contract_link' => $request->contract_link,
             ]);
             $academies->sports()->sync($request->sport_id);
             session()->flash('success',trans('admin.academies.academies updated successfully'));

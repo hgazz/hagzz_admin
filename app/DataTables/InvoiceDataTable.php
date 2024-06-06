@@ -12,6 +12,24 @@ use Yajra\DataTables\Services\DataTable;
 class InvoiceDataTable extends DataTable
 {
     use DataTablesTrait;
+
+    protected $query;
+
+    /**
+     * Set a custom query.
+     *
+     * @param  array|string  $key
+     * @param  mixed  $value
+     * @return static
+     */
+    public function with(array|string $key, mixed $value = null): static
+    {
+        if (is_string($key) && $key === 'query') {
+            $this->query = $value;
+        }
+
+        return $this;
+    }
     /**
      * Build the DataTable class.
      *
@@ -43,20 +61,14 @@ class InvoiceDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Invoice $model): QueryBuilder
+    public function query(Invoice $model)
     {
-        $query = $model->newQuery()->with(['user', 'training']);
-        $training = request()->input('training.name');
-        if ($training) {
-            $query->whereHas('training', function ($q) use ($training) {
-                // Use JSON_SEARCH to find any occurrence of $city within the JSON column, regardless of the key (locale)
-                $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$training}%"]);
-            });
+        if ($this->query) {
+            return $this->query;
         }
 
-        return $query->select('invoices.*');
+        return $model->newQuery();
     }
-
     /**
      * Optional method if you want to use the html builder.
      */

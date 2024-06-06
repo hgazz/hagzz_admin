@@ -237,7 +237,7 @@
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="bank_account_number">{{trans('admin.academies.Bank account number')}}</label>
+        <label for="bank_account_number">{{trans('admin.academies.Beneficiary Name')}}</label>
         <input id="beneficiary_name" type="text" class="formInput" placeholder="{{trans('admin.academies.Beneficiary Name')}}" oninput="this.className = ''" value="{{(old('beneficiary_name', isset($academies) ? $academies->beneficiary_name : ''))}}" name="beneficiary_name">
     </div>
     @error('beneficiary_name')
@@ -288,6 +288,27 @@
         <input id="account_manager" type="text" class="formInput" placeholder="{{trans('admin.academies.Account Manager')}}" oninput="this.className = ''" value="{{(old('account_manager',isset($academies) ? $academies->account_manager : ''))}}" name="account_manager">
     </div>
     @error('account_manager')
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+    <div class="mb-3">
+        <label for="settlement_days_count">{{trans('admin.settlement_days_count')}}</label>
+        <input id="settlement_days_count" type="text" class="formInput" placeholder="{{trans('admin.settlement_days_count')}}" oninput="this.className = ''" value="{{(old('settlement_days_count',isset($academies) ? $academies->settlement_days_count : ''))}}" name="settlement_days_count" required>
+    </div>
+    @error('settlement_days_count')
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+    <div class="mb-3">
+        <label for="non_refund_days_count">{{trans('admin.non_refund_days_count')}}</label>
+        <input id="non_refund_days_count" type="text" class="formInput" placeholder="{{trans('admin.non_refund_days_count')}}" oninput="this.className = ''" value="{{(old('non_refund_days_count',isset($academies) ? $academies->non_refund_days_count : ''))}}" name="non_refund_days_count" required>
+    </div>
+    @error('non_refund_days_count')
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+    <div class="mb-3">
+        <label for="contract_link">{{trans('admin.contract_link')}}</label>
+        <input id="contract_link" type="text"  placeholder="{{trans('admin.contract_link')}}" oninput="this.className = ''" value="{{(old('contract_link',isset($academies) ? $academies->contract_link : ''))}}" name="contract_link">
+    </div>
+    @error('contract_link')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
