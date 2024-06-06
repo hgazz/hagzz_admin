@@ -57,34 +57,6 @@
         </div>
         <!--  END BREADCRUMBS  -->
 
-        <div class="row layout-top-spacing">
-
-            <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="row widget-statistic">
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
-                        <div class="widget widget-one_hybrid widget-followers">
-                            <div class="widget-heading p-2">
-                                <div class="w-title d-flex align-items-start justify-content-start m-0">
-                                    <div
-                                        class="w-icon bg-transparent p-0 d-flex align-items-start justify-content-start vertical-">
-                                        <img width="48" height="48"
-                                             src="https://img.icons8.com/color/48/money-bag.png" alt="money-bag" />
-                                    </div>
-                                    <div
-                                        class="d-flex flex-column align-items-center justify-content-between gap-1 flex-shrink-1 flex-grow-1">
-                                        <h5 class="fs-6">{{ trans('admin.latest_settlement_amount') }}</h5>
-                                        <p class="w-value">{{ $settlements ? $settlements->total_amount : 0 }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
-        </div>
     </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="row widget-statistic">
