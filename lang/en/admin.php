@@ -257,6 +257,7 @@ return [
         'is_canceled' => 'Is Canceled',
         'amount' => 'Amount',
         'user_type' => 'User Type',
+        'academy_partner' => 'Partner',
     ],
     'training'=>[
         'training'=>'Trainings',

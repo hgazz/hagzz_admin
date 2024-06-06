@@ -47,6 +47,9 @@ class InvoiceDataTable extends DataTable
             ->editColumn('is_canceled', function ($row) {
                 return $row->is_canceled ? trans('admin.bookings.cancelled') : 'N/A';
             })
+            ->addColumn('partner', function ($row) {
+                return $row->training->academy->commercial_name;
+            })
             ->filterColumn('training.name', function ($query, $keyword) {
                 $query->whereHas('training',function ($q) use($keyword){
                     $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
@@ -55,7 +58,8 @@ class InvoiceDataTable extends DataTable
             ->addColumn('action', function (Invoice $invoice) {
                 return view('Admin.pages.booking.datatable.actions', compact('invoice'));
             })
-            ->setRowId('id');
+            ->setRowId('id')
+            ->rawColumns(['action', 'user_id', 'training_id', 'partner', 'is_canceled']);
     }
 
     /**
@@ -67,7 +71,7 @@ class InvoiceDataTable extends DataTable
             return $this->query;
         }
 
-        return $model->newQuery();
+        return $model->newQuery()->with(['user', 'training']);
     }
     /**
      * Optional method if you want to use the html builder.
@@ -112,6 +116,7 @@ class InvoiceDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
+            ['name' => 'partner', 'data' => 'partner', 'title' => trans('admin.bookings.academy_partner')],
             ['name' => 'user.name', 'data' => 'user_id', 'title' => trans('admin.bookings.user')],
             ['name' => 'training.name', 'data' => 'training_id', 'title' => trans('admin.bookings.training')],
             ['name' => 'amount', 'data' => 'amount', 'title' => trans('admin.bookings.amount')],

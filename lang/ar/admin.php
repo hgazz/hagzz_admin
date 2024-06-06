@@ -257,6 +257,7 @@ return [
         'is_canceled' => 'ملغى',
         'amount' => 'المبلغ',
         'user_type' => 'نوع المستخدم',
+        'partner' => 'الشركة',
     ],
     'training' => [
         'training' => 'التدريبات',
