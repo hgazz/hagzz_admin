@@ -52,7 +52,7 @@ class AcademiesController extends Controller
     {
         try {
             DB::beginTransaction();
-            $imageName =  $this->upload($request->file('image') , $this->academicModels::PATH );
+            $imageName =  $request->hasFile('image') ? $this->upload($request->file('image') , $this->academicModels::PATH ) : null;
             $translatableFields = TranslatableService::generateTranslatableFields($this->academicModels->getTranslatableFields(), $request->validated());
             $academy = $this->academicModels->create($translatableFields + [
                     'password'=> Hash::make($request->password),
