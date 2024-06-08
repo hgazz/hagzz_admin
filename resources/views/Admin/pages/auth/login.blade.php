@@ -62,7 +62,7 @@
                                 @csrf
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label class="form-label">{{ trans('admin.auth.email') }}</label>
+                                        <label class="form-label">{{ trans('admin.auth.email') }}<code>*</code></label>
                                         <input type="email" class="form-control" name="email" value={{ old('email') }}>
                                         @error('email')
                                         <div class="text-danger">{{ $message }}</div>
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-4">
-                                        <label class="form-label">{{ trans('admin.auth.password') }}</label>
+                                        <label class="form-label">{{ trans('admin.auth.password') }}<code>*</code></label>
                                         <input type="password" class="form-control" name="password">
                                         @error('password')
                                         <div class="text-danger">{{ $message }}</div>

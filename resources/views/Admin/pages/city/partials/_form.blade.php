@@ -3,7 +3,7 @@
     <div class="row">
         @foreach (\App\Services\TranslatableService::getTranslatableInputs(App\Models\City::class) as $name => $data)
             <div class="col-md-6 mb-3">
-                <label for="{{$name}}" class="form-label">{{trans('admin.area.'.$name)}}</label>
+                <label for="{{$name}}" class="form-label">{{trans('admin.area.'.$name)}}<code>*</code></label>
                 <input type="text" id="{{$name}}" name="{{$name}}" maxlength="50" class="form-control"
                        @php
                            $language = $name == 'name_en' ? 'en' : 'ar';
@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-md-12 mb-3">
             <select class="form-select" name="country_id">
-                <option value="">{{trans('admin.city.Select County')}}</option>
+                <option value="">{{trans('admin.city.Select County')}}<code>*</code></option>
                 @foreach($countries as $country)
                     <option value="{{$country->id}}"  @selected(old('city_id', isset($city) ? $city->country_id : '') == $country->id)>{{$country->name}}</option>
                 @endforeach

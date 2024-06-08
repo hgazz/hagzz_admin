@@ -96,7 +96,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label for="fullName">{{trans('admin.profile.first_name')}}</label>
+                                                                            <label for="fullName">{{trans('admin.profile.first_name')}}<code>*</code></label>
                                                                             <input type="text" class="form-control mb-3" name="first_name" id="fullName" placeholder="Name" value="{{$admin->first_name ?? ''}}">
                                                                         </div>
                                                                         @error('first_name')
@@ -106,7 +106,7 @@
 
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label for="profession">{{trans('admin.profile.last_name')}}</label>
+                                                                            <label for="profession">{{trans('admin.profile.last_name')}}<code>*</code></label>
                                                                             <input type="text" class="form-control mb-3" name="last_name" id="profession" placeholder="last_name" value="{{$admin->last_name ?? ''}}">
                                                                         </div>
                                                                         @error('last_name')
@@ -116,7 +116,7 @@
 
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label for="address">{{trans('admin.profile.email')}}</label>
+                                                                            <label for="address">{{trans('admin.profile.email')}}<code>*</code></label>
                                                                             <input type="email" class="form-control mb-3" name="email" id="address" placeholder="Email" value="{{$admin->email ?? ''}}" >
                                                                         </div>
                                                                         @error('email')
@@ -126,7 +126,7 @@
 
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label for="location">{{trans('admin.profile.phone')}}</label>
+                                                                            <label for="location">{{trans('admin.profile.phone')}}<code>*</code></label>
                                                                             <input type="tel" name="phone" class="form-control mb-3" id="location" placeholder="Phone" value="{{$admin->phone ?? ''}}">
                                                                         </div>
                                                                         @error('phone')

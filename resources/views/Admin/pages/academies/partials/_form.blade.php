@@ -31,21 +31,21 @@
 <div class="step">
     <p class="text-center mb-4">{{trans('admin.academies.Basic Information')}}</p>
     <div class="mb-3">
-        <label for="first_name">{{trans('admin.academies.First Name')}}</label>
+        <label for="first_name">{{trans('admin.academies.First Name')}}<code>*</code></label>
         <input id="first_name" type="text" class="formInput" placeholder="{{trans('admin.academies.First Name')}}" value="{{old('first_name',isset($academies) ? $academies->first_name : '')}}" oninput="this.className = ''" name="first_name">
     </div>
     @error('firs_name')
         <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="last_name">{{trans('admin.academies.Last Name')}}</label>
+        <label for="last_name">{{trans('admin.academies.Last Name')}}<code>*</code></label>
         <input id="last_name" type="text" class="formInput" placeholder="{{trans('admin.academies.Last Name')}}" value="{{old('last_name',isset($academies) ? $academies->last_name : '')}}" oninput="this.className = ''" name="last_name">
     </div>
     @error('last_name')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="role">{{ trans('admin.academies.role') }}</label>
+        <label for="role">{{ trans('admin.academies.role') }}<code>*</code></label>
         <select id="role" name="role" class="form-control formInput basic">
             @foreach($roles as $role)
                 <option value="{{$role}}" @selected(old('role', isset($academies) ? $academies->role : '') == $role)>{{$role}}</option>
@@ -56,14 +56,14 @@
         @enderror
     </div>
     <div class="mb-3">
-        <label for="email">{{trans('admin.academies.email')}}</label>
+        <label for="email">{{trans('admin.academies.email')}}<code>*</code></label>
         <input id="email" type="text" class="formInput" placeholder="{{trans('admin.academies.email')}}" value="{{old('email', isset($academies) ? $academies->email : '')}}" oninput="this.className = ''" name="email">
     </div>
     @error('email')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3 position-relative">
-        <label for="password">{{trans('admin.academies.password')}}</label>
+        <label for="password">{{trans('admin.academies.password')}}<code>*</code></label>
         <input type="password" name="password" class="@if(isset($academies)) form-control @else formInput @endif" id="password" placeholder="{{trans('admin.academies.password')}}">
         <span class="password-toggle-eye" onclick="togglePasswordVisibility()">
                 <i class="fa fa-eye" id="toggleEye"></i>
@@ -73,7 +73,7 @@
         @enderror
     </div>
     <div class="mb-3">
-        <label for="phone">{{trans('admin.academies.phone')}}</label>
+        <label for="phone">{{trans('admin.academies.phone')}}<code>*</code></label>
         <input id="phone" type="text" class="formInput" placeholder="{{trans('admin.academies.phone')}}" value="{{old('phone', isset($academies) ? $academies->phone : '')}}" oninput="this.className = ''" name="phone">
     </div>
     @error('phone')
@@ -87,7 +87,7 @@
     @foreach(\App\Services\TranslatableService::getTranslatableInputs(App\Models\Academies::class) as $name => $data)
        @if($name == 'app_name_en' || $name == 'app_name_ar')
             <div class="mb-3">
-                <label for="{{ $name }}">{{trans("admin.academies.$name")}}</label>
+                <label for="{{ $name }}">{{trans("admin.academies.$name")}}<code>*</code></label>
                 <input id="{{$name}}" type="text" class="formInput"  placeholder="{{trans("admin.academies.$name")}}" oninput="this.className = ''" name="{{$name}}"
                        @php
                            $language = $name == 'app_name_en' ? 'en' : 'ar';
@@ -103,7 +103,7 @@
 
     @endforeach
     <div class="mb-3 d-flex flex-column align-items-start">
-        <label for="sports">{{ trans('admin.sport.sport') }}</label>
+        <label for="sports">{{ trans('admin.sport.sport') }}<code>*</code></label>
         <div>
             <select class="js-example-basic-multiple w-100 form-select form-control formInput basic" name="sport_id[]" multiple id="sports">
                 @foreach($sports as $sport)
@@ -167,13 +167,13 @@
 <div class="step">
     <p class="text-center mb-4">{{trans('admin.academies.Legal & Tax Details')}}</p>
     <div class="mb-3">
-        <span class="">{{trans('admin.academies.full_name_arabic')}}</span>
+        <span class="">{{trans('admin.academies.full_name_arabic')}}<code>*</code></span>
         <input type="text" class="formInput" placeholder="{{trans('admin.academies.full_name_arabic')}}" value="{{(old('name', isset($academies) ? $academies->name : ''))}}" oninput="this.className = ''" name="name">
     </div>
     @foreach(\App\Services\TranslatableService::getTranslatableInputs(App\Models\Academies::class) as $name => $data)
         @if($name == 'commercial_name_en' || $name == 'commercial_name_ar')
             <div class="mb-3">
-                <label for="{{ $name }}">{{trans("admin.academies.$name")}}</label>
+                <label for="{{ $name }}">{{trans("admin.academies.$name")}}<code>*</code></label>
                 <input type="text" class="formInput" placeholder="{{trans("admin.academies.$name")}}" oninput="this.className = ''" name="{{$name}}"
                        @php
                            $language = $name == 'commercial_name_en' ? 'en' : 'ar';
@@ -190,28 +190,28 @@
 
     @endforeach
     <div class="mb-3">
-        <label for="trade_license_number">{{ trans('admin.academies.trade_license_number') }}</label>
+        <label for="trade_license_number">{{ trans('admin.academies.trade_license_number') }}<code>*</code></label>
         <input id="trade_license_number" type="number" class="formInput" value="{{(old('trade_license_number', isset($academies) ? $academies->trade_license_number : ''))}}" placeholder="{{trans('admin.academies.trade_license_number')}}" oninput="this.className = ''" name="trade_license_number">
     </div>
     @error('trade_license_number')
         <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="license_expire">{{ trans('admin.academies.trade_license_expire_date') }}</label>
+        <label for="license_expire">{{ trans('admin.academies.trade_license_expire_date') }}<code>*</code></label>
         <input id="license_expire" type="date" class="formInput" placeholder="{{trans('admin.academies.trade_license_expire_date')}}" oninput="this.className = ''" value="{{(old('trade_license_expire_date', isset($academies) ? $academies->trade_license_expire_date : ''))}}" name="trade_license_expire_date">
     </div>
     @error('trade_license_expire_date')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="tax_number">{{ trans('admin.academies.tax_number') }}</label>
+        <label for="tax_number">{{ trans('admin.academies.tax_number') }}<code>*</code></label>
         <input id="tax_number" type="number" placeholder="{{trans('admin.academies.tax_number')}}" oninput="this.className = ''" value="{{(old('tax_number', isset($academies) ? $academies->tax_number : ''))}}" name="tax_number">
     </div>
     @error('tax_number')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="tax_percentage">{{trans('admin.academies.Tax percentage')}}</label>
+        <label for="tax_percentage">{{trans('admin.academies.Tax percentage')}}<code>*</code></label>
         <input type="number" class="formInput" placeholder="{{trans('admin.academies.Tax percentage')}}" oninput="this.className = ''" value="{{(old('commission_percentage', isset($academies) ? $academies->commission_percentage : ''))}}" name="commission_percentage">
     </div>
     @error('commission_percentage')
@@ -224,28 +224,28 @@
     <p class="text-center mb-4">{{trans('admin.academies.Billing Details')}}</p>
     <div class="mb-3">
         <label for="bank_account_type">{{trans('admin.academies.Bank account type')}}</label>
-        <input id="bank_account_type" type="text" class="formInput" placeholder="{{trans('admin.academies.Bank account type')}}" oninput="this.className = ''" value="{{(old('bank_account_type', isset($academies) ? $academies->bank_account_type : ''))}}" name="bank_account_type">
+        <input id="bank_account_type" type="text" class="" placeholder="{{trans('admin.academies.Bank account type')}}" oninput="this.className = ''" value="{{(old('bank_account_type', isset($academies) ? $academies->bank_account_type : ''))}}" name="bank_account_type">
     </div>
     @error('bank_account_type')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
         <label for="bank_name">{{trans('admin.academies.Bank Name')}}</label>
-        <input id="bank_name" type="text" class="formInput" placeholder="{{trans('admin.academies.Bank Name')}}" oninput="this.className = ''" value="{{(old('bank_name', isset($academies) ? $academies->bank_name : ''))}}" name="bank_name">
+        <input id="bank_name" type="text" class="" placeholder="{{trans('admin.academies.Bank Name')}}" oninput="this.className = ''" value="{{(old('bank_name', isset($academies) ? $academies->bank_name : ''))}}" name="bank_name">
     </div>
     @error('bank_name')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
         <label for="bank_account_number">{{trans('admin.academies.Beneficiary Name')}}</label>
-        <input id="beneficiary_name" type="text" class="formInput" placeholder="{{trans('admin.academies.Beneficiary Name')}}" oninput="this.className = ''" value="{{(old('beneficiary_name', isset($academies) ? $academies->beneficiary_name : ''))}}" name="beneficiary_name">
+        <input id="beneficiary_name" type="text" class="" placeholder="{{trans('admin.academies.Beneficiary Name')}}" oninput="this.className = ''" value="{{(old('beneficiary_name', isset($academies) ? $academies->beneficiary_name : ''))}}" name="beneficiary_name">
     </div>
     @error('beneficiary_name')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
         <label for="bank_account_number">{{trans('admin.academies.Bank account number')}}</label>
-        <input id="bank_account_number" type="text" class="formInput" placeholder="{{trans('admin.academies.Bank account number')}}" oninput="this.className = ''" value="{{(old('bank_account_number', isset($academies) ? $academies->bank_account_number : ''))}}" name="bank_account_number">
+        <input id="bank_account_number" type="text" class="" placeholder="{{trans('admin.academies.Bank account number')}}" oninput="this.className = ''" value="{{(old('bank_account_number', isset($academies) ? $academies->bank_account_number : ''))}}" name="bank_account_number">
     </div>
     @error('bank_account_number')
     <p class="text-danger">{{$message}}</p>
@@ -256,49 +256,49 @@
 <div class="step">
     <p class="text-center mb-4">{{trans('admin.academies.Contract Details')}}</p>
     <div class="mb-3">
-        <label for="contract_date">{{ trans('admin.academies.Contract Data') }}</label>
+        <label for="contract_date">{{ trans('admin.academies.Contract Data') }}<code>*</code></label>
         <input id="contract_date" type="date" class="formInput" placeholder="{{trans('admin.academies.Contract Data')}}" oninput="this.className = ''" value="{{(old('contract_date', isset($academies) ? $academies->contract_date : ''))}}" name="contract_date">
     </div>
     @error('contract_date')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="start_date">{{ trans('admin.academies.Start Date') }}</label>
+        <label for="start_date">{{ trans('admin.academies.Start Date') }}<code>*</code></label>
         <input id="start_date" type="date" class="formInput" placeholder="{{trans('admin.academies.Start Date')}}" oninput="this.className = ''" value="{{(old('start_date', isset($academies) ? $academies->start_date : ''))}}" name="start_date">
     </div>
     @error('start_date')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="end_date">{{ trans('admin.academies.End Date') }}</label>
+        <label for="end_date">{{ trans('admin.academies.End Date') }}<code>*</code></label>
         <input id="end_date" type="date" class="formInput" placeholder="{{trans('admin.academies.End Date')}}" oninput="this.className = ''" value="{{(old('end_date', isset($academies) ? $academies->end_date : ''))}}" name="end_date">
     </div>
     @error('end_date')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="contract_number">{{ trans('admin.academies.Contract Number') }}</label>
+        <label for="contract_number">{{ trans('admin.academies.Contract Number') }}<code>*</code></label>
         <input id="contract_number" type="number" class="formInput" placeholder="{{trans('admin.academies.Contract Number')}}" oninput="this.className = ''" value="{{(old('contract_number', isset($academies) ? $academies->contract_number : ''))}}" name="contract_number">
     </div>
     @error('contract_number')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="account_manager">{{trans('admin.academies.Account Manager')}}</label>
+        <label for="account_manager">{{trans('admin.academies.Account Manager')}}<code>*</code></label>
         <input id="account_manager" type="text" class="formInput" placeholder="{{trans('admin.academies.Account Manager')}}" oninput="this.className = ''" value="{{(old('account_manager',isset($academies) ? $academies->account_manager : ''))}}" name="account_manager">
     </div>
     @error('account_manager')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="settlement_days_count">{{trans('admin.settlement_days_count')}}</label>
+        <label for="settlement_days_count">{{trans('admin.settlement_days_count')}}<code>*</code></label>
         <input id="settlement_days_count" type="text" class="formInput" placeholder="{{trans('admin.settlement_days_count')}}" oninput="this.className = ''" value="{{(old('settlement_days_count',isset($academies) ? $academies->settlement_days_count : ''))}}" name="settlement_days_count" required>
     </div>
     @error('settlement_days_count')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="non_refund_days_count">{{trans('admin.non_refund_days_count')}}</label>
+        <label for="non_refund_days_count">{{trans('admin.non_refund_days_count')}} <code>*</code></label>
         <input id="non_refund_days_count" type="text" class="formInput" placeholder="{{trans('admin.non_refund_days_count')}}" oninput="this.className = ''" value="{{(old('non_refund_days_count',isset($academies) ? $academies->non_refund_days_count : ''))}}" name="non_refund_days_count" required>
     </div>
     @error('non_refund_days_count')

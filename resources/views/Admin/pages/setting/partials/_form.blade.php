@@ -3,7 +3,7 @@
     <div class="row">
 
         <div class="col-md-6 mb-3">
-            <label for="keySelect">{{ trans('admin.setting.key') }}</label>
+            <label for="keySelect">{{ trans('admin.setting.key') }}<code>*</code></label>
             <select class="form-select" id="keySelect" name="key">
                 @foreach($keys as $key)
                     <option value="{{$key}}" @selected(old('key', isset($setting) ? $setting->key : '') == $key)>{{$key}}</option>
@@ -15,7 +15,7 @@
         </div>
 
         <div class="col-md-6 mb-3">
-            <label for="types">{{trans('admin.setting.type')}}</label>
+            <label for="types">{{trans('admin.setting.type')}}<code>*</code></label>
             <select name="type" id="types" class="form-control" onchange="showDiv(this.value)">
 
             </select>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-md-6 mb-3" style="display: none" id="imageDiv">
-            <label for="icon">{{trans('admin.sport.icon')}}</label>
+            <label for="icon">{{trans('admin.sport.icon')}}<code>*</code></label>
             <input type="file" name="image_value" class="form-control">
             @error('image_value')
             <span class="text-danger">{{$message}}</span>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="col-md-6 mb-3" id="textDiv">
-            <label for="value">{{trans('admin.setting.value')}}</label>
+            <label for="value">{{trans('admin.setting.value')}}<code>*</code></label>
             <input type="text" name="value" id="value"  value="{{isset($setting) && $setting->type == 'text' ? $setting->value : old('value')}}" class="form-control"  placeholder="value">
             @error('value')
             <span class="text-danger">{{$message}}</span>z
@@ -41,7 +41,7 @@
         </div>
 
         <div class="col-md-12 mb-3" style="display: none" id="textAreaDiv">
-            <label for="body">{{ trans('admin.setting.value') }}</label>
+            <label for="body">{{ trans('admin.setting.value') }}<code>*</code></label>
             <textarea class="form-control @error('text_value') is-invalid fparsley-error parsley-error @enderror" id="body" name="text_value" rows="5">{!! isset($setting) && $setting->type == 'textarea' ? $setting->value : old('text_value') !!}</textarea>
             @error('text_value')
             <div class="invalid-feedback">
