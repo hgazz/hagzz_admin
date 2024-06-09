@@ -144,7 +144,7 @@ Route::group(
             Route::controller(UserController::class)->group(function (){
                 Route::get('user','index')->name('user.index');
                 Route::get('user/show/{user}','show')->name('user.show');
-                Route::delete('user/delete/{user}','delete')->name('user.delete');
+                Route::delete('user/delete','delete')->name('user.delete');
                 Route::get('user.export','export')->name('user.export');
             });
 
