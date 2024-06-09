@@ -26,7 +26,7 @@
             </li>
             <li>
                 <a class="d-block text-danger text-center fw-bold show_confirm_two" href="javascript:void(0);"
-                   data-href="{{ route('admin.cities.edit', $city) }}" data-id="{{ $city->id }}"
+                   data-href="{{ route('admin.cities.delete') }}" data-id="{{ $city->id }}"
                    data-name="City">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
                          class="bi bi-trash3-fill text-danger" viewBox="0 0 16 16">
