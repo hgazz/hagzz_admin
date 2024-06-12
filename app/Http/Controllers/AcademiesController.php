@@ -85,7 +85,8 @@ class AcademiesController extends Controller
                     'status' => $request->status,
                     'settlement_days_count' => $request->settlement_days_count,
                     'non_refund_days_count' => $request->non_refund_days_count,
-                    'contract_link'=>$request->contract_link
+                    'contract_link'=>$request->contract_link,
+
                 ]);
             $academy->sports()->attach($request->sport_id);
             DB::commit();

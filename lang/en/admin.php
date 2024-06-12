@@ -119,7 +119,7 @@ return [
         'website'=>'Website',
         'instagram'=>'Instagram',
         'linkedin'=>'LinkedIn',
-        'Tax percentage'=>'Tax percentage',
+        'Tax percentage'=>'Commission percentage',
         'Bank account type'=>'Bank account type',
         'Bank Name'=>'Bank Name',
         'Beneficiary Name'=>'Beneficiary Name',

@@ -119,7 +119,7 @@ return [
         'website' => 'الموقع الإلكتروني',
         'instagram' => 'إنستجرام',
         'linkedin' => 'لينكد إن',
-        'Tax percentage' => 'نسبة الضريبة',
+        'Tax percentage' => 'نسبة الربح (مئويه)',
         'Bank account type' => 'نوع الحساب البنكي',
         'Bank Name' => 'اسم البنك',
         'Beneficiary Name' => 'اسم المستفيد',

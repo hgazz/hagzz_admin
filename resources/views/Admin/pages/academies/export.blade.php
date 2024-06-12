@@ -10,7 +10,7 @@
         <th>trade_license_number</th>
         <th>trade_license_expire_date</th>
         <th>tax_number</th>
-        <th>percentage</th>
+        <th>Commission percentage</th>
         <th>contract_number</th>
         <th>account_manager</th>
         <th>is_registered</th>
@@ -33,7 +33,7 @@
             <td>{{ $academy->trade_license_number }}</td>
             <td>{{ $academy->trade_license_expire_date }}</td>
             <td>{{ $academy->tax_number }}</td>
-            <td>{{ $academy->percentage }}</td>
+            <td>{{ $academy->commission_percentage }}</td>
             <td>{{ $academy->contract_number }}</td>
             <td>{{ $academy->account_manager }}</td>
             <td>{{ $academy->is_registered }}</td>
