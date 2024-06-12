@@ -15,9 +15,6 @@
         <th>account_manager</th>
         <th>is_registered</th>
         <th>branch_to</th>
-        <th>Country</th>
-        <th>City</th>
-        <th>Area</th>
         <th>Sports</th>
 
 
@@ -41,9 +38,6 @@
             <td>{{ $academy->account_manager }}</td>
             <td>{{ $academy->is_registered }}</td>
             <td>{{ $academy->academy->commercial_name ?? 'null' }}</td>
-            <td>{{ $academy->county->name ?? 'null' }}</td>
-            <td>{{ $academy->city->name ?? 'null' }}
-            <td>{{ $academy->area->name ?? 'null' }}</td>
             <td>{{ $academy->sports->pluck('name')->implode(', ') }}</td>
 
         </tr>
