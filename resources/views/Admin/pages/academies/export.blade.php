@@ -20,6 +20,7 @@
         <th>Country</th>
         <th>City</th>
         <th>Area</th>
+        <th>Sports</th>
 
 
 
@@ -47,6 +48,8 @@
             <td>{{ $academy->county->name ?? 'null' }}</td>
             <td>{{ $academy->city->name ?? 'null' }}
             <td>{{ $academy->area->name ?? 'null' }}</td>
+            <td>{{ $academy->sports->pluck('name')->implode(', ') }}</td>
+
         </tr>
     @endforeach
     </tbody>

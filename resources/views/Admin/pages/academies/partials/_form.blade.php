@@ -115,10 +115,10 @@
                     >{{ $sport->name }}</option>
                 @endforeach
             </select>
-        </div>
-        @error('sport_id')
+            @error('sport_id[]')
             <span class="text-danger">{{$message}}</span>
-        @enderror
+            @enderror
+        </div>
     </div>
     <div class="mb-3">
         <label for="academy">{{ trans('admin.academies.select_academy') }}</label>
@@ -191,7 +191,7 @@
     @endforeach
     <div class="mb-3">
         <label for="trade_license_number">{{ trans('admin.academies.trade_license_number') }}<code>*</code></label>
-        <input id="trade_license_number" type="number" class="formInput" value="{{(old('trade_license_number', isset($academies) ? $academies->trade_license_number : ''))}}" placeholder="{{trans('admin.academies.trade_license_number')}}" oninput="this.className = ''" name="trade_license_number">
+        <input id="trade_license_number" type="text" class="formInput" value="{{(old('trade_license_number', isset($academies) ? $academies->trade_license_number : ''))}}" placeholder="{{trans('admin.academies.trade_license_number')}}" oninput="this.className = ''" name="trade_license_number">
     </div>
     @error('trade_license_number')
         <p class="text-danger">{{$message}}</p>
@@ -205,14 +205,14 @@
     @enderror
     <div class="mb-3">
         <label for="tax_number">{{ trans('admin.academies.tax_number') }}<code>*</code></label>
-        <input id="tax_number" type="number" placeholder="{{trans('admin.academies.tax_number')}}" oninput="this.className = ''" value="{{(old('tax_number', isset($academies) ? $academies->tax_number : ''))}}" name="tax_number">
+        <input id="tax_number" type="text" placeholder="{{trans('admin.academies.tax_number')}}" oninput="this.className = ''" value="{{(old('tax_number', isset($academies) ? $academies->tax_number : ''))}}" name="tax_number">
     </div>
     @error('tax_number')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
         <label for="tax_percentage">{{trans('admin.academies.Tax percentage')}}<code>*</code></label>
-        <input type="number" class="formInput" placeholder="{{trans('admin.academies.Tax percentage')}}" oninput="this.className = ''" value="{{(old('commission_percentage', isset($academies) ? $academies->commission_percentage : ''))}}" name="commission_percentage">
+        <input type="number" class="formInput" min="0" placeholder="{{trans('admin.academies.Tax percentage')}}" oninput="this.className = ''" value="{{(old('commission_percentage', isset($academies) ? $academies->commission_percentage : ''))}}" name="commission_percentage">
     </div>
     @error('commission_percentage')
     <p class="text-danger">{{$message}}</p>
