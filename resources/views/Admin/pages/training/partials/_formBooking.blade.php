@@ -27,16 +27,6 @@
         @enderror
     </div>
     <div class="col-md-6 mb-3">
-        <label for="phone">{{trans('admin.user.phone')}} <code>*</code></label>
-        <input type="text" name="phone" class="form-control"
-               value="{{ old('phone') }}" id="phone"
-               placeholder="{{trans('admin.academies.phone')}}">
-        @error('phone')
-        <span class="text-danger">{{$message}}</span>
-        @enderror
-    </div>
-
-    <div class="col-md-6 mb-3">
         <label for="gender">{{trans('admin.user.gender')}} <code>*</code></label>
         <select id="gender" name="gender" class="form-control">
             <option value="">{{ trans('admin.user.select_gender') }}</option>
@@ -47,6 +37,25 @@
         <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
+    <div class="col-md-6 mb-3">
+        <label for="country_code">{{trans('admin.city.country_code')}} <code>*</code></label>
+        <input type="text" name="country_code" class="form-control"
+                   value="{{ old('country_code') }}" id="country_code"
+                   placeholder="{{trans('admin.city.country_code')}}">
+        @error('country_code')
+            <span class="text-danger">{{$message}}</span>
+        @enderror
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="phone">{{trans('admin.user.phone')}} <code>*</code></label>
+        <input type="text" name="phone" class="form-control"
+               value="{{ old('phone') }}" id="phone"
+               placeholder="{{trans('admin.academies.phone')}}">
+        @error('phone')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
+    </div>
+
     <div class="col-md-6 mb-3">
         <label for="country">{{ trans('admin.country.country') }} <code>*</code></label>
         <select class="form-select" id="country" name="country_id">

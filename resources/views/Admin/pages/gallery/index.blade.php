@@ -55,7 +55,11 @@
                         <h3>{{ trans('admin.gallery.gallery') }}</h3>
                     </a>
                 </div>
-
+                <form action="{{ route('admin.gallery.bulkActive') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="ids" id="ids">
+                    <button type="submit" class="btn btn-success d-none dt-button">{{ trans('admin.academies.make_active') }}</button>
+                </form>
             </div>
             <div class="card-body">
                 {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
@@ -72,4 +76,10 @@
     <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/datatables.min.js"></script>
     <script src="{{ asset('assetsAdmin/confirmationDelete.js') }}"></script>
     {!! $dataTable->scripts() !!}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+
+        });
+    </script>
 @endpush

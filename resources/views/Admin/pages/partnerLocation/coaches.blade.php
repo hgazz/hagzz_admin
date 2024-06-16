@@ -53,7 +53,7 @@
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-                <a class="btn btn-success w-25 mt-1 mb-2" href="{{route('admin.report.coach.export')}}">{{ trans('admin.Export') }}</a>
+{{--                <a class="btn btn-success w-25 mt-1 mb-2" href="{{route('admin.report.coach.export')}}" target="_blank">{{ trans('admin.Export') }}</a>--}}
 
                 <div class="card">
                     <div class="card-header">

@@ -3,6 +3,7 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Price</th>
         <th>start Date</th>
         <th>End Date</th>
         <th>Description</th>
@@ -15,6 +16,7 @@
         <th>Gender</th>
         <th>Age Group</th>
         <th>Address</th>
+        <th>Classes Count</th>
 
 
     </tr>
@@ -24,6 +26,7 @@
         <tr>
             <td>{{ $training->id }}</td>
             <td>{{ $training->name }}</td>
+            <td>{{ $training->price }}</td>
             <td>{{ $training->start_date }}</td>
             <td>{{ $training->end_date }}</td>
             <td>{{ $training->description }}</td>
@@ -36,6 +39,7 @@
             <td>{{ $training->gender }}</td>
             <td>{{ $training->age_group }}</td>
             <td>{{ $training->address->address ?? 'null' }}</td>
+            <td>{{ $training->classes->count() }}</td>
         </tr>
     @endforeach
     </tbody>

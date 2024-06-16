@@ -31,6 +31,8 @@ return [
     'apply' => 'Apply',
     'contract_link' => 'Contract Link',
     'created_at' => 'Created At',
+    'print' => 'Print',
+    'export' => 'Export',
     'auth' => [
         'sign_in' => 'Sign In',
         'enter_your_email_and_password' => 'Enter your email and password to login',
@@ -54,7 +56,8 @@ return [
         'updated_successfully' => 'City updated successfully',
         'deleted_successfully' => 'City deleted successfully',
         'Select County'=>'Select County',
-        'country'=>'Country'
+        'country'=>'Country',
+        'country_code'=>'Country Code',
     ],
     'area' => [
         'area' => 'Area',
@@ -334,7 +337,10 @@ return [
     'gallery'=> [
         'gallery'=>'Gallery',
         'image' => 'Image',
+        'active' => 'Active',
+        'not_active' => 'Not Active',
         'status_updated_successfully' => 'Status Updated Successfully',
+        'bulk_active' => 'Bulk Active',
     ],
     'address'=>[
         'address'=>'Locations',
@@ -354,6 +360,8 @@ return [
         'address successfully created'=>'Address Successfully Created',
         'country'=>'Country',
         'edit'=>'Edit',
+        'location_owned' => 'Owned',
+        'location_not_owned' => 'not owned',
     ],
 
     'balance' => 'Balance',

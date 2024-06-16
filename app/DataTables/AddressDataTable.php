@@ -36,6 +36,9 @@ class AddressDataTable extends DataTable
                 ->editColumn('active', function (Address $address) {
                     return $address->active ? trans('admin.address.active') : trans('admin.address.inactive');
                 })
+                ->editColumn('location_owned', function (Address $address) {
+                    return $address->location_owned ? trans('admin.address.location_owned') : trans('admin.address.location_not_owned');
+                })
                 ->filterColumn('active', function ($query, $keyword) {
                     $query->where('active', $keyword === 'active' ? 1 : 0);
                 })
@@ -165,6 +168,7 @@ class AddressDataTable extends DataTable
             ['name' => 'longitude', 'data' => 'longitude', 'title' => trans('admin.address.longitude')],
             ['name' => 'latitude', 'data' => 'latitude', 'title' => trans('admin.address.latitude')],
             ['name' => 'active', 'data' => 'active', 'title' => trans('admin.address.active')],
+            ['name' => 'location_owned', 'data' => 'location_owned', 'title' => trans('admin.address.location_owned')],
 //            ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }

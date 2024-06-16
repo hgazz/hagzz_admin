@@ -14,6 +14,22 @@ use Yajra\DataTables\Services\DataTable;
 class TrainingDataTable extends DataTable
 {
     use DataTablesTrait;
+
+    /**
+     * Set a custom query.
+     *
+     * @param  array|string  $key
+     * @param  mixed  $value
+     * @return static
+     */
+    public function with(array|string $key, mixed $value = null): static
+    {
+        if (is_string($key) && $key === 'query') {
+            $this->query = $value;
+        }
+
+        return $this;
+    }
     /**
      * Build the DataTable class.
      *
@@ -57,6 +73,9 @@ class TrainingDataTable extends DataTable
      */
     public function query(Training $model): QueryBuilder
     {
+        if ($this->query) {
+            return $this->query;
+        }
         return $model->newQuery()->with(['coach', 'academy', 'sport', 'classes', 'joins', 'address']);
     }
 
@@ -81,7 +100,7 @@ class TrainingDataTable extends DataTable
                         'autoWidth' => false,
                         'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                         'buttons' => [
-                            $hideButtonsArray,
+                            $hideButtonsArray
                         ],
                         'order' => [
                             0, 'desc'

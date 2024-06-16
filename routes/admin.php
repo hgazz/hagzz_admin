@@ -168,6 +168,7 @@ Route::group(
             Route::controller(GalleryController::class)->group(function (){
                 Route::get('galleries','index')->name('gallery.index');
                 Route::put('galleries/active/{gallery}','makeActive')->name('gallery.active');
+                Route::post('galleries/active/bulk','bulkActive')->name('gallery.bulkActive');
             });
 
             Route::prefix('report')->as('report.')->controller(ReportController::class)

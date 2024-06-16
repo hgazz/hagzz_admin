@@ -16,6 +16,7 @@
         "php-flasher/flasher-toastr-laravel": "^1.15",
         "spatie/laravel-translatable": "^6.5",
         "yajra/laravel-datatables": "^10.0",
+        "yajra/laravel-datatables-buttons": "^10.0",
         "yajra/laravel-datatables-oracle": "^10.3.1"
     },
     "require-dev": {

@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Http\Traits\DataTablesTrait;
 use App\Models\Join;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -14,7 +15,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class JoinDataTable extends DataTable
 {
-
+    use DataTablesTrait;
     protected $query;
 
     /**
@@ -88,22 +89,34 @@ class JoinDataTable extends DataTable
      */
     public function html(): HtmlBuilder
     {
+        $hideButtonsArray = array_column($this->getColumns(), 'title');
+        $hideButtonsArray = $this->makeHideButtons($hideButtonsArray);
         return $this->builder()
                     ->setTableId('join-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-            ->scrollX()
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+                    ->dom('Bfltip')
+            ->parameters([
+                'scrollX' => true,
+                'scrollY' => true,
+                'autoWidth' => false,
+                'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
+                'buttons' => [
+                    $hideButtonsArray
+                ],
+                'order' => [
+                    0, 'desc'
+                ],
+                'language' =>
+                    (app()->getLocale() === 'ar') ?
+                        [
+                            'url' => url('//cdn.datatables.net/plug-ins/1.13.8/i18n/ar.json')
+                        ] :
+                        [
+                            'url' => url('//cdn.datatables.net/plug-ins/1.13.8/i18n/English.json')
+                        ]
+
+            ]);
     }
 
     /**

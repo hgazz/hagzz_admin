@@ -27,8 +27,14 @@ class GalleryDataTable extends DataTable
             ->editColumn('academy.commercial_name', function (Gallery $gallery) {
                 return $gallery->academy->commercial_name;
             })
+            ->editColumn('active', function (Gallery $gallery) {
+                return $gallery->active ? trans('admin.gallery.active') : trans('admin.gallery.not_active');
+            })
             ->addColumn('action', function (Gallery $gallery) {
                 return view('Admin.pages.gallery.datatable.actions', compact('gallery'))->render();
+            })
+            ->addColumn('checkbox',function (Gallery $gallery){
+                return view('Admin.pages.gallery.datatable.checkbox',compact('gallery'));
             })
             ->filterColumn('academy.commercial_name', function ($query, $keyword) {
                 $query->whereHas('academy', function ($q) use ($keyword) {
@@ -36,7 +42,7 @@ class GalleryDataTable extends DataTable
                     $q->whereRaw("JSON_SEARCH(lower(commercial_name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
                 });
             })
-            ->rawColumns(['action', 'image','academy.commercial_name']);
+            ->rawColumns(['action', 'image','academy.commercial_name', 'checkbox']);
     }
 
     /**
@@ -98,9 +104,11 @@ class GalleryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            ['name' => 'checkbox', 'data' => 'checkbox', 'title' => trans('admin.gallery.bulk_active'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
             ['name' => 'academy.commercial_name', 'data' => 'academy.commercial_name', 'title' => trans('admin.training.academy')],
             ['name' => 'image', 'data' => 'image', 'title' => trans('admin.gallery.image')],
+            ['name' => 'active', 'data' => 'active', 'title' => trans('admin.gallery.active')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }

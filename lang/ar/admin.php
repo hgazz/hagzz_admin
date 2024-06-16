@@ -31,6 +31,7 @@ return [
     'apply' => 'تطبيق',
     'contract_link' => 'رابط العقد',
     'created_at' => 'تاريخ الانشاء',
+    'print' => 'طباعة',
     'auth' => [
         'sign_in' => 'تسجيل الدخول',
         'enter_your_email_and_password' => 'أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول',
@@ -54,7 +55,8 @@ return [
         'updated_successfully' => 'تم تحديث المدينة بنجاح',
         'deleted_successfully' => 'تم حذف المدينة بنجاح',
         'Select County' => 'اختر المقاطعة',
-        'country' => 'الدولة'
+        'country' => 'الدولة',
+        'country_code' => 'رمز الدولة',
     ],
     'area' => [
         'area' => 'المنطقة',
@@ -335,6 +337,9 @@ return [
         'gallery' => 'المعرض',
         'image' => 'الصورة',
         'status_updated_successfully' => 'تم تحديث الحالة بنجاح',
+        'active' => 'نشط',
+        'not_active' => 'غير نشط',
+        'bulk_active' => 'تنشيط جماعي',
     ],
     'address' => [
         'address' => 'المواقع',
@@ -354,6 +359,8 @@ return [
         'address successfully created' => 'تم إنشاء الموقع بنجاح',
         'country' => 'الدولة',
         'edit' => 'تعديل',
+        'location_owned' => 'الأكاديمية تمتلك الموقع',
+        'location_not_owned' => 'الأكاديمية لا تمتلك الموقع',
     ],
     'balance' => 'الرصيد',
     'refunds' => 'المبالغ المستردة',

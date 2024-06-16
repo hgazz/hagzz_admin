@@ -22,7 +22,7 @@
                             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.cities.index') }}">{{ trans('admin.faq.faq') }}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.faq.index') }}">{{ trans('admin.faq.faq') }}</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.faq.create faq') }}</li>
                                 </ol>
                             </nav>
