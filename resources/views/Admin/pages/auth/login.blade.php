@@ -83,7 +83,7 @@
                                         <div class="form-check form-check-primary form-check-inline">
 
                                             <input class="form-check-input me-3" type="checkbox" id="form-check-default"
-                                                   name="remember" @if(old('remember')) checked @endif>
+                                                   name="remember" value="1" @if(old('remember')) checked @endif>
                                             <label class="form-check-label" for="form-check-default">
                                                 {{ trans('admin.auth.remember_me') }}
                                             </label>
