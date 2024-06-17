@@ -115,21 +115,21 @@
                         <div class="form-group mb-0 mt-2 container">
                             <form id="filterForm" action="javascript:void(0)">
                                 <div class="row">
-                                    <div class="col-5">
+                                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
                                         <label for="start_date"
                                                class="form-label me-2">{{ trans('admin.training.start_date') }}</label>
                                         <input type="date" class="form-control flatpickr flatpickr-input"
                                                name="start_date" id="start_date"
                                                placeholder="{{ trans('admin.select_start_date') }}">
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
                                         <label for="end_date"
                                                class="form-label me-2">{{ trans('admin.training.end_date') }}</label>
                                         <input type="date" class="form-control flatpickr flatpickr-input"
                                                name="end_date" id="end_date"
                                                placeholder="{{ trans('admin.select_end_date') }}">
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
                                         <label for="filter" class="form-label me-2"></label>
                                         <button type="button" class="btn btn-primary mt-4"
                                                 id="filter">{{ trans('admin.apply_filter') }}</button>
