@@ -259,7 +259,7 @@
                                             </a>
                                             <a class="dropdown-item" id="userYearFilter" href="javascript:void(0);"
                                                data-url="{{ route('admin.getUserDataByYear') }}">
-                                                This Year
+                                                {{ trans('admin.this_year') }}
                                             </a>
 
                                         </div>
@@ -281,9 +281,8 @@
                                         <img src="{{ asset('assetsAdmin/icons8-deadlift.gif') }}" alt="sports-image">
                                     </span>
                                 </div>
-                                <div class="balance-info d-flex justify-content-center align-items-center">
+                                <div class="balance-info d-flex justify-content-center align-items-center mx-auto">
                                     <h6 class="text-muted mb-0 mx-2">{{ trans('admin.sports_level') }}</h6>
-                                    {{--                                    <p>{{$totalUsers}}</p> --}}
                                 </div>
                             </div>
                             <div id="sportChartDiv"></div>

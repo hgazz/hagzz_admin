@@ -142,6 +142,8 @@ return [
         'inactive' => 'غير نشط',
         'status' => 'الحالة',
         'balance' => 'الرصيد',
+        'this_month' => 'هذا الشهر',
+        'this_year' => 'هذه السنة',
     ],
     'banners' => [
         'banners' => 'اللافتات',

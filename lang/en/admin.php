@@ -143,6 +143,8 @@ return [
         'inactive'=>'Inactive',
         'status'=>'Status',
         'balance'=>'Balance',
+        'this_month'=>'This Month',
+        'this_year'=>'This Year'
     ],
     'banners'=> [
         'banners'=>'Banners',
