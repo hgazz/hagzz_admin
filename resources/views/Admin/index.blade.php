@@ -120,14 +120,14 @@
                                                class="form-label me-2">{{ trans('admin.training.start_date') }}</label>
                                         <input type="date" class="form-control flatpickr flatpickr-input"
                                                name="start_date" id="start_date"
-                                               placeholder="{{ trans('admin.select_start_date') }}">
+                                               placeholder="{{ trans('admin.select_start_date') }}"  value="{{ old('start_date') ?? request('start_date') }}">
                                     </div>
                                     <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
                                         <label for="end_date"
                                                class="form-label me-2">{{ trans('admin.training.end_date') }}</label>
                                         <input type="date" class="form-control flatpickr flatpickr-input"
                                                name="end_date" id="end_date"
-                                               placeholder="{{ trans('admin.select_end_date') }}">
+                                               placeholder="{{ trans('admin.select_end_date') }}"  value="{{ old('end_date') ?? request('end_date') }}">
                                     </div>
                                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
                                         <label for="filter" class="form-label me-2"></label>
