@@ -40,10 +40,10 @@
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                 <div class="card">
                     <div class="container mt-4">
-                        <h2 class="text-center"> {{trans('admin.user.Trainings')}} </h2>
                         @if($showUser->joins->count() == 0)
                             <h3 class="text-center"> {{trans('admin.user.no_trainings')}} </h3>
                         @else
+                            <h2 class="text-center"> {{trans('admin.user.Trainings')}} </h2>
                             <div class="row mt-4">
                             @foreach($showUser->joins as $join)
                                 <div class="col-md-4 mb-2">
@@ -63,10 +63,11 @@
                         </div>
                         @endif
                         <hr>
-                        <h2 class="text-center"> {{trans('admin.user.Sports')}} </h2>
+
                         @if($showUser->sports->count() == 0)
                             <h3 class="text-center"> {{trans('admin.user.no_sports')}} </h3>
                         @else
+                                <h2 class="text-center"> {{trans('admin.user.Sports')}} </h2>
                         <div class="row mt-4">
                             @foreach($showUser->sports as $sport)
                                 <div class="col-md-4 mb-2">
