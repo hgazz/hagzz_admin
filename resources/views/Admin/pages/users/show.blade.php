@@ -50,14 +50,12 @@
                                     <div class="card" style="width: 18rem;">
                                         <img src="{{$join->training->sport->icon}}" class="card-img-top" alt="...">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{$join->training->name}}</h5>
-                                            <p class="card-text">{{$join->training->description}}</p>
-                                            <span class="text-success">{{$join->training->start_date}}</span>
-                                            /
-                                            <span class="text-danger">{{$join->training->end_date}}</span>
-                                            <br>
-                                            <span>{{trans('admin.user.coach')}} :{{$join->training->coach->name}} </span>
-                                            <span>{{trans('admin.training.academy')}} :{{$join->training->academy->commercial_name}} </span>
+                                            <h5 class="card-title">{{ trans('admin.user.training_name') }} : {{$join->training->name}}</h5>
+                                            <p class="card-text">{{ trans('admin.user.training_details') }} : {{$join->training->description}}</p>
+                                            <p class="text-success">{{ trans('admin.user.start_date') }} : {{$join->training->start_date}}</p>
+                                            <p class="text-danger">{{ trans('admin.user.end_date') }} : {{$join->training->end_date}}</p>
+                                            <p>{{trans('admin.user.coach')}} : {{$join->training->coach->name}} </p>
+                                            <p>{{trans('admin.training.academy')}} : {{$join->training->academy->commercial_name}} </p>
                                         </div>
                                     </div>
                                 </div>

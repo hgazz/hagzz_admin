@@ -253,6 +253,10 @@ return [
         'back' => 'رجوع',
         'no_trainings' => 'لا يوجد تدريبات',
         'no_sports' => 'لا يوجد رياضات',
+        'training_name' => 'اسم التدريب',
+        'training_details' => 'تفاصيل التدريب',
+        'start_date' => 'تاريخ البدء',
+        'end_date' => 'تاريخ الانتهاء',
     ],
     'bookings' => [
         'bookings' => 'الحجوزات',

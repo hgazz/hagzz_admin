@@ -254,6 +254,11 @@ return [
         'back' => 'Back',
         'no_trainings' => 'No Trainings',
         'no_sports' => 'No Sports',
+        'training_name' => 'Training Name',
+        'training_details' => 'Training Details',
+        'start_date' => 'Start Date',
+        'end_date' => 'End Date',
+
     ],
     'bookings' => [
         'bookings' => 'Bookings',
