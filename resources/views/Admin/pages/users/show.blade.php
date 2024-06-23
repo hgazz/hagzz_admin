@@ -41,7 +41,10 @@
                 <div class="card">
                     <div class="container mt-4">
                         <h2 class="text-center"> {{trans('admin.user.Trainings')}} </h2>
-                        <div class="row mt-4">
+                        @if($showUser->joins->count() == 0)
+                            <h3 class="text-center"> {{trans('admin.user.no_trainings')}} </h3>
+                        @else
+                            <div class="row mt-4">
                             @foreach($showUser->joins as $join)
                                 <div class="col-md-4 mb-2">
                                     <div class="card" style="width: 18rem;">
@@ -60,8 +63,12 @@
                                 </div>
                             @endforeach
                         </div>
+                        @endif
                         <hr>
                         <h2 class="text-center"> {{trans('admin.user.Sports')}} </h2>
+                        @if($showUser->sports->count() == 0)
+                            <h3 class="text-center"> {{trans('admin.user.no_sports')}} </h3>
+                        @else
                         <div class="row mt-4">
                             @foreach($showUser->sports as $sport)
                                 <div class="col-md-4 mb-2">
@@ -80,6 +87,7 @@
                                 </div>
                             @endforeach
                         </div>
+                        @endif
                     </div>
                     <div class="card-footer">
                         <a href="{{ url()->previous()}}" class="btn btn-primary btn-lg"> {{trans('admin.user.back')}}</a>

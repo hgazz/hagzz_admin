@@ -251,6 +251,8 @@ return [
         'show_details' => 'عرض التفاصيل',
         'sport_not_related_to_partner' => 'رياضة غير مرتبطة بأكاديميه',
         'back' => 'رجوع',
+        'no_trainings' => 'لا يوجد تدريبات',
+        'no_sports' => 'لا يوجد رياضات',
     ],
     'bookings' => [
         'bookings' => 'الحجوزات',

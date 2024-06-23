@@ -252,6 +252,8 @@ return [
         'show_details' => 'Show Details',
         'sport_not_related_to_partner' => 'Sport Not Related To Partner',
         'back' => 'Back',
+        'no_trainings' => 'No Trainings',
+        'no_sports' => 'No Sports',
     ],
     'bookings' => [
         'bookings' => 'Bookings',
