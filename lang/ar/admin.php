@@ -250,6 +250,7 @@ return [
         'select_gender' => 'اختر الجنس',
         'show_details' => 'عرض التفاصيل',
         'sport_not_related_to_partner' => 'رياضة غير مرتبطة بأكاديميه',
+        'back' => 'رجوع',
     ],
     'bookings' => [
         'bookings' => 'الحجوزات',

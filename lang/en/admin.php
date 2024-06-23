@@ -251,6 +251,7 @@ return [
         'select_gender' => 'Select Gender',
         'show_details' => 'Show Details',
         'sport_not_related_to_partner' => 'Sport Not Related To Partner',
+        'back' => 'Back',
     ],
     'bookings' => [
         'bookings' => 'Bookings',
