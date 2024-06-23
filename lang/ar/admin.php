@@ -249,6 +249,7 @@ return [
         'female' => 'أنثى',
         'select_gender' => 'اختر الجنس',
         'show_details' => 'عرض التفاصيل',
+        'sport_not_related_to_partner' => 'رياضة غير مرتبطة بأكاديميه',
     ],
     'bookings' => [
         'bookings' => 'الحجوزات',

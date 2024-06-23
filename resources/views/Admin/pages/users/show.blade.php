@@ -64,7 +64,7 @@
                         <div class="row mt-4">
                             @foreach($showUser->sports as $sport)
                                 <div class="col-md-4">
-                                    <div class="card" style="width: 18rem;">
+                                    <div class="card mb-2" style="width: 18rem;">
                                         <img src="{{$sport->icon}}" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title">{{$sport->name}}</h5>
@@ -73,7 +73,7 @@
                                             @else
                                                 <p class="card-text text-danger">{{$sport->status}}</p>
                                             @endif
-                                            <span class="">{{ trans('admin.academies.academies') }} - {{$sport->academy->commercial_name ?? 'Not Academy'}}</span>
+                                            <span class="">{{ trans('admin.academies.academies') }} - {{$sport->academy->commercial_name ?? trans('admin.user.sport_not_related_to_partner')}}}</span>
                                         </div>
                                     </div>
                                 </div>
