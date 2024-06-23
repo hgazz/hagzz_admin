@@ -74,7 +74,7 @@
                                             @else
                                                 <p class="card-text text-danger">{{$sport->status}}</p>
                                             @endif
-                                            <span class="">{{ trans('admin.academies.academies') }} - {{$sport->academy->commercial_name ?? trans('admin.user.sport_not_related_to_partner')}}}</span>
+                                            <span class="">{{ trans('admin.academies.academies') }} - {{$sport->academy->commercial_name ?? trans('admin.user.sport_not_related_to_partner')}}</span>
                                         </div>
                                     </div>
                                 </div>
