@@ -40,7 +40,7 @@
                                     <li class="breadcrumb-item"><a
                                             href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
                                     <li class="breadcrumb-item active"
-                                        aria-current="page">{{ trans('admin.partner_location') }}</li>
+                                        aria-current="page">{{ trans('admin.partner_coaches') }}</li>
                                 </ol>
                             </nav>
 
