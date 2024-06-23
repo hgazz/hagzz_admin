@@ -43,7 +43,7 @@
                         <h2 class="text-center"> {{trans('admin.user.Trainings')}} </h2>
                         <div class="row mt-4">
                             @foreach($showUser->joins as $join)
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="card" style="width: 18rem;">
                                         <img src="{{$join->training->sport->icon}}" class="card-img-top" alt="...">
                                         <div class="card-body">
@@ -54,6 +54,7 @@
                                             <span class="text-danger">{{$join->training->end_date}}</span>
                                             <br>
                                             <span>{{trans('admin.user.coach')}} :{{$join->training->coach->name}} </span>
+                                            <span>{{trans('admin.training.academy')}} :{{$join->training->academy->commercial_name}} </span>
                                         </div>
                                     </div>
                                 </div>
@@ -63,8 +64,8 @@
                         <h2 class="text-center"> {{trans('admin.user.Sports')}} </h2>
                         <div class="row mt-4">
                             @foreach($showUser->sports as $sport)
-                                <div class="col-md-4">
-                                    <div class="card mb-2" style="width: 18rem;">
+                                <div class="col-md-4 mb-2">
+                                    <div class="card" style="width: 18rem;">
                                         <img src="{{$sport->icon}}" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title">{{$sport->name}}</h5>
