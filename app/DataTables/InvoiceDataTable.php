@@ -127,7 +127,7 @@ class InvoiceDataTable extends DataTable
             ['name' => 'order_number', 'data' => 'order_number', 'title' => trans('admin.bookings.order_number')],
             ['name' => 'user_type', 'data' => 'user_type', 'title' => trans('admin.bookings.payment_type')],
             ['name' => 'is_canceled', 'data' => 'is_canceled', 'title' => trans('admin.bookings.is_canceled')],
-            ['name' => 'created_at', 'data' => 'created_at', 'title' => trans('admin.created_at'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
+            ['name' => 'created_at', 'data' => 'created_at', 'title' => trans('admin.created_at'), 'exportable' => true, 'printable' => true, 'orderable' => true, 'searchable' => false],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }
