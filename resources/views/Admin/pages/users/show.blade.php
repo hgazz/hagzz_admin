@@ -38,7 +38,7 @@
         <!--  END BREADCRUMBS  -->
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-                <a href="{{ url()->previous()}}" class="btn btn-primary align-items-end"> {{trans('admin.user.back')}}</a>
+                <a href="{{ url()->previous()}}" class="btn btn-primary btn-lg align-items-start"> {{trans('admin.user.back')}}</a>
                 <div class="card">
                     <div class="container mt-4">
                         <h2 class="text-center"> {{trans('admin.user.Trainings')}} </h2>
