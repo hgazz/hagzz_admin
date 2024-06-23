@@ -96,9 +96,9 @@ class AcademiesRequest extends FormRequest
             'bank_name'=>'required|string|min:3|max:255',
             'beneficiary_name'=>'required|string|min:3|max:255',
             'bank_account_number'=>'required|numeric',
-            'start_date'=>'required|date|after_or_equal:'. now()->toDateString(),
+            'start_date'=>'required|date|before:end_date',
             'end_date'=>'required|date|after:start_date',
-            'contract_date'=>'required|date|after_or_equal:'. now()->toDateString(),
+            'contract_date'=>'required|date',
             'image'=>'nullable|image|mimes:png,jpg,jpeg,svg,webp',
             'status'=>'required|in:active,inactive,pending'
         ];
