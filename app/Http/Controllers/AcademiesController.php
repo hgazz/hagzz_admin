@@ -166,7 +166,7 @@ class AcademiesController extends Controller
                     'contract_link' => $request->contract_link,
             ]);
             $academies->sports()->sync($request->sport_id);
-            session()->flash('success',trans('admin.academies.academies updated successfully'));
+            session()->flash('success',trans('admin.academies.academies_updated_successfully'));
 
         });
         return to_route('admin.academies.index');
