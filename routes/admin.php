@@ -84,7 +84,7 @@ Route::group(
                     Route::put('/academies/updateStatus/{academies}', 'updateStatus')->name('academies.updateStatus');
                     Route::delete('/academies/delete', 'delete')->name('academies.delete');
                     Route::get('academies/area/{city}', 'getAreaByCity')->name('area.getAreaByCity');
-                    Route::get('academies/edit/area/{city}', 'getAreaByCity')->name('area.getAreaByCity');
+//                    Route::get('academies/edit/area/{city}', 'getAreaByCity')->name('area.getAreaByCity');
                     Route::get('academies/country/{country}', 'getAllCountry')->name('country.getCountry');
                     Route::get('academies/edit/country/{country}', 'getAllCountry')->name('country.getCountry');
                     Route::get('academies/show/{academies}', 'show')->name('academies.show');
