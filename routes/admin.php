@@ -86,7 +86,7 @@ Route::group(
                     Route::get('academies/area/{city}', 'getAreaByCity')->name('area.getAreaByCity');
 //                    Route::get('academies/edit/area/{city}', 'getAreaByCity')->name('area.getAreaByCity');
                     Route::get('academies/country/{country}', 'getAllCountry')->name('country.getCountry');
-                    Route::get('academies/edit/country/{country}', 'getAllCountry')->name('country.getCountry');
+//                    Route::get('academies/edit/country/{country}', 'getAllCountry')->name('country.getCountry');
                     Route::get('academies/show/{academies}', 'show')->name('academies.show');
                     Route::get('academies/export', 'export')->name('academies.export');
                     Route::get('partner/locations', 'partnerLocation')->name('academies.locations');
