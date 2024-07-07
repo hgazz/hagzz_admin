@@ -16,7 +16,7 @@ class AuthController extends Controller
     {
         $remember_me = $request->has('remember');
         $credentials = $request->only('email', 'password');
-        if (auth()->guard('admin')->attempt($credentials, $remember_me)) {
+        if (auth()->guard('admin')->attempt($credentials, true)) {
             return redirect(route('admin.index'));
         }
         return redirect()->back()->with(['error' => trans('admin.auth.invalid_email_or_password')])
