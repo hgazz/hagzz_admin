@@ -1,7 +1,6 @@
 @csrf
 <div class="row">
-    <div class="row">
-        @foreach (\App\Services\TranslatableService::getTranslatableInputs(App\Models\Faq::class) as $name => $data)
+    @foreach (\App\Services\TranslatableService::getTranslatableInputs(App\Models\Faq::class) as $name => $data)
             <div class="col-md-6 mb-3">
                 <label for="{{$name}}" class="form-label">{{trans('admin.faq.'.$name)}}<code>*</code></label>
                 <input type="text" id="{{$name}}" name="{{$name}}" maxlength="250" class="form-control"
@@ -30,6 +29,5 @@
             <span class="text-danger">*{{$message}}</span>
             @enderror
         </div>
-    </div>
 </div>
 

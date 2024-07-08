@@ -60,7 +60,7 @@
     </div>
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="row widget-statistic">
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-4 col-12 layout-spacing">
                 <div class="widget widget-one_hybrid widget-followers">
                     <div class="widget-heading">
                         <div class="w-title m-0">
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-4 col-12 layout-spacing">
                 <div class="widget widget-one_hybrid widget-followers">
                     <div class="widget-heading">
                         <div class="w-title m-0">
@@ -95,7 +95,7 @@
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-4 col-12 layout-spacing">
                 <div class="widget widget-one_hybrid widget-followers">
                     <div class="widget-heading">
                         <div class="w-title m-0">
@@ -146,7 +146,7 @@
             <div class="row">
                 <div class="col-12 layout-spacing">
                     <div class="row widget-statistic mt-2 container">
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-3 col-12 layout-spacing">
                             <div class="widget widget-one_hybrid widget-followers">
                                 <div class="widget-heading">
                                     <div class="w-title m-0">
@@ -164,7 +164,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-3 col-12 layout-spacing">
                             <div class="widget widget-one_hybrid widget-followers">
                                 <div class="widget-heading">
                                     <div class="w-title m-0">
@@ -181,7 +181,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-3 col-12 layout-spacing">
                             <div class="widget widget-one_hybrid widget-followers">
                                 <div class="widget-heading">
                                     <div class="w-title m-0">
@@ -198,7 +198,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-3 col-12 layout-spacing">
                             <div class="widget widget-one_hybrid widget-followers">
                                 <div class="widget-heading">
                                     <div class="w-title m-0">
