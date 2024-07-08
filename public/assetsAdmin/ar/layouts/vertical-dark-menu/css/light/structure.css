@@ -1189,7 +1189,7 @@ body .navbar .dark-mode, body:not(.dark) .navbar .dark-mode {
   transition: 0.3s;
   width: 13px;
   height: 13px;
-  transform: rotate(180deg);
+  /* transform: rotate(180deg); */
 }
 #sidebar ul.menu-categories ul.submenu > li ul.sub-submenu > li a {
   position: relative;

@@ -1153,7 +1153,7 @@ body.dark #sidebar ul.menu-categories ul.submenu > li a.dropdown-toggle svg {
   transition: 0.3s;
   width: 13px;
   height: 13px;
-  transform: rotate(180deg);
+  /* transform: rotate(180deg); */
 }
 body.dark #sidebar ul.menu-categories ul.submenu > li ul.sub-submenu > li a {
   position: relative;
