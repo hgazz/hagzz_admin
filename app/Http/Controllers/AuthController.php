@@ -14,9 +14,10 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $remember_me = $request->has('remember');
+        $remember_me = $request->has('remember') ? true : false;
         $credentials = $request->only('email', 'password');
         if (auth()->guard('admin')->attempt($credentials, $remember_me)) {
+            \Log::info('Remember me: ' . ($remember_me ? 'Yes' : 'No'));
             return redirect(route('admin.index'));
         }
         return redirect()->back()->with(['error' => trans('admin.auth.invalid_email_or_password')])
