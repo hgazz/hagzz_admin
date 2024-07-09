@@ -47,14 +47,14 @@ class JoinDataTable extends DataTable
             ->addColumn('sport', fn($join) => $join->training->sport->name)
             ->addColumn('level', fn($join) => $join->training->level)
             ->addColumn('age_group', fn($join) => $join->training->age_group)
-            ->addColumn('classes', fn($join) => $join->training->classes->count())
+            ->addColumn('classes', fn($join) => $join?->training?->classes?->count())
             ->addColumn('start_date', fn($join) => $join->training->start_date)
             ->addColumn('end_date', fn($join) => $join->training->end_date)
-            ->addColumn('coach', fn($join) => $join->training->coach->name)
-            ->addColumn('count', fn($join) => $join->training->joins->count())
+            ->addColumn('coach', fn($join) => $join?->training?->coach?->name)
+            ->addColumn('count', fn($join) => $join?->training?->joins?->count())
             ->addColumn('max_player', fn($join) => $join->training->max_players)
-            ->addColumn('price', fn($join) => $join->training->price)
-            ->addColumn('discount_price', fn($join) => $join->training->discount_price)
+            ->addColumn('price', fn($join) => $join?->training?->price)
+            ->addColumn('discount_price', fn($join) => $join?->training?->discount_price)
             ->rawColumns([
                 'training',
                 'partner_name',
