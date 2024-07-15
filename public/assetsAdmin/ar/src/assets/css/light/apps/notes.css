@@ -39,7 +39,7 @@
   font-weight: 600;
   font-size: 15px;
   color: #506690;
-  letter-spacing: 1px;
+  letter-spacing: 0px;
   margin-top: 25px;
   margin-bottom: 13px;
   padding: 9px 20px;
@@ -125,7 +125,7 @@
   font-weight: 600;
   padding: 9px 50px 9px 15px;
   color: #3b3f5c;
-  letter-spacing: 1px;
+  letter-spacing: 0px;
 }
 .tab-title .nav-pills.group-list .nav-item a[class*=g-dot-]:before {
   position: absolute;
@@ -235,7 +235,7 @@
   font-weight: 500;
   color: #0e1726;
   margin-bottom: 0px;
-  letter-spacing: 0px;
+  lletter-spacing: 0px;
 }
 .note-container.note-grid .note-item .note-inner-content .meta-time {
   font-weight: 600;
@@ -249,7 +249,7 @@
   font-size: 15px;
   font-weight: 500;
   margin-bottom: 0;
-  letter-spacing: 0px;
+  lletter-spacing: 0px;
   word-wrap: break-word;
   color: #3b3f5c;
 }
@@ -323,7 +323,7 @@
 .note-container.note-grid .note-item .note-inner-content .note-footer .tags-selector .dropdown-menu a {
   font-size: 14px;
   padding: 3px 35px;
-  letter-spacing: 0px;
+  lletter-spacing: 0px;
   color: #515365;
 }
 .note-container.note-grid .note-item .note-inner-content .note-footer .tags-selector .dropdown-menu .dropdown-item.active, .note-container.note-grid .note-item .note-inner-content .note-footer .tags-selector .dropdown-menu .dropdown-item:active {
