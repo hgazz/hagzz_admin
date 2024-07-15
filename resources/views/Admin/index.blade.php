@@ -392,7 +392,7 @@
                         data: data.ordersData
                     }],
                     title: {
-                        text: 'Revenue by Month',
+                        text: '', // Revenue by Month
                         align: 'left'
                     },
                     grid: {
