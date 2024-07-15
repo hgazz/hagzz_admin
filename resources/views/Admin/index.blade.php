@@ -19,6 +19,9 @@
     .widget.widget-card-five .account-box .info-box .icon:before {
         background-color: white !important;
     }
+    .widget.widget-card-five .account-box .info-box {
+        min-height: 30px;
+    }
 </style>
 @section('content')
     <div class="middle-content container-xxl p-0">
