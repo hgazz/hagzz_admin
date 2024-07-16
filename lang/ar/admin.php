@@ -54,7 +54,7 @@ return [
         'created_successfully' => 'تم إنشاء المدينة بنجاح',
         'updated_successfully' => 'تم تحديث المدينة بنجاح',
         'deleted_successfully' => 'تم حذف المدينة بنجاح',
-        'Select County' => 'اختر المقاطعة',
+        'Select County' => 'اختر البلد',
         'country' => 'الدولة',
         'country_code' => 'رمز الدولة',
     ],
