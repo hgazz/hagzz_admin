@@ -211,8 +211,8 @@
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="tax_percentage">{{trans('admin.academies.Tax percentage')}}<code>*</code></label>
-        <input type="number" class="formInput" min="0" placeholder="{{trans('admin.academies.Tax percentage')}}" oninput="this.className = ''" value="{{(old('commission_percentage', isset($academies) ? $academies->commission_percentage : ''))}}" name="commission_percentage">
+        <label for="tax_percentage">{{trans('admin.academies.commission_percentage')}}<code>*</code></label>
+        <input type="number" class="formInput" min="0" placeholder="{{trans('admin.academies.commission_percentage')}}" oninput="this.className = ''" value="{{(old('commission_percentage', isset($academies) ? $academies->commission_percentage : ''))}}" name="commission_percentage">
     </div>
     @error('commission_percentage')
     <p class="text-danger">{{$message}}</p>
@@ -224,7 +224,13 @@
     <p class="text-center mb-4">{{trans('admin.academies.Billing Details')}}</p>
     <div class="mb-3">
         <label for="bank_account_type">{{trans('admin.academies.Bank account type')}}</label>
-        <input id="bank_account_type" type="text" class="" placeholder="{{trans('admin.academies.Bank account type')}}" oninput="this.className = ''" value="{{(old('bank_account_type', isset($academies) ? $academies->bank_account_type : ''))}}" name="bank_account_type">
+        <select id="bank_account_type" class="form-control formInput" name="bank_account_type">
+            <option value="bank_personal" @selected(old('bank_account_type', isset($academies) ? $academies->bank_account_type : '') == 'bank_personal')>{{trans('admin.academies.bank_personal')}}</option>
+            <option value="bank_corpert" @selected(old('bank_account_type', isset($academies) ? $academies->bank_account_type : '') == 'bank_corpert')>{{trans('admin.academies.bank_corpert')}}</option>
+            <option value="wallet" @selected(old('bank_account_type', isset($academies) ? $academies->bank_account_type : '') == 'wallet')>{{trans('admin.academies.wallet')}}</option>
+            <option value="cash" @selected(old('bank_account_type', isset($academies) ? $academies->bank_account_type : '') == 'cash')>{{trans('admin.academies.cash')}}</option>
+            <option value="instapay" @selected(old('bank_account_type', isset($academies) ? $academies->bank_account_type : '') == 'instapay')>{{trans('admin.academies.instapay')}}</option>
+        </select>
     </div>
     @error('bank_account_type')
     <p class="text-danger">{{$message}}</p>

@@ -156,6 +156,11 @@ return [
         'settlement_days_count'=>'Settlement Days Count',
         'contract_link'=>'Contract Link',
         'download' =>'Download',
+        'bank_personal'=>'Bank Personal',
+        'bank_corpert' => 'Bank Corpert',
+        'wallet' => 'Wallet',
+        'cash' => 'Cash',
+        'instapay' => 'Instapay',
     ],
     'banners'=> [
         'banners'=>'Banners',

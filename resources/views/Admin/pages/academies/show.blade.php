@@ -269,7 +269,6 @@
                                             </div>
                                             <div class="card-body">
                                                 <p class="card-text text-center text-dark fw-bold">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><path d="M12 15V21H8V15C8 13.34 9.34 12 11 12C12.66 12 14 13.34 14 15V27H12V15Z"/><path d="M20 12C21.66 12 23 13.34 23 15V21H17V15C17 13.34 18.34 12 20 12Z"/></svg>
                                                 {{$academies->bank_account_type ?? null}}
                                             </div>
                                         </div>
