@@ -235,9 +235,11 @@
                                                             @php
                                                                 $numberOfOutcomes = count(json_decode($class->out_comes, true));
                                                                 $numberBringsWithMe = count(json_decode($class->bring_with_me, true));
+                                                                $outcomes = json_decode($class->out_comes, true);
+                                                                $bringsWithMe = json_decode($class->bring_with_me, true);
                                                             @endphp
                                                             <div class="col-sm-6">
-                                                                {{json_decode($class->out_comes, true)}}
+                                                                {{$outcomes}}
 {{--                                                                <ul>{{ trans('admin.training.out_comes') }}--}}
 {{--                                                                    @for($i = 0; $i < $numberOfOutcomes; $i++)--}}
 {{--                                                                        <li>{{$class->out_comes[$i]}}</li>--}}
