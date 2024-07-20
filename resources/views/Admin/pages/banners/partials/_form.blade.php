@@ -11,6 +11,13 @@
         </div>
 
     </div>
+    <div class="col-sm-8 mx-auto">
+        <select name="status" id="" class="form-control mt-2">
+            <option value="">{{ trans('admin.academies.Status') }}</option>
+            <option value="active" @selected(old('status', (isset($banner) ? $banner->status : '')) == 'active')>{{ trans('admin.academies.active') }}</option>
+            <option value="inactive" @selected(old('status', (isset($banner) ? $banner->status : '')) == 'inactive')>{{ trans('admin.academies.inactive') }}</option>
+        </select>
+    </div>
 </div>
 
 @push('js')

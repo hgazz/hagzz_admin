@@ -81,6 +81,7 @@ class BannerDataTable extends DataTable
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
             ['name' => 'logo', 'data' => 'logo', 'title' => trans('admin.banners.image')],
+            ['name' => 'status', 'data' => 'status', 'title' => trans('admin.academies.Status')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }

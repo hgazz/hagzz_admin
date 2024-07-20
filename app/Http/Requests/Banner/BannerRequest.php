@@ -24,6 +24,7 @@ class BannerRequest extends FormRequest
     {
         return [
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status' => 'required|in:active,inactive',
         ];
     }
 }
