@@ -239,7 +239,7 @@
                                                                 $bringsWithMe = json_decode($class->bring_with_me, true);
                                                             @endphp
                                                             <div class="col-sm-6">
-                                                                {{$outcomes}}
+                                                                {{$outcomes[1]}}
 {{--                                                                <ul>{{ trans('admin.training.out_comes') }}--}}
 {{--                                                                    @for($i = 0; $i < $numberOfOutcomes; $i++)--}}
 {{--                                                                        <li>{{$class->out_comes[$i]}}</li>--}}
