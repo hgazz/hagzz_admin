@@ -9,6 +9,7 @@ use App\Exports\AcademiesExport;
 use App\Http\Requests\Academies\AcademiesRequest;
 use App\Http\Traits\FileUpload;
 use App\Models\Academies;
+use App\Models\Address;
 use App\Models\Area;
 use App\Models\City;
 use App\Models\Country;
@@ -211,6 +212,19 @@ class AcademiesController extends Controller
     public function partnerLocation(AddressDataTable $dataTable)
     {
         return $dataTable->render('Admin.pages.partnerLocation.index');
+    }
+    public function partnerLocationEdit(Address $address)
+    {
+        return view("Admin.pages.partnerLocation.edit",compact('address'));
+    }
+    public function partnerLocationUpdate(Request $request, Address $address)
+    {
+        $address->update([
+            'longitude'=>request('longitude'),
+            'latitude'=>request('latitude'),
+        ]);
+        session()->flash('success',trans('admin.academies.academies_updated_successfully'));
+        return to_route("admin.academies.locations");
     }
 
     public function partnerCoach(CoachDataTable $dataTable)
