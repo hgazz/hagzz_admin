@@ -181,6 +181,7 @@ return [
         'level' =>'Level',
         'create'=>'Add New Sport',
         'edit'=>'Edit',
+        'status' => 'Status',
         'status_active_successfully'=>'Status Active Successfully',
         'status inactive successfully'=>'Status Inactive Successfully',
         'deleted_successfully' => 'Sport Deleted Successfully',

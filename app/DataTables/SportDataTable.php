@@ -84,6 +84,7 @@ class SportDataTable extends DataTable
             ['data' => 'id', 'name' => 'id', 'title' => trans('admin.id')],
             ['data' => 'name', 'name' => 'name', 'title' => trans('admin.sport.title')],
             ['data' => 'icon', 'name' => 'icon', 'title' => trans('admin.sport.icon')],
+            ['data' => 'status', 'name' => 'status', 'title' => trans('admin.sport.status')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
 
         ];
