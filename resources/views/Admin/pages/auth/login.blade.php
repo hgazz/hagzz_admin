@@ -79,7 +79,7 @@
                         </div>
                         <div class="inputBox">
                             <label class="form-label">{{ trans('admin.auth.password') }}<code>*</code></label>
-                            <input type="password" name="password" @if(isset($_COOKIE['password'])) value="{{ $_COOKIE['password'] }}" @endifrequired>
+                            <input type="password" name="password" @if(isset($_COOKIE['password'])) value="{{ $_COOKIE['password'] }}" @endif required>
                             @error('password')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
