@@ -157,6 +157,7 @@ Route::group(
 
                 Route::controller(TrainingController::class)->group(function () {
                     Route::get('trainings', 'index')->name('training.index');
+                    Route::get('trainings/show/{training}', 'show')->name('training.show');
                     Route::put('trainings/active/{training}', 'updateTrainingStatus')->name('training.active');
                     Route::get('trainings/export', 'export')->name('training.export');
                     Route::get('trainings/booking/{training}', 'createBooking')->name('training.createBooking');
