@@ -29,9 +29,6 @@ class BookingRequest extends FormRequest
             'country_code' =>'required|string',
             'phone' =>'required|string',
             'gender' =>'required|in:male,female',
-            'country_id' =>'required|exists:countries,id',
-            'city_id' =>'required|exists:cities,id',
-            'area_id' =>'required|exists:areas,id'
         ];
     }
 }

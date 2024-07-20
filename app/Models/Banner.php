@@ -12,6 +12,7 @@ class Banner extends Model
     const PATH = 'images/banners/';
     protected $fillable = [
         'logo',
+        'status',
     ];
 
     public function getLogoAttribute($value)

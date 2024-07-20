@@ -20,7 +20,6 @@ class Training extends Model
         'active',
         'sport_id',
         'academy_id',
-        'x',
         'level',
         'gender',
         'age_group',

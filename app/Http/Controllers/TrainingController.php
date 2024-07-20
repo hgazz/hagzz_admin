@@ -59,17 +59,18 @@ class TrainingController extends Controller
     public function storeBooking(BookingRequest $request)
     {
         try {
+            $training = Training::findOrFail($request->training_id);
             DB::beginTransaction();
             $user = User::create([
                 'name' => $request->name,
                 'phone' => $request->phone,
                 'gender' => $request->gender,
                 'country_code' => $request->country_code,
-                'country_id' => $request->country_id,
-                'city_id' => $request->city_id,
-                'area_id' => $request->area_id,
+                'country_id' => $training->address->country_id,
+                'city_id' => $training->address->city_id,
+                'area_id' => $training->address->area_id,
                 'user_type'=> 'system',
-                'birth_date'=>$request->birth_date,
+                'birth_date'=> $request->birth_date,
             ]);
             $booking = Invoice::create([
                 'user_id' => $user->id,
