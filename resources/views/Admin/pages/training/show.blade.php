@@ -225,52 +225,54 @@
                                             </div>
 
                                         <div class="tab-pane fade" id="profile-tab-icon-pane" role="tabpanel" aria-labelledby="profile-tab-icon" tabindex="0">
-                                           @forelse($training->classes as $class)
-                                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h5 class="card-title">{{$class->title}}</h5>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            @php
-                                                                $numberOfOutcomes = count(json_decode($class->out_comes, true));
-                                                                $numberBringsWithMe = count(json_decode($class->bring_with_me, true));
-                                                                $outcomes = json_decode($class->out_comes, true);
-                                                                $bringsWithMe = json_decode($class->bring_with_me, true);
-                                                            @endphp
-                                                            <div class="col-sm-6">
-                                                                {{$outcomes[1]}}
-{{--                                                                <ul>{{ trans('admin.training.out_comes') }}--}}
-{{--                                                                    @for($i = 0; $i < $numberOfOutcomes; $i++)--}}
-{{--                                                                        <li>{{$class->out_comes[$i]}}</li>--}}
-{{--                                                                    @endfor--}}
-{{--                                                                </ul>--}}
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <ul>{{ trans('admin.training.brings_with_me') }}
-                                                                    @for($i = 0; $i < $numberBringsWithMe; $i++)
-                                                                        <li>{{$class->bring_with_me[$i]}}</li>
-                                                                    @endfor
-                                                                </ul>
-                                                            </div>
+                                           <div class="row mt-2">
+                                               @forelse($training->classes as $class)
+                                                   <div class="col-sm-6">
+                                                       <div class="card">
+                                                           <div class="card-header">
+                                                               <h5 class="card-title">{{$class->title}}</h5>
+                                                           </div>
+                                                           <div class="card-body">
+                                                               @php
+                                                                   $numberOfOutcomes = count(json_decode($class->out_comes, true));
+                                                                   $numberBringsWithMe = count(json_decode($class->bring_with_me, true));
+                                                                   $outcomes = json_decode($class->out_comes, true);
+                                                                   $bringsWithMe = json_decode($class->bring_with_me, true);
+                                                               @endphp
+                                                               <div class="col-sm-6">
+                                                                   <ul>{{ trans('admin.training.out_comes') }}
+                                                                       @for($i = 0; $i < $numberOfOutcomes; $i++)
+                                                                           <li>{{$outcomes[$i]}}</li>
+                                                                       @endfor
+                                                                   </ul>
+                                                               </div>
+                                                               <div class="col-sm-6">
+                                                                   <ul>{{ trans('admin.training.brings_with_me') }}
+                                                                       @for($i = 0; $i < $numberBringsWithMe; $i++)
+                                                                           <li>{{$bringsWithMe[$i]}}</li>
+                                                                       @endfor
+                                                                   </ul>
+                                                               </div>
 
-                                                        </div>
-                                                        <div class="card-footer">
-                                                            <p class="card-text text-dark fw-bold">{{$class->date}}</p>
-                                                            <small class="text-muted">{{ trans('admin.training.start_time') }}: {{ $class->start_time }}</small>
-                                                            <small class="float-end text-muted">{{ trans('admin.training.end_time') }}: {{ $class->end_time }}</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @empty
-                                                <div class="col-sm-8 mx-auto mt-3">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h5 class="card-title fw-bold text-center">{{ trans('admin.training.no_classes') }}</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                           @endforelse
+                                                           </div>
+                                                           <div class="card-footer">
+                                                               <p class="card-text text-dark fw-bold">{{$class->date}}</p>
+                                                               <small class="text-muted">{{ trans('admin.training.start_time') }}: {{ $class->start_time }}</small>
+                                                               <small class="float-end text-muted">{{ trans('admin.training.end_time') }}: {{ $class->end_time }}</small>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                               @empty
+                                                   <div class="col-sm-8 mx-auto mt-3">
+                                                       <div class="card">
+                                                           <div class="card-header">
+                                                               <h5 class="card-title fw-bold text-center">{{ trans('admin.training.no_classes') }}</h5>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                               @endforelse
+                                           </div>
+
                                         </div>
                                         <hr>
                                         <form action="{{ route('admin.training.active', $training) }}" method="post">
