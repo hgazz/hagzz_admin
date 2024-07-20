@@ -223,7 +223,16 @@ class AcademiesController extends Controller
             'longitude'=>request('longitude'),
             'latitude'=>request('latitude'),
         ]);
-        session()->flash('success',trans('admin.academies.academies_updated_successfully'));
+        session()->flash('success',trans('admin.gallery.status_updated_successfully'));
+        return to_route("admin.academies.locations");
+    }
+
+    public function updateStatusAddress(Address $address)
+    {
+        $address->update([
+            'active'=> !$address->active,
+        ]);
+        session()->flash('success',trans('admin.gallery.status_updated_successfully'));
         return to_route("admin.academies.locations");
     }
 
