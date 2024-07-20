@@ -27,7 +27,7 @@
 #signUpForm .form-header .stepIndicator::before {
     content: "";
     position: absolute;
-    right: 50%;
+    right: 37%;
     bottom: 0;
     transform: translateX(-50%);
     z-index: 9;
