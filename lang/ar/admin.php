@@ -350,6 +350,7 @@ return [
         'active' => 'نشط',
         'not_active' => 'غير نشط',
         'bulk_active' => 'تنشيط جماعي',
+        'bulk_inactive' => 'تعطيل جماعي',
     ],
     'address' => [
         'address' => 'المواقع',

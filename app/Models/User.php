@@ -16,7 +16,7 @@ class User extends Authenticatable
 
     public function getImageAttribute($value)
     {
-        return is_null($value) ? asset('assetsAdmin/logo/Primary.svg') : config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
+        return is_null($value) ? asset('assetsAdmin/people-fill.svg') : config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
     }
     /**
      * The attributes that are mass assignable.

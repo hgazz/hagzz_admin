@@ -368,6 +368,7 @@ return [
         'not_active' => 'Not Active',
         'status_updated_successfully' => 'Status Updated Successfully',
         'bulk_active' => 'Bulk Active',
+        'bulk_inactive' => 'Bulk In Active',
     ],
     'address'=>[
         'location'=>'Location',
