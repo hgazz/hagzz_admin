@@ -227,7 +227,7 @@
                                         <div class="tab-pane fade" id="profile-tab-icon-pane" role="tabpanel" aria-labelledby="profile-tab-icon" tabindex="0">
                                            <div class="row mt-2">
                                                @forelse($training->classes as $class)
-                                                   <div class="col-sm-6">
+                                                   <div class="col-sm-6 mt-2">
                                                        <div class="card">
                                                            <div class="card-header">
                                                                <h5 class="card-title">{{$class->title}}</h5>
@@ -239,21 +239,22 @@
                                                                    $outcomes = json_decode($class->out_comes, true);
                                                                    $bringsWithMe = json_decode($class->bring_with_me, true);
                                                                @endphp
-                                                               <div class="col-sm-6">
-                                                                   <ul>{{ trans('admin.training.out_comes') }}
-                                                                       @for($i = 0; $i < $numberOfOutcomes; $i++)
-                                                                           <li>{{$outcomes[$i]}}</li>
-                                                                       @endfor
-                                                                   </ul>
+                                                               <div class="row">
+                                                                   <div class="col-sm-6">
+                                                                       <ul>{{ trans('admin.training.out_comes') }}
+                                                                           @for($i = 0; $i < $numberOfOutcomes; $i++)
+                                                                               <li>{{$outcomes[$i]}}</li>
+                                                                           @endfor
+                                                                       </ul>
+                                                                   </div>
+                                                                   <div class="col-sm-6">
+                                                                       <ul>{{ trans('admin.training.brings_with_me') }}
+                                                                           @for($i = 0; $i < $numberBringsWithMe; $i++)
+                                                                               <li>{{$bringsWithMe[$i]}}</li>
+                                                                           @endfor
+                                                                       </ul>
+                                                                   </div>
                                                                </div>
-                                                               <div class="col-sm-6">
-                                                                   <ul>{{ trans('admin.training.brings_with_me') }}
-                                                                       @for($i = 0; $i < $numberBringsWithMe; $i++)
-                                                                           <li>{{$bringsWithMe[$i]}}</li>
-                                                                       @endfor
-                                                                   </ul>
-                                                               </div>
-
                                                            </div>
                                                            <div class="card-footer">
                                                                <p class="card-text text-dark fw-bold">{{$class->date}}</p>
