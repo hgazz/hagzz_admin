@@ -1,6 +1,6 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.area.edit'). ' | ' . $area->name)
+@section('title', trans('admin.area.edit'). ' | ' . $address->name)
 
 
 @section('content')
@@ -28,13 +28,11 @@
                             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a
-                                                href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a>
-                                    </li>
+                                            href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
                                     <li class="breadcrumb-item"><a
-                                                href="{{ route('admin.areas.index') }}">{{ trans('admin.area.area') }}</a>
+                                            href="{{ route('admin.areas.index') }}">{{ trans('admin.area.area') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active"
-                                        aria-current="page">{{ trans('admin.area.edit'). ' | ' . $area->name}}</li>
+                                                                        <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.area.edit'). ' | ' . $address->name}}</li>
                                 </ol>
                             </nav>
 
@@ -47,12 +45,12 @@
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-bottom:24px;">
-                <form method="POST" action="{{ route('admin.areas.update', $area) }}">
+                <form method="POST" action="{{ route('admin.academies.locations.update', $address) }}">
                     @method('PUT')
-                    <input type="hidden" name="id_unique" value="{{ $area->id }}">
+                    <input type="hidden" name="id_unique" value="{{ $address->id }}">
                     <div class="card">
                         <div class="card-header">
-                            <h3>{{ trans('admin.area.edit'). ' | ' . $area->name }}</h3>
+                            <h3>{{ trans('admin.area.edit'). ' | ' . $address->name }}</h3>
                         </div>
                         <div class="card-body">
                             @include('Admin.pages.partnerLocation.partials._form')
@@ -67,3 +65,4 @@
         </div>
     </div>
 @endsection
+

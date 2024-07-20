@@ -90,6 +90,9 @@ Route::group(
                     Route::get('academies/show/{academies}', 'show')->name('academies.show');
                     Route::get('academies/export', 'export')->name('academies.export');
                     Route::get('partner/locations', 'partnerLocation')->name('academies.locations');
+                    Route::get('partner/locations/{address}', 'updateStatusAddress')->name('academies.locations.updateStatusAddress');
+                    Route::get("partner/locations/edit/{address}", 'partnerLocationEdit')->name('academies.locations.edit');
+                    Route::put("partner/locations/update/{address}", 'partnerLocationUpdate')->name('academies.locations.update');
                     Route::get('partner/coaches', 'partnerCoach')->name('academies.coaches');
                 });
 
