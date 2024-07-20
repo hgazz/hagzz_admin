@@ -296,7 +296,7 @@ return [
         'Choose Coach' => 'اختر المدرب',
         'Classes' => 'الحصص التدريبيه',
         'Choose Classes' => 'اختر السيشن',
-        'price' => 'السعر',
+        'price' => 'السعر الفعلي',
         'start_time' => 'وقت البدء',
         'end_time' => 'وقت الانتهاء',
         'levels' => 'المستويات',
