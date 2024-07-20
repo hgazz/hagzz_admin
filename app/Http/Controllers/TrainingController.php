@@ -34,6 +34,11 @@ class TrainingController extends Controller
         return $dataTable->render('Admin.pages.training.index');
     }
 
+    public function show(Training $training)
+    {
+        return view('Admin.pages.training.show', get_defined_vars());
+    }
+
     public function updateTrainingStatus(Training $training)
     {
         $training->update(['active' => ! $training->active]);

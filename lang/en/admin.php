@@ -361,6 +361,11 @@ return [
         'subscribed' => 'Subscribed',
         'active' => 'Active',
         'make_booking'=>'Make Booking',
+        'main_details' => 'Main Details',
+        'discount_price' => 'Discount Price',
+        'no_classes' => 'No Classes',
+        'out_comes' => 'Out Comes',
+        'brings_with_me' => 'Brings with me',
     ],
     'gallery'=> [
         'gallery'=>'Gallery',

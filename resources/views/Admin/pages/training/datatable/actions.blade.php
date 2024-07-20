@@ -56,6 +56,16 @@
                     {{ trans('admin.training.make_booking') }}
                 </a>
             </li>
+            <li class="mb-1">
+                <a href="{{ route('admin.training.show', $training) }}" class="text-primary text-center"
+                   title="{{ trans('admin.academies.show') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 24 24">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                    </svg>
+                    {{ trans('admin.training.Show Details') }}
+                </a>
+            </li>
             @if ($training->joins->count() == 0)
                 <li class="mb-1">
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">

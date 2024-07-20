@@ -343,6 +343,11 @@ return [
         'subscribed' => 'مشترك',
         'active' => 'نشط',
         'make_booking' => 'إجراء حجز',
+        'main_details' => 'التفاصيل الرئيسية',
+        'discount_price' => 'السعر بعد الخصم',
+        'no_classes' => 'لا يوجد جلسات',
+        'out_comes' => 'النتائج',
+        'brings_with_me' => 'أحضر معي',
     ],
     'gallery' => [
         'gallery' => 'المعرض',
