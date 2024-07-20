@@ -233,13 +233,8 @@
                                                         </div>
                                                         <div class="card-body">
                                                             @php
-                                                                // Ensure $class->out_comes and $class->bring_with_me are arrays
-                                                                $outComes = is_array($class->out_comes) ? $class->out_comes : explode(',', $class->out_comes);
-                                                                $bringWithMe = is_array($class->bring_with_me) ? $class->bring_with_me : explode(',', $class->bring_with_me);
-
-                                                                // Count the elements in the arrays
-                                                                $numberOfOutcomes = count($outComes);
-                                                                $numberBringsWithMe = count($bringWithMe);
+                                                                $numberOfOutcomes = count(json_decode($class->out_comes, true));
+                                                                $numberBringsWithMe = count(json_decode($class->bring_with_me, true));
                                                             @endphp
                                                             <div class="col-sm-6">
                                                                 <ul>{{ trans('admin.training.out_comes') }}
