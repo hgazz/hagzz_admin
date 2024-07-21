@@ -13,7 +13,7 @@
         type="text/css" />
     <script src="{{ asset('assetsAdmin/layouts/vertical-light-menu/loader.js') }}"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cairo:400,600,700" rel="stylesheet">
     <link href="{{ asset('assetsAdmin/src/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('assetsAdmin/layouts/vertical-light-menu/css/light/plugins.css') }}" rel="stylesheet"
@@ -42,25 +42,10 @@
     <!--  END LOADER -->
 
     <section>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span>
-        <div class="signin">
+        {{-- <div class="signin">
             <div class="content">
                 <img src="{{ asset('assetsAdmin/logo/Icon-Black.svg') }}" alt="User Image">
                 <h2>{{ trans('admin.auth.sign_in') }}</h2>
-                {{-- <p class="text-light">{{ trans('admin.auth.enter_your_email_and_password') }}</p> --}}
 
                 @if (session()->has('error'))
                     <div class="alert alert-danger">
@@ -96,6 +81,53 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div> --}}
+
+        <div class="signIn">
+            <div class="signIn-logo">
+                <img src="{{ asset('assetsAdmin/src/assets/img/auth/logIn-logo.jpeg') }}" alt="">
+                <h1>
+                    Ignite Your Success Story Here
+                </h1>
+            </div>
+            <div class="content">
+                <form class="w-50" action="{{ route('admin.login') }}" method="post">
+                    @csrf
+                    <h2>
+                        Welcome back
+                        with open arms!
+                    </h2>
+                    <div class="form">
+                        <div class="inputBox">
+                            <input type="email" name="email" value="{{ old('email') }}" placeholder="Email"
+                                required>
+                            @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="inputBox">
+                            <input type="password" name="password" required placeholder="Password">
+                            @error('password')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-check form-check-primary form-check-inline">
+                            <input class="form-check-input me-3" type="checkbox" id="form-check-default" name="remember"
+                                value="1" @if (old('remember')) checked @endif>
+                            <label class="form-check-label" for="form-check-default">
+                                {{ trans('admin.auth.remember_me') }}
+                            </label>
+                        </div>
+                        <div class="inputBox w-100 text-light mt-4">
+                            <input type="submit" class="w-100" value="{{ trans('admin.auth.sign_in') }}">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="image">
+                    <img src="{{ asset('assetsAdmin/src/assets/img/auth/login.png') }}" alt="">
+                </div>
             </div>
         </div>
     </section>
