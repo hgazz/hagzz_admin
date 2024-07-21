@@ -57,14 +57,14 @@
                     <div class="form">
                         <div class="inputBox">
                             <label class="form-label">{{ trans('admin.auth.email') }}<code>*</code></label>
-                            <input type="email" name="email" value="{{ old('email') }}" required>
+                            <input type="email" name="email" @if(isset($_COOKIE['email'])) value="{{ $_COOKIE['email'] }}" @endif required>
                             @error('email')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="inputBox">
                             <label class="form-label">{{ trans('admin.auth.password') }}<code>*</code></label>
-                            <input type="password" name="password" required>
+                            <input type="password" name="password" @if(isset($_COOKIE['password'])) value="{{ $_COOKIE['password'] }}" @endif required>
                             @error('password')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror

@@ -62,7 +62,10 @@ class AddressDataTable extends DataTable
                         $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
                     });
                 })
-                ->rawColumns(['country_id','city_id','area_id','academy_id']);
+            ->addColumn('action', function (Address $address) {
+                return view('Admin.pages.partnerLocation.datatable.actions', compact('address'));
+            })
+                ->rawColumns(['country_id','city_id','area_id','academy_id','action']);
     }
 
     /**
@@ -169,7 +172,7 @@ class AddressDataTable extends DataTable
             ['name' => 'latitude', 'data' => 'latitude', 'title' => trans('admin.address.latitude')],
             ['name' => 'active', 'data' => 'active', 'title' => trans('admin.address.active')],
             ['name' => 'location_owned', 'data' => 'location_owned', 'title' => trans('admin.address.location_owned')],
-//            ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
+            ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }
 
