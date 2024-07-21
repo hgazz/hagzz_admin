@@ -13,7 +13,7 @@
         type="text/css" />
     <script src="{{ asset('assetsAdmin/layouts/vertical-light-menu/loader.js') }}"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cairo:400,600,700" rel="stylesheet">
     <link href="{{ asset('assetsAdmin/src/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('assetsAdmin/layouts/vertical-light-menu/css/light/plugins.css') }}" rel="stylesheet"
@@ -112,13 +112,13 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        {{-- <div class="form-check form-check-primary form-check-inline">
+                        <div class="form-check form-check-primary form-check-inline">
                             <input class="form-check-input me-3" type="checkbox" id="form-check-default" name="remember"
                                 value="1" @if (old('remember')) checked @endif>
                             <label class="form-check-label" for="form-check-default">
                                 {{ trans('admin.auth.remember_me') }}
                             </label>
-                        </div> --}}
+                        </div>
                         <div class="inputBox w-100 text-light mt-4">
                             <input type="submit" class="w-100" value="{{ trans('admin.auth.sign_in') }}">
                         </div>

@@ -87,6 +87,12 @@ input[type="submit"] {
     width: 100%;
 }
 
+.form-check.form-check-primary {
+    margin-left: 10px;
+}
+.form-check.form-check-primary .form-check-input:checked {
+    background-color: black;
+}
 
 @media screen and (max-width:991px) {
 
