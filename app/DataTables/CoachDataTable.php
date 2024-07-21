@@ -52,7 +52,7 @@ class CoachDataTable extends DataTable
             ->filterColumn('active', function ($query, $keyword) {
                 $query->where('active', $keyword === 'active' ? 1 : 0);
             })
-            ->filterColumn('academy.commercial_name', function ($query, $keyword) {
+            ->filterColumn('academy_id', function ($query, $keyword) {
                 $query->whereHas('academy',function ($q) use($keyword){
                     $q->whereRaw("JSON_SEARCH(lower(commercial_name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
                 });
