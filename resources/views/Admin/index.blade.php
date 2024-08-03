@@ -512,4 +512,31 @@
             });
         });
     </script>
+    <script>
+        function checkNotifications() {
+            $.ajax({
+                url: '{{ route("admin.check-notifications") }}',
+                type: 'GET',
+                success: function(data) {
+                    if (data.hasChanged) {
+                        $('#notificationBadge').text(data.unreadCount).show();
+                        alert("You have new notifications!");
+                    } else if (data.unreadCount === 0) {
+                        $('#notificationBadge').hide();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Failed to fetch notifications:', error);
+                }
+            });
+        }
+
+        // Check notifications every minute
+        setInterval(checkNotifications, 60000); // 60000ms = 1 minute
+
+        // Initial check when page loads
+        $(document).ready(function() {
+            checkNotifications();
+        });
+    </script>
 @endpush

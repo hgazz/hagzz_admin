@@ -6,6 +6,7 @@ use App\Http\Traits\BookingFilterTrait;
 use App\Http\Traits\UsersTrait;
 use App\Models\Follow;
 use App\Models\Join;
+use App\Models\Notification;
 use App\Models\Settlement;
 use App\Models\Sport;
 use App\Models\User;
@@ -161,6 +162,23 @@ class DashboardController extends Controller
             ->where('created_at', '>=', Carbon::now()->subDays(7))
             ->get()
             ->unique('user_id');
+    }
+
+    public function checkNotifications()
+    {
+        $unreadCount = Notification::whereNull('read_at')->count();
+        $previousCount = session('notification_count', 0);
+
+        // Save the new count in the session
+        session(['notification_count' => $unreadCount]);
+
+        // Return the current count and whether it has changed
+        return response()->json([
+            'unreadCount' => $unreadCount,
+            'hasChanged' => $unreadCount !== $previousCount,
+        ]);
+
+        return response()->json(['unreadCount' => $unreadCount]);
     }
 
 }
