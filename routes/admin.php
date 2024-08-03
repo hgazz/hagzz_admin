@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SportController;
@@ -124,6 +125,9 @@ Route::group(
                     Route::put('setting/update/{setting}', 'update')->name('setting.update');
                     Route::delete('setting/delete', 'delete')->name('setting.delete');
 
+                });
+                Route::controller(NotificationController::class)->group(function () {
+                    Route::get('notification', 'index')->name('notification.index');
                 });
                 Route::controller(FaqController::class)->group(function () {
                     Route::get('faq', 'index')->name('faq.index');

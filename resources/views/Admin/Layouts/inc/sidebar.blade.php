@@ -57,7 +57,7 @@
 
             <li class="menu {{ Request::routeIs('admin.index') ? 'active' : '' }}">
                 <a href="{{ route('admin.index') }}" aria-expanded="false" class="dropdown-toggle">
-                    
+
                     <div class="">
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 33 32"
@@ -301,6 +301,15 @@
                     </div>
                 </a>
             </li>
+            <li class="menu {{ Request::routeIs('admin.notification.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.notification.index') }}" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <img src="{{ asset('assetsAdmin/card-checklist.svg') }}" alt="">
+                        <span>Notification</span>
+                    </div>
+                </a>
+            </li>
+
 
             <li class="menu {{ Request::routeIs('admin.report.*') ? 'active' : '' }}">
                 <a href="#report" data-bs-toggle="collapse"
