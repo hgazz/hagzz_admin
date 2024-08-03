@@ -23,7 +23,7 @@ class NotificationDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->editColumn('notifiable_type', function ($notification) {
-                return $notification->notifiable->name;
+                return $notification?->notifiable?->name;
             })
             ->editColumn('description', function ($notification) {
                 return $notification->description ?? null;
