@@ -29,7 +29,7 @@
                             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Notification</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{trans("admin.notification.notification")}}</li>
                                 </ol>
                             </nav>
 
@@ -46,7 +46,7 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
                             <a href="">
-                                <h3>Notifications</h3>
+                                <h3>{{trans("admin.notification.notification")}}</h3>
                             </a>
 {{--                            <a href="{{route('admin.setting.create')}}" class="btn btn-primary">--}}
 {{--                                {{ trans('admin.setting.create') }}--}}

@@ -181,6 +181,13 @@ return [
         'updated_successfully' => 'تم تحديث الإعداد بنجاح',
         'deleted_successfully' => 'تم حذف الإعداد بنجاح',
     ],
+    'notification' => [
+        'notification' => 'الإشعارات',
+        'title' => 'العنوان',
+        'description' => 'الوصف',
+        'details' => 'التفاصيل',
+        'notifiable_type' => 'نوع الإشعار',
+    ],
     'coaches' => [
         'coaches' => 'المدربين',
         'create' => 'إنشاء',

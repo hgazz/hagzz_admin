@@ -81,10 +81,10 @@ class NotificationDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            ['data' => 'notifiable_type', 'name' => 'notifiable_type', 'title' =>'Notifiable Type'],
-            ['data' => 'title', 'name' => 'title', 'title' => 'Title'],
-            ['data' => 'description', 'name' => 'description', 'title' => 'Description'],
-            ['data' => 'details', 'name' => 'details', 'title' => 'Details'],
+            ['data' => 'notifiable_type', 'name' => 'notifiable_type', 'title' =>trans("admin.notification.notifiable_type")],
+            ['data' => 'title', 'name' => 'title', 'title' =>trans("admin.notification.title")],
+            ['data' => 'description', 'name' => 'description', 'title' =>trans("admin.notification.description")],
+            ['data' => 'details', 'name' => 'details', 'title' =>trans("admin.notification.details")],
         ];
     }
 

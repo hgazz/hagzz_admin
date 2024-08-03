@@ -198,6 +198,13 @@ return [
         'updated_successfully' => 'Setting Updated Successfully',
         'deleted_successfully' => 'Setting Deleted Successfully',
     ],
+    'notification'=>[
+      'notification'=>'Notification',
+      'title'=>'Title',
+      'description'=>'Description',
+      'details'=>'Details',
+        'notifiable_type'=>'Notifiable Type',
+    ],
     'coaches'=>[
         'coaches'=>'Coaches',
         'create'=>'Create',
