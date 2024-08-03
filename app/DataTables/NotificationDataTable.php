@@ -22,6 +22,12 @@ class NotificationDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->editColumn('notifiable_type', function ($notification) {
+                return $notification->notifiable->name;
+            })
+            ->editColumn('description', function ($notification) {
+                return $notification->description ?? null;
+            })
             ->addColumn('action', 'notification.action')
             ->setRowId('id');
     }
@@ -77,6 +83,7 @@ class NotificationDataTable extends DataTable
         return [
             ['data' => 'notifiable_type', 'name' => 'notifiable_type', 'title' =>'Notifiable Type'],
             ['data' => 'title', 'name' => 'title', 'title' => 'Title'],
+            ['data' => 'description', 'name' => 'description', 'title' => 'Description'],
             ['data' => 'details', 'name' => 'details', 'title' => 'Details'],
         ];
     }
