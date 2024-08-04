@@ -181,6 +181,16 @@ return [
         'updated_successfully' => 'تم تحديث الإعداد بنجاح',
         'deleted_successfully' => 'تم حذف الإعداد بنجاح',
     ],
+    'notification' => [
+        'notification' => 'الإشعارات',
+        'title' => 'العنوان',
+        'description' => 'الوصف',
+        'details' => 'التفاصيل',
+        'type' => 'النوع',
+        'user'=>'(المستخدم)',
+        'partner'=>'(الاكاديمية)',
+        'created_at'=>'تاريخ الإنشاء'
+    ],
     'coaches' => [
         'coaches' => 'المدربين',
         'create' => 'إنشاء',

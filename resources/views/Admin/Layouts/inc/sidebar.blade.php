@@ -305,7 +305,7 @@
                 <a href="{{ route('admin.notification.index') }}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <img src="{{ asset('assetsAdmin/card-checklist.svg') }}" alt="">
-                        <span>Notification</span>
+                        <span>{{trans("admin.notification.notification")}}</span>
                     </div>
                 </a>
             </li>
