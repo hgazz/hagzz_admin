@@ -186,7 +186,10 @@ return [
         'title' => 'العنوان',
         'description' => 'الوصف',
         'details' => 'التفاصيل',
-        'notifiable_type' => 'نوع الإشعار',
+        'type' => 'النوع',
+        'user'=>'(المستخدم)',
+        'partner'=>'(الاكاديمية)',
+        'created_at'=>'تاريخ الإنشاء'
     ],
     'coaches' => [
         'coaches' => 'المدربين',

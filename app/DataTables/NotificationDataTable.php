@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Notification;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -23,10 +24,14 @@ class NotificationDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->editColumn('notifiable_type', function ($notification) {
-                return $notification?->notifiable?->name;
+                return $notification?->notifiable?->name  . ' '. $notification->notifiable_type == "App\\Models\\User" ? trans("admin.notification.user") : trans("admin.notification.partner")  ;
             })
             ->editColumn('description', function ($notification) {
                 return $notification->description ?? null;
+            })
+            ->editColumn('created_at', function ($notification) {
+                $date = Carbon::parse($notification->created_at);
+                return $date->format('F j, Y');
             })
             ->addColumn('action', 'notification.action')
             ->setRowId('id');
@@ -81,10 +86,11 @@ class NotificationDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            ['data' => 'notifiable_type', 'name' => 'notifiable_type', 'title' =>trans("admin.notification.notifiable_type")],
+            ['data' => 'notifiable_type', 'name' => 'notifiable_type', 'title' =>trans("admin.notification.type")],
             ['data' => 'title', 'name' => 'title', 'title' =>trans("admin.notification.title")],
             ['data' => 'description', 'name' => 'description', 'title' =>trans("admin.notification.description")],
             ['data' => 'details', 'name' => 'details', 'title' =>trans("admin.notification.details")],
+            ['data' => 'created_at', 'name' => 'created_at', 'title' =>trans("admin.notification.created_at")],
         ];
     }
 

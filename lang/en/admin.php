@@ -203,7 +203,10 @@ return [
       'title'=>'Title',
       'description'=>'Description',
       'details'=>'Details',
-        'notifiable_type'=>'Notifiable Type',
+        'type'=>'Type',
+        'user'=>'(User)',
+        'partner'=>'(Partner)',
+        'created_at'=>'Created At',
     ],
     'coaches'=>[
         'coaches'=>'Coaches',
