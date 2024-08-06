@@ -23,7 +23,7 @@ class NotificationDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->editColumn('notifiable_type', function ($notification) {
+            ->addColumn('notifiable', function ($notification) {
                 return $notification?->notifiable?->name ;
             })
             ->editColumn('notifiable_type', function ($notification) {
@@ -37,7 +37,8 @@ class NotificationDataTable extends DataTable
                 return $date->format('F j, Y');
             })
             ->addColumn('action', 'notification.action')
-            ->setRowId('id');
+            ->setRowId('id')
+            ->rawColumns(['notifiable']);
     }
 
     /**
@@ -89,7 +90,7 @@ class NotificationDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            ['data' => 'notifiable_type', 'name' => 'notifiable_type', 'title' =>trans("admin.profile.user")],
+            ['data' => 'notifiable', 'name' => 'notifiable', 'title' =>trans("admin.profile.user"), 'searchable' => false, 'orderable' => false],
             ['data' => 'notifiable_type', 'name' => 'notifiable_type', 'title' =>trans("admin.notification.type")],
             ['data' => 'title', 'name' => 'title', 'title' =>trans("admin.notification.title")],
             ['data' => 'description', 'name' => 'description', 'title' =>trans("admin.notification.description")],
