@@ -33,6 +33,9 @@ return [
     'created_at' => 'Created At',
     'print' => 'Print',
     'export' => 'Export',
+    'new_notifications' => 'New Notifications!',
+    'you_have_new_notifications' => 'You have new notifications.',
+    'ok' => 'OK',
     'auth' => [
         'sign_in' => 'Sign In',
         'enter_your_email_and_password' => 'Enter your email and password to login',

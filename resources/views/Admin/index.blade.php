@@ -523,10 +523,10 @@
                     if (data.hasChanged) {
                         $('#notificationBadge').text(data.unreadCount).show();
                         Swal.fire({
-                            title: 'New Notifications!',
-                            text: "You have new notifications.",
+                            title: '{{ trans('admin.new_notifications') }}',
+                            text: "{{ trans('admin.you_have_new_notifications') }}",
                             icon: 'info',
-                            confirmButtonText: 'OK'
+                            confirmButtonText: '{{ trans('admin.ok') }}'
                         });
                     } else if (data.unreadCount === 0) {
                         $('#notificationBadge').hide();

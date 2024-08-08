@@ -32,6 +32,9 @@ return [
     'contract_link' => 'رابط العقد',
     'created_at' => 'تاريخ الانشاء',
     'print' => 'طباعة',
+    'new_notifications' => 'الاشعارات الجديدة',
+    'you_have_new_notifications' => 'لديك اشعارات جديدة',
+    'ok' => 'موافق',
     'auth' => [
         'sign_in' => 'تسجيل الدخول',
         'enter_your_email_and_password' => 'أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول',
