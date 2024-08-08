@@ -320,6 +320,8 @@
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="{{ asset('assetsAdmin/src/plugins/src/flatpickr/flatpickr.js') }}"></script>
     <script src="{{ asset('assetsAdmin/src/plugins/src/flatpickr/custom-flatpickr.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <script>
         var f1 = flatpickr(document.getElementById('start_date'));
@@ -520,7 +522,12 @@
                 success: function(data) {
                     if (data.hasChanged) {
                         $('#notificationBadge').text(data.unreadCount).show();
-                        alert("You have new notifications!");
+                        Swal.fire({
+                            title: 'New Notifications!',
+                            text: "You have new notifications.",
+                            icon: 'info',
+                            confirmButtonText: 'OK'
+                        });
                     } else if (data.unreadCount === 0) {
                         $('#notificationBadge').hide();
                     }
@@ -530,6 +537,7 @@
                 }
             });
         }
+
 
         // Check notifications every minute
         setInterval(checkNotifications, 60000); // 60000ms = 1 minute
