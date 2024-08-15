@@ -53,7 +53,7 @@
                             <h3>{{ trans('admin.area.create') }}</h3>
                         </div>
                         <div class="card-body">
-                            @include('Admin.pages.partnerLocation.partials._form')
+                            @include('Admin.pages.area._form')
                         </div>
                         <div class="card-footer">
                             <button type="submit"
