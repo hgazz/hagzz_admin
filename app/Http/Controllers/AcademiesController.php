@@ -131,7 +131,7 @@ class AcademiesController extends Controller
     public function update(Academies $academies , AcademiesRequest $request)
     {
         DB::transaction(function () use ($academies, $request) {
-            $imageName = $request->hasFile('image') ? $this->upload($request->file('image') , $this->academicModels::PATH,  $academies->getRawOriginal('image')) : $academies->getRawOriginal('icon');
+            $imageName = $request->hasFile('image') ? $this->upload($request->file('image') , $this->academicModels::PATH,  $academies->getRawOriginal('logo')) : $academies->getRawOriginal('icon');
             $translatableFields = TranslatableService::generateTranslatableFields($this->academicModels->getTranslatableFields(), $request->validated());
             $academies->update($translatableFields + [
                 'password'=> !is_null($request->password) ? Hash::make($request->password) : $academies->password,
