@@ -60,6 +60,8 @@ return [
         'deleted_successfully' => 'City deleted successfully',
         'Select County'=>'Select County',
         'country'=>'Country',
+        'country_en'=>'Country (English)',
+        'country_ar'=>'Country (Arabic)',
         'country_code'=>'Country Code',
     ],
     'area' => [
@@ -71,6 +73,8 @@ return [
         'name_ar' => 'Name (Arabic)',
         'name_en' => 'Name (English)',
         'city' => 'City',
+        'city_en' => 'City Name (English)',
+        'city_ar' => 'City Name (Arabic)',
         'select_city' => 'Select City',
         'created_successfully' => 'Area created successfully',
         'updated_successfully' => 'Area updated successfully',

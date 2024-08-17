@@ -59,6 +59,8 @@ return [
         'deleted_successfully' => 'تم حذف المدينة بنجاح',
         'Select County' => 'اختر الدوله',
         'country' => 'الدولة',
+        'country_en' => 'اسم الدولة بالإنجليزية',
+        'country_ar' => 'اسم الدولة بالعربية',
         'country_code' => 'رمز الدولة',
     ],
     'area' => [
@@ -70,6 +72,8 @@ return [
         'name_ar' => 'الاسم (بالعربية)',
         'name_en' => 'الاسم (بالإنجليزية)',
         'city' => 'المدينة',
+        'city_en' => 'اسم المدينة بالإنجليزية',
+        'city_ar' => 'اسم المدينة بالعربية',
         'select_city' => 'اختر المدينة',
         'created_successfully' => 'تم إنشاء المنطقة بنجاح',
         'updated_successfully' => 'تم تحديث المنطقة بنجاح',

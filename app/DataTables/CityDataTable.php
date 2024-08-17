@@ -23,8 +23,11 @@ class CityDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('name.en', fn($raw) => $raw->getTranslation('name', 'en'))
             ->addColumn('name.ar', fn($raw) => $raw->getTranslation('name', 'ar'))
-            ->addColumn('country.name', function (City $country) {
-                return $country->country->getTranslation('name', app()->getLocale());
+            ->addColumn('country_en', function (City $country) {
+                return $country->country->getTranslation('name', 'en');
+            })
+            ->addColumn('country_ar', function (City $country) {
+                return $country->country->getTranslation('name', 'ar');
             })
             ->addColumn('action', function (City $city) {
                 return view('Admin.pages.city.datatable.actions', compact('city'))->render();
@@ -101,7 +104,8 @@ class CityDataTable extends DataTable
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
             ['name' => 'name->en', 'data' => 'name.en', 'title' => trans('admin.city.name_en')],
             ['name' => 'name->ar', 'data' => 'name.ar', 'title' => trans('admin.city.name_ar')],
-            ['name' => 'country.name', 'data' => 'country.name', 'title' => trans('admin.city.country')],
+            ['name' => 'country.name->en', 'data' => 'country_en', 'title' => trans('admin.city.country_en')],
+            ['name' => 'country.name->ar', 'data' => 'country_ar', 'title' => trans('admin.city.country_ar')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }

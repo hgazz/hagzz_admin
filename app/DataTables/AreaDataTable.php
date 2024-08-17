@@ -22,8 +22,11 @@ class AreaDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('name_en', fn($raw) => $raw->getTranslation('name', 'en'))
             ->addColumn('name_ar', fn($raw) => $raw->getTranslation('name', 'ar'))
-            ->addColumn('city_id', function (Area $area) {
-                return $area->city->name;
+            ->addColumn('city_en', function (Area $area) {
+                return $area->city->getTranslation('name', 'en');
+            })
+            ->addColumn('city_ar', function (Area $area) {
+                return $area->city->getTranslation('name', 'ar');
             })
             ->addColumn('action', function (Area $area) {
                 return view('Admin.pages.area.datatable.actions', compact('area'))->render();
@@ -33,7 +36,7 @@ class AreaDataTable extends DataTable
                     $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
                 });
             })
-            ->rawColumns(['name_en', 'name_ar','action', 'city_id']);
+            ->rawColumns(['name_en', 'name_ar','action', 'city_en', 'city_ar']);
     }
 
     /**
@@ -99,7 +102,8 @@ class AreaDataTable extends DataTable
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
             ['name' => 'name->en', 'data' => 'name_en', 'title' => trans('admin.city.name_en')],
             ['name' => 'name->ar', 'data' => 'name_ar', 'title' => trans('admin.city.name_ar')],
-            ['name' => 'city.name', 'data' => 'city_id', 'title' => trans('admin.city.name')],
+            ['name' => 'city.name->en', 'data' => 'city_en', 'title' => trans('admin.area.city_en')],
+            ['name' => 'city.name->ar', 'data' => 'city_ar', 'title' => trans('admin.area.city_ar')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }
