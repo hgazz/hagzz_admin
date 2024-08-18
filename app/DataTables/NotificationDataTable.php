@@ -46,7 +46,7 @@ class NotificationDataTable extends DataTable
      */
     public function query(Notification $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('created_at', 'desc');
     }
 
     /**
