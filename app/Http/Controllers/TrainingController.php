@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\DataTables\TrainingDataTable;
 use App\Exports\TrainingExport;
 use App\Http\Requests\Booking\BookingRequest;
+use App\Models\Academies;
 use App\Models\Area;
 use App\Models\City;
+use App\Models\Coach;
 use App\Models\Country;
+use App\Models\Follow;
 use App\Models\Invoice;
 use App\Models\Join;
 use App\Models\Training;
 use App\Models\User;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -42,6 +46,7 @@ class TrainingController extends Controller
     public function updateTrainingStatus(Training $training)
     {
         $training->update(['active' => ! $training->active]);
+        $this->sendNotification($training);
         return back()->with('success', __('admin.training.Training Status Updated'));
     }
 
@@ -120,6 +125,41 @@ class TrainingController extends Controller
             return response()->json(['data' => [
                 'status' => 'failed',
             ]]);
+        }
+    }
+
+    /**
+     * @param Training $training
+     * @return void
+     */
+    public function sendNotification(Training $training): void
+    {
+        if ($training->active) {
+            $details = [
+                'training_id' => $training->id,
+                'longitude' => $training->longitude,
+                'latitude' => $training->latitude,
+                'academy_name' => $training->academy->commercial_name
+            ];
+            $AcademyTitle = 'Don’t miss out!';
+            $AcademyBody = 'just added a new activity. Check it out!';
+            $academyFollows = Follow::where([
+                'followable_type' => Academies::class,
+                'followable_id' => $training->academy_id,
+            ])->get();
+            $academyFollows->map(function ($follow) use ($AcademyTitle, $AcademyBody, $details, $training) {
+                NotificationService::dbNotification($follow->user_id, User::class, 1, $AcademyTitle, $AcademyBody, $training->image, $details);
+            });
+
+            $coachTitle = 'Don’t miss out!';
+            $coachBody = $training->coach->name . ' is leading a new training.Tap for details';
+            $coachFollows = Follow::where([
+                'followable_type' => Coach::class,
+                'followable_id' => $training->coach_id,
+            ])->get();
+            $coachFollows->map(function ($follow) use ($coachTitle, $coachBody, $details, $training) {
+                NotificationService::dbNotification($follow->user_id, User::class, 1, $coachTitle, $coachBody, $training->image, $details);
+            });
         }
     }
 }
