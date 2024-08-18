@@ -92,7 +92,7 @@ class NotificationDataTable extends DataTable
             ['data' => 'notifiable_type', 'name' => 'notifiable_type', 'title' =>trans("admin.notification.type")],
             ['data' => 'title', 'name' => 'title', 'title' =>trans("admin.notification.title")],
             ['data' => 'description', 'name' => 'description', 'title' =>trans("admin.notification.description")],
-            ['data' => 'details', 'name' => 'details', 'title' =>trans("admin.notification.details")],
+//            ['data' => 'details', 'name' => 'details', 'title' =>trans("admin.notification.details")],
             ['data' => 'created_at', 'name' => 'created_at', 'title' =>trans("admin.notification.created_at")],
         ];
     }
