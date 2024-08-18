@@ -62,6 +62,7 @@ class NotificationDataTable extends DataTable
             ->minifiedAjax()
             ->dom('Bfltip')
             ->selectStyleSingle()
+            ->orderBy('created_at', 'desc')
             ->parameters([
                 'scrollX' => true,
                 'scrollY' => true,
@@ -69,9 +70,6 @@ class NotificationDataTable extends DataTable
                 'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                 'buttons' => [
 
-                ],
-                'order' => [
-                    0, 'desc'
                 ],
                 'language' =>
                     (app()->getLocale() === 'ar') ?
