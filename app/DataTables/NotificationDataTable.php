@@ -62,7 +62,7 @@ class NotificationDataTable extends DataTable
             ->minifiedAjax()
             ->dom('Bfltip')
             ->selectStyleSingle()
-            ->orderBy('created_at', 'desc')
+            ->orderBy(0, 'desc')
             ->parameters([
                 'scrollX' => true,
                 'scrollY' => true,
