@@ -161,7 +161,7 @@ class TrainingController extends Controller
             'details' => $details
         ];
         $x = NotificationService::firebaseNotification($data, 'dVFohhI_rER-hdkGjuy1wp:APA91bGwNYpzf9LDc7i8M2_SRvdNxJzg365kI7NnL-Ay1qWKMJhKCsV7OfyZcbZP11JrCo-Lam1Wbr4wpcc8kfcl5zTx_VLPGsHTsb4ctlKKezbRk1UeOGElpeODC04m_dLIAIFA7VQb');
-        dd($x);
+//        dd($x);
         $coachTitle = 'Don’t miss out!';
             $coachBody = $training->coach->name . ' is leading a new training.Tap for details';
             $coachFollows = Follow::where([
