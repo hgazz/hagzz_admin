@@ -46,7 +46,10 @@ class TrainingController extends Controller
     public function updateTrainingStatus(Training $training)
     {
         $training->update(['active' => ! $training->active]);
-        $this->sendNotification($training);
+        if ($training->active){
+            $this->sendNotification($training);
+        }
+
         return back()->with('success', __('admin.training.Training Status Updated'));
     }
 
@@ -134,7 +137,6 @@ class TrainingController extends Controller
      */
     public function sendNotification(Training $training): void
     {
-        if ($training->active) {
             $details = [
                 'training_id' => $training->id,
                 'longitude' => $training->longitude,
@@ -160,6 +162,5 @@ class TrainingController extends Controller
             $coachFollows->map(function ($follow) use ($coachTitle, $coachBody, $details, $training) {
                 NotificationService::dbNotification($follow->user_id, User::class, 1, $coachTitle, $coachBody, $training->image, $details);
             });
-        }
     }
 }
