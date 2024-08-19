@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Notification extends Model
 {
     use HasFactory;
-    protected $fillable = ["id","title", "details", "notifiable_type", "notifiable_id"];
+    protected $guarded = [];
 
 
 
