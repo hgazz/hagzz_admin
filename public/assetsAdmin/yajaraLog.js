@@ -7,7 +7,7 @@ $(document).ajaxError(function(event, jqxhr, settings, exception) {
         bootbox.confirm("Your session has expired. Would you like to be redirected to the login page?", function(result) {
             if (result) {
                 // Update the URL to the correct path
-                window.location.href = 'https://admin.hagzz.com/en/admin';
+                window.location.href = 'https://admin.hagzz.com/admin';
             }
         });
     }
