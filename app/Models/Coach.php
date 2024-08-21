@@ -4,10 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Coach extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
+
+
+    public $translatable = [
+        'name',
+        'description',
+        'license',
+        'license_type',
+    ];
 
     const PATH = 'images/coaches';
     protected $fillable = [
