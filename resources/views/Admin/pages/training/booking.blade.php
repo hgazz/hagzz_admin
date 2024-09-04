@@ -54,6 +54,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" value="{{ app()->getLocale() }}" id="lang">
 @endsection
 
 @push('js')
@@ -65,6 +66,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+            const lang = $('#lang').val();
             $('#country').change(function() {
                 var countryID = $(this).val();
                 if (countryID) {
@@ -79,7 +81,7 @@
                             $('#city').empty();
                             $('#city').append('<option value="">{{ trans('admin.training.select_city')}}</option>');
                             $.each(data, function(key, value) {
-                                $('#city').append('<option value="'+ value.id +'">'+ value.name.en +'</option>');
+                                $('#city').append('<option value="'+ value.id +'">'+ value.name[lang] +'</option>');
                             });
                         }
                     });
@@ -102,7 +104,7 @@
                             $('#area').empty();
                             $('#area').append('<option value="">{{ trans('admin.academies.select_area') }}</option>');
                             $.each(data, function(key, value) {
-                                $('#area').append('<option value="'+ value.id +'">'+ value.name.en +'</option>');
+                                $('#area').append('<option value="'+ value.id +'">'+ value.name[lang] +'</option>');
                             });
                         }
                     });

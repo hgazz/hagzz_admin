@@ -55,6 +55,40 @@
         <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
+    <div class="col-md-6 mb-3">
+        <label for="country">{{ trans('admin.country.country') }} <code>*</code></label>
+        <select class="form-select" id="country" name="country_id">
+            <option value="0">{{ trans('admin.city.Select County') }}</option>
+            @foreach($countries as $country)
+                <option
+                    value="{{ $country->id }}" @selected(old('country_id'))>{{ $country->name }}</option>
+            @endforeach
+        </select>
+        @error('country_id')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="city">{{ trans('admin.city.city') }} <code>*</code></label>
+        <select class="form-select citySelected" id="city" name="city_id">
+
+        </select>
+        @error('city_id')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="area">{{ trans('admin.area.area') }} <code>*</code></label>
+        <select class="form-select" id="area" name="area_id">
+
+        </select>
+        @error('area_id')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+
     <div class="col-md-12 mb-3">
         <label for="phone">{{trans('admin.user.birth_date')}} <code>*</code></label>
         <input type="date" name="birth_date" class="form-control"

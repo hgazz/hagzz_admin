@@ -74,9 +74,9 @@ class TrainingController extends Controller
                 'phone' => $request->phone,
                 'gender' => $request->gender,
                 'country_code' => $request->country_code,
-                'country_id' => $training->address->country_id,
-                'city_id' => $training->address->city_id,
-                'area_id' => $training->address->area_id,
+                'country_id' => $request->country_id,
+                'city_id' => $request->city_id,
+                'area_id' => $request->area_id,
                 'user_type'=> 'system',
                 'birth_date'=> $request->birth_date,
             ]);
