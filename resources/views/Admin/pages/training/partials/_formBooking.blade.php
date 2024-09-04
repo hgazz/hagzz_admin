@@ -58,7 +58,7 @@
     <div class="col-md-6 mb-3">
         <label for="country">{{ trans('admin.country.country') }} <code>*</code></label>
         <select class="form-select" id="country" name="country_id">
-            <option value="0">{{ trans('admin.city.Select County') }}</option>
+            <option value="">{{ trans('admin.city.Select County') }}</option>
             @foreach($countries as $country)
                 <option
                     value="{{ $country->id }}" @selected(old('country_id'))>{{ $country->name }}</option>
