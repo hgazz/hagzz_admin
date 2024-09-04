@@ -54,6 +54,7 @@ class JoinDataTable extends DataTable
             ->addColumn('count', fn($join) => $join?->training?->joins?->count())
             ->addColumn('max_player', fn($join) => $join->training->max_players)
             ->addColumn('price', fn($join) => $join?->training?->price)
+            ->addColumn('training.created_at', fn($join) => $join?->training?->created_at)
             ->addColumn('discount_price', fn($join) => $join?->training?->discount_price)
             ->rawColumns([
                 'training',
@@ -68,7 +69,8 @@ class JoinDataTable extends DataTable
                 'count',
                 'max_player',
                 'price',
-                'discount_price'
+                'discount_price',
+                'training.created_at'
             ]);
     }
 
@@ -81,7 +83,7 @@ class JoinDataTable extends DataTable
             return $this->query;
         }
 
-        return $model->newQuery();
+        return $model->newQuery()->with('training');
     }
 
     /**
@@ -139,6 +141,7 @@ class JoinDataTable extends DataTable
             ['name' => 'max_player', 'data' => 'max_player', 'title' => trans('admin.training.max_players')],
             ['name' => 'price', 'data' => 'price', 'title' => trans('admin.training.price')],
             ['name' => 'discount_price', 'data' => 'discount_price', 'title' => trans('admin.discount_price')],
+            ['name' => 'training.created_at', 'data' => 'created_at', 'title' => trans('admin.created_at'), 'exportable' => true, 'printable' => true, 'orderable' => true, 'searchable' => false],
         ];
     }
 

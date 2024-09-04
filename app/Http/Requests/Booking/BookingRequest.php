@@ -27,7 +27,7 @@ class BookingRequest extends FormRequest
             'price' =>'required|numeric',
             'name' =>'required|string',
             'country_code' =>'required|string',
-            'phone' =>'required|string',
+            'phone' =>'required|string|unique:users,phone',
             'gender' =>'required|in:male,female',
         ];
     }

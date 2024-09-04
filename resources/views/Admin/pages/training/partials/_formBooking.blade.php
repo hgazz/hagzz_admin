@@ -58,7 +58,9 @@
     <div class="col-md-12 mb-3">
         <label for="phone">{{trans('admin.user.birth_date')}} <code>*</code></label>
         <input type="date" name="birth_date" class="form-control"
-               value="{{ old('birth_date') }}" id="phone"
+               value="{{ old('birth_date') }}"
+               id="phone"
+               max="{{ date('Y-m-d', strtotime('-2 years')) }}"
                placeholder="{{trans('admin.academies.birth_date')}}">
         @error('birth_date')
         <span class="text-danger">{{$message}}</span>
