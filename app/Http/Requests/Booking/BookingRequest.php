@@ -26,7 +26,7 @@ class BookingRequest extends FormRequest
             'training_id' => 'required|exists:trainings,id',
             'price' =>'required|numeric',
             'name' =>'required|string',
-            'country_code' =>'required|string',
+            'country_code' =>'required|regex:/^\+?[0-9]+$/',
             'phone' =>'required|string|unique:users,phone',
             'gender' =>'required|in:male,female',
             'country_id' =>'required|string|exists:countries,id',
