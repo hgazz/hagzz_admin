@@ -66,54 +66,83 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
             const lang = $('#lang').val();
-            $('#country').change(function() {
-                var countryID = $(this).val();
+
+            function loadCities(countryID, callback) {
                 if (countryID) {
                     $.ajax({
                         url: '{{ route("admin.training.getCities") }}',
                         type: "POST",
-                        data: {
-                            country_id: countryID
-                        },
+                        data: { country_id: countryID },
                         dataType: "json",
-                        success:function(data) {
+                        success: function(data) {
                             $('#city').empty();
-                            $('#city').append('<option value="">{{ trans('admin.training.select_city')}}</option>');
+                            $('#city').append('<option value="">{{ trans('admin.training.select_city') }}</option>');
                             $.each(data, function(key, value) {
-                                $('#city').append('<option value="'+ value.id +'">'+ value.name[lang] +'</option>');
+                                $('#city').append('<option value="' + value.id + '">' + value.name[lang] + '</option>');
                             });
+                            if (callback) callback();
                         }
                     });
                 } else {
                     $('#city').empty();
+                    $('#area').empty();
                 }
-            });
+            }
 
-            $('#city').change(function() {
-                const cityID = $(this).val();
+            function loadAreas(cityID, callback) {
                 if (cityID) {
                     $.ajax({
                         url: '{{ route("admin.training.getAreaByCity") }}',
                         type: "POST",
-                        data: {
-                            city_id: cityID
-                        },
+                        data: { city_id: cityID },
                         dataType: "json",
-                        success:function(data) {
+                        success: function(data) {
                             $('#area').empty();
                             $('#area').append('<option value="">{{ trans('admin.academies.select_area') }}</option>');
                             $.each(data, function(key, value) {
-                                $('#area').append('<option value="'+ value.id +'">'+ value.name[lang] +'</option>');
+                                $('#area').append('<option value="' + value.id + '">' + value.name[lang] + '</option>');
                             });
+                            if (callback) callback();
                         }
                     });
                 } else {
                     $('#area').empty();
                 }
+            }
+
+            $('#country').change(function() {
+                var countryID = $(this).val();
+                loadCities(countryID);
             });
+
+            $('#city').change(function() {
+                const cityID = $(this).val();
+                loadAreas(cityID);
+            });
+
+            // Load initial data if old values exist
+            const oldCountry = '{{ old('country_id') }}';
+            const oldCity = '{{ old('city_id') }}';
+            const oldArea = '{{ old('area_id') }}';
+
+            if (oldCountry) {
+                $('#country').val(oldCountry);
+                loadCities(oldCountry, function() {
+                    if (oldCity) {
+                        $('#city').val(oldCity);
+                        loadAreas(oldCity, function() {
+                            if (oldArea) {
+                                $('#area').val(oldArea);
+                            }
+                        });
+                    }
+                });
+            }
         });
     </script>
+
 
 @endpush
 

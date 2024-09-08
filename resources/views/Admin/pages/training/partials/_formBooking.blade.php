@@ -72,7 +72,11 @@
     <div class="col-md-6 mb-3">
         <label for="city">{{ trans('admin.city.city') }} <code>*</code></label>
         <select class="form-select citySelected" id="city" name="city_id">
-
+            @if(old('city_id'))
+                <option value="{{ old('city_id') }}" selected>
+                    {{ old('city_name') }} <!-- Provide city name dynamically from controller if needed -->
+                </option>
+            @endif
         </select>
         @error('city_id')
         <span class="text-danger">{{ $message }}</span>
@@ -82,7 +86,11 @@
     <div class="col-md-6 mb-3">
         <label for="area">{{ trans('admin.area.area') }} <code>*</code></label>
         <select class="form-select" id="area" name="area_id">
-
+            @if(old('area_id'))
+                <option value="{{ old('area_id') }}" selected>
+                    {{ old('area_name') }} <!-- Provide city name dynamically from controller if needed -->
+                </option>
+            @endif
         </select>
         @error('area_id')
         <span class="text-danger">{{ $message }}</span>
