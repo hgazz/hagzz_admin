@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Http\Traits\DataTablesTrait;
 use App\Models\Join;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Carbon;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -54,7 +55,7 @@ class JoinDataTable extends DataTable
             ->addColumn('count', fn($join) => $join?->training?->joins?->count())
             ->addColumn('max_player', fn($join) => $join->training->max_players)
             ->addColumn('price', fn($join) => $join?->training?->price)
-            ->addColumn('training.created_at', fn($join) => $join?->training?->created_at)
+            ->addColumn('training.created_at', fn($join) => Carbon::parse($join->training->created_at)->format('Y-m-d H:i:s'))
             ->addColumn('discount_price', fn($join) => $join?->training?->discount_price)
             ->rawColumns([
                 'training',
@@ -141,7 +142,7 @@ class JoinDataTable extends DataTable
             ['name' => 'max_player', 'data' => 'max_player', 'title' => trans('admin.training.max_players')],
             ['name' => 'price', 'data' => 'price', 'title' => trans('admin.training.price')],
             ['name' => 'discount_price', 'data' => 'discount_price', 'title' => trans('admin.discount_price')],
-            ['name' => 'training.created_at', 'data' => 'created_at', 'title' => trans('admin.created_at'), 'exportable' => true, 'printable' => true, 'orderable' => true, 'searchable' => false],
+            ['name' => 'training.created_at', 'data' => 'training.created_at', 'title' => trans('admin.created_at'), 'exportable' => true, 'printable' => true, 'orderable' => true, 'searchable' => false],
         ];
     }
 

@@ -34,7 +34,7 @@ class NotificationDataTable extends DataTable
             })
             ->editColumn('created_at', function ($notification) {
                 $date = Carbon::parse($notification->created_at);
-                return $date->format('F j, Y');
+                return $date->format('Y-m-d H:i:s');
             })
             ->addColumn('action', 'notification.action')
             ->setRowId('id')
