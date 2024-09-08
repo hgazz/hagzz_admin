@@ -326,9 +326,6 @@
     @enderror
     <label for="status">{{trans('admin.academies.Status')}}</label>
     <select class="form-control formInput basic" name="status" id="status">
-        @if(request()->routeIs('admin.academies.create'))
-            <option value="">{{trans('admin.academies.Status')}}</option>
-        @endif
         <option value="pending" {{( old('pending', $academies->status ?? '') == 'pending')   ? 'selected' : ''}} >{{ trans('admin.academies.pending') }}</option>
          <option value="active" {{( old('active', $academies->status ?? '') == 'active')   ? 'selected' : ''}}  >{{ trans('admin.academies.active') }}</option>
          <option value="inactive" {{( old('inactive', $academies->status ?? '') == 'inactive')   ? 'selected' : ''}} >{{ trans('admin.academies.inactive') }}</option>
