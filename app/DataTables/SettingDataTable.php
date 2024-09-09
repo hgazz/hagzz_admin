@@ -26,7 +26,7 @@ class SettingDataTable extends DataTable
                 if ($setting->type == 'image'){
                     return '<img src="' . $setting->logo.$setting->value . '" width="100" height="100">';
                 }
-                return  substr($setting->value, 0, 20);
+                return  substr($setting->value, 0, 100);
             })
             ->addColumn('action', function (Setting $setting) {
                 return view('Admin.pages.setting.datatable.actions', compact('setting'))->render();
