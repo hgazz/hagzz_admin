@@ -29,8 +29,8 @@ class AcademiesRequest extends FormRequest
     public function onCreate()
     {
         return [
-            'commercial_name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name')],
-            'commercial_name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name')],
+            'commercial_name_en' => ['required', 'string', 'min:3', 'max:255'],
+            'commercial_name_ar' => ['required', 'string', 'min:3', 'max:255'],
             'first_name' => ['required', 'string', 'min:3', 'max:255'],
             'last_name' => ['required', 'string', 'min:3', 'max:255'],
             'app_name_en' => ['required', 'string', 'min:3', 'max:255'],
@@ -68,8 +68,8 @@ class AcademiesRequest extends FormRequest
     public function onUpdate()
     {
         return [
-            'commercial_name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name', request('id_unique'))],
-            'commercial_name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name', request('id_unique'))],
+            'commercial_name_en' => ['required', 'string', 'min:3', 'max:255'],
+            'commercial_name_ar' => ['required', 'string', 'min:3', 'max:255'],
             'first_name' => ['required', 'string', 'min:3', 'max:255'],
             'last_name' => ['required', 'string', 'min:3', 'max:255'],
             'app_name_en' => ['required', 'string', 'min:3', 'max:255'],

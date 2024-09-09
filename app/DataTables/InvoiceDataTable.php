@@ -53,6 +53,13 @@ class InvoiceDataTable extends DataTable
             ->addColumn('partner', function ($row) {
                 return $row->training->academy->commercial_name;
             })
+            ->filterColumn('partner', function ($query, $keyword) {
+                $query->whereHas('training',function ($q) use($keyword){
+                    $q->whereHas('academy',function ($q) use($keyword){
+                        $q->whereRaw("JSON_SEARCH(lower(commercial_name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
+                    });
+                });
+            })
             ->filterColumn('training.name', function ($query, $keyword) {
                 $query->whereHas('training',function ($q) use($keyword){
                     $q->whereRaw("JSON_SEARCH(lower(name), 'one', lower(?)) IS NOT NULL", ["%{$keyword}%"]);
@@ -74,7 +81,7 @@ class InvoiceDataTable extends DataTable
             return $this->query;
         }
 
-        return $model->newQuery()->with(['user', 'training']);
+        return $model->newQuery()->with(['user', 'training.academy']);
     }
     /**
      * Optional method if you want to use the html builder.
