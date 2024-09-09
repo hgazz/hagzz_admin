@@ -325,7 +325,7 @@
     <p class="text-danger">{{$message}}</p>
     @enderror
     <label for="status">{{trans('admin.academies.Status')}}</label>
-    <select class="form-control formInput basic" name="status" id="status">
+    <select class="form-control formInput basic mb-3" name="status" id="status">
         <option value="pending" {{( old('pending', $academies->status ?? '') == 'pending')   ? 'selected' : ''}} >{{ trans('admin.academies.pending') }}</option>
          <option value="active" {{( old('active', $academies->status ?? '') == 'active')   ? 'selected' : ''}}  >{{ trans('admin.academies.active') }}</option>
          <option value="inactive" {{( old('inactive', $academies->status ?? '') == 'inactive')   ? 'selected' : ''}} >{{ trans('admin.academies.inactive') }}</option>
