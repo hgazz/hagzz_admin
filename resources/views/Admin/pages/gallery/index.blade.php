@@ -80,9 +80,28 @@
     <script src="{{ asset('assetsAdmin/confirmationDelete.js') }}"></script>
     {!! $dataTable->scripts() !!}
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        $(document).ready(function() {
+            let button = $('.dt-button');
+            let ids = $('#ids');
 
+            // Use event delegation
+            $('#gallery-table').on('change', '.child-chk', function() {
+                updateCheckedItems();
+            });
 
+            function updateCheckedItems() {
+                let checkedValues = [];
+                $('.child-chk:checked').each(function() {
+                    checkedValues.push($(this).data('id'));
+                });
+                ids.val(JSON.stringify(checkedValues));
+                button.toggleClass('d-none', checkedValues.length === 0);
+            }
+
+            // Reinitialize checkboxes after each draw
+            $('#gallery-table').on('draw.dt', function() {
+                updateCheckedItems();
+            });
         });
     </script>
 @endpush
