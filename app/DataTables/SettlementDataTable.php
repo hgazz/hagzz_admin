@@ -37,13 +37,16 @@ class SettlementDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('partner',function ($q){
-             return $q->partner->name ?? '';
+            ->addColumn('partner_en',function ($q){
+             return $q->partner->getTranslation('commercial_name','en') ?? '';
+            })
+            ->addColumn('partner_ar',function ($q){
+             return $q->partner->getTranslation('commercial_name','en') ?? '';
             })
             ->addColumn('action',function (Settlement $settlement){
                 return view('Admin.pages.settlement.action',compact('settlement'));
             })
-            ->rawColumns(['partner','action']);
+            ->rawColumns(['partner_en', 'partner_ar','action']);
     }
 
     /**
@@ -100,7 +103,8 @@ class SettlementDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'partner', 'data' => 'partner', 'title' => trans('admin.partner')],
+            ['name' => 'partner_en', 'data' => 'partner_en', 'title' => trans('admin.partner'), 'searchable' => false],
+            ['name' => 'partner_ar', 'data' => 'partner_ar', 'title' => trans('admin.partner'), 'searchable' => false],
             ['name' => 'total_amount', 'data' => 'total_amount', 'title' => trans('admin.total_amount')],
             ['name' => 'settlement_date', 'data' => 'settlement_date', 'title' => trans('admin.settlement_date')],
             ['name' => 'status', 'data' => 'status', 'title' => trans('admin.status')],

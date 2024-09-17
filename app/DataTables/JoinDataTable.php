@@ -43,6 +43,7 @@ class JoinDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->editColumn('name', fn($raw) => $raw->name)
+            ->addColumn('user_name', fn($join) => $join->user->name)
             ->addColumn('training_name', fn($join) => $join->training->name)
             ->addColumn('partner_name', fn($join) => $join->training->academy->commercial_name)
             ->addColumn('sport', fn($join) => $join->training->sport->name)
@@ -58,6 +59,7 @@ class JoinDataTable extends DataTable
             ->addColumn('training.created_at', fn($join) => Carbon::parse($join->training->created_at)->format('Y-m-d H:i:s'))
             ->addColumn('discount_price', fn($join) => $join?->training?->discount_price)
             ->rawColumns([
+                'user_name',
                 'training',
                 'partner_name',
                 'level',
@@ -84,7 +86,7 @@ class JoinDataTable extends DataTable
             return $this->query;
         }
 
-        return $model->newQuery()->with('training');
+        return $model->newQuery()->with(['training', 'user']);
     }
 
     /**
@@ -129,6 +131,7 @@ class JoinDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
+            ['name' => 'user_name', 'data' => 'user_name', 'title' => trans('admin.bookings.user')],
             ['name' => 'training_name', 'data' => 'training_name', 'title' => trans('admin.training.name')],
             ['name' => 'partner_name', 'data' => 'partner_name', 'title' => trans('admin.training.academy')],
             ['name' => 'level', 'data' => 'level', 'title' => trans('admin.training.level')],
