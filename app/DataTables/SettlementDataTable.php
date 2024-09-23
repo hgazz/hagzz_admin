@@ -103,8 +103,8 @@ class SettlementDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'partner.commercial_name', 'data' => 'partner_commercial_name_en', 'title' => trans('admin.academies.commercial_name_en'), 'searchable' => false],
-            ['name' => 'partner.commercial_name', 'data' => 'partner_commercial_name_ar', 'title' => trans('admin.academies.commercial_name_ar'), 'searchable' => false],
+            ['name' => 'partner.commercial_name', 'data' => 'partner_commercial_name_en', 'title' => trans('admin.academies.commercial_name_en'), 'searchable' => true],
+            ['name' => 'partner.commercial_name', 'data' => 'partner_commercial_name_ar', 'title' => trans('admin.academies.commercial_name_ar'), 'searchable' => true],
             ['name' => 'total_amount', 'data' => 'total_amount', 'title' => trans('admin.total_amount')],
             ['name' => 'settlement_date', 'data' => 'settlement_date', 'title' => trans('admin.settlement_date')],
             ['name' => 'status', 'data' => 'status', 'title' => trans('admin.status')],
