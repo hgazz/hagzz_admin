@@ -37,16 +37,16 @@ class SettlementDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('partner_en',function ($q){
-             return $q->partner->getTranslation('commercial_name','en') ?? '';
-            })
-            ->addColumn('partner_ar',function ($q){
-             return $q->partner->getTranslation('commercial_name','ar') ?? '';
-            })
+//            ->addColumn('partner_id',function ($q){
+//             return $q->partner->getTranslation('commercial_name','en') ?? '';
+//            })
+//            ->addColumn('partner_id',function ($q){
+//             return $q->partner->getTranslation('commercial_name','ar') ?? '';
+//            })
             ->addColumn('action',function (Settlement $settlement){
                 return view('Admin.pages.settlement.action',compact('settlement'));
             })
-            ->rawColumns(['partner_en', 'partner_ar','action']);
+            ->rawColumns(['action']);
     }
 
     /**
@@ -103,8 +103,8 @@ class SettlementDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'partner.commercial_name', 'data' => 'partner_en', 'title' => trans('admin.academies.commercial_name_en'), 'searchable' => false],
-            ['name' => 'partner.commercial_name', 'data' => 'partner_ar', 'title' => trans('admin.academies.commercial_name_ar'), 'searchable' => false],
+            ['name' => 'partner.commercial_name->en', 'data' => 'partner.commercial_name->en', 'title' => trans('admin.academies.commercial_name_en'), 'searchable' => false],
+            ['name' => 'partner.commercial_name->ar', 'data' => 'partner.commercial_name->ar', 'title' => trans('admin.academies.commercial_name_ar'), 'searchable' => false],
             ['name' => 'total_amount', 'data' => 'total_amount', 'title' => trans('admin.total_amount')],
             ['name' => 'settlement_date', 'data' => 'settlement_date', 'title' => trans('admin.settlement_date')],
             ['name' => 'status', 'data' => 'status', 'title' => trans('admin.status')],
