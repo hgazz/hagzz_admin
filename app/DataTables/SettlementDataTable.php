@@ -58,7 +58,7 @@ class SettlementDataTable extends DataTable
             return $this->query;
         }
 
-        return $model->newQuery();
+        return $model->newQuery()->with('partner');
     }
 
     /**
