@@ -26,4 +26,12 @@ class Invoice extends Model
     {
        return $this->hasMany(Join::class);
     }
+
+    public function getStatusAttribute($value)
+    {
+        return match ($value) {
+            'paid' => trans('admin.bookings.paid'),
+            default => trans('admin.academies.pending'),
+        };
+    }
 }
