@@ -36,6 +36,7 @@ return [
     'new_notifications' => 'New Notifications!',
     'you_have_new_notifications' => 'You have new notifications.',
     'ok' => 'OK',
+    'settled' => 'Settled',
     'auth' => [
         'sign_in' => 'Sign In',
         'enter_your_email_and_password' => 'Enter your email and password to login',
