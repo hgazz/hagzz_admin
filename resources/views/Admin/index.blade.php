@@ -528,6 +528,7 @@
                             icon: 'info',
                             confirmButtonText: '{{ trans('admin.ok') }}'
                         });
+                        
                     } else if (data.unreadCount === 0) {
                         $('#notificationBadge').hide();
                     }
