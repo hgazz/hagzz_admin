@@ -70,10 +70,12 @@ class CoachDataTable extends DataTable
                 });
             })
             ->addColumn('training_count',function($q){
-               return $q->academy->trainings->count();
+                return $q->academy->trainings()
+                    ->where('coach_id',$q->id)
+                    ->count() ;
             })
             ->addColumn('follow_count',function($q){
-                return Follow::where('followable_id',$q->id)->count();
+                return Follow::where([['followable_id',$q->id], ['followable_type','App\Models\Coach']])->count();
             })
             ->rawColumns(['image', 'academy_id','training_count','follow_count', 'active', 'license']);
     }

@@ -46,4 +46,9 @@ class Coach extends Model
     {
         return config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
     }
+
+    public function getGenderAttribute($value)
+    {
+        return $value ? trans('admin.user.male') : trans('admin.user.female');
+    }
 }
