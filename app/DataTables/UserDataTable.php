@@ -36,7 +36,7 @@ class UserDataTable extends DataTable
                 return $user->is_verify == 1 ? trans('admin.user.is_verify') : trans('admin.user.not_verify');
             })
             ->filterColumn('is_verify', function ($query, $keyword) {
-                $query->verificationStatus($keyword);
+                $query->verificationStatus($keyword !== '' ? $keyword : null);
             })
             ->addColumn('action', function (User $user) {
                 return view('Admin.pages.users.datatable.actions', compact('user'))->render();
