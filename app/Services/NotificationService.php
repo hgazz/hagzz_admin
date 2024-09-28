@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Models\Notification;
 use Google\Client as GoogleClient;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -12,7 +13,21 @@ class NotificationService
 {
     public static function firebaseNotification($notificationData, $token)
     {
-        $data = [
+        if (empty($token)) {
+            Log::info('Skipping notification: User not registered on Firebase');
+            return false;
+        }
+
+        $data = self::prepareNotificationData($notificationData, $token);
+        $accessToken = self::getFirebaseAccessToken();
+        $response = self::sendFirebaseNotification($data, $accessToken);
+
+        return $response === true;
+    }
+
+    private static function prepareNotificationData($notificationData, $token)
+    {
+        return [
             "message" => [
                 "token" => $token,
                 "notification" => [
@@ -21,7 +36,10 @@ class NotificationService
                 ],
             ]
         ];
+    }
 
+    private static function getFirebaseAccessToken()
+    {
         $credentialsFilePath = Storage::path('json/bokit-eafed-firebase-adminsdk-n2vgb-1cdfccf166.json');
         $client = new GoogleClient();
         $client->setAuthConfig($credentialsFilePath);
@@ -29,10 +47,13 @@ class NotificationService
         $client->refreshTokenWithAssertion();
         $token = $client->getAccessToken();
 
-        $access_token = $token['access_token'];
+        return $token['access_token'];
+    }
 
+    private static function sendFirebaseNotification($data, $accessToken)
+    {
         $headers = [
-            "Authorization: Bearer $access_token",
+            "Authorization: Bearer $accessToken",
             'Content-Type: application/json'
         ];
 
@@ -48,11 +69,8 @@ class NotificationService
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-        curl_exec($ch);
-
         if ($response === false || $httpCode !== 200) {
-            dd($response);
-            // Log the error or return an error response
+            Log::error('Firebase notification failed', ['response' => $response, 'httpCode' => $httpCode]);
             return false;
         }
 
