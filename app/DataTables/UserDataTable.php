@@ -33,12 +33,15 @@ class UserDataTable extends DataTable
                 return '<img src="'. $user->image . '" width="100" height="100">';
             })
             ->editColumn('is_verify', function (User $user) {
-                return $user->is_verify == 1? trans('admin.user.is_verify') : trans('admin.user.not_verify');
+                return $user->is_verify == 1 ? trans('admin.user.is_verify') : trans('admin.user.not_verify');
+            })
+            ->filterColumn('is_verify', function ($query, $keyword) {
+                $query->verificationStatus($keyword);
             })
             ->addColumn('action', function (User $user) {
                 return view('Admin.pages.users.datatable.actions', compact('user'))->render();
             })
-            ->rawColumns(['action','image']);
+            ->rawColumns(['action','image', 'is_verify']);
     }
 
     /**

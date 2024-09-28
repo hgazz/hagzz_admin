@@ -294,6 +294,7 @@ return [
         'start_date' => 'Start Date',
         'end_date' => 'End Date',
         'is_verify' => 'Is Verified',
+        'not_verify' => 'Not Verified',
 
     ],
     'bookings' => [

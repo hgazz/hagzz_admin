@@ -94,7 +94,10 @@ class User extends Authenticatable
         return $this->morphToMany(Notification::class, 'notificationable');
     }
 
-
+    public function scopeVerificationStatus($query, $status)
+    {
+        return $query->where('is_verify', $status);
+    }
 
 
 
