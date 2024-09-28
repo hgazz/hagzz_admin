@@ -37,9 +37,9 @@ class UserDataTable extends DataTable
                 return $user->is_verify == 1 ? trans('admin.user.is_verify') : trans('admin.user.not_verify');
             })
             ->filterColumn('is_verify', function ($query, $keyword) {
-                if ($keyword == '1') {
+                if ($keyword == 'is_verify') {
                     $query->where('is_verify', 1);
-                } elseif ($keyword == '0') {
+                } elseif ($keyword == 'not_verified') {
                     $query->where('is_verify', 0);
                 }
             })
