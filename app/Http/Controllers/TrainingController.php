@@ -141,7 +141,7 @@ class TrainingController extends Controller
                 'training_id' => $training->id,
                 'longitude' => $training->longitude,
                 'latitude' => $training->latitude,
-                'academy_name' => $training->academy->commercial_name
+                'academy_name' => $training->academy->getTranslation('commercial_name', 'en'),
             ];
             $AcademyTitle = 'Don’t miss out!';
             $AcademyBody = 'just added a new activity. Check it out!';
@@ -149,17 +149,29 @@ class TrainingController extends Controller
                 'followable_type' => Academies::class,
                 'followable_id' => $training->academy_id,
             ])->get();
-            $academyFollows->map(function ($follow) use ($AcademyTitle, $AcademyBody, $details, $training) {
-                NotificationService::dbNotification($follow->user_id, User::class, 1, $AcademyTitle, $AcademyBody, $training->image, $details);
+            $data = [
+                'title' => $AcademyTitle,
+                'body' => $AcademyBody,
+                'image' => $training->academy->image,
+                'details' => $details
+            ];
+            $academyFollows->map(function ($follow) use ($data) {
+                NotificationService::firebaseNotification($data, $follow->user->fcm_token);
             });
-        $coachTitle = 'Don’t miss out!';
+        $coachTitle = 'Exciting News!';
             $coachBody = $training->coach->name . ' is leading a new training.Tap for details';
+            $data = [
+                'title' => $coachTitle,
+                'body' => $coachBody,
+                'image' => $training->academy->image,
+                'details' => $details
+            ];
             $coachFollows = Follow::where([
                 'followable_type' => Coach::class,
                 'followable_id' => $training->coach_id,
             ])->get();
-            $coachFollows->map(function ($follow) use ($coachTitle, $coachBody, $details, $training) {
-                NotificationService::dbNotification($follow->user_id, User::class, 1, $coachTitle, $coachBody, $training->image, $details);
+            $coachFollows->map(function ($follow) use ($data) {
+                NotificationService::firebaseNotification($data, $follow->user->fcm_token, );
             });
     }
 }
