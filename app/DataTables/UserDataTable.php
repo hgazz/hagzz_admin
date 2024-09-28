@@ -17,11 +17,12 @@ class UserDataTable extends DataTable
      *
      * @param QueryBuilder $query Results from query() method.
      */
+
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('country',function (User $user){
-              return $user?->country?->name;
+                return $user?->country?->name;
             })
             ->addColumn('city',function (User $user){
                 return $user?->city?->name;
@@ -36,14 +37,17 @@ class UserDataTable extends DataTable
                 return $user->is_verify == 1 ? trans('admin.user.is_verify') : trans('admin.user.not_verify');
             })
             ->filterColumn('is_verify', function ($query, $keyword) {
-                $query->verificationStatus($keyword !== '' ? $keyword : null);
+                if ($keyword == '1') {
+                    $query->where('is_verify', 1);
+                } elseif ($keyword == '0') {
+                    $query->where('is_verify', 0);
+                }
             })
             ->addColumn('action', function (User $user) {
                 return view('Admin.pages.users.datatable.actions', compact('user'))->render();
             })
             ->rawColumns(['action','image', 'is_verify']);
     }
-
     /**
      * Get the query source of dataTable.
      */
