@@ -259,6 +259,8 @@ return [
         'country' => 'الدولة',
         'city' => 'المدينة',
         'area' => 'المنطقة',
+        'is_verify' => 'تم التحقق',
+        'not_verify' => 'لم يتم التحقق',
         'Trainings' => 'التدريبات',
         'Sports' => 'الرياضات',
         'User deleted successfully' => 'تم حذف المستخدم بنجاح',

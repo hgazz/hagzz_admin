@@ -293,6 +293,7 @@ return [
         'training_details' => 'Training Details',
         'start_date' => 'Start Date',
         'end_date' => 'End Date',
+        'is_verify' => 'Is Verified',
 
     ],
     'bookings' => [
