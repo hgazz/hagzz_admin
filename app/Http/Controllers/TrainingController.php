@@ -144,7 +144,7 @@ class TrainingController extends Controller
                 'academy_name' => $training->academy->getTranslation('commercial_name', 'en'),
             ];
             $AcademyTitle = 'Don’t miss out!';
-            $AcademyBody = 'just added a new activity. Check it out!';
+            $AcademyBody = $training->academy->getTranslation('commercial_name', 'en') .' just added a new activity. Check it out!';
             $academyFollows = Follow::where([
                 'followable_type' => Academies::class,
                 'followable_id' => $training->academy_id,
