@@ -30,16 +30,17 @@ class NotificationService
         return [
             "message" => [
                 "token" => $token,
-                "notification" => [
+//                "notification" => [
+//                    "title" => (string)$notificationData['title'],
+//                    "body" => (string)$notificationData['body']
+//                ],
+                "data" => [
                     "title" => (string)$notificationData['title'],
-                    "body" => (string)$notificationData['body']
-                ],
+                    "body" => (string)$notificationData['body'],
+                    "details" => (array)$notificationData['details']
+                ]
             ],
-            "data" => [
-                "title" => (string)$notificationData['title'],
-                "body" => (string)$notificationData['body'],
-                "details" => (array)$notificationData['details']
-            ]
+
         ];
     }
 
