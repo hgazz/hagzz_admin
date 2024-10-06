@@ -21,8 +21,8 @@ class NotificationService
         $data = self::prepareNotificationData($notificationData, $token);
         $accessToken = self::getFirebaseAccessToken();
         $response = self::sendFirebaseNotification($data, $accessToken);
-        return true;
-//        return $response === true;
+
+        return $response === true;
     }
 
     private static function prepareNotificationData($notificationData, $token)
@@ -70,16 +70,22 @@ class NotificationService
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-//        if ($response === false || $httpCode !== 200) {
-//            Log::error('Firebase notification failed', ['response' => $response, 'httpCode' => $httpCode]);
-//            return false;
-//        }
+        if ($response === false || $httpCode !== 200) {
+            return [
+                'response' => $response,
+                'httpCode' => $httpCode,
+                'data' => $data
+            ];
+
+        }
 
         return true;
     }
+
 
     public static function dbNotification($sender, $senderType, $type, $title, $body, $image = null, $details = null)
     {
