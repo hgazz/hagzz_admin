@@ -153,7 +153,8 @@ class TrainingController extends Controller
                 'title' => $AcademyTitle,
                 'body' => $AcademyBody,
                 'image' => $training->academy->image,
-                'details' => $details
+                'details' => $details,
+                "training_id" => $training->id
             ];
             $academyFollows->map(function ($follow) use ($data) {
                 NotificationService::firebaseNotification($data, $follow->user->fcm_token);
