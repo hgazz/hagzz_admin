@@ -31,12 +31,11 @@ class NotificationService
             "message" => [
                 "token" => $token,
                 "notification" => [
+                    "id" => (string)$notificationData['training_id'],
                     "title" => (string)$notificationData['title'],
                     "body" => (string)$notificationData['body'],
-                    "training_id" => (string)$notificationData['training_id'],
                 ],
             ],
-
         ];
     }
 
@@ -81,18 +80,15 @@ class NotificationService
 
     public static function dbNotification($sender, $senderType, $type, $title, $body, $image = null, $details = null)
     {
-
         Notification::create([
-            'id'=>Str::uuid(),
+            'id' => Str::uuid(),
             'notifiable_id' => $sender,
             'notifiable_type' => $senderType,
-            'type' =>$type,
+            'type' => $type,
             'title' => $title,
             'description' => $body,
             'image' => $image,
             'details' => $details
         ]);
-
     }
-
 }
