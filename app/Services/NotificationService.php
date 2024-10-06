@@ -32,7 +32,7 @@ class NotificationService
                 "token" => $token,
                 "notification" => [
                     "title" => (string)$notificationData['title'],
-                    "body" => (string)$notificationData['body'],
+                    "body" => (string)$notificationData['details'],
                 ],
             ]
         ];
