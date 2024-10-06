@@ -72,10 +72,10 @@ class NotificationService
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-        if ($response === false || $httpCode !== 200) {
-            Log::error('Firebase notification failed', ['response' => $response, 'httpCode' => $httpCode]);
-            return false;
-        }
+//        if ($response === false || $httpCode !== 200) {
+//            Log::error('Firebase notification failed', ['response' => $response, 'httpCode' => $httpCode]);
+//            return false;
+//        }
 
         return true;
     }
