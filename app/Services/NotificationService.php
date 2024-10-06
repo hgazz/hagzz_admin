@@ -75,6 +75,7 @@ class NotificationService
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         if ($response === false || $httpCode !== 200) {
+            dd('hi');
             return [
                 'response' => $response,
                 'httpCode' => $httpCode,
