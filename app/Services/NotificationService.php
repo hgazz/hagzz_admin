@@ -31,10 +31,12 @@ class NotificationService
             "message" => [
                 "token" => $token,
                 "notification" => [
-                    "id" => (string)$notificationData['training_id'],
                     "title" => (string)$notificationData['title'],
                     "body" => (string)$notificationData['body'],
                 ],
+                "data" => [
+                    "id" => (string)$notificationData['id'], // Custom data
+                ]
             ],
         ];
     }
