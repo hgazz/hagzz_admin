@@ -166,7 +166,9 @@ class TrainingController extends Controller
                 'title' => $coachTitle,
                 'body' => $coachBody,
                 'image' => $training->academy->image,
-                'details' => $details
+                'details' => $details,
+                "id" => $training->id,
+                'page' => 'details'
             ];
             $coachFollows = Follow::where([
                 'followable_type' => Coach::class,
