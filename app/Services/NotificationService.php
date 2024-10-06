@@ -21,8 +21,8 @@ class NotificationService
         $data = self::prepareNotificationData($notificationData, $token);
         $accessToken = self::getFirebaseAccessToken();
         $response = self::sendFirebaseNotification($data, $accessToken);
-
-        return $response === true;
+        return true;
+//        return $response === true;
     }
 
     private static function prepareNotificationData($notificationData, $token)
