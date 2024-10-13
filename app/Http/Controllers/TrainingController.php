@@ -155,7 +155,7 @@ class TrainingController extends Controller
                 'image' => $training->academy->image,
                 'details' => $details,
                 "id" => $training->id,
-                'page' => 'details'
+                'page' => 'checkout'
             ];
             $academyFollows->map(function ($follow) use ($data) {
                 NotificationService::firebaseNotification($data, $follow->user->fcm_token);
@@ -168,7 +168,7 @@ class TrainingController extends Controller
                 'image' => $training->academy->image,
                 'details' => $details,
                 "id" => $training->id,
-                'page' => 'details'
+                'page' => 'checkout'
             ];
             $coachFollows = Follow::where([
                 'followable_type' => Coach::class,
