@@ -315,8 +315,8 @@
 @push('js')
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="{{ asset('assetsAdmin/src/plugins/src/apex/apexcharts.min.js') }}"></script>
-    {{--    <script src="{{ asset('assetsAdmin/src/plugins/src/apex/custom-apexcharts.js') }}"></script> --}}
-    <script src="{{ asset('assetsAdmin/src/assets/js/dashboard/dash_1.js') }}"></script>
+{{--        <script src="{{ asset('assetsAdmin/src/plugins/src/apex/custom-apexcharts.js') }}"></script>--}}
+{{--    <script src="{{ asset('assetsAdmin/src/assets/js/dashboard/dash_1.js') }}"></script>--}}
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="{{ asset('assetsAdmin/src/plugins/src/flatpickr/flatpickr.js') }}"></script>
     <script src="{{ asset('assetsAdmin/src/plugins/src/flatpickr/custom-flatpickr.js') }}"></script>
@@ -528,7 +528,7 @@
                             icon: 'info',
                             confirmButtonText: '{{ trans('admin.ok') }}'
                         });
-                        
+
                     } else if (data.unreadCount === 0) {
                         $('#notificationBadge').hide();
                     }

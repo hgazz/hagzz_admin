@@ -14,7 +14,7 @@ return [
     'location_management'=>'Location Management',
     'partner' =>'Partners',
     'partner_management'=>'Partner Management',
-    'preferences'=>'preferences',
+    'preferences'=>'Preferences',
     'Export'=>'Export',
     'id' => 'ID',
     'actions' => 'Actions',
