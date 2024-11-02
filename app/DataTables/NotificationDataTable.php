@@ -24,7 +24,7 @@ class NotificationDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('notifiable', function ($notification) {
-                return $notification?->notifiable?->name ;
+                return $notification?->notifiable?->commercial_name ?? null;
             })
             ->editColumn('notifiable_type', function ($notification) {
                 return $notification?->notifiable?->name  . ' '. $notification->notifiable_type == "App\\Models\\User" ? trans("admin.notification.user") : trans("admin.notification.partner")  ;
@@ -34,7 +34,7 @@ class NotificationDataTable extends DataTable
             })
             ->editColumn('created_at', function ($notification) {
                 $date = Carbon::parse($notification->created_at);
-                return $date->format('F j, Y');
+                return $date->format('Y-m-d H:i:s');
             })
             ->addColumn('action', 'notification.action')
             ->setRowId('id')
@@ -46,7 +46,9 @@ class NotificationDataTable extends DataTable
      */
     public function query(Notification $model): QueryBuilder
     {
-        return $model->newQuery()->orderBy('created_at', 'desc');
+        return $model->newQuery()
+            ->orderBy('created_at', 'desc');
+//            ->where(['notifiable_type' => get_class($model), 'notifiable_id' => auth('academy')->id()]);
     }
 
     /**

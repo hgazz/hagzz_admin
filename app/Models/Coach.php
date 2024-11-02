@@ -4,10 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Coach extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
+
+
+    public $translatable = [
+        'name',
+        'description',
+        'license',
+        'license_type',
+    ];
 
     const PATH = 'images/coaches';
     protected $fillable = [
@@ -36,5 +45,10 @@ class Coach extends Model
     public function getImageAttribute($value)
     {
         return config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
+    }
+
+    public function getGenderAttribute($value)
+    {
+        return $value ? trans('admin.user.male') : trans('admin.user.female');
     }
 }

@@ -14,7 +14,7 @@ return [
     'location_management'=>'Location Management',
     'partner' =>'Partners',
     'partner_management'=>'Partner Management',
-    'preferences'=>'preferences',
+    'preferences'=>'Preferences',
     'Export'=>'Export',
     'id' => 'ID',
     'actions' => 'Actions',
@@ -36,6 +36,7 @@ return [
     'new_notifications' => 'New Notifications!',
     'you_have_new_notifications' => 'You have new notifications.',
     'ok' => 'OK',
+    'settled' => 'Settled',
     'auth' => [
         'sign_in' => 'Sign In',
         'enter_your_email_and_password' => 'Enter your email and password to login',
@@ -292,6 +293,8 @@ return [
         'training_details' => 'Training Details',
         'start_date' => 'Start Date',
         'end_date' => 'End Date',
+        'is_verify' => 'Is Verified',
+        'not_verify' => 'Not Verified',
 
     ],
     'bookings' => [

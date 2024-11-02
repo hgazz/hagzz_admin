@@ -17,11 +17,12 @@ class UserDataTable extends DataTable
      *
      * @param QueryBuilder $query Results from query() method.
      */
+
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('country',function (User $user){
-              return $user?->country?->name;
+                return $user?->country?->name;
             })
             ->addColumn('city',function (User $user){
                 return $user?->city?->name;
@@ -32,12 +33,17 @@ class UserDataTable extends DataTable
             ->addColumn('image', function (User $user) {
                 return '<img src="'. $user->image . '" width="100" height="100">';
             })
+            ->editColumn('is_verify', function (User $user) {
+                return $user->is_verify == 1 ? trans('admin.user.is_verify') : trans('admin.user.not_verify');
+            })
+            ->filterColumn('is_verify', function ($query, $keyword) {
+                $query->verificationStatus($keyword !== '' ?( $keyword == trans('admin.user.is_verify') ? 1 : 0) : null);
+            })
             ->addColumn('action', function (User $user) {
                 return view('Admin.pages.users.datatable.actions', compact('user'))->render();
             })
-            ->rawColumns(['action','image']);
+            ->rawColumns(['action','image', 'is_verify']);
     }
-
     /**
      * Get the query source of dataTable.
      */
@@ -100,6 +106,7 @@ class UserDataTable extends DataTable
             ['name' => 'country', 'data' => 'country', 'title' => trans('admin.user.country')],
             ['name' => 'city', 'data' => 'city', 'title' => trans('admin.user.city')],
             ['name' => 'area', 'data' => 'area', 'title' => trans('admin.user.area')],
+            ['name' => 'is_verify', 'data' => 'is_verify', 'title' => trans('admin.user.is_verify')],
 //            ['name' => 'fcm_token', 'data' => 'fcm_token', 'title' => trans('admin.user.fcm_token')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
 

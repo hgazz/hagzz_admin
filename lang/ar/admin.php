@@ -35,6 +35,7 @@ return [
     'new_notifications' => 'الاشعارات الجديدة',
     'you_have_new_notifications' => 'لديك اشعارات جديدة',
     'ok' => 'موافق',
+    'settled' => 'تم التسوية',
     'auth' => [
         'sign_in' => 'تسجيل الدخول',
         'enter_your_email_and_password' => 'أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول',
@@ -258,6 +259,8 @@ return [
         'country' => 'الدولة',
         'city' => 'المدينة',
         'area' => 'المنطقة',
+        'is_verify' => 'تم التحقق',
+        'not_verify' => 'لم يتم التحقق',
         'Trainings' => 'التدريبات',
         'Sports' => 'الرياضات',
         'User deleted successfully' => 'تم حذف المستخدم بنجاح',

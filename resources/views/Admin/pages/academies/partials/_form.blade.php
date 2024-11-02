@@ -135,7 +135,7 @@
     </div>
     <div class="mb-3">
         <label for="facebook">{{ trans('admin.academies.facebook') }}</label>
-        <input id="facebook" type="text" class="form-control" placeholder="{{trans('admin.academies.facebook')}}" value="{{old('facebook',(isset($academies) ? $academies->facebook : ''))}}" oninput="" name="facebook">
+        <input id="facebook" type="url" class="form-control" placeholder="{{trans('admin.academies.facebook')}}" value="{{old('facebook',(isset($academies) ? $academies->facebook : ''))}}" oninput="" name="facebook">
     </div>
     @error('facebook')
     <p class="text-danger">{{$message}}</p>
@@ -156,7 +156,7 @@
     @enderror
     <div class="mb-3">
         <label for="linkedin">{{trans('admin.academies.linkedin')}}</label>
-        <input id="linkedin" type="text" class="form-control" placeholder="{{trans('admin.academies.linkedin')}}" value="{{(old('linkedin', isset($academies) ? $academies->linkedin : ''))}}" oninput="" name="linkedin">
+        <input id="linkedin" type="url" class="form-control" placeholder="{{trans('admin.academies.linkedin')}}" value="{{(old('linkedin', isset($academies) ? $academies->linkedin : ''))}}" oninput="" name="linkedin">
     </div>
     @error('linkedin')
     <p class="text-danger">{{$message}}</p>
@@ -325,8 +325,7 @@
     <p class="text-danger">{{$message}}</p>
     @enderror
     <label for="status">{{trans('admin.academies.Status')}}</label>
-    <select class="form-control formInput basic" name="status" id="status">
-        <option value="">{{trans('admin.academies.Status')}}</option>
+    <select class="form-control formInput basic mb-3" name="status" id="status">
         <option value="pending" {{( old('pending', $academies->status ?? '') == 'pending')   ? 'selected' : ''}} >{{ trans('admin.academies.pending') }}</option>
          <option value="active" {{( old('active', $academies->status ?? '') == 'active')   ? 'selected' : ''}}  >{{ trans('admin.academies.active') }}</option>
          <option value="inactive" {{( old('inactive', $academies->status ?? '') == 'inactive')   ? 'selected' : ''}} >{{ trans('admin.academies.inactive') }}</option>

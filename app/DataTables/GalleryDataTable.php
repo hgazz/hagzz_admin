@@ -33,8 +33,8 @@ class GalleryDataTable extends DataTable
             ->addColumn('action', function (Gallery $gallery) {
                 return view('Admin.pages.gallery.datatable.actions', compact('gallery'))->render();
             })
-            ->addColumn('checkbox',function (Gallery $gallery){
-                return view('Admin.pages.gallery.datatable.checkbox',compact('gallery'));
+            ->addColumn('checkbox', function (Gallery $gallery) {
+                return '<input type="checkbox" class="child-chk" name="bulk[]" data-id="' . $gallery->id . '">';
             })
             ->filterColumn('academy.commercial_name', function ($query, $keyword) {
                 $query->whereHas('academy', function ($q) use ($keyword) {

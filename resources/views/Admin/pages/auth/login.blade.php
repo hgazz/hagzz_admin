@@ -16,15 +16,15 @@
     <link href="https://fonts.googleapis.com/css?family=Cairo:400,600,700" rel="stylesheet">
     <link href="{{ asset('assetsAdmin/src/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('assetsAdmin/layouts/vertical-light-menu/css/light/plugins.css') }}" rel="stylesheet"
+    <!-- <link href="{{ asset('assetsAdmin/layouts/vertical-light-menu/css/light/plugins.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('assetsAdmin/src/assets/css/light/authentication/auth-boxed.css') }}" rel="stylesheet"
         type="text/css" />
 
     <link href="{{ asset('assetsAdmin/layouts/vertical-light-menu/css/dark/plugins.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('assetsAdmin/src/assets/css/dark/authentication/auth-boxed.css') }}" rel="stylesheet"
-        type="text/css" />
+        type="text/css" /> -->
+    <!-- <link href="{{ asset('assetsAdmin/src/assets/css/dark/authentication/auth-boxed.css') }}" rel="stylesheet"
+        type="text/css" /> -->
     <!-- END GLOBAL MANDATORY STYLES -->
     <link href="{{ asset('assetsAdmin/src/assets/css/dark/auth/log.css') }}" rel="stylesheet" type="text/css" />
 </head>

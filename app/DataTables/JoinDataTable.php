@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Http\Traits\DataTablesTrait;
 use App\Models\Join;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Carbon;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -42,6 +43,7 @@ class JoinDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->editColumn('name', fn($raw) => $raw->name)
+            ->addColumn('user_name', fn($join) => $join->user->name)
             ->addColumn('training_name', fn($join) => $join->training->name)
             ->addColumn('partner_name', fn($join) => $join->training->academy->commercial_name)
             ->addColumn('sport', fn($join) => $join->training->sport->name)
@@ -54,8 +56,10 @@ class JoinDataTable extends DataTable
             ->addColumn('count', fn($join) => $join?->training?->joins?->count())
             ->addColumn('max_player', fn($join) => $join->training->max_players)
             ->addColumn('price', fn($join) => $join?->training?->price)
+            ->addColumn('training.created_at', fn($join) => Carbon::parse($join->training->created_at)->format('Y-m-d H:i:s'))
             ->addColumn('discount_price', fn($join) => $join?->training?->discount_price)
             ->rawColumns([
+                'user_name',
                 'training',
                 'partner_name',
                 'level',
@@ -68,7 +72,8 @@ class JoinDataTable extends DataTable
                 'count',
                 'max_player',
                 'price',
-                'discount_price'
+                'discount_price',
+                'training.created_at'
             ]);
     }
 
@@ -81,7 +86,7 @@ class JoinDataTable extends DataTable
             return $this->query;
         }
 
-        return $model->newQuery();
+        return $model->newQuery()->with(['training', 'user']);
     }
 
     /**
@@ -126,6 +131,7 @@ class JoinDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
+            ['name' => 'user_name', 'data' => 'user_name', 'title' => trans('admin.bookings.user')],
             ['name' => 'training_name', 'data' => 'training_name', 'title' => trans('admin.training.name')],
             ['name' => 'partner_name', 'data' => 'partner_name', 'title' => trans('admin.training.academy')],
             ['name' => 'level', 'data' => 'level', 'title' => trans('admin.training.level')],
@@ -139,6 +145,7 @@ class JoinDataTable extends DataTable
             ['name' => 'max_player', 'data' => 'max_player', 'title' => trans('admin.training.max_players')],
             ['name' => 'price', 'data' => 'price', 'title' => trans('admin.training.price')],
             ['name' => 'discount_price', 'data' => 'discount_price', 'title' => trans('admin.discount_price')],
+            ['name' => 'training.created_at', 'data' => 'training.created_at', 'title' => trans('admin.created_at'), 'exportable' => true, 'printable' => true, 'orderable' => true, 'searchable' => false],
         ];
     }
 

@@ -45,6 +45,18 @@ class CoachDataTable extends DataTable
             ->editColumn('image', function (Coach $coach) {
                 return '<img src="' . $coach->image . '" width="90" height="70" class="img-thumbnail">';
             })
+            ->addColumn('name_en', function (Coach $coach) {
+                return $coach->getTranslation('name', 'en');
+            })
+            ->addColumn('name_ar', function (Coach $coach) {
+                return $coach->getTranslation('name', 'ar');
+            })
+            ->addColumn('description_en', function (Coach $coach) {
+                return $coach->getTranslation('description', 'en');
+            })
+            ->addColumn('description_ar', function (Coach $coach) {
+                return $coach->getTranslation('description', 'ar');
+            })
             ->editColumn('license', fn($raw) => $raw->license ? trans('admin.coaches.is_licensed') : trans('admin.coaches.no_licensed'))
             ->editColumn('active', function (Coach $coach) {
                 return $coach->active ? trans('admin.address.active') : trans('admin.address.inactive');
@@ -58,10 +70,12 @@ class CoachDataTable extends DataTable
                 });
             })
             ->addColumn('training_count',function($q){
-               return $q->academy->trainings->count();
+                return $q->academy->trainings()
+                    ->where('coach_id',$q->id)
+                    ->count() ;
             })
             ->addColumn('follow_count',function($q){
-                return Follow::where('followable_id',$q->id)->count();
+                return Follow::where([['followable_id',$q->id], ['followable_type','App\Models\Coach']])->count();
             })
             ->rawColumns(['image', 'academy_id','training_count','follow_count', 'active', 'license']);
     }
@@ -121,8 +135,10 @@ class CoachDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
-            ['name' => 'name', 'data' => 'name', 'title' => trans('admin.coaches.name')],
-            ['name' => 'description', 'data' => 'description', 'title' => trans('admin.coaches.description')],
+            ['name' => 'name->en', 'data' => 'name_en', 'title' => trans('admin.area.name_en')],
+            ['name' => 'name->ar', 'data' => 'name_en', 'title' => trans('admin.area.name_ar')],
+            ['name' => 'description->en', 'data' => 'description_en', 'title' => trans('admin.training.description_en')],
+            ['name' => 'description->ar', 'data' => 'description_ar', 'title' => trans('admin.training.description_ar')],
             ['name' => 'image', 'data' => 'image', 'title' => trans('admin.coaches.image')],
             ['name' => 'license', 'data' => 'license', 'title' => trans('admin.coaches.is_licensed'), 'orderable' => true, 'searchable' => true, ''],
             ['name' => 'academy.commercial_name', 'data' => 'academy_id', 'title' => trans('admin.coaches.academy_id')],

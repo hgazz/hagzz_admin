@@ -129,18 +129,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12 mt-2">
-                                        <div class="card me-2">
-                                            <div class="card-header">
-                                                <h5 class="card-title text-center">{{ trans('admin.academies.national_id_number') }}</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <p class="card-text text-center text-dark fw-bold">
-                                                    {{$academies->national_id_number ?? 'null'}}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
+{{--                                    <div class="col-lg-4 col-md-4 col-sm-12 mt-2">--}}
+{{--                                        <div class="card me-2">--}}
+{{--                                            <div class="card-header">--}}
+{{--                                                <h5 class="card-title text-center">{{ trans('admin.academies.national_id_number') }}</h5>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="card-body">--}}
+{{--                                                <p class="card-text text-center text-dark fw-bold">--}}
+{{--                                                    {{$academies->national_id_number ?? 'null'}}--}}
+{{--                                                </p>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                     <div class="col-lg-4 col-md-4 col-sm-12 mt-2">
                                         <div class="card me-2">
                                             <div class="card-header">

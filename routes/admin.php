@@ -43,7 +43,7 @@ Route::group(
                     Route::get('/login', 'loginPage')->name('loginPage');
                     Route::post('/login', 'login')->name('login');
                 });
-                Route::post('/logout', 'logout')->name('logout')->middleware('auth:admin');
+                Route::get('/logout', 'logout')->name('logout')->middleware('auth:admin');
             });
 
             Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', 'as' => 'admin.'], function () {

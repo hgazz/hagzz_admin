@@ -74,9 +74,9 @@ class TrainingController extends Controller
                 'phone' => $request->phone,
                 'gender' => $request->gender,
                 'country_code' => $request->country_code,
-                'country_id' => $training->address->country_id,
-                'city_id' => $training->address->city_id,
-                'area_id' => $training->address->area_id,
+                'country_id' => $request->country_id,
+                'city_id' => $request->city_id,
+                'area_id' => $request->area_id,
                 'user_type'=> 'system',
                 'birth_date'=> $request->birth_date,
             ]);
@@ -141,25 +141,41 @@ class TrainingController extends Controller
                 'training_id' => $training->id,
                 'longitude' => $training->longitude,
                 'latitude' => $training->latitude,
-                'academy_name' => $training->academy->commercial_name
+                'academy_name' => $training->academy->getTranslation('commercial_name', 'en'),
             ];
             $AcademyTitle = 'Don’t miss out!';
-            $AcademyBody = 'just added a new activity. Check it out!';
+            $AcademyBody = $training->academy->getTranslation('commercial_name', 'en') .' just added a new activity. Check it out!';
             $academyFollows = Follow::where([
                 'followable_type' => Academies::class,
                 'followable_id' => $training->academy_id,
             ])->get();
-            $academyFollows->map(function ($follow) use ($AcademyTitle, $AcademyBody, $details, $training) {
-                NotificationService::dbNotification($follow->user_id, User::class, 1, $AcademyTitle, $AcademyBody, $training->image, $details);
+            $data = [
+                'title' => $AcademyTitle,
+                'body' => $AcademyBody,
+                'image' => $training->academy->image,
+                'details' => $details,
+                "id" => $training->id,
+                'page' => 'checkout'
+            ];
+            $academyFollows->map(function ($follow) use ($data) {
+                NotificationService::firebaseNotification($data, $follow->user->fcm_token);
             });
-        $coachTitle = 'Don’t miss out!';
+        $coachTitle = 'Exciting News!';
             $coachBody = $training->coach->name . ' is leading a new training.Tap for details';
+            $data = [
+                'title' => $coachTitle,
+                'body' => $coachBody,
+                'image' => $training->academy->image,
+                'details' => $details,
+                "id" => $training->id,
+                'page' => 'checkout'
+            ];
             $coachFollows = Follow::where([
                 'followable_type' => Coach::class,
                 'followable_id' => $training->coach_id,
             ])->get();
-            $coachFollows->map(function ($follow) use ($coachTitle, $coachBody, $details, $training) {
-                NotificationService::dbNotification($follow->user_id, User::class, 1, $coachTitle, $coachBody, $training->image, $details);
+            $coachFollows->map(function ($follow) use ($data) {
+                NotificationService::firebaseNotification($data, $follow->user->fcm_token, );
             });
     }
 }

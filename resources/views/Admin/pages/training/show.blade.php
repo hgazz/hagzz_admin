@@ -234,24 +234,24 @@
                                                            </div>
                                                            <div class="card-body">
                                                                @php
-                                                                   $numberOfOutcomes = count(json_decode($class->out_comes, true));
-                                                                   $numberBringsWithMe = count(json_decode($class->bring_with_me, true));
-                                                                   $outcomes = json_decode($class->out_comes, true);
-                                                                   $bringsWithMe = json_decode($class->bring_with_me, true);
+                                                                   $numberOfOutcomes = count(json_decode($class->out_comes, true)[app()->getLocale()] ?? []);
+                                                                   $numberBringsWithMe = count(json_decode($class->bring_with_me, true)[app()->getLocale()] ?? []);
+                                                                   $outcomes = json_decode($class->out_comes, true)[app()->getLocale()] ?? [];
+                                                                   $bringsWithMe = json_decode($class->bring_with_me, true)[app()->getLocale()] ?? [];
                                                                @endphp
                                                                <div class="row">
                                                                    <div class="col-sm-6">
                                                                        <ul>{{ trans('admin.training.out_comes') }}
-                                                                           @for($i = 0; $i < $numberOfOutcomes; $i++)
-                                                                               <li>{{$outcomes[$i]}}</li>
-                                                                           @endfor
+                                                                           @foreach($outcomes as $outcome)
+                                                                               <li>{{ $outcome }}</li>
+                                                                           @endforeach
                                                                        </ul>
                                                                    </div>
                                                                    <div class="col-sm-6">
                                                                        <ul>{{ trans('admin.training.brings_with_me') }}
-                                                                           @for($i = 0; $i < $numberBringsWithMe; $i++)
-                                                                               <li>{{$bringsWithMe[$i]}}</li>
-                                                                           @endfor
+                                                                           @foreach($bringsWithMe as $item)
+                                                                               <li>{{ $item }}</li>
+                                                                           @endforeach
                                                                        </ul>
                                                                    </div>
                                                                </div>

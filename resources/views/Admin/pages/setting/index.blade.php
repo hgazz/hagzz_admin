@@ -44,14 +44,14 @@
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
         <div class="card">
             <div class="card-header">
-                <div class="d-flex justify-content-between align-items-center">
-                    <a href="{{route('admin.setting.create')}}">
-                        <h3>{{ trans('admin.setting.setting') }}</h3>
-                    </a>
-                    <a href="{{route('admin.setting.create')}}" class="btn btn-primary">
-                        {{ trans('admin.setting.create') }}
-                    </a>
-                </div>
+{{--                <div class="d-flex justify-content-between align-items-center">--}}
+{{--                    <a href="{{route('admin.setting.create')}}">--}}
+{{--                        <h3>{{ trans('admin.setting.setting') }}</h3>--}}
+{{--                    </a>--}}
+{{--                    <a href="{{route('admin.setting.create')}}" class="btn btn-primary">--}}
+{{--                        {{ trans('admin.setting.create') }}--}}
+{{--                    </a>--}}
+{{--                </div>--}}
 
             </div>
             <div class="card-body">

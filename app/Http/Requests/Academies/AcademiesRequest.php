@@ -29,15 +29,15 @@ class AcademiesRequest extends FormRequest
     public function onCreate()
     {
         return [
-            'commercial_name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name')],
-            'commercial_name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name')],
+            'commercial_name_en' => ['required', 'string', 'min:3', 'max:255'],
+            'commercial_name_ar' => ['required', 'string', 'min:3', 'max:255'],
             'first_name' => ['required', 'string', 'min:3', 'max:255'],
             'last_name' => ['required', 'string', 'min:3', 'max:255'],
             'app_name_en' => ['required', 'string', 'min:3', 'max:255'],
             'app_name_ar' => ['required', 'string', 'min:3', 'max:255'],
-            'facebook' => ['nullable', 'string','min:3'],
-            'instagram' => ['nullable', 'string','min:3'],
-            'website' => ['nullable', 'string','min:3'],
+            'facebook' => ['nullable', 'string','min:3', 'url'],
+            'instagram' => ['nullable', 'string','min:3', 'url'],
+            'website' => ['nullable', 'string','min:3', 'url'],
             'linkedin' => ['nullable', 'string','min:3'],
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'commission_percentage'=>['required','numeric'],
@@ -68,8 +68,8 @@ class AcademiesRequest extends FormRequest
     public function onUpdate()
     {
         return [
-            'commercial_name_en' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name', request('id_unique'))],
-            'commercial_name_ar' => ['required', 'string', 'min:3', 'max:255', new UniqueTranslation('academies', 'commercial_name', request('id_unique'))],
+            'commercial_name_en' => ['required', 'string', 'min:3', 'max:255'],
+            'commercial_name_ar' => ['required', 'string', 'min:3', 'max:255'],
             'first_name' => ['required', 'string', 'min:3', 'max:255'],
             'last_name' => ['required', 'string', 'min:3', 'max:255'],
             'app_name_en' => ['required', 'string', 'min:3', 'max:255'],

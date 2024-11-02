@@ -4,54 +4,100 @@ namespace App\Services;
 
 
 use App\Models\Notification;
+use Google\Client as GoogleClient;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class NotificationService
 {
     public static function firebaseNotification($notificationData, $token)
     {
-        $SERVER_API_KEY = 'AAAAU9DrP9s:APA91bHPZSjTIEgNGFTL28H-yMuNFdwe84zfe0zQ7m0epSK0y7UsmLkVVU-vP9jkkaOfPnRiS72OaCv0WscyDn85jiYGnHVd83AbYCENvGiKYFXXqPYzDTExc_-ZQkcLmbMMbJWYgXwA';
+        if (empty($token)) {
+            Log::info('Skipping notification: User not registered on Firebase');
+            return false;
+        }
 
-        $data = [
-            'registration_ids' => [
-                $token,
+        $data = self::prepareNotificationData($notificationData, $token);
+        $accessToken = self::getFirebaseAccessToken();
+        $response = self::sendFirebaseNotification($data, $accessToken);
+
+        return $response === true;
+    }
+
+    private static function prepareNotificationData($notificationData, $token)
+    {
+        return [
+            "message" => [
+                "token" => $token,
+                "notification" => [
+                    "title" => (string)$notificationData['title'],
+                    "body" => (string)$notificationData['body'],
+                ],
+                "data" => [
+                    "id" => (string)$notificationData['id'], // Custom data
+                    "page" => (string)$notificationData['page'], // Custom data
+                ]
             ],
-            'notification' => $notificationData,
+        ];
+    }
+
+    private static function getFirebaseAccessToken()
+    {
+        $credentialsFilePath = Storage::path('json/bokit-eafed-firebase-adminsdk-n2vgb-1cdfccf166.json');
+        $client = new GoogleClient();
+        $client->setAuthConfig($credentialsFilePath);
+        $client->addScope('https://www.googleapis.com/auth/firebase.messaging');
+        $client->refreshTokenWithAssertion();
+        $token = $client->getAccessToken();
+
+        return $token['access_token'];
+    }
+
+    private static function sendFirebaseNotification($data, $accessToken)
+    {
+        $headers = [
+            "Authorization: Bearer $accessToken",
+            'Content-Type: application/json'
         ];
 
         $dataString = json_encode($data);
-
-        $headers = [
-            'Authorization: key='.$SERVER_API_KEY,
-            'Content-Type: application/json',
-        ];
-
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        $projectId = 'bokit-eafed';
+        curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/v1/projects/{$projectId}/messages:send");
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
-        curl_exec($ch);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if ($response === false || $httpCode !== 200) {
+            return [
+                'response' => $response,
+                'httpCode' => $httpCode,
+                'data' => $data
+            ];
+
+        }
 
         return true;
     }
 
+
     public static function dbNotification($sender, $senderType, $type, $title, $body, $image = null, $details = null)
     {
-
         Notification::create([
-            'id'=>Str::uuid(),
+            'id' => Str::uuid(),
             'notifiable_id' => $sender,
             'notifiable_type' => $senderType,
-            'type' =>$type,
+            'type' => $type,
             'title' => $title,
             'description' => $body,
             'image' => $image,
             'details' => $details
         ]);
-
     }
-
 }
