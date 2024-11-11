@@ -5,5 +5,5 @@
 <script src="{{ asset('assetsAdmin/src/plugins/src/waves/waves.min.js') }}"></script>
 <script src="{{ asset('assetsAdmin/layouts/vertical-light-menu/app.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-{{--<script src="{{ asset('assetsAdmin/yajaraLog.js') }}"></script>--}}
+<script src="{{ asset('assetsAdmin/yajaraLog.js') }}"></script>
 @stack('js')
