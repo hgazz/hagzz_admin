@@ -14,10 +14,10 @@ window.addEventListener("load", function(){
                 toggle: true,
                 darkMode: false,
                 boxed: false,
-                logo: {
-                    darkLogo: '../assetsAdmin/logo/Lettermark-Primary.svg',
-                    lightLogo: '../assetsAdmin/logo/Lettermark-Primary.svg'
-                }
+                // logo: {
+                //     darkLogo: '../assetsAdmin/logo/Lettermark-Primary.svg',
+                //     lightLogo: '../assetsAdmin/logo/Lettermark-Primary.svg'
+                // }
             }
         },
         reset: false
