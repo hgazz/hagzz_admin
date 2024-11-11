@@ -15,8 +15,8 @@ window.addEventListener("load", function(){
                 darkMode: false,
                 boxed: false,
                 logo: {
-                    darkLogo: '../src/assets/img/logo.svg',
-                    lightLogo: '../src/assets/img/logo.svg'
+                    darkLogo: '../logo/Lettermark-Primary.svg',
+                    lightLogo: '../logo/Lettermark-Primary.svg'
                 }
             }
         },

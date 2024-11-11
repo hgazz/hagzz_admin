@@ -1,7 +1,7 @@
 <link href="{{ asset('assetsAdmin/layouts/vertical-light-menu/css/light/loader.css') }}" rel="stylesheet"
     type="text/css" />
 <link href="{{ asset('assetsAdmin/layouts/vertical-light-menu/css/dark/loader.css') }}" rel="stylesheet" type="text/css" />
-{{--<script src="{{ asset('assetsAdmin/layouts/vertical-light-menu/loader.js') }}"></script>--}}
+<script src="{{ asset('assetsAdmin/layouts/vertical-light-menu/loader.js') }}"></script>
 
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 @if (app()->getLocale() == 'ar')
