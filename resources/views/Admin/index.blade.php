@@ -324,8 +324,10 @@
 
 
     <script>
-        var f1 = flatpickr(document.getElementById('start_date'));
+        document.addEventListener('DOMContentLoaded',()=>{
+            var f1 = flatpickr(document.getElementById('start_date'));
         var f2 = flatpickr(document.getElementById('end_date'));
+        })
     </script>
     <script>
         $(document).ready(function() {
