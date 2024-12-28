@@ -33,7 +33,8 @@ class BannerController extends Controller
         $image = $this->upload($request->file('image'), $this->bannerModel::PATH);
         $this->bannerModel->create([
             'logo' => $image,
-            'status' => $request->status
+            'status' => $request->status,
+            'country' => $request->country
         ]);
         session()->flash('success', trans('admin.banners.created_successfully'));
         return to_route('admin.banners.index');
