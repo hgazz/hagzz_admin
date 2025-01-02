@@ -50,7 +50,9 @@ class BannerController extends Controller
         $image = $request->hasFile('image') ? $this->upload($request->file('image'), $this->bannerModel::PATH, $banner->getRawOriginal('logo')) : $banner->getRawOriginal('logo');
         $banner->update([
             'logo' => $image,
-            'status' => $request->status
+            'status' => $request->status,
+            'country' => $request->country
+
         ]);
         session()->flash('success', trans('admin.banners.updated_successfully'));
         return to_route('admin.banners.index');
