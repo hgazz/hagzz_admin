@@ -13,17 +13,31 @@ class Training extends Model
 
     protected $fillable = [
         'name',
-        'start_date',
-        'end_date',
+        'price',
         'description',
-        'coach_id',
-        'active',
-        'sport_id',
-        'academy_id',
+        'max_players',
         'level',
         'gender',
         'age_group',
-        'address_id'
+        'address_id',
+        'coach_id',
+        'academy_id',
+        'active',
+        'sport_id',
+        'discount_price',
+        'start_time',
+        'end_time',
+        'classes_days',
+        'color',
+        'classes_number'
+    ];
+
+    protected $casts = [
+        'classes_days' => 'array',
+        'start_time' => 'datetime:H:i:s',
+        'end_time' => 'datetime:H:i:s',
+        'created_at' => 'datetime',
+        'active' => 'boolean',
     ];
 
     public  $translatable = ['name','description'];

@@ -61,10 +61,16 @@ class TrainingDataTable extends DataTable
             ->addColumn('subscribed', function (Training $training) {
                 return $training->joins->count();
             })
+            ->editColumn('classes_days', function (Training $training) {
+                return ! is_null($training->classes_days ) ? $training->classes_days : null;
+            })
+            ->editColumn('color', function (Training $training) {
+                return "<div style='background-color: $training->color; width: 20px; height: 20px; border-radius: 2px'></div>";
+            })
             ->addColumn('action', function (Training $training) {
                 return view('Admin.pages.training.datatable.actions', compact('training'))->render();
             })
-            ->rawColumns(['action', 'coach_id', 'academy_id','image','sport_id', 'classes', 'subscribed', 'active']);
+            ->rawColumns(['action', 'coach_id', 'academy_id','image','sport_id', 'classes', 'subscribed', 'active', 'classes_days', 'color']);
 
     }
 
@@ -128,8 +134,8 @@ class TrainingDataTable extends DataTable
             ['name' => 'price', 'data' => 'price', 'title' => trans('admin.training.price')],
             ['name' => 'academy.commercial_name', 'data' => 'academy_id', 'title' => trans('admin.training.academy')],
             ['name' => 'coach.name', 'data' => 'coach_id', 'title' => trans('admin.training.coach')],
-            ['name' => 'start_date', 'data' => 'start_date', 'title' => trans('admin.training.start_date')],
-            ['name' => 'end_date', 'data' => 'end_date', 'title' => trans('admin.training.end_date')],
+//            ['name' => 'start_date', 'data' => 'start_date', 'title' => trans('admin.training.start_date')],
+//            ['name' => 'end_date', 'data' => 'end_date', 'title' => trans('admin.training.end_date')],
             ['name' => 'age_group', 'data' => 'age_group', 'title' => trans('admin.training.age_group')],
             ['name' => 'gender', 'data' => 'gender', 'title' => trans('admin.training.gender')],
             ['name' => 'max_players', 'data' => 'max_players', 'title' => trans('admin.training.max_players')],
@@ -139,7 +145,10 @@ class TrainingDataTable extends DataTable
             ['name' => 'active', 'data' => 'active', 'title' => trans('admin.training.active')],
             ['name' => 'description', 'data' => 'description', 'title' => trans('admin.training.description')],
             ['name' => 'sport.name', 'data' => 'sport_id', 'title' => trans('admin.training.sport')],
-            ['name' => 'classes', 'data' => 'classes', 'title' => trans('admin.training.classes_count')],
+            ['name' => 'classes_number', 'data' => 'classes_number', 'title' => trans('admin.training.classes_number')],
+            ['name' => 'classes_days', 'data' => 'classes_days', 'title' => trans('admin.training.classes_days')],
+            ['name' => 'color', 'data' => 'color', 'title' => trans('admin.training.color')],
+//            ['name' => 'classes', 'data' => 'classes', 'title' => trans('admin.training.classes_count')],
             ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }
