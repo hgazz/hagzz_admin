@@ -48,12 +48,6 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> {{ trans('admin.training.main_details') }}
                                             </button>
                                         </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="profile-tab-icon" data-bs-toggle="tab" data-bs-target="#profile-tab-icon-pane" type="button" role="tab" aria-controls="profile-tab-icon-pane" aria-selected="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                                {{ trans('admin.training.Classes') }}
-                                            </button>
-                                        </li>
                                     </ul>
                                     <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane fade show active" id="home-tab-icon-pane" role="tabpanel" aria-labelledby="home-tab-icon" tabindex="0">
@@ -224,57 +218,6 @@
 
                                             </div>
 
-                                        <div class="tab-pane fade" id="profile-tab-icon-pane" role="tabpanel" aria-labelledby="profile-tab-icon" tabindex="0">
-                                           <div class="row mt-2">
-                                               @forelse($training->classes as $class)
-                                                   <div class="col-sm-6 mt-2">
-                                                       <div class="card">
-                                                           <div class="card-header">
-                                                               <h5 class="card-title">{{$class->title}}</h5>
-                                                           </div>
-                                                           <div class="card-body">
-                                                               @php
-                                                                   $numberOfOutcomes = count(json_decode($class->out_comes, true)[app()->getLocale()] ?? []);
-                                                                   $numberBringsWithMe = count(json_decode($class->bring_with_me, true)[app()->getLocale()] ?? []);
-                                                                   $outcomes = json_decode($class->out_comes, true)[app()->getLocale()] ?? [];
-                                                                   $bringsWithMe = json_decode($class->bring_with_me, true)[app()->getLocale()] ?? [];
-                                                               @endphp
-                                                               <div class="row">
-                                                                   <div class="col-sm-6">
-                                                                       <ul>{{ trans('admin.training.out_comes') }}
-                                                                           @foreach($outcomes as $outcome)
-                                                                               <li>{{ $outcome }}</li>
-                                                                           @endforeach
-                                                                       </ul>
-                                                                   </div>
-                                                                   <div class="col-sm-6">
-                                                                       <ul>{{ trans('admin.training.brings_with_me') }}
-                                                                           @foreach($bringsWithMe as $item)
-                                                                               <li>{{ $item }}</li>
-                                                                           @endforeach
-                                                                       </ul>
-                                                                   </div>
-                                                               </div>
-                                                           </div>
-                                                           <div class="card-footer">
-                                                               <p class="card-text text-dark fw-bold">{{$class->date}}</p>
-                                                               <small class="text-muted">{{ trans('admin.training.start_time') }}: {{ $class->start_time }}</small>
-                                                               <small class="float-end text-muted">{{ trans('admin.training.end_time') }}: {{ $class->end_time }}</small>
-                                                           </div>
-                                                       </div>
-                                                   </div>
-                                               @empty
-                                                   <div class="col-sm-8 mx-auto mt-3">
-                                                       <div class="card">
-                                                           <div class="card-header">
-                                                               <h5 class="card-title fw-bold text-center">{{ trans('admin.training.no_classes') }}</h5>
-                                                           </div>
-                                                       </div>
-                                                   </div>
-                                               @endforelse
-                                           </div>
-
-                                        </div>
                                         <hr>
                                         <form action="{{ route('admin.training.active', $training) }}" method="post">
                                             @csrf
