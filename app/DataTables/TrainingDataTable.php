@@ -136,6 +136,8 @@ class TrainingDataTable extends DataTable
             ['name' => 'coach.name', 'data' => 'coach_id', 'title' => trans('admin.training.coach')],
 //            ['name' => 'start_date', 'data' => 'start_date', 'title' => trans('admin.training.start_date')],
 //            ['name' => 'end_date', 'data' => 'end_date', 'title' => trans('admin.training.end_date')],
+            ['name' => 'start_time', 'data' => 'start_time', 'title' => trans('admin.training.start_time')],
+            ['name' => 'end_time', 'data' => 'start_time', 'title' => trans('admin.training.start_time')],
             ['name' => 'age_group', 'data' => 'age_group', 'title' => trans('admin.training.age_group')],
             ['name' => 'gender', 'data' => 'gender', 'title' => trans('admin.training.gender')],
             ['name' => 'max_players', 'data' => 'max_players', 'title' => trans('admin.training.max_players')],

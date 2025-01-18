@@ -18,6 +18,17 @@
             <option value="inactive" @selected(old('status', (isset($banner) ? $banner->status : '')) == 'inactive')>{{ trans('admin.academies.inactive') }}</option>
         </select>
     </div>
+
+        <div class="col-md-12 mb-3">
+            <select class="form-select" name="country">
+                <option value="">{{trans('admin.city.Select County')}}<code>*</code></option>
+                <option value="eg"  @selected(old('country', isset($country) ? $country : '') == 'eg')>Egypt</option>
+                <option value="qa"  @selected(old('country', isset($country) ? $country : '') == 'qa')>Qatar</option>
+            </select>
+            @error('country')
+            <span class="text-danger">*{{$message}}</span>
+            @enderror
+        </div>
 </div>
 
 @push('js')
