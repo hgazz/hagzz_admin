@@ -297,6 +297,7 @@ return [
         'coach' => 'مدرب',
         'fcm_token' => 'رمز FCM',
         'male' => 'ذكر',
+        'user_details' => 'تفاصيل المستخدم',
         'female' => 'أنثى',
         'select_gender' => 'اختر الجنس',
         'show_details' => 'عرض التفاصيل',

@@ -86,20 +86,20 @@
                                                            <div class="col-sm-4 mt-2">
                                                                <div class="card">
                                                                    <div class="card-header">
-                                                                       <h5 class="card-title">{{ trans('admin.training.start_date') }}</h5>
+                                                                       <h5 class="card-title">{{ trans('admin.training.start_time') }}</h5>
                                                                    </div>
                                                                    <div class="card-body">
-                                                                       <p class="card-text text-dark fw-bold">{{$training->start_date}}</p>
+                                                                       <p class="card-text text-dark fw-bold">{{$training->start_time}}</p>
                                                                    </div>
                                                                </div>
                                                            </div>
                                                            <div class="col-sm-4 mt-2">
                                                                    <div class="card">
                                                                        <div class="card-header">
-                                                                           <h5 class="card-title">{{ trans('admin.training.end_date') }}</h5>
+                                                                           <h5 class="card-title">{{ trans('admin.training.end_time') }}</h5>
                                                                        </div>
                                                                        <div class="card-body">
-                                                                           <p class="card-text text-dark fw-bold">{{$training->end_date}}</p>
+                                                                           <p class="card-text text-dark fw-bold">{{$training->end_time}}</p>
                                                                        </div>
                                                                    </div>
                                                            </div>

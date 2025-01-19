@@ -147,4 +147,9 @@ class ReportController extends Controller
         session()->flash('success','Settlement Status updated successfully');
         return back();
     }
+
+    public function viewBookingDetails(Join $join)
+    {
+        return view('Admin.pages.joins.details', compact('join'));
+    }
 }

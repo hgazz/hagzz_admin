@@ -312,6 +312,7 @@ return [
         'coach'=> 'Coach',
         'fcm_token'=> 'FCM Token',
         'male' => 'Male',
+        'user_details' => 'User Details',
         'female' => 'Female',
         'select_gender' => 'Select Gender',
         'show_details' => 'Show Details',
