@@ -4,7 +4,7 @@
         <select id="training_id" name="training_id" class="form-control">
             <option value="">{{ trans('admin.academies.select_training') }}</option>
             @foreach($trainings as $training)
-                <option value="{{ $training->id }}">{{ $training->name }}</option>
+                <option value="{{ $training->id }}" @selected(old('training_id') == $training->id)>{{ $training->name }}</option>
             @endforeach
         </select>
         @error('training_id')

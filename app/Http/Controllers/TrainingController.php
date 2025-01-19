@@ -109,7 +109,7 @@ class TrainingController extends Controller
             ]);
             DB::commit();
             session()->flash('success', __('admin.training.Booking created successfully'));
-            return to_route('admin.training.index');
+            return to_route('admin.booking.index');
         }catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
