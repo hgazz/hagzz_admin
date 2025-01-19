@@ -35,7 +35,19 @@ class User extends Authenticatable
         'area_id',
         'language',
         'user_type',
-        'country_code'
+        'country_code',
+        'email',
+        'child_type',
+        'school_name',
+        'parent_name',
+        'parent_phone',
+        'coach_preference',
+        'frequent_attendance',
+        'relation_with_child',
+        'referral_source',
+        'medical_condition',
+        'medical_condition_details',
+        'additional_information'
     ];
 
     /**

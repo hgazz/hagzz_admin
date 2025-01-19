@@ -168,12 +168,13 @@ Route::group(
                     Route::get('trainings/show/{training}', 'show')->name('training.show');
                     Route::put('trainings/active/{training}', 'updateTrainingStatus')->name('training.active');
                     Route::get('trainings/export', 'export')->name('training.export');
-                    Route::get('trainings/booking/{training}', 'createBooking')->name('training.createBooking');
-                    Route::post('trainings/booking', 'storeBooking')->name('training.storeBooking');
                     Route::post('trainings/areas', 'getAreaByCity')->name('training.getAreaByCity');
                     Route::post('trainings/cities', 'getCityByCountry')->name('training.getCities');
                     Route::delete('trainings/delete', 'delete')->name('trainings.delete');
                 });
+
+                Route::get('create-booking', [TrainingController::class, 'createBooking'])->name('offline.create');
+                Route::post('add-booking', [TrainingController::class, 'storeBooking'])->name('offline.storeBooking');
 
                 Route::controller(GalleryController::class)->group(function () {
                     Route::get('galleries', 'index')->name('gallery.index');

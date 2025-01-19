@@ -36,9 +36,9 @@
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-bottom:24px;">
-                <form method="POST" action="{{ route('admin.training.storeBooking') }}">
+                <form method="POST" action="{{ route('admin.offline.storeBooking') }}">
                     @csrf
-                    <input type="hidden" name="training_id" value="{{ $training->id }}">
+{{--                    <input type="hidden" name="training_id" value="{{ $training->id }}">--}}
                     <div class="card">
                         <div class="card-header">
                             <h3>{{ trans('admin.training.create_booking') }}</h3>
