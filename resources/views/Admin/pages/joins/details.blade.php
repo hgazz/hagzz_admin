@@ -85,8 +85,7 @@
                                                                 <h5 class="card-title">{{ trans('admin.training.classes_days') }}</h5>
                                                             </div>
                                                             <div class="card-body">
-                                                                @dd($join?->training?->classes_days)
-                                                                <p class="card-text text-dark fw-bold">{{ $join?->training?->classes_days ?? implode('-', $join?->training?->classes_days) }}</p>
+                                                                <p class="card-text text-dark fw-bold">{{ $join?->training?->classes_days != null ? implode('-', $join?->training?->classes_days) : null }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
