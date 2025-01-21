@@ -67,6 +67,7 @@ class TrainingController extends Controller
 
     public function storeBooking(BookingRequest $request)
     {
+
         try {
             $training = Training::findOrFail($request->training_id);
             DB::beginTransaction();
@@ -88,6 +89,7 @@ class TrainingController extends Controller
                     'school_name' => $request->school_name,
                     'parent_name' => $request->parent_name,
                     'parent_phone' => $request->parent_phone,
+                    'club_member' => $request->club_member,
                     'coach_preference' =>  $request->coach_preference,
                     'frequent_attendance' => $request->frequent_attendance,
                     'relation_with_child' => $request->relation_with_child,
