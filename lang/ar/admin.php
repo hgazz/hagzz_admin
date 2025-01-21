@@ -176,13 +176,17 @@ return [
         'how_did_you_hear_about_us' => 'مصدر الإحالة',
         'friends' => 'اصدقاء',
         'hagzz_app' => 'تطبيق حجز الالكتروني',
-        'did_you_have_medical_conditions' => 'الحاله الصحية',
+        'did_you_have_medical_conditions' => 'هل تعاني من أي حساسية أو أمراض',
+        'select_medical_condition' => 'اختر هل تعاني أم لا',
+
         'yes' => 'نعم',
         'no' => 'لا',
         'medical_condition' => 'برجاء اضافه التفاصيل',
         'additional_information' => 'معلومات إضافية',
         'select_training' => 'حدد التدريب',
-        'delivery_service' => 'هل تحتاج خدمه توصيل'
+        'delivery_service' => 'هل تحتاج خدمه توصيل',
+        'club_member' => 'هل أنت من أعضاء النادي',
+         'select_club_member' => 'اختر إذا كنت من أعضاء النادي',
     ],
     'banners' => [
         'banners' => 'اللافتات',

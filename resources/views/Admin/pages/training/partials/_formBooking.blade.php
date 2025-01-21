@@ -201,7 +201,7 @@
         <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
-    <div class="col-md-12 mb-3">
+    <div class="col-md-6 mb-3">
         <label for="delivery_service">{{trans('admin.academies.delivery_service')}}<code>*</code></label>
         <select class="form-select" id="delivery_service" name="delivery_service" required>
             <option value="">{{ trans('admin.academies.delivery_service') }}</option>
@@ -212,7 +212,20 @@
         <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
-    <div class="col-md-12 mb-3">
+    <div class="col-md-6 mb-4">
+        <label for="club_member" class="form-label">
+            {{ trans('admin.academies.club_member') }} <code>*</code>
+        </label>
+        <select class="form-select" id="club_member" name="club_member" required>
+            <option value="">{{ trans('admin.academies.select_club_member') }}</option>
+            <option value="yes" @selected(old('club_member') == 'yes')>{{ trans('admin.academies.yes') }}</option>
+            <option value="no" @selected(old('club_member') == 'no')>{{ trans('admin.academies.no') }}</option>
+        </select>
+        @error('club_member')
+        <span class="text-danger d-block mt-2">{{ $message }}</span>
+        @enderror
+    </div>
+    <div class="col-md-6 mb-3">
         <label for="how_did_you_hear_about_us">{{trans('admin.academies.how_did_you_hear_about_us')}}<code>*</code></label>
         <select class="form-select" id="how_did_you_hear_about_us" name="referral_source" required>
             <option value="">{{ trans('admin.academies.how_did_you_hear_about_us') }}</option>
@@ -224,32 +237,19 @@
          <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
-    <div class="col-md-12 mb-4">
+    <div class="col-md-6 mb-4">
         <label for="medical_condition" class="form-label">
             {{ trans('admin.academies.did_you_have_medical_conditions') }} <code>*</code>
         </label>
-        <div class="row">
-            <!-- Yes Option -->
-            <div class="col-md-6 mb-3 d-flex align-items-center">
-                <input type="radio" name="medical_condition" class="form-check-input me-2" id="medical_condition_yes" value="yes" @checked(old('medical_condition') == 'yes')>
-                <label for="medical_condition_yes" class="form-check-label me-3">
-                    {{ trans('admin.academies.yes') }}
-                </label>
-            </div>
-
-            <!-- No Option -->
-            <div class="col-md-6 d-flex align-items-center">
-                <input type="radio" name="medical_condition" class="form-check-input me-2" id="medical_condition_no" value="no" @checked(old('medical_condition') == 'no')>
-                <label for="medical_condition_no" class="form-check-label">
-                    {{ trans('admin.academies.no') }}
-                </label>
-            </div>
-        </div>
-        <!-- General Error Message -->
+        <select class="form-select" id="medical_condition" name="medical_condition" required>
+            <option value="">{{ trans('admin.academies.select_medical_condition') }}</option>
+            <option value="yes" @selected(old('medical_condition') == 'yes')>{{ trans('admin.academies.yes') }}</option>
+            <option value="no" @selected(old('medical_condition') == 'no')>{{ trans('admin.academies.no') }}</option>
+        </select>
         @error('medical_condition')
         <span class="text-danger d-block mt-2">{{ $message }}</span>
         @enderror
-        <div class="col-md-6 mb-2">
+        <div class="col-md-6 mb-2 mt-2">
             <input type="text" id="medical_condition_txt" class="form-control ms-2 d-none"
                    value="{{ old('medical_condition_details') }}"
                    name="medical_condition_details"
@@ -272,6 +272,25 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const medicalConditionSelect = document.getElementById('medical_condition');
+        const medicalConditionTxt = document.getElementById('medical_condition_txt');
+
+        function toggleMedicalConditionInput() {
+            if (medicalConditionSelect.value === 'yes') {
+                medicalConditionTxt.classList.remove('d-none');
+            } else {
+                medicalConditionTxt.classList.add('d-none');
+                medicalConditionTxt.value = '';
+            }
+        }
+
+        // Add event listener for select changes
+        medicalConditionSelect.addEventListener('change', toggleMedicalConditionInput);
+
+        // Check the initial state of the select (e.g., after validation errors)
+        toggleMedicalConditionInput();
+    });
     document.addEventListener('DOMContentLoaded', function () {
         const yesRadio = document.getElementById('medical_condition_yes');
         const noRadio = document.getElementById('medical_condition_no');
