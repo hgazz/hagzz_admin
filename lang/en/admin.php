@@ -198,7 +198,8 @@ return [
         'no' => 'No',
         'medical_condition' => 'Enter your medical conditions',
         'additional_information' => 'Additional Information',
-        'select_training' => 'Select Training'
+        'select_training' => 'Select Training',
+        'delivery_service' => 'Delivery Service',
     ],
     'banners'=> [
         'banners'=>'Banners',

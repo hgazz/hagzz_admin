@@ -312,6 +312,16 @@
                                                     <div class="col-sm-4 mt-2">
                                                         <div class="card">
                                                             <div class="card-header">
+                                                                <h5 class="card-title">{{ trans('admin.academies.delivery_service') }}</h5>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <p class="card-text text-dark fw-bold">{{$join->user->delivery_service ?? 'N/A'}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 mt-2">
+                                                        <div class="card">
+                                                            <div class="card-header">
                                                                 <h5 class="card-title">{{ trans('admin.academies.additional_information') }}</h5>
                                                             </div>
                                                             <div class="card-body">
