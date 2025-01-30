@@ -13,6 +13,7 @@ class Banner extends Model
     protected $fillable = [
         'logo',
         'status',
+        'country'
     ];
 
     public function getLogoAttribute($value)
