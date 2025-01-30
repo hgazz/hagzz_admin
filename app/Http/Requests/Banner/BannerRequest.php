@@ -23,9 +23,14 @@ class BannerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => $this->checkImage(),
             'status' => 'required|in:active,inactive',
             'country' => 'required|in:eg,qa'
         ];
+    }
+
+    public function checkImage(): string
+    {
+       return request()->isMethod('PUT') ? 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048' : 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
     }
 }

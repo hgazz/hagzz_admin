@@ -40,7 +40,7 @@ class BannerController extends Controller
         return to_route('admin.banners.index');
     }
 
-    public function edit(Banner$banner)
+    public function edit(Banner $banner)
     {
         return view('Admin.pages.banners.edit', compact('banner'));
     }
