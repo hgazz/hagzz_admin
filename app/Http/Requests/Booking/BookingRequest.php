@@ -47,6 +47,7 @@ class BookingRequest extends FormRequest
             'additional_information' => 'nullable',
             'delivery_service' => 'required|in:yes,no',
             'club_member' => 'required|in:yes,no',
+            'start_date' => 'required|date',
         ];
     }
 }
