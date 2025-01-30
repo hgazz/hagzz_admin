@@ -60,6 +60,11 @@ class JoinDataTable extends DataTable
             ->addColumn('training.created_at', fn($join) => Carbon::parse($join->training->created_at)->format('Y-m-d H:i:s'))
             ->addColumn('discount_price', fn($join) => $join?->training?->discount_price)
             ->addColumn('actions', fn($join)=> view('Admin.pages.joins.datatables.action', compact('join')))
+            ->filterColumn('user_type', function($query, $keyword) {
+                $query->whereHas('invoice', function($query) use($keyword) {
+                    $query->where('user_type', 'like', '%' . $keyword . '%');
+                });
+            })
             ->rawColumns([
                 'user_name',
                 'training',
@@ -148,7 +153,7 @@ class JoinDataTable extends DataTable
             ['name' => 'max_player', 'data' => 'max_player', 'title' => trans('admin.training.max_players')],
             ['name' => 'price', 'data' => 'price', 'title' => trans('admin.training.price')],
             ['name' => 'discount_price', 'data' => 'discount_price', 'title' => trans('admin.discount_price')],
-            ['name' => 'user_type', 'data' => 'user_type', 'title' => trans('admin.user_type')],
+            ['name' => 'user_type', 'data' => 'user_type', 'title' => trans('admin.academies.user_type')],
             ['name' => 'training.created_at', 'data' => 'training.created_at', 'title' => trans('admin.created_at'), 'exportable' => true, 'printable' => true, 'orderable' => true, 'searchable' => false],
             ['name' => 'actions', 'data' => 'actions', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
         ];
