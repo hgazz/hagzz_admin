@@ -41,7 +41,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="simple-tab">
-
+                                    <a href="{{ route('admin.report.export-booking-file', $join) }}" class="btn btn-success mt-1 mb-1">{{ trans('admin.export') }}</a>
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="home-tab-icon" data-bs-toggle="tab" data-bs-target="#home-tab-icon-pane" type="button" role="tab" aria-controls="home-tab-icon-pane" aria-selected="true">
