@@ -174,6 +174,7 @@ return [
         'sister' => 'أخت',
         'guardian' => 'وصي',
         'how_did_you_hear_about_us' => 'مصدر الإحالة',
+        'referral_source' => 'مصدر الإحالة',
         'friends' => 'اصدقاء',
         'hagzz_app' => 'تطبيق حجز الالكتروني',
         'did_you_have_medical_conditions' => 'هل تعاني من أي حساسية أو أمراض',
@@ -317,6 +318,7 @@ return [
     ],
     'bookings' => [
         'bookings' => 'الحجوزات',
+        'offline_bookings' => 'الحجوزات الاوفلاين',
         'add_new_booking' => 'إضافه حجز اوفلاين',
         'booking cancelled successfully' => 'تم إلغاء الحجز بنجاح',
         'training' => 'التدريب',

@@ -376,6 +376,15 @@
                         </a>
                     </li>
 
+                    <li class="menu {{ Request::routeIs('admin.report.offline-joins') ? 'active' : '' }}">
+                        <a href="{{ route('admin.report.offline-joins') }}" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <img src="{{ asset('assetsAdmin/person-arms-up.svg') }}" alt="">
+                                <span>{{ trans('admin.bookings.offline_bookings') }}</span>
+                            </div>
+                        </a>
+                    </li>
+
                     <li class="menu {{ Request::routeIs('admin.report.coach') ? 'active' : '' }}">
                         <a href="{{ route('admin.report.coach') }}" aria-expanded="false" class="dropdown-toggle">
                             <div class="">

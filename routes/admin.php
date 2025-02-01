@@ -191,9 +191,11 @@ Route::group(
                         Route::get('invoice', 'invoice')->name('invoice.filter');
                         Route::get('bookings/export', 'bookingExport')->name('booking.export');
                         Route::get('joins', 'joins')->name('joins');
+                        Route::get('joins/offline', 'offlineJoins')->name('offline-joins');
                         Route::get('joins/{join}', 'viewBookingDetails')->name('view-booking-details');
                         Route::get('joins/export/{join}', 'exportBookingFile')->name('export-booking-file');
                         Route::get('joins/filter', 'joinFilter')->name('join.filter');
+                        Route::get('joins/offline/filter', 'offlineJoinFilter')->name('joins-offline-filter');
                         Route::get('joins/export', 'joinExport')->name('join.export');
                         Route::get('coach', 'coach')->name('coach');
                         Route::get('coach/filter', 'coachFilter')->name('coach.filter');
