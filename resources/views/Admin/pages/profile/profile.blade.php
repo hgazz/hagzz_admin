@@ -14,7 +14,7 @@
 
     <link href="{{asset('assetsAdmin')}}/src/plugins/css/light/sweetalerts2/custom-sweetalert.css" rel="stylesheet" type="text/css" />
     <link href="{{asset('assetsAdmin')}}/src/plugins/css/light/notification/snackbar/custom-snackbar.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../src/assets/css/light/forms/switches.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assetsAdmin')}}/src/assets/css/light/forms/switches.css">
     <link href="{{asset('assetsAdmin')}}/src/assets/css/light/components/list-group.css" rel="stylesheet" type="text/css">
 
     <link href="{{asset('assetsAdmin')}}/src/assets/css/light/users/account-setting.css" rel="stylesheet" type="text/css" />
@@ -234,7 +234,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="payment-card">
-                                                            <img src="../src/assets/img/card-mastercard.svg" class="align-self-center me-3" alt="americanexpress">
+                                                            <img src="{{asset('assetsAdmin')}}/src/assets/img/card-mastercard.svg" class="align-self-center me-3" alt="americanexpress">
                                                         </div>
                                                         <div class="billing-content">
                                                             <div class="fw-bold">Mastercard</div>
@@ -253,7 +253,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="payment-card">
-                                                            <img src="../src/assets/img/card-americanexpress.svg" class="align-self-center me-3" alt="americanexpress">
+                                                            <img src="{{asset('assetsAdmin')}}/src/assets/img/card-americanexpress.svg" class="align-self-center me-3" alt="americanexpress">
                                                         </div>
                                                         <div class="billing-content">
                                                             <div class="fw-bold">American Express</div>
@@ -272,7 +272,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="payment-card">
-                                                            <img src="../src/assets/img/card-visa.svg" class="align-self-center me-3" alt="americanexpress">
+                                                            <img src="{{asset('assetsAdmin')}}/src/assets/img/card-visa.svg" class="align-self-center me-3" alt="americanexpress">
                                                         </div>
                                                         <div class="billing-content">
                                                             <div class="fw-bold">Visa</div>
@@ -369,12 +369,12 @@
                                                         <label class="form-label">Card Brand</label>
                                                         <div class="invoice-action-currency">
                                                             <div class="dropdown selectable-dropdown cardName-select">
-                                                                <a id="cardBrandDropdown" href="javascript:void(0);" class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../src/assets/img/card-mastercard.svg" class="flag-width" alt="flag"> <span class="selectable-text">Mastercard</span> <span class="selectable-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></span></a>
+                                                                <a id="cardBrandDropdown" href="javascript:void(0);" class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('assetsAdmin')}}/src/assets/img/card-mastercard.svg" class="flag-width" alt="flag"> <span class="selectable-text">Mastercard</span> <span class="selectable-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></span></a>
                                                                 <div class="dropdown-menu" aria-labelledby="cardBrandDropdown">
-                                                                    <a class="dropdown-item" data-img-value="../src/assets/img/card-mastercard.svg" data-value="GBP - British Pound" href="javascript:void(0);"><img src="../src/assets/img/card-mastercard.svg" class="flag-width" alt="flag"> Mastercard</a>
-                                                                    <a class="dropdown-item" data-img-value="../src/assets/img/card-americanexpress.svg" data-value="IDR - Indonesian Rupiah" href="javascript:void(0);"><img src="../src/assets/img/card-americanexpress.svg" class="flag-width" alt="flag"> American Express</a>
-                                                                    <a class="dropdown-item" data-img-value="../src/assets/img/card-visa.svg" data-value="USD - US Dollar" href="javascript:void(0);"><img src="../src/assets/img/card-visa.svg" class="flag-width" alt="flag"> Visa</a>
-                                                                    <a class="dropdown-item" data-img-value="../src/assets/img/card-discover.svg" data-value="INR - Indian Rupee" href="javascript:void(0);"><img src="../src/assets/img/card-discover.svg" class="flag-width" alt="flag"> Discover</a>
+                                                                    <a class="dropdown-item" data-img-value="{{asset('assetsAdmin')}}/src/assets/img/card-mastercard.svg" data-value="GBP - British Pound" href="javascript:void(0);"><img src="{{asset('assetsAdmin')}}/src/assets/img/card-mastercard.svg" class="flag-width" alt="flag"> Mastercard</a>
+                                                                    <a class="dropdown-item" data-img-value="{{asset('assetsAdmin')}}/src/assets/img/card-americanexpress.svg" data-value="IDR - Indonesian Rupiah" href="javascript:void(0);"><img src="{{asset('assetsAdmin')}}/src/assets/img/card-americanexpress.svg" class="flag-width" alt="flag"> American Express</a>
+                                                                    <a class="dropdown-item" data-img-value="{{asset('assetsAdmin')}}/src/assets/img/card-visa.svg" data-value="USD - US Dollar" href="javascript:void(0);"><img src="{{asset('assetsAdmin')}}/src/assets/img/card-visa.svg" class="flag-width" alt="flag"> Visa</a>
+                                                                    <a class="dropdown-item" data-img-value="{{asset('assetsAdmin')}}/src/assets/img/card-discover.svg" data-value="INR - Indian Rupee" href="javascript:void(0);"><img src="{{asset('assetsAdmin')}}/src/assets/img/card-discover.svg" class="flag-width" alt="flag"> Discover</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -425,14 +425,14 @@
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
                                                     <label class="form-check-label" for="flexRadioDefault1">
-                                                        <img class="ms-3" width="100" height="68" alt="settings-dark" src="../src/assets/img/settings-light.svg">
+                                                        <img class="ms-3" width="100" height="68" alt="settings-dark" src="{{asset('assetsAdmin')}}/src/assets/img/settings-light.svg">
                                                     </label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                                                     <label class="form-check-label" for="flexRadioDefault2">
-                                                        <img class="ms-3" width="100" height="68" alt="settings-light" src="../src/assets/img/settings-dark.svg">
+                                                        <img class="ms-3" width="100" height="68" alt="settings-light" src="{{asset('assetsAdmin')}}/src/assets/img/settings-dark.svg">
                                                     </label>
                                                 </div>
                                             </div>
