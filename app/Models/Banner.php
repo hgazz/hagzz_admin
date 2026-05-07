@@ -18,6 +18,18 @@ class Banner extends Model
 
     public function getLogoAttribute($value)
     {
-        return  config('services.s3.url'). DIRECTORY_SEPARATOR . self::PATH . $value;
+        if (blank($value)) {
+            return null;
+        }
+
+        if (str_starts_with($value, 'http://') || str_starts_with($value, 'https://')) {
+            return $value;
+        }
+
+        $path = str_starts_with($value, self::PATH)
+            ? $value
+            : self::PATH . ltrim($value, '/');
+
+        return rtrim(config('services.s3.url'), '/') . '/' . $path;
     }
 }

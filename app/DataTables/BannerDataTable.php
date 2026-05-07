@@ -21,7 +21,11 @@ class BannerDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('logo', function (Banner $banner) {
-                return '<img src="' . $banner->logo . '" width="120" height="80">';
+                if (blank($banner->logo)) {
+                    return '-';
+                }
+
+                return '<img src="' . e($banner->logo) . '" width="120" height="80" loading="lazy" alt="Banner">';
             })
             ->addColumn('action', function (Banner $banner) {
                 return view('Admin.pages.banners.datatable.actions', compact('banner'))->render();
