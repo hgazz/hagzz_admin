@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Schema;
 
 class DashboardController extends Controller
 {
@@ -43,8 +44,14 @@ class DashboardController extends Controller
         $beginnerLevels = $this->getBeginnerSportsCount();
         $intermediateLevels = $this->getIntermediateSportsCount();
         $advancedLevels = $this->getAdvancedSportsCount();
-        $settlements = Settlement::latest()->first();
-        $totalSettlements = Settlement::sum('total_amount');
+        $settlements = null;
+        $totalSettlements = 0;
+
+        if (Schema::hasTable('settlements')) {
+            $settlements = Settlement::latest()->first();
+            $totalSettlements = Settlement::sum('total_amount');
+        }
+
         $follows = Follow::count();
         return view('Admin.index', compact('totalUsers','totalSettlements','follows','maleUsers', 'femaleUsers', 'usersBooking', 'newCustomers', 'beginnerLevels', 'intermediateLevels', 'advancedLevels', 'settlements'));
     }
