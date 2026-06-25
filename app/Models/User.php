@@ -17,9 +17,24 @@ class User extends Authenticatable
 
     public function getImageAttribute($value)
     {
-        return is_null($value)
-            ? asset('assetsAdmin/people-fill.svg')
-            : rtrim(config('services.storage.url'), '/') . '/' . self::PATH . '/' . ltrim($value, '/');
+        if (blank($value)) {
+            return $this->defaultImageUrl();
+        }
+
+        if (str_starts_with($value, 'http://') || str_starts_with($value, 'https://')) {
+            return $value;
+        }
+
+        return rtrim(config('services.storage.url'), '/') . '/' . self::PATH . '/' . ltrim($value, '/');
+    }
+
+    public function defaultImageUrl(): string
+    {
+        $fileName = $this->getRawOriginal('gender') === 'female'
+            ? 'default-user-female.webp'
+            : 'default-user-male.webp';
+
+        return asset('assetsAdmin/img/' . $fileName);
     }
     /**
      * The attributes that are mass assignable.
