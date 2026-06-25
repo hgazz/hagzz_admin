@@ -14,6 +14,6 @@ class Setting extends Model
 
     public function getLogoAttribute($value)
     {
-        return  config('services.s3.url'). DIRECTORY_SEPARATOR . self::PATH . $value;
+        return rtrim(config('services.storage.url'), '/') . '/' . self::PATH . ltrim($value, '/');
     }
 }

@@ -44,7 +44,7 @@ class Coach extends Model
 
     public function getImageAttribute($value)
     {
-        return config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
+        return rtrim(config('services.storage.url'), '/') . '/' . self::PATH . '/' . ltrim($value, '/');
     }
 
     public function getGenderAttribute($value)

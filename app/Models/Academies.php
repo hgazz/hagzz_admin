@@ -12,7 +12,7 @@ class Academies extends Model
     const  PATH = 'images/academies';
     public function getImageAttribute($value)
     {
-        return config('services.s3.url') . DIRECTORY_SEPARATOR . self::PATH . DIRECTORY_SEPARATOR . $value;
+        return rtrim(config('services.storage.url'), '/') . '/' . self::PATH . '/' . ltrim($value, '/');
     }
 
     public $translatable = ['commercial_name','app_name'];

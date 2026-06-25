@@ -30,6 +30,6 @@ class Banner extends Model
             ? $value
             : self::PATH . ltrim($value, '/');
 
-        return rtrim(config('services.s3.url'), '/') . '/' . $path;
+        return rtrim(config('services.storage.url'), '/') . '/' . $path;
     }
 }
