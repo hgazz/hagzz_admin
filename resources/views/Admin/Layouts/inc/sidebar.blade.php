@@ -70,6 +70,11 @@
                     </div>
                 </a>
             </li>
+            <li class="menu {{ Request::routeIs('admin.saas-plans.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.saas-plans.index') }}" class="dropdown-toggle">
+                    <div><i class="fa-solid fa-layer-group" style="width:22px;margin-inline-end:12px"></i><span>{{ trans('admin.saas.plans') }}</span></div>
+                </a>
+            </li>
             <li
                 class="menu {{ Request::routeIs('admin.country.*') || Request::routeIs('admin.cities.*') || Request::routeIs('admin.areas.*') || Request::routeIs('admin.academies.locations') ? 'active' : '' }}">
                 <a href="#address" data-bs-toggle="collapse"

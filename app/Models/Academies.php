@@ -20,6 +20,8 @@ class Academies extends Model
 
     protected $guarded = [];
 
+    protected $casts = ['business_type' => 'string'];
+
     public static array $translatableColumns = [
         'commercial_name'=>[
             'type'=>'text',
@@ -62,5 +64,15 @@ class Academies extends Model
     public function trainings()
     {
         return $this->hasMany(Training::class,'academy_id');
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(TenantSubscription::class, 'academy_id');
+    }
+
+    public function currentSubscription()
+    {
+        return $this->hasOne(TenantSubscription::class, 'academy_id')->latestOfMany();
     }
 }

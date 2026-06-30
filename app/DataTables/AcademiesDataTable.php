@@ -97,6 +97,7 @@ class AcademiesDataTable extends DataTable
             ['name' => 'email', 'data' => 'email', 'title' => trans('admin.academies.email')],
             ['name' => 'phone', 'data' => 'phone', 'title' => trans('admin.academies.phone')],
             ['name' => 'role', 'data' => 'role', 'title' => trans('admin.academies.role')],
+            ['name' => 'business_type', 'data' => 'business_type', 'title' => trans('admin.saas.business_type')],
             ['name' => 'branch_to', 'data' => 'branch_to', 'title' => trans('admin.academies.branch_to')],
             ['name' => 'trade_license_number', 'data' => 'trade_license_number', 'title' => trans('admin.academies.trade_license_number')],
             ['name' => 'trade_license_expire_date', 'data' => 'trade_license_expire_date', 'title' => trans('admin.academies.trade_license_expire_date')],

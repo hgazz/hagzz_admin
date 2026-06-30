@@ -14,6 +14,8 @@ use App\Models\Area;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Sport;
+use App\Models\SaasPlan;
+use App\Models\TenantSubscription;
 use App\Services\TranslatableService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -46,6 +48,8 @@ class AcademiesController extends Controller
         $countries = $this->countryModel->get(['id', 'name']);
         $cities = $this->cityModel->get(['id', 'name']);
         $areas = $this->areaModel->get(['id', 'name']);
+        $saasPlans = SaasPlan::where('active', true)->get();
+        $currentSubscription = null;
         return view('Admin.pages.academies.create',get_defined_vars());
     }
 
@@ -60,6 +64,7 @@ class AcademiesController extends Controller
                     'email' => $request->email,
                     'phone' => $request->phone,
                     'role' => $request->role,
+                    'business_type' => $request->business_type,
                     'trade_license_number' => $request->trade_license_number,
                     'trade_license_expire_date' => $request->trade_license_expire_date,
                     'tax_number' => $request->tax_number,
@@ -89,7 +94,8 @@ class AcademiesController extends Controller
                     'contract_link'=>$request->contract_link,
 
                 ]);
-            $academy->sports()->attach($request->sport_id);
+            $academy->sports()->attach($request->sport_id ?? []);
+            $this->saveSubscription($academy, $request);
             DB::commit();
             session()->flash('success', trans('admin.academies.academies_created_successfully'));
             return to_route('admin.academies.index');
@@ -125,6 +131,8 @@ class AcademiesController extends Controller
         $countries = $this->countryModel->get(['id', 'name']);
         $cities = $this->cityModel->get(['id', 'name']);
         $areas = $this->areaModel->get(['id', 'name']);
+        $saasPlans = SaasPlan::where('active', true)->get();
+        $currentSubscription = $academies->currentSubscription;
         return view('Admin.pages.academies.edit', get_defined_vars());
     }
 
@@ -138,6 +146,7 @@ class AcademiesController extends Controller
                     'email' => $request->email,
                     'phone' => $request->phone,
                     'role' => $request->role,
+                    'business_type' => $request->business_type,
                     'trade_license_number' => $request->trade_license_number,
                     'trade_license_expire_date' => $request->trade_license_expire_date,
                     'tax_number' => $request->tax_number,
@@ -166,11 +175,32 @@ class AcademiesController extends Controller
                     'non_refund_days_count' => $request->non_refund_days_count,
                     'contract_link' => $request->contract_link,
             ]);
-            $academies->sports()->sync($request->sport_id);
+            $academies->sports()->sync($request->sport_id ?? []);
+            $this->saveSubscription($academies, $request);
             session()->flash('success',trans('admin.academies.academies_updated_successfully'));
 
         });
         return to_route('admin.academies.index');
+    }
+
+    private function saveSubscription(Academies $academy, Request $request): void
+    {
+        if (!$request->saas_plan_id) {
+            return;
+        }
+
+        TenantSubscription::updateOrCreate(
+            ['academy_id' => $academy->id, 'status' => 'active'],
+            [
+                'saas_plan_id' => $request->saas_plan_id,
+                'billing_cycle' => $request->billing_cycle,
+                'custom_price' => $request->custom_price,
+                'starts_at' => $request->subscription_starts_at,
+                'ends_at' => $request->subscription_ends_at,
+                'trial_ends_at' => $request->trial_ends_at,
+                'auto_renew' => $request->boolean('auto_renew'),
+            ]
+        );
     }
 
     public function delete(Request $request)

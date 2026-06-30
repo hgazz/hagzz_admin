@@ -17,6 +17,7 @@ use App\Http\Controllers\SportController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\SaasPlanController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -48,6 +49,7 @@ Route::group(
 
             Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', 'as' => 'admin.'], function () {
                 Route::get('/', [DashboardController::class, 'index'])->name('index');
+                Route::resource('saas-plans', SaasPlanController::class)->except(['show']);
                 Route::get('booking/filter', [DashboardController::class, 'filterBookings'])->name('filter-bookings');
                 Route::get('/revenue-data', [DashboardController::class, 'getRevenueDataByMonth'])->name('revenue-data');
                 Route::get('/chart/users-by-month', [DashboardController::class, 'getUserDataByMonthAjax'])->name('getUserDataByMonth');
@@ -205,4 +207,3 @@ Route::group(
             });
         });
 });
-

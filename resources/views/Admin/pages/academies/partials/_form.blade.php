@@ -24,6 +24,7 @@
     <span class="stepIndicator">{{trans('admin.academies.Legal & Tax Details')}}</span>
     <span class="stepIndicator">{{trans('admin.academies.Billing Details')}}</span>
     <span class="stepIndicator">{{trans('admin.academies.Contract Details')}}</span>
+    <span class="stepIndicator">{{ trans('admin.saas.subscription') }}</span>
 </div>
 <!-- end step indicators -->
 
@@ -54,6 +55,14 @@
         @error('role')
         <span class="text-danger">{{$message}}</span>
         @enderror
+    </div>
+    <div class="mb-3">
+        <label for="business_type">{{ trans('admin.saas.business_type') }}<code>*</code></label>
+        <select id="business_type" name="business_type" class="form-control formInput basic">
+            @foreach(['academy','venue','hybrid'] as $type)
+                <option value="{{ $type }}" @selected(old('business_type', $academies->business_type ?? 'academy') === $type)>{{ trans('admin.saas.business_types.'.$type) }}</option>
+            @endforeach
+        </select>
     </div>
     <div class="mb-3">
         <label for="email">{{trans('admin.academies.email')}}<code>*</code></label>
@@ -102,7 +111,7 @@
        @endif
 
     @endforeach
-    <div class="mb-3 d-flex flex-column align-items-start">
+    <div class="mb-3 d-flex flex-column align-items-start" id="sports_wrap">
         <label for="sports">{{ trans('admin.sport.sport') }}<code>*</code></label>
         <div>
             <select class="js-example-basic-multiple w-100 form-select form-control formInput basic" name="sport_id[]" multiple id="sports">
@@ -336,6 +345,17 @@
 
 </div>
 
+<div class="step">
+    <p class="text-center mb-4">{{ trans('admin.saas.subscription') }}</p>
+    <div class="mb-3"><label for="saas_plan_id">{{ trans('admin.saas.plan') }}</label><select id="saas_plan_id" name="saas_plan_id" class="form-control basic"><option value="">{{ trans('admin.saas.no_plan') }}</option>@foreach($saasPlans as $plan)<option value="{{ $plan->id }}" @selected(old('saas_plan_id', $currentSubscription->saas_plan_id ?? null) == $plan->id)>{{ $plan->name }}</option>@endforeach</select></div>
+    <div class="mb-3"><label>{{ trans('admin.saas.billing_cycle') }}</label><select name="billing_cycle" class="form-control basic"><option value="monthly" @selected(old('billing_cycle',$currentSubscription->billing_cycle ?? 'monthly')==='monthly')>{{ trans('admin.saas.monthly') }}</option><option value="annual" @selected(old('billing_cycle',$currentSubscription->billing_cycle ?? '')==='annual')>{{ trans('admin.saas.annual') }}</option></select></div>
+    <div class="mb-3"><label>{{ trans('admin.saas.custom_price') }}</label><input type="number" min="0" step="0.01" name="custom_price" value="{{ old('custom_price',$currentSubscription->custom_price ?? '') }}"></div>
+    <div class="mb-3"><label>{{ trans('admin.saas.starts_at') }}</label><input type="date" name="subscription_starts_at" value="{{ old('subscription_starts_at',$currentSubscription?->starts_at?->format('Y-m-d') ?? now()->format('Y-m-d')) }}"></div>
+    <div class="mb-3"><label>{{ trans('admin.saas.ends_at') }}</label><input type="date" name="subscription_ends_at" value="{{ old('subscription_ends_at',$currentSubscription?->ends_at?->format('Y-m-d')) }}"></div>
+    <div class="mb-3"><label>{{ trans('admin.saas.trial_ends_at') }}</label><input type="date" name="trial_ends_at" value="{{ old('trial_ends_at',$currentSubscription?->trial_ends_at?->format('Y-m-d')) }}"></div>
+    <div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="auto_renew" value="1" @checked(old('auto_renew',$currentSubscription->auto_renew ?? false))><label class="form-check-label">{{ trans('admin.saas.auto_renew') }}</label></div>
+</div>
+
 <!-- start previous / next buttons -->
 <div class="form-footer d-flex">
     <button type="button" id="prevBtn" onclick="nextPrev(-1)">{{trans('admin.academies.Previous')}}</button>
@@ -349,6 +369,17 @@
             $('.js-example-basic-multiple').select2({
                 placeholder: "{{ trans('admin.academies.select_sport') }}"
             });
+            const businessType = document.getElementById('business_type');
+            const sportsWrap = document.getElementById('sports_wrap');
+            const sports = document.getElementById('sports');
+            function toggleSports() {
+                const venueOnly = businessType.value === 'venue';
+                sportsWrap.classList.toggle('d-none', venueOnly);
+                sports.required = !venueOnly;
+                sports.classList.toggle('formInput', !venueOnly);
+            }
+            businessType.addEventListener('change', toggleSports);
+            toggleSports();
         });
     </script>
     <script>

@@ -493,4 +493,16 @@ return [
     'classes'=>'Classes',
     'count'=>'Count',
     'discount_price'=>'Discount Price',
+    'saas' => [
+        'plans' => 'SaaS Plans', 'plans_hint' => 'Manage subscription pricing, limits and enabled modules.', 'add_plan' => 'Add Plan', 'edit_plan' => 'Edit Plan',
+        'plan' => 'Plan', 'subscription' => 'SaaS Subscription', 'business_type' => 'Business Type',
+        'business_types' => ['academy' => 'Academy', 'venue' => 'Venues only', 'hybrid' => 'Academy and venues'],
+        'code' => 'Code', 'name_ar' => 'Arabic Name', 'name_en' => 'English Name', 'monthly_price' => 'Monthly Price', 'annual_price' => 'Annual Price',
+        'max_venues' => 'Maximum Locations', 'max_spaces' => 'Maximum Spaces', 'max_staff' => 'Maximum Staff', 'limits' => 'Locations / Spaces / Staff',
+        'features' => 'Enabled Modules', 'feature_names' => ['academy' => 'Academy Management', 'venues' => 'Venue Management', 'reports' => 'Advanced Reports', 'mobile_marketplace' => 'Mobile Marketplace'],
+        'active' => 'Active', 'inactive' => 'Inactive', 'empty' => 'No plans yet.', 'saved' => 'Plan saved successfully.', 'deleted' => 'Plan deleted.',
+        'plan_in_use' => 'This plan is assigned to customers and cannot be deleted.', 'no_plan' => 'No plan', 'billing_cycle' => 'Billing Cycle',
+        'monthly' => 'Monthly', 'annual' => 'Annual', 'custom_price' => 'Custom Price', 'starts_at' => 'Subscription Starts',
+        'ends_at' => 'Subscription Ends', 'trial_ends_at' => 'Trial Ends', 'auto_renew' => 'Auto Renew', 'cancel' => 'Cancel',
+    ],
 ];
