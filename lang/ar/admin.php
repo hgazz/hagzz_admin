@@ -485,5 +485,9 @@ return [
         'plan_in_use' => 'لا يمكن حذف الباقة لأنها مرتبطة بعملاء.', 'no_plan' => 'بدون باقة', 'billing_cycle' => 'دورة الفوترة',
         'monthly' => 'شهري', 'annual' => 'سنوي', 'custom_price' => 'سعر مخصص', 'starts_at' => 'بداية الاشتراك',
         'ends_at' => 'نهاية الاشتراك', 'trial_ends_at' => 'نهاية الفترة التجريبية', 'auto_renew' => 'تجديد تلقائي', 'cancel' => 'إلغاء',
+        'market_prices' => 'أسعار الدول', 'market_prices_hint' => 'فعّل الدول التي تباع فيها الباقة وحدد سعراً محلياً مستقلاً لكل دولة.',
+        'enable_market' => 'تفعيل', 'currency' => 'العملة', 'tax_rate' => 'نسبة الضريبة', 'tax_included' => 'السعر شامل الضريبة',
+        'no_market_prices' => 'لا توجد أسعار للدول', 'market_country' => 'دولة العميل', 'select_country' => 'اختر الدولة',
+        'selected_market_price' => 'سعر الدولة المحددة', 'price_not_available' => 'لا يوجد سعر نشط لهذه الباقة في دولة العميل المحددة.',
     ],
 ];

@@ -20,6 +20,7 @@ use App\Services\TranslatableService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AcademiesController extends Controller
@@ -48,7 +49,7 @@ class AcademiesController extends Controller
         $countries = $this->countryModel->get(['id', 'name']);
         $cities = $this->cityModel->get(['id', 'name']);
         $areas = $this->areaModel->get(['id', 'name']);
-        $saasPlans = SaasPlan::where('active', true)->get();
+        $saasPlans = SaasPlan::with(['prices' => fn ($query) => $query->where('active', true)])->where('active', true)->get();
         $currentSubscription = null;
         return view('Admin.pages.academies.create',get_defined_vars());
     }
@@ -65,6 +66,7 @@ class AcademiesController extends Controller
                     'phone' => $request->phone,
                     'role' => $request->role,
                     'business_type' => $request->business_type,
+                    'country_id' => $request->country_id,
                     'trade_license_number' => $request->trade_license_number,
                     'trade_license_expire_date' => $request->trade_license_expire_date,
                     'tax_number' => $request->tax_number,
@@ -131,7 +133,7 @@ class AcademiesController extends Controller
         $countries = $this->countryModel->get(['id', 'name']);
         $cities = $this->cityModel->get(['id', 'name']);
         $areas = $this->areaModel->get(['id', 'name']);
-        $saasPlans = SaasPlan::where('active', true)->get();
+        $saasPlans = SaasPlan::with(['prices' => fn ($query) => $query->where('active', true)])->where('active', true)->get();
         $currentSubscription = $academies->currentSubscription;
         return view('Admin.pages.academies.edit', get_defined_vars());
     }
@@ -147,6 +149,7 @@ class AcademiesController extends Controller
                     'phone' => $request->phone,
                     'role' => $request->role,
                     'business_type' => $request->business_type,
+                    'country_id' => $request->country_id,
                     'trade_license_number' => $request->trade_license_number,
                     'trade_license_expire_date' => $request->trade_license_expire_date,
                     'tax_number' => $request->tax_number,
@@ -189,12 +192,26 @@ class AcademiesController extends Controller
             return;
         }
 
+        $plan = SaasPlan::with('prices')->findOrFail($request->saas_plan_id);
+        $marketPrice = $plan->prices->first(fn ($price) => $price->country_id == $request->country_id && $price->active);
+        if (!$marketPrice) {
+            throw ValidationException::withMessages(['saas_plan_id' => trans('admin.saas.price_not_available')]);
+        }
+        $contractPrice = $request->filled('custom_price')
+            ? (float) $request->custom_price
+            : (float) ($request->billing_cycle === 'annual' ? $marketPrice->annual_price : $marketPrice->monthly_price);
+
         TenantSubscription::updateOrCreate(
             ['academy_id' => $academy->id, 'status' => 'active'],
             [
                 'saas_plan_id' => $request->saas_plan_id,
+                'saas_plan_price_id' => $marketPrice->id,
                 'billing_cycle' => $request->billing_cycle,
                 'custom_price' => $request->custom_price,
+                'price_amount' => $contractPrice,
+                'currency_code' => $marketPrice->currency_code,
+                'tax_rate' => $marketPrice->tax_rate,
+                'tax_included' => $marketPrice->tax_included,
                 'starts_at' => $request->subscription_starts_at,
                 'ends_at' => $request->subscription_ends_at,
                 'trial_ends_at' => $request->trial_ends_at,

@@ -65,6 +65,16 @@
         </select>
     </div>
     <div class="mb-3">
+        <label for="country_id">{{ trans('admin.saas.market_country') }}<code>*</code></label>
+        <select id="country_id" name="country_id" class="form-control formInput basic">
+            <option value="">{{ trans('admin.saas.select_country') }}</option>
+            @foreach($countries as $country)
+                <option value="{{ $country->id }}" @selected(old('country_id', $academies->country_id ?? null) == $country->id)>{{ $country->name }} @if($country->currency_code)({{ $country->currency_code }})@endif</option>
+            @endforeach
+        </select>
+        @error('country_id')<span class="text-danger">{{ $message }}</span>@enderror
+    </div>
+    <div class="mb-3">
         <label for="email">{{trans('admin.academies.email')}}<code>*</code></label>
         <input id="email" type="text" class="formInput" placeholder="{{trans('admin.academies.email')}}" value="{{old('email', isset($academies) ? $academies->email : '')}}" oninput="this.className = ''" name="email">
     </div>
@@ -347,8 +357,9 @@
 
 <div class="step">
     <p class="text-center mb-4">{{ trans('admin.saas.subscription') }}</p>
-    <div class="mb-3"><label for="saas_plan_id">{{ trans('admin.saas.plan') }}</label><select id="saas_plan_id" name="saas_plan_id" class="form-control basic"><option value="">{{ trans('admin.saas.no_plan') }}</option>@foreach($saasPlans as $plan)<option value="{{ $plan->id }}" @selected(old('saas_plan_id', $currentSubscription->saas_plan_id ?? null) == $plan->id)>{{ $plan->name }}</option>@endforeach</select></div>
-    <div class="mb-3"><label>{{ trans('admin.saas.billing_cycle') }}</label><select name="billing_cycle" class="form-control basic"><option value="monthly" @selected(old('billing_cycle',$currentSubscription->billing_cycle ?? 'monthly')==='monthly')>{{ trans('admin.saas.monthly') }}</option><option value="annual" @selected(old('billing_cycle',$currentSubscription->billing_cycle ?? '')==='annual')>{{ trans('admin.saas.annual') }}</option></select></div>
+    <div class="mb-3"><label for="saas_plan_id">{{ trans('admin.saas.plan') }}</label><select id="saas_plan_id" name="saas_plan_id" class="form-control basic"><option value="">{{ trans('admin.saas.no_plan') }}</option>@foreach($saasPlans as $plan)<option value="{{ $plan->id }}" data-prices='@json($plan->prices->keyBy('country_id'))' @selected(old('saas_plan_id', $currentSubscription->saas_plan_id ?? null) == $plan->id)>{{ $plan->name }}</option>@endforeach</select></div>
+    <div class="mb-3"><label>{{ trans('admin.saas.billing_cycle') }}</label><select id="billing_cycle" name="billing_cycle" class="form-control basic"><option value="monthly" @selected(old('billing_cycle',$currentSubscription->billing_cycle ?? 'monthly')==='monthly')>{{ trans('admin.saas.monthly') }}</option><option value="annual" @selected(old('billing_cycle',$currentSubscription->billing_cycle ?? '')==='annual')>{{ trans('admin.saas.annual') }}</option></select></div>
+    <div id="market_price_preview" class="alert alert-info d-none"></div>
     <div class="mb-3"><label>{{ trans('admin.saas.custom_price') }}</label><input type="number" min="0" step="0.01" name="custom_price" value="{{ old('custom_price',$currentSubscription->custom_price ?? '') }}"></div>
     <div class="mb-3"><label>{{ trans('admin.saas.starts_at') }}</label><input type="date" name="subscription_starts_at" value="{{ old('subscription_starts_at',$currentSubscription?->starts_at?->format('Y-m-d') ?? now()->format('Y-m-d')) }}"></div>
     <div class="mb-3"><label>{{ trans('admin.saas.ends_at') }}</label><input type="date" name="subscription_ends_at" value="{{ old('subscription_ends_at',$currentSubscription?->ends_at?->format('Y-m-d')) }}"></div>
@@ -380,6 +391,26 @@
             }
             businessType.addEventListener('change', toggleSports);
             toggleSports();
+            const planSelect = document.getElementById('saas_plan_id');
+            const countrySelect = document.getElementById('country_id');
+            const cycleSelect = document.getElementById('billing_cycle');
+            const preview = document.getElementById('market_price_preview');
+            function updateMarketPrice() {
+                const option = planSelect?.selectedOptions[0];
+                const prices = option?.dataset.prices ? JSON.parse(option.dataset.prices) : {};
+                const price = prices[countrySelect?.value];
+                if (!price) {
+                    preview.classList.add('d-none');
+                    return;
+                }
+                const amount = cycleSelect.value === 'annual' ? price.annual_price : price.monthly_price;
+                preview.textContent = `{{ trans('admin.saas.selected_market_price') }}: ${amount} ${price.currency_code} | {{ trans('admin.saas.tax_rate') }}: ${price.tax_rate}%`;
+                preview.classList.remove('d-none');
+            }
+            planSelect?.addEventListener('change', updateMarketPrice);
+            countrySelect?.addEventListener('change', updateMarketPrice);
+            cycleSelect?.addEventListener('change', updateMarketPrice);
+            updateMarketPrice();
         });
     </script>
     <script>
