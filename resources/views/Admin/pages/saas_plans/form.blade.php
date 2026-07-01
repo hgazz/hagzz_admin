@@ -239,10 +239,11 @@
                     @foreach(['max_venues' => 'home', 'max_spaces' => 'map', 'max_staff' => 'users'] as $limit => $icon)
                         <div class="col-md-4">
                             <label class="form-label" for="{{ $limit }}">{{ trans('admin.saas.'.$limit) }}</label>
-                            <div class="input-group"><span class="input-group-text"><i data-feather="{{ $icon }}"></i></span><input id="{{ $limit }}" type="number" min="1" class="form-control" name="{{ $limit }}" required value="{{ old($limit, $plan->$limit ?: 1) }}"></div>
+                            <div class="input-group"><span class="input-group-text"><i data-feather="{{ $icon }}"></i></span><input id="{{ $limit }}" type="number" min="0" class="form-control" name="{{ $limit }}" required value="{{ old($limit, $plan->exists ? $plan->$limit : ($limit === 'max_staff' ? 1 : 0)) }}"></div>
                         </div>
                     @endforeach
                 </div>
+                <div class="d-flex align-items-center gap-2 mt-3 text-muted small"><i data-feather="info" style="width:15px;height:15px"></i><span>{{ trans('admin.saas.zero_means_unavailable') }}</span></div>
 
                 <div class="mt-4">
                     <label class="form-label d-block">{{ trans('admin.saas.features') }}</label>

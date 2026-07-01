@@ -38,7 +38,7 @@ class SaasPlanController extends Controller
         $validated = $request->validate([
             'code' => ['required','alpha_dash','max:50','unique:saas_plans,code,'.($plan?->id ?? 'NULL')],
             'name_ar' => ['required','string','max:255'], 'name_en' => ['required','string','max:255'],
-            'max_venues' => ['required','integer','min:1'], 'max_spaces' => ['required','integer','min:1'], 'max_staff' => ['required','integer','min:1'],
+            'max_venues' => ['required','integer','min:0'], 'max_spaces' => ['required','integer','min:0'], 'max_staff' => ['required','integer','min:0'],
             'features' => ['nullable','array'], 'active' => ['nullable','boolean'],
             'prices' => ['required','array','min:1'], 'prices.*.enabled' => ['nullable','boolean'],
             'prices.*.country_id' => ['required','integer','exists:countries,id'],
