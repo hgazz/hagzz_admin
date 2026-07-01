@@ -120,7 +120,10 @@
         background: #fff;
         color: #475467;
         border: 1px solid var(--plan-border);
+        overflow: hidden;
     }
+    .market-name-icon img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .market-name-icon svg { width: 16px; height: 16px; }
     .market-name strong { color: var(--plan-ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .market-fields { padding: 18px; transition: opacity .2s ease; }
     .market-saving {
@@ -164,6 +167,12 @@
     .plan-submit-bar .btn { min-height: 44px; border-radius: 7px; padding-inline: 22px; font-weight: 600; }
     .plan-submit-note { display: flex; align-items: center; gap: 9px; color: var(--plan-muted); font-size: 13px; }
     .plan-submit-note i { color: #079455; }
+    .plan-form-page svg { stroke-width: 2; }
+    .plan-back svg, .plan-panel-icon svg { width: 19px; height: 19px; }
+    .plan-form-page .input-group-text svg { width: 16px; height: 16px; }
+    .feature-option svg { width: 18px; height: 18px; flex: 0 0 18px; color: var(--plan-primary); }
+    .market-saving svg { width: 14px; height: 14px; }
+    .plan-submit-note svg, .plan-submit-actions svg { width: 16px; height: 16px; }
     @media (max-width: 991.98px) { .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 575.98px) {
         .plan-form-header { align-items: flex-start; }
@@ -181,12 +190,7 @@
 
 @section('content')
 @php
-    $featureIcons = [
-        'academy' => 'fa-solid fa-graduation-cap',
-        'venues' => 'fa-solid fa-map-location-dot',
-        'reports' => 'fa-solid fa-chart-column',
-        'mobile_marketplace' => 'fa-solid fa-mobile-screen-button',
-    ];
+    $featureIcons = ['academy' => 'award', 'venues' => 'map-pin', 'reports' => 'bar-chart-2', 'mobile_marketplace' => 'smartphone'];
 @endphp
 <div class="middle-content container-xxl p-0 plan-form-page">
     <div class="plan-form-header">
@@ -195,13 +199,13 @@
             <p>{{ trans('admin.saas.plans_hint') }}</p>
         </div>
         <a class="plan-back" href="{{ route('admin.saas-plans.index') }}" title="{{ trans('admin.saas.cancel') }}">
-            <i class="fa-solid fa-arrow-{{ app()->getLocale() === 'ar' ? 'right' : 'left' }}"></i>
+            <i data-feather="arrow-{{ app()->getLocale() === 'ar' ? 'right' : 'left' }}"></i>
         </a>
     </div>
 
     @if($errors->any())
         <div class="alert alert-danger d-flex gap-3 align-items-start" role="alert">
-            <i class="fa-solid fa-circle-exclamation mt-1"></i>
+            <i data-feather="alert-circle" class="mt-1"></i>
             <ul class="mb-0 ps-3">@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
         </div>
     @endif
@@ -212,14 +216,14 @@
 
         <section class="plan-panel">
             <div class="plan-panel-head">
-                <span class="plan-panel-icon"><i class="fa-solid fa-layer-group"></i></span>
+                <span class="plan-panel-icon"><i data-feather="layers"></i></span>
                 <div><h5>{{ trans('admin.saas.plan') }}</h5><p>{{ trans('admin.saas.plans_hint') }}</p></div>
             </div>
             <div class="plan-panel-body">
                 <div class="row g-3">
                     <div class="col-lg-4">
                         <label class="form-label" for="plan-code">{{ trans('admin.saas.code') }}</label>
-                        <div class="input-group"><span class="input-group-text"><i class="fa-solid fa-code"></i></span><input id="plan-code" class="form-control" name="code" required value="{{ old('code', $plan->code) }}"></div>
+                        <div class="input-group"><span class="input-group-text"><i data-feather="code"></i></span><input id="plan-code" class="form-control" name="code" required value="{{ old('code', $plan->code) }}"></div>
                     </div>
                     <div class="col-lg-4">
                         <label class="form-label" for="plan-name-ar">{{ trans('admin.saas.name_ar') }}</label>
@@ -232,10 +236,10 @@
                 </div>
 
                 <div class="row g-3 mt-1">
-                    @foreach(['max_venues' => 'fa-building', 'max_spaces' => 'fa-futbol', 'max_staff' => 'fa-user-group'] as $limit => $icon)
+                    @foreach(['max_venues' => 'home', 'max_spaces' => 'map', 'max_staff' => 'users'] as $limit => $icon)
                         <div class="col-md-4">
                             <label class="form-label" for="{{ $limit }}">{{ trans('admin.saas.'.$limit) }}</label>
-                            <div class="input-group"><span class="input-group-text"><i class="fa-solid {{ $icon }}"></i></span><input id="{{ $limit }}" type="number" min="1" class="form-control" name="{{ $limit }}" required value="{{ old($limit, $plan->$limit ?: 1) }}"></div>
+                            <div class="input-group"><span class="input-group-text"><i data-feather="{{ $icon }}"></i></span><input id="{{ $limit }}" type="number" min="1" class="form-control" name="{{ $limit }}" required value="{{ old($limit, $plan->$limit ?: 1) }}"></div>
                         </div>
                     @endforeach
                 </div>
@@ -246,7 +250,7 @@
                         @foreach(['academy','venues','reports','mobile_marketplace'] as $feature)
                             <label class="feature-option">
                                 <input class="form-check-input" type="checkbox" name="features[]" value="{{ $feature }}" @checked(in_array($feature, old('features', $plan->features ?? [])))>
-                                <i class="{{ $featureIcons[$feature] }}"></i>
+                                <i data-feather="{{ $featureIcons[$feature] }}"></i>
                                 <span>{{ trans('admin.saas.feature_names.'.$feature) }}</span>
                             </label>
                         @endforeach
@@ -257,7 +261,7 @@
 
         <section class="plan-panel">
             <div class="plan-panel-head">
-                <span class="plan-panel-icon"><i class="fa-solid fa-earth-americas"></i></span>
+                <span class="plan-panel-icon"><i data-feather="globe"></i></span>
                 <div><h5>{{ trans('admin.saas.market_prices') }}</h5><p>{{ trans('admin.saas.market_prices_hint') }}</p></div>
             </div>
             <div class="plan-panel-body">
@@ -271,7 +275,13 @@
                             <div class="market-card {{ $enabled ? 'is-enabled' : '' }}">
                                 <input type="hidden" name="prices[{{ $index }}][country_id]" value="{{ $country->id }}">
                                 <div class="market-card-head">
-                                    <div class="market-name"><span class="market-name-icon"><i class="fa-solid fa-location-dot"></i></span><strong>{{ $country->name }}</strong></div>
+                                    <div class="market-name">
+                                        <span class="market-name-icon">
+                                            @if($country->iso2)<img src="https://flagcdn.com/w80/{{ strtolower($country->iso2) }}.png" alt="{{ $country->name }}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">@endif
+                                            <i data-feather="globe" style="{{ $country->iso2 ? 'display:none' : '' }}"></i>
+                                        </span>
+                                        <strong>{{ $country->name }}</strong>
+                                    </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input market-toggle" type="checkbox" name="prices[{{ $index }}][enabled]" value="1" role="switch" @checked($enabled)>
                                         <label class="form-check-label">{{ trans('admin.saas.enable_market') }}</label>
@@ -299,7 +309,7 @@
                                             <div class="form-check"><input class="form-check-input" type="checkbox" name="prices[{{ $index }}][tax_included]" value="1" @checked(old("prices.$index.tax_included", $saved?->tax_included))><label class="form-check-label">{{ trans('admin.saas.tax_included') }}</label></div>
                                         </div>
                                     </div>
-                                    <div class="market-saving" aria-live="polite"></div>
+                                    <div class="market-saving" aria-live="polite"><i data-feather="tag"></i><span></span></div>
                                 </div>
                             </div>
                         </div>
@@ -314,10 +324,10 @@
         </div>
 
         <div class="plan-submit-bar">
-            <div class="plan-submit-note"><i class="fa-solid fa-shield-check"></i><span>{{ trans('admin.saas.market_prices_hint') }}</span></div>
+            <div class="plan-submit-note"><i data-feather="shield"></i><span>{{ trans('admin.saas.market_prices_hint') }}</span></div>
             <div class="plan-submit-actions d-flex gap-2">
                 <a class="btn btn-light" href="{{ route('admin.saas-plans.index') }}">{{ trans('admin.saas.cancel') }}</a>
-                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>{{ trans('admin.submit') }}</button>
+                <button class="btn btn-primary" type="submit"><i data-feather="save" class="me-2"></i>{{ trans('admin.submit') }}</button>
             </div>
         </div>
     </form>
@@ -325,14 +335,17 @@
 @endsection
 
 @push('js')
+<script src="{{ asset('assetsAdmin/src/plugins/src/font-icons/feather/feather.min.js') }}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    if (window.feather) window.feather.replace();
     document.querySelectorAll('.market-card').forEach(function (card) {
         const toggle = card.querySelector('.market-toggle');
         const monthly = card.querySelector('.monthly-price');
         const annual = card.querySelector('.annual-price');
         const currency = card.querySelector('.currency-input');
         const saving = card.querySelector('.market-saving');
+        const savingText = saving.querySelector('span');
 
         function refreshState() {
             card.classList.toggle('is-enabled', toggle.checked);
@@ -347,12 +360,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const monthlyValue = parseFloat(monthly.value);
             const annualValue = parseFloat(annual.value);
             if (!toggle.checked || !monthlyValue || !annualValue || annualValue >= monthlyValue * 12) {
-                saving.innerHTML = '';
+                saving.style.display = 'none';
+                savingText.textContent = '';
                 return;
             }
             const amount = (monthlyValue * 12 - annualValue).toFixed(2);
             const percentage = Math.round((amount / (monthlyValue * 12)) * 100);
-            saving.innerHTML = '<i class="fa-solid fa-tags"></i><span>' + percentage + '% (' + amount + ' ' + currency.value.toUpperCase() + ')</span>';
+            saving.style.display = 'flex';
+            savingText.textContent = percentage + '% (' + amount + ' ' + currency.value.toUpperCase() + ')';
         }
 
         toggle.addEventListener('change', refreshState);
