@@ -19,17 +19,17 @@
 <input type="hidden" value="{{app()->getLocale()}}" id="local">
 <!-- start step indicators -->
 <div class="form-header d-flex mb-4">
-    <span class="stepIndicator">{{trans('admin.academies.Basic Information')}}</span>
-    <span class="stepIndicator">{{trans('admin.academies.Partner Details')}}</span>
-    <span class="stepIndicator">{{trans('admin.academies.Legal & Tax Details')}}</span>
-    <span class="stepIndicator">{{trans('admin.academies.Billing Details')}}</span>
-    <span class="stepIndicator">{{trans('admin.academies.Contract Details')}}</span>
-    <span class="stepIndicator">{{ trans('admin.saas.subscription') }}</span>
+    <span class="stepIndicator" data-step-index="0" data-step-number="1">{{trans('admin.academies.Basic Information')}}</span>
+    <span class="stepIndicator" data-step-index="1" data-step-number="2">{{trans('admin.academies.Partner Details')}}</span>
+    <span class="stepIndicator" data-step-index="2" data-step-number="3">{{trans('admin.academies.Legal & Tax Details')}}</span>
+    <span class="stepIndicator" data-step-index="3" data-step-number="4">{{trans('admin.academies.Billing Details')}}</span>
+    <span class="stepIndicator" data-step-index="4" data-step-number="5">{{trans('admin.academies.Contract Details')}}</span>
+    <span class="stepIndicator" data-step-index="5" data-step-number="6">{{ trans('admin.saas.subscription') }}</span>
 </div>
 <!-- end step indicators -->
 
 <!-- step one -->
-<div class="step">
+<div class="step" data-step-panel="0">
     <p class="text-center mb-4">{{trans('admin.academies.Basic Information')}}</p>
     <div class="mb-3">
         <label for="first_name">{{trans('admin.academies.First Name')}}<code>*</code></label>
@@ -101,7 +101,7 @@
 </div>
 
 <!-- step two -->
-<div class="step">
+<div class="step" data-step-panel="1">
     <p class="text-center mb-4">{{trans('admin.academies.Partner Details')}}</p>
     @foreach(\App\Services\TranslatableService::getTranslatableInputs(App\Models\Academies::class) as $name => $data)
        @if($name == 'app_name_en' || $name == 'app_name_ar')
@@ -183,7 +183,7 @@
 </div>
 
 <!-- step three -->
-<div class="step">
+<div class="step" data-step-panel="2">
     <p class="text-center mb-4">{{trans('admin.academies.Legal & Tax Details')}}</p>
     <div class="mb-3">
         <span class="">{{trans('admin.academies.full_name_arabic')}}<code>*</code></span>
@@ -239,7 +239,7 @@
 </div>
 
 <!-- step Four -->
-<div class="step">
+<div class="step" data-step-panel="3">
     <p class="text-center mb-4">{{trans('admin.academies.Billing Details')}}</p>
     <div class="mb-3">
         <label for="bank_account_type">{{trans('admin.academies.Bank account type')}}</label>
@@ -278,7 +278,7 @@
 
 </div>
 
-<div class="step">
+<div class="step" data-step-panel="4">
     <p class="text-center mb-4">{{trans('admin.academies.Contract Details')}}</p>
     <div class="mb-3">
         <label for="contract_date">{{ trans('admin.academies.Contract Data') }}<code>*</code></label>
@@ -355,7 +355,7 @@
 
 </div>
 
-<div class="step">
+<div class="step subscription-step" data-step-panel="5">
     <p class="text-center mb-4">{{ trans('admin.saas.subscription') }}</p>
     <div class="mb-3"><label for="saas_plan_id">{{ trans('admin.saas.plan') }}</label><select id="saas_plan_id" name="saas_plan_id" class="form-control basic"><option value="">{{ trans('admin.saas.no_plan') }}</option>@foreach($saasPlans as $plan)<option value="{{ $plan->id }}" data-prices='@json($plan->prices->keyBy('country_id'))' @selected(old('saas_plan_id', $currentSubscription->saas_plan_id ?? null) == $plan->id)>{{ $plan->name }}</option>@endforeach</select></div>
     <div class="mb-3"><label>{{ trans('admin.saas.billing_cycle') }}</label><select id="billing_cycle" name="billing_cycle" class="form-control basic"><option value="monthly" @selected(old('billing_cycle',$currentSubscription->billing_cycle ?? 'monthly')==='monthly')>{{ trans('admin.saas.monthly') }}</option><option value="annual" @selected(old('billing_cycle',$currentSubscription->billing_cycle ?? '')==='annual')>{{ trans('admin.saas.annual') }}</option></select></div>

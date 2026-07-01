@@ -46,7 +46,7 @@ class AcademiesController extends Controller
         $roles = ['manager', 'owner', 'partner'];
         $sports = $this->sportModel::get(['id', 'name']);
         $allAcademies = $this->academicModels->where('branch_to', null)->get(['id','commercial_name']);
-        $countries = $this->countryModel->get(['id', 'name']);
+        $countries = $this->countryModel->get(['id', 'name', 'iso2', 'currency_code']);
         $cities = $this->cityModel->get(['id', 'name']);
         $areas = $this->areaModel->get(['id', 'name']);
         $saasPlans = SaasPlan::with(['prices' => fn ($query) => $query->where('active', true)])->where('active', true)->get();
@@ -130,7 +130,7 @@ class AcademiesController extends Controller
         $roles = ['manager', 'owner', 'partner'];
         $sports = $this->sportModel->get(['id','name']);
         $allAcademies = $this->academicModels->where('id','!=',$academies->id)->get(['id','commercial_name']);
-        $countries = $this->countryModel->get(['id', 'name']);
+        $countries = $this->countryModel->get(['id', 'name', 'iso2', 'currency_code']);
         $cities = $this->cityModel->get(['id', 'name']);
         $areas = $this->areaModel->get(['id', 'name']);
         $saasPlans = SaasPlan::with(['prices' => fn ($query) => $query->where('active', true)])->where('active', true)->get();
