@@ -38,13 +38,15 @@
         .partner-summary { display: flex; align-items: center; justify-content: space-between; gap: 22px; margin-bottom: 20px; padding: 18px 20px; border: 1px solid var(--edit-border); border-radius: 8px; background: #fff; box-shadow: 0 8px 24px rgba(23, 32, 51, .05); }
         .partner-main { display: flex; align-items: center; gap: 14px; min-width: 0; }
         .partner-logo { width: 62px; height: 62px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 62px; overflow: hidden; border: 1px solid var(--edit-border); border-radius: 8px; background: #eff6ff; color: var(--edit-primary); font-size: 19px; font-weight: 700; }
-        .partner-logo img { width: 100%; height: 100%; display: block; object-fit: cover; }
+        .partner-logo img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; background: #eff6ff; }
+        .partner-logo { position: relative; }
+        .partner-logo-initials { position: relative; z-index: 0; }
         .partner-copy { min-width: 0; }
         .partner-copy h5 { overflow: hidden; color: var(--edit-ink); font-weight: 700; margin: 0 0 5px; text-overflow: ellipsis; white-space: nowrap; }
         .partner-copy p { color: var(--edit-muted); font-size: 13px; margin: 0; }
         .partner-facts { display: flex; align-items: stretch; gap: 8px; }
         .partner-fact { min-width: 118px; padding: 10px 12px; border-inline-start: 1px solid var(--edit-border); }
-        .partner-fact small { display: block; color: var(--edit-muted); font-size: 10px; margin-bottom: 4px; }
+        .partner-fact small { display: flex; align-items: center; gap: 5px; color: var(--edit-muted); font-size: 10px; margin-bottom: 4px; }
         .partner-fact strong { display: block; max-width: 170px; overflow: hidden; color: var(--edit-ink); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
         .partner-status { display: inline-flex; align-items: center; gap: 6px; color: #067647 !important; }
         .partner-status::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #12b76a; }
@@ -59,6 +61,8 @@
         .partner-edit-form .form-header .stepIndicator:hover { color: var(--edit-primary); background: #f8faff; }
         .partner-edit-form .form-header .stepIndicator.active { border-color: #bfd0f7; color: var(--edit-primary); background: #eff5ff; }
         .partner-edit-form .form-header .stepIndicator.active::before { border-color: var(--edit-primary) !important; background: var(--edit-primary) !important; color: #fff; }
+        .partner-edit-form .form-header .stepIndicator > svg { width: 17px; height: 17px; flex: 0 0 17px; color: #667085; }
+        .partner-edit-form .form-header .stepIndicator.active > svg { color: var(--edit-primary); }
         .partner-edit-form .form-header .stepIndicator.finish::after { display: none !important; }
         .partner-edit-form .step { grid-column: 2; grid-row: 1; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px 18px; min-width: 0; margin: 0; padding: 22px; border: 1px solid var(--edit-border); border-radius: 8px; background: #fff; box-shadow: 0 8px 24px rgba(23, 32, 51, .05); }
         .partner-edit-form .step > p:first-child { grid-column: 1 / -1; margin: 0 0 3px !important; padding-bottom: 15px; border-bottom: 1px solid var(--edit-border); color: var(--edit-ink); font-size: 17px; font-weight: 700; text-align: start !important; }
@@ -117,18 +121,18 @@
 <div class="middle-content container-xxl p-0 academy-edit-page">
     <div class="edit-page-head">
         <div><h3>{{ trans('admin.academies.edit') }} {{ $academies->commercial_name }}</h3><p>{{ trans('admin.saas.business_type') }}: {{ trans('admin.saas.business_types.'.($academies->business_type ?? 'academy')) }}</p></div>
-        <a class="edit-back" href="{{ route('admin.academies.index') }}" title="{{ trans('admin.user.back') }}"><i data-feather="arrow-{{ app()->getLocale() === 'ar' ? 'right' : 'left' }}"></i></a>
+        <a class="edit-back" href="{{ route('admin.academies.index') }}" title="{{ trans('admin.user.back') }}"><x-feather-icon :name="app()->getLocale() === 'ar' ? 'arrow-right' : 'arrow-left'" /></a>
     </div>
 
     <section class="partner-summary">
         <div class="partner-main">
-            <span class="partner-logo">@if($hasLogo)<img src="{{ $academies->image }}" alt="{{ $academies->commercial_name }}">@else{{ $initials ?: '#' }}@endif</span>
+            <span class="partner-logo"><span class="partner-logo-initials">{{ $initials ?: '#' }}</span>@if($hasLogo)<img src="{{ $academies->image }}" alt="{{ $academies->commercial_name }}" onerror="this.style.display='none'">@endif</span>
             <div class="partner-copy"><h5>{{ $academies->commercial_name }}</h5><p>{{ $academies->email }} · {{ $academies->phone }}</p></div>
         </div>
         <div class="partner-facts">
-            <div class="partner-fact"><small>{{ trans('admin.saas.market_country') }}</small><strong>{{ $academies->country?->name ?? '-' }}</strong></div>
-            <div class="partner-fact"><small>{{ trans('admin.saas.plan') }}</small><strong>{{ $currentSubscription?->plan?->name ?? trans('admin.saas.no_plan') }}</strong></div>
-            <div class="partner-fact"><small>{{ trans('admin.status') }}</small><strong class="partner-status {{ $academies->status === 'active' ? '' : 'is-inactive' }}">{{ trans('admin.academies.'.$academies->status) }}</strong></div>
+            <div class="partner-fact"><small><x-feather-icon name="globe" size="13" />{{ trans('admin.saas.market_country') }}</small><strong>{{ $academies->country?->name ?? '-' }}</strong></div>
+            <div class="partner-fact"><small><x-feather-icon name="package" size="13" />{{ trans('admin.saas.plan') }}</small><strong>{{ $currentSubscription?->plan?->name ?? trans('admin.saas.no_plan') }}</strong></div>
+            <div class="partner-fact"><small><x-feather-icon name="activity" size="13" />{{ trans('admin.status') }}</small><strong class="partner-status {{ $academies->status === 'active' ? '' : 'is-inactive' }}">{{ trans('admin.academies.'.$academies->status) }}</strong></div>
         </div>
     </section>
 
@@ -136,7 +140,7 @@
         @method('PUT')
         <input type="hidden" name="id_unique" value="{{ $academies->id }}">
         @if ($errors->any())
-            <div class="alert alert-danger d-flex align-items-start gap-2"><i data-feather="alert-circle"></i><div><strong>{{ $errors->count() }}</strong><ul class="mb-0 mt-1">@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div></div>
+            <div class="alert alert-danger d-flex align-items-start gap-2"><x-feather-icon name="alert-circle" /><div><strong>{{ $errors->count() }}</strong><ul class="mb-0 mt-1">@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div></div>
         @endif
         @include('Admin.pages.academies.partials._form')
     </form>
@@ -144,11 +148,8 @@
 @endsection
 
 @push('js')
-<script src="{{ asset('assetsAdmin/src/plugins/src/font-icons/feather/feather.min.js') }}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    if (window.feather) window.feather.replace();
-
     const form = document.getElementById('signUpForm');
     const steps = Array.from(form.querySelectorAll('.step'));
     const indicators = Array.from(form.querySelectorAll('.stepIndicator'));

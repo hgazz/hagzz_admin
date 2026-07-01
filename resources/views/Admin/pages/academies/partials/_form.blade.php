@@ -13,18 +13,17 @@
             width: 100%;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 @endpush
 @csrf
 <input type="hidden" value="{{app()->getLocale()}}" id="local">
 <!-- start step indicators -->
 <div class="form-header d-flex mb-4">
-    <span class="stepIndicator" data-step-index="0" data-step-number="1">{{trans('admin.academies.Basic Information')}}</span>
-    <span class="stepIndicator" data-step-index="1" data-step-number="2">{{trans('admin.academies.Partner Details')}}</span>
-    <span class="stepIndicator" data-step-index="2" data-step-number="3">{{trans('admin.academies.Legal & Tax Details')}}</span>
-    <span class="stepIndicator" data-step-index="3" data-step-number="4">{{trans('admin.academies.Billing Details')}}</span>
-    <span class="stepIndicator" data-step-index="4" data-step-number="5">{{trans('admin.academies.Contract Details')}}</span>
-    <span class="stepIndicator" data-step-index="5" data-step-number="6">{{ trans('admin.saas.subscription') }}</span>
+    <span class="stepIndicator" data-step-index="0" data-step-number="1"><x-feather-icon name="user" />{{trans('admin.academies.Basic Information')}}</span>
+    <span class="stepIndicator" data-step-index="1" data-step-number="2"><x-feather-icon name="briefcase" />{{trans('admin.academies.Partner Details')}}</span>
+    <span class="stepIndicator" data-step-index="2" data-step-number="3"><x-feather-icon name="file-text" />{{trans('admin.academies.Legal & Tax Details')}}</span>
+    <span class="stepIndicator" data-step-index="3" data-step-number="4"><x-feather-icon name="credit-card" />{{trans('admin.academies.Billing Details')}}</span>
+    <span class="stepIndicator" data-step-index="4" data-step-number="5"><x-feather-icon name="clipboard" />{{trans('admin.academies.Contract Details')}}</span>
+    <span class="stepIndicator" data-step-index="5" data-step-number="6"><x-feather-icon name="package" />{{ trans('admin.saas.subscription') }}</span>
 </div>
 <!-- end step indicators -->
 
@@ -85,7 +84,7 @@
         <label for="password">{{trans('admin.academies.password')}}<code>*</code></label>
         <input type="password" name="password" class="@if(isset($academies)) form-control @else formInput @endif" id="password" placeholder="{{trans('admin.academies.password')}}">
         <span class="password-toggle-eye" onclick="togglePasswordVisibility()">
-                <i class="fa fa-eye" id="toggleEye"></i>
+                <x-feather-icon name="eye" id="toggleEye" />
         </span>
         @error('password')
         <span class="text-danger">{{$message}}</span>
@@ -416,15 +415,10 @@
     <script>
         function togglePasswordVisibility() {
             var passwordInput = document.getElementById("password");
-            var toggleEye = document.getElementById("toggleEye");
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
-                toggleEye.classList.remove("fa-eye");
-                toggleEye.classList.add("fa-eye-slash");
             } else {
                 passwordInput.type = "password";
-                toggleEye.classList.remove("fa-eye-slash");
-                toggleEye.classList.add("fa-eye");
             }
         }
     </script>
