@@ -508,5 +508,7 @@ return [
         'enable_market' => 'Enable', 'currency' => 'Currency', 'tax_rate' => 'Tax Rate', 'tax_included' => 'Price includes tax',
         'no_market_prices' => 'No country prices', 'market_country' => 'Customer Country', 'select_country' => 'Select country',
         'selected_market_price' => 'Selected country price', 'price_not_available' => 'This plan has no active price for the selected customer country.',
+        'enable_one_market' => 'Enable at least one country price before saving the plan.',
+        'enabled_market_requires_price' => 'Every enabled country must have a currency, monthly price, and annual price.',
     ],
 ];
