@@ -1,4 +1,4 @@
-@extends('Admin.layouts.app')
+@extends('Admin.Layouts.master')
 @section('title', trans('admin.saas.plans'))
 @section('content')
 <div class="middle-content container-xxl p-0">
