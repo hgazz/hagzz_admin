@@ -17,7 +17,7 @@
     .plans-header .btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; border-radius: 8px; padding-inline: 18px; font-weight: 600; white-space: nowrap; }
     .plans-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 20px; }
     .summary-item { display: flex; align-items: center; gap: 13px; min-height: 78px; padding: 15px 17px; background: #fff; border: 1px solid var(--plans-border); border-radius: 8px; box-shadow: 0 5px 18px rgba(23, 32, 51, .04); }
-    .summary-icon { width: 42px; height: 42px; flex: 0 0 42px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; color: var(--plans-primary); background: #eff6ff; font-size: 17px; }
+    .summary-icon { width: 42px; height: 42px; flex: 0 0 42px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; color: var(--plans-primary); background: #eff6ff; }
     .summary-item strong { display: block; color: var(--plans-ink); font-size: 21px; line-height: 1.1; }
     .summary-item small { color: var(--plans-muted); font-size: 12px; }
     .plans-list { display: grid; gap: 18px; }
@@ -25,7 +25,7 @@
     .plan-card:hover { transform: translateY(-2px); border-color: #cbd8ef; box-shadow: 0 14px 34px rgba(23, 32, 51, .09); }
     .plan-card-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 20px; border-bottom: 1px solid var(--plans-border); }
     .plan-identity { display: flex; align-items: center; gap: 13px; min-width: 0; }
-    .plan-avatar { width: 46px; height: 46px; flex: 0 0 46px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; color: #fff; background: #2563eb; font-size: 18px; box-shadow: 0 7px 16px rgba(37, 99, 235, .22); }
+    .plan-avatar { width: 46px; height: 46px; flex: 0 0 46px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; color: #fff; background: #2563eb; box-shadow: 0 7px 16px rgba(37, 99, 235, .22); }
     .plan-identity h5 { color: var(--plans-ink); font-weight: 700; margin: 0 0 5px; }
     .plan-code { display: inline-flex; align-items: center; gap: 6px; color: var(--plans-muted); font-family: monospace; font-size: 12px; }
     .plan-head-tools { display: flex; align-items: center; gap: 9px; }
@@ -47,7 +47,9 @@
     .section-label small { color: var(--plans-muted); font-size: 11px; }
     .market-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
     .market-card { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 11px; min-height: 72px; padding: 12px 13px; border: 1px solid var(--plans-border); border-radius: 8px; background: #fff; }
-    .country-flag { width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 42px; border: 1px solid #e8ebf0; border-radius: 8px; background: var(--plans-surface); font-size: 25px; line-height: 1; }
+    .country-flag { width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 42px; overflow: hidden; border: 1px solid #e8ebf0; border-radius: 8px; background: var(--plans-surface); color: #98a2b3; }
+    .country-flag img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .country-flag svg { width: 19px; height: 19px; }
     .country-info { min-width: 0; }
     .country-info strong { display: block; overflow: hidden; color: var(--plans-ink); font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
     .country-info small { color: var(--plans-muted); font-size: 11px; text-transform: uppercase; }
@@ -59,14 +61,19 @@
     .plan-meta { padding: 20px; border-inline-start: 1px solid var(--plans-border); background: #fbfcfe; }
     .limits-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
     .limit-item { padding: 10px 5px; border: 1px solid var(--plans-border); border-radius: 7px; background: #fff; text-align: center; }
-    .limit-item i { display: block; color: var(--plans-primary); font-size: 13px; margin-bottom: 6px; }
+    .limit-item svg { display: block; width: 15px; height: 15px; margin: 0 auto 6px; color: var(--plans-primary); }
     .limit-item b { display: block; color: var(--plans-ink); font-size: 14px; }
     .limit-item small { display: block; overflow: hidden; color: var(--plans-muted); font-size: 9px; margin-top: 2px; text-overflow: ellipsis; white-space: nowrap; }
     .features-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
     .feature-item { display: inline-flex; align-items: center; gap: 7px; padding: 7px 9px; border: 1px solid var(--plans-border); border-radius: 7px; background: #fff; color: #475467; font-size: 10px; line-height: 1.25; }
-    .feature-item i { color: var(--plans-primary); }
+    .feature-item svg { width: 14px; height: 14px; flex: 0 0 14px; color: var(--plans-primary); }
     .plans-empty { padding: 64px 20px; border: 1px dashed #cfd6df; border-radius: 8px; background: #fff; text-align: center; }
-    .plans-empty-icon { width: 58px; height: 58px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px; border-radius: 8px; color: var(--plans-primary); background: #eff6ff; font-size: 22px; }
+    .plans-empty-icon { width: 58px; height: 58px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px; border-radius: 8px; color: var(--plans-primary); background: #eff6ff; }
+    .saas-plans-page svg { stroke-width: 2; }
+    .plans-header .btn svg, .plan-action svg { width: 16px; height: 16px; }
+    .summary-icon svg { width: 19px; height: 19px; }
+    .plan-avatar svg { width: 20px; height: 20px; }
+    .plan-code svg { width: 13px; height: 13px; }
     .plans-pagination { margin-top: 18px; }
     @media (max-width: 1199.98px) { .plan-card-body { grid-template-columns: 1fr; } .plan-meta { border-inline-start: 0; border-top: 1px solid var(--plans-border); } .plan-meta-inner { display: grid; grid-template-columns: 320px 1fr; gap: 22px; align-items: start; } }
     @media (max-width: 767.98px) {
@@ -102,24 +109,20 @@
     $pagePlans = $plans->getCollection();
     $activePlans = $pagePlans->where('active', true)->count();
     $activeMarkets = $pagePlans->sum(fn ($plan) => $plan->prices->where('active', true)->count());
-    $flagFromIso = function (?string $iso2): string {
-        if (! $iso2 || strlen($iso2) !== 2) return '';
-        return mb_chr(127397 + ord(strtoupper($iso2[0]))) . mb_chr(127397 + ord(strtoupper($iso2[1])));
-    };
-    $featureIcons = ['academy' => 'fa-solid fa-graduation-cap', 'venues' => 'fa-solid fa-map-location-dot', 'reports' => 'fa-solid fa-chart-column', 'mobile_marketplace' => 'fa-solid fa-mobile-screen-button'];
+    $featureIcons = ['academy' => 'award', 'venues' => 'map-pin', 'reports' => 'bar-chart-2', 'mobile_marketplace' => 'smartphone'];
 @endphp
 <div class="middle-content container-xxl p-0 saas-plans-page">
     <div class="plans-header">
         <div><h3>{{ trans('admin.saas.plans') }}</h3><p>{{ trans('admin.saas.plans_hint') }}</p></div>
-        <a class="btn btn-primary" href="{{ route('admin.saas-plans.create') }}"><i class="fa-solid fa-plus"></i><span>{{ trans('admin.saas.add_plan') }}</span></a>
+        <a class="btn btn-primary" href="{{ route('admin.saas-plans.create') }}"><i data-feather="plus"></i><span>{{ trans('admin.saas.add_plan') }}</span></a>
     </div>
 
-    @if(session('success'))<div class="alert alert-success d-flex align-items-center gap-2"><i class="fa-solid fa-circle-check"></i><span>{{ session('success') }}</span></div>@endif
+    @if(session('success'))<div class="alert alert-success d-flex align-items-center gap-2"><i data-feather="check-circle"></i><span>{{ session('success') }}</span></div>@endif
 
     <div class="plans-summary">
-        <div class="summary-item"><span class="summary-icon"><i class="fa-solid fa-layer-group"></i></span><div><strong>{{ $plans->total() }}</strong><small>{{ trans('admin.saas.plans') }}</small></div></div>
-        <div class="summary-item"><span class="summary-icon"><i class="fa-solid fa-circle-check"></i></span><div><strong>{{ $activePlans }}</strong><small>{{ trans('admin.saas.active') }}</small></div></div>
-        <div class="summary-item"><span class="summary-icon"><i class="fa-solid fa-earth-americas"></i></span><div><strong>{{ $activeMarkets }}</strong><small>{{ trans('admin.saas.market_prices') }}</small></div></div>
+        <div class="summary-item"><span class="summary-icon"><i data-feather="layers"></i></span><div><strong>{{ $plans->total() }}</strong><small>{{ trans('admin.saas.plans') }}</small></div></div>
+        <div class="summary-item"><span class="summary-icon"><i data-feather="check-circle"></i></span><div><strong>{{ $activePlans }}</strong><small>{{ trans('admin.saas.active') }}</small></div></div>
+        <div class="summary-item"><span class="summary-icon"><i data-feather="globe"></i></span><div><strong>{{ $activeMarkets }}</strong><small>{{ trans('admin.saas.market_prices') }}</small></div></div>
     </div>
 
     <div class="plans-list">
@@ -128,16 +131,16 @@
             <article class="plan-card">
                 <header class="plan-card-head">
                     <a class="plan-identity" href="{{ route('admin.saas-plans.edit', $plan) }}">
-                        <span class="plan-avatar"><i class="fa-solid fa-cube"></i></span>
-                        <span><h5>{{ $plan->name }}</h5><span class="plan-code"><i class="fa-solid fa-code"></i>{{ $plan->code }}</span></span>
+                        <span class="plan-avatar"><i data-feather="box"></i></span>
+                        <span><h5>{{ $plan->name }}</h5><span class="plan-code"><i data-feather="code"></i>{{ $plan->code }}</span></span>
                     </a>
                     <div class="plan-head-tools">
                         <span class="status-pill {{ $plan->active ? 'is-active' : 'is-inactive' }}">{{ $plan->active ? trans('admin.saas.active') : trans('admin.saas.inactive') }}</span>
                         <div class="plan-actions">
-                            <a class="plan-action" href="{{ route('admin.saas-plans.edit', $plan) }}"><i class="fa-solid fa-pen-to-square"></i><span>{{ trans('admin.edit') }}</span></a>
+                            <a class="plan-action" href="{{ route('admin.saas-plans.edit', $plan) }}"><i data-feather="edit-3"></i><span>{{ trans('admin.edit') }}</span></a>
                             <form method="POST" action="{{ route('admin.saas-plans.destroy', $plan) }}" onsubmit="return confirm('{{ trans('admin.delete') }}?');">
                                 @csrf @method('DELETE')
-                                <button type="submit" class="plan-action delete" title="{{ trans('admin.delete') }}"><i class="fa-solid fa-trash-can"></i></button>
+                                <button type="submit" class="plan-action delete" title="{{ trans('admin.delete') }}"><i data-feather="trash-2"></i></button>
                             </form>
                         </div>
                     </div>
@@ -154,7 +157,12 @@
                                         $savingPercent = $price->monthly_price > 0 ? round(($annualSaving / ((float) $price->monthly_price * 12)) * 100) : 0;
                                     @endphp
                                     <div class="market-card">
-                                        <span class="country-flag" aria-hidden="true">{{ $flagFromIso($price->country?->iso2) ?: '🌐' }}</span>
+                                        <span class="country-flag">
+                                            @if($price->country?->iso2)
+                                                <img src="https://flagcdn.com/w80/{{ strtolower($price->country->iso2) }}.png" alt="{{ $price->country->name }}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                                            @endif
+                                            <i data-feather="globe" style="{{ $price->country?->iso2 ? 'display:none' : '' }}"></i>
+                                        </span>
                                         <span class="country-info"><strong>{{ $price->country?->name }}</strong><small>{{ $price->currency_code }}</small></span>
                                         <span class="country-prices">
                                             <b>{{ number_format($price->monthly_price, 2) }} {{ $price->currency_code }} / {{ trans('admin.saas.monthly') }}</b>
@@ -164,7 +172,7 @@
                                 @endforeach
                             </div>
                         @else
-                            <div class="no-markets"><i class="fa-solid fa-circle-exclamation"></i><span>{{ trans('admin.saas.no_market_prices') }}</span></div>
+                            <div class="no-markets"><i data-feather="alert-circle"></i><span>{{ trans('admin.saas.no_market_prices') }}</span></div>
                         @endif
                     </section>
 
@@ -173,16 +181,16 @@
                             <div>
                                 <div class="section-label"><strong>{{ trans('admin.saas.limits') }}</strong></div>
                                 <div class="limits-grid">
-                                    <span class="limit-item"><i class="fa-solid fa-building"></i><b>{{ $plan->max_venues }}</b><small>{{ trans('admin.saas.max_venues') }}</small></span>
-                                    <span class="limit-item"><i class="fa-solid fa-futbol"></i><b>{{ $plan->max_spaces }}</b><small>{{ trans('admin.saas.max_spaces') }}</small></span>
-                                    <span class="limit-item"><i class="fa-solid fa-user-group"></i><b>{{ $plan->max_staff }}</b><small>{{ trans('admin.saas.max_staff') }}</small></span>
+                                    <span class="limit-item"><i data-feather="home"></i><b>{{ $plan->max_venues }}</b><small>{{ trans('admin.saas.max_venues') }}</small></span>
+                                    <span class="limit-item"><i data-feather="map"></i><b>{{ $plan->max_spaces }}</b><small>{{ trans('admin.saas.max_spaces') }}</small></span>
+                                    <span class="limit-item"><i data-feather="users"></i><b>{{ $plan->max_staff }}</b><small>{{ trans('admin.saas.max_staff') }}</small></span>
                                 </div>
                             </div>
                             <div>
                                 <div class="section-label"><strong>{{ trans('admin.saas.features') }}</strong></div>
                                 <div class="features-list">
                                     @forelse($plan->features ?? [] as $feature)
-                                        @if(isset($featureIcons[$feature]))<span class="feature-item"><i class="{{ $featureIcons[$feature] }}"></i><span>{{ trans('admin.saas.feature_names.'.$feature) }}</span></span>@endif
+                                        @if(isset($featureIcons[$feature]))<span class="feature-item"><i data-feather="{{ $featureIcons[$feature] }}"></i><span>{{ trans('admin.saas.feature_names.'.$feature) }}</span></span>@endif
                                     @empty
                                         <span class="text-muted small">-</span>
                                     @endforelse
@@ -193,9 +201,18 @@
                 </div>
             </article>
         @empty
-            <div class="plans-empty"><span class="plans-empty-icon"><i class="fa-solid fa-layer-group"></i></span><strong class="d-block mb-1">{{ trans('admin.saas.empty') }}</strong><a href="{{ route('admin.saas-plans.create') }}" class="btn btn-sm btn-primary mt-3">{{ trans('admin.saas.add_plan') }}</a></div>
+            <div class="plans-empty"><span class="plans-empty-icon"><i data-feather="layers"></i></span><strong class="d-block mb-1">{{ trans('admin.saas.empty') }}</strong><a href="{{ route('admin.saas-plans.create') }}" class="btn btn-sm btn-primary mt-3">{{ trans('admin.saas.add_plan') }}</a></div>
         @endforelse
     </div>
     <div class="plans-pagination">{{ $plans->links() }}</div>
 </div>
 @endsection
+
+@push('js')
+<script src="{{ asset('assetsAdmin/src/plugins/src/font-icons/feather/feather.min.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.feather) window.feather.replace();
+    });
+</script>
+@endpush
