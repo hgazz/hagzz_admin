@@ -356,12 +356,16 @@
 
 <div class="step subscription-step" data-step-panel="5">
     <p class="text-center mb-4">{{ trans('admin.saas.subscription') }}</p>
+    <div class="subscription-duration-card" id="subscription_duration_card">
+        <span class="subscription-duration-icon"><x-feather-icon name="activity" /></span>
+        <span><small>{{ trans('admin.saas.subscription_duration') }}</small><strong id="subscription_duration_value">{{ trans('admin.saas.duration_not_set') }}</strong></span>
+    </div>
     <div class="mb-3"><label for="saas_plan_id">{{ trans('admin.saas.plan') }}</label><select id="saas_plan_id" name="saas_plan_id" class="form-control basic"><option value="">{{ trans('admin.saas.no_plan') }}</option>@foreach($saasPlans as $plan)<option value="{{ $plan->id }}" data-prices='@json($plan->prices->keyBy('country_id'))' @selected(old('saas_plan_id', $currentSubscription->saas_plan_id ?? null) == $plan->id)>{{ $plan->name }}</option>@endforeach</select></div>
     <div class="mb-3"><label>{{ trans('admin.saas.billing_cycle') }}</label><select id="billing_cycle" name="billing_cycle" class="form-control basic"><option value="monthly" @selected(old('billing_cycle',$currentSubscription->billing_cycle ?? 'monthly')==='monthly')>{{ trans('admin.saas.monthly') }}</option><option value="annual" @selected(old('billing_cycle',$currentSubscription->billing_cycle ?? '')==='annual')>{{ trans('admin.saas.annual') }}</option></select></div>
     <div id="market_price_preview" class="alert alert-info d-none"></div>
     <div class="mb-3"><label>{{ trans('admin.saas.custom_price') }}</label><input type="number" min="0" step="0.01" name="custom_price" value="{{ old('custom_price',$currentSubscription->custom_price ?? '') }}"></div>
-    <div class="mb-3"><label>{{ trans('admin.saas.starts_at') }}</label><input type="date" name="subscription_starts_at" value="{{ old('subscription_starts_at',$currentSubscription?->starts_at?->format('Y-m-d') ?? now()->format('Y-m-d')) }}"></div>
-    <div class="mb-3"><label>{{ trans('admin.saas.ends_at') }}</label><input type="date" name="subscription_ends_at" value="{{ old('subscription_ends_at',$currentSubscription?->ends_at?->format('Y-m-d')) }}"></div>
+    <div class="mb-3"><label>{{ trans('admin.saas.starts_at') }}</label><input id="subscription_starts_at" type="date" name="subscription_starts_at" value="{{ old('subscription_starts_at',$currentSubscription?->starts_at?->format('Y-m-d') ?? now()->format('Y-m-d')) }}"></div>
+    <div class="mb-3"><label>{{ trans('admin.saas.ends_at') }}</label><input id="subscription_ends_at" type="date" name="subscription_ends_at" value="{{ old('subscription_ends_at',$currentSubscription?->ends_at?->format('Y-m-d')) }}"></div>
     <div class="mb-3"><label>{{ trans('admin.saas.trial_ends_at') }}</label><input type="date" name="trial_ends_at" value="{{ old('trial_ends_at',$currentSubscription?->trial_ends_at?->format('Y-m-d')) }}"></div>
     <div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="auto_renew" value="1" @checked(old('auto_renew',$currentSubscription->auto_renew ?? false))><label class="form-check-label">{{ trans('admin.saas.auto_renew') }}</label></div>
 </div>
@@ -394,6 +398,9 @@
             const countrySelect = document.getElementById('country_id');
             const cycleSelect = document.getElementById('billing_cycle');
             const preview = document.getElementById('market_price_preview');
+            const subscriptionStart = document.getElementById('subscription_starts_at');
+            const subscriptionEnd = document.getElementById('subscription_ends_at');
+            const durationValue = document.getElementById('subscription_duration_value');
             function updateMarketPrice() {
                 const option = planSelect?.selectedOptions[0];
                 const prices = option?.dataset.prices ? JSON.parse(option.dataset.prices) : {};
@@ -410,6 +417,22 @@
             countrySelect?.addEventListener('change', updateMarketPrice);
             cycleSelect?.addEventListener('change', updateMarketPrice);
             updateMarketPrice();
+
+            function updateSubscriptionDuration() {
+                if (!subscriptionStart?.value || !subscriptionEnd?.value) {
+                    durationValue.textContent = @json(trans('admin.saas.duration_not_set'));
+                    return;
+                }
+                const start = new Date(subscriptionStart.value + 'T00:00:00');
+                const end = new Date(subscriptionEnd.value + 'T00:00:00');
+                const days = Math.round((end - start) / 86400000);
+                durationValue.textContent = days < 0
+                    ? @json(trans('admin.saas.invalid_duration'))
+                    : days + ' ' + @json(trans('admin.saas.days'));
+            }
+            subscriptionStart?.addEventListener('change', updateSubscriptionDuration);
+            subscriptionEnd?.addEventListener('change', updateSubscriptionDuration);
+            updateSubscriptionDuration();
         });
     </script>
     <script>

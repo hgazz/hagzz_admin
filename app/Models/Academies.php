@@ -10,9 +10,31 @@ class Academies extends Model
     use HasTranslations;
 
     const  PATH = 'images/academies';
-    public function getImageAttribute($value)
+    public function getImageAttribute($value): ?string
     {
-        return rtrim(config('services.storage.url'), '/') . '/' . self::PATH . '/' . ltrim($value, '/');
+        return $this->storageAsset($value ?: ($this->attributes['logo'] ?? null));
+    }
+
+    public function getLogoAttribute($value): ?string
+    {
+        return $this->storageAsset($value);
+    }
+
+    private function storageAsset(?string $value): ?string
+    {
+        if (blank($value)) {
+            return null;
+        }
+
+        if (str_starts_with($value, 'http://') || str_starts_with($value, 'https://')) {
+            return $value;
+        }
+
+        $path = str_starts_with(ltrim($value, '/'), self::PATH.'/')
+            ? ltrim($value, '/')
+            : self::PATH.'/'.ltrim($value, '/');
+
+        return rtrim(config('services.storage.url'), '/').'/'.$path;
     }
 
     public $translatable = ['commercial_name','app_name'];

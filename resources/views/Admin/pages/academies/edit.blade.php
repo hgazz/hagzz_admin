@@ -84,6 +84,10 @@
         .partner-edit-form #sports_wrap > div { width: 100%; }
         .partner-edit-form .password-toggle-eye { top: 33px; color: var(--edit-muted); }
         .partner-edit-form .subscription-step { position: relative; }
+        .partner-edit-form .subscription-duration-card { grid-column: 1 / -1; display: flex; align-items: center; gap: 11px; padding: 13px 14px; border: 1px solid #b9cffd; border-radius: 8px; background: #f4f8ff; }
+        .partner-edit-form .subscription-duration-icon { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 38px; border-radius: 7px; background: #fff; color: var(--edit-primary); }
+        .partner-edit-form .subscription-duration-card small { display: block; color: var(--edit-muted); font-size: 10px; margin-bottom: 3px; }
+        .partner-edit-form .subscription-duration-card strong { display: block; color: var(--edit-ink); font-size: 13px; }
         .partner-edit-form .subscription-step #market_price_preview { grid-column: 1 / -1; margin: 0; border: 1px solid #b9cffd; border-radius: 7px; background: #eff6ff; color: #1849a9; font-size: 13px; }
         .partner-edit-form .subscription-step .form-check { grid-column: 1 / -1; display: flex; align-items: center; gap: 9px; min-height: 48px; padding: 11px 14px; border: 1px solid var(--edit-border); border-radius: 7px; background: var(--edit-surface); }
         .partner-edit-form .subscription-step .form-check-input { float: none; width: 38px; height: 20px; min-height: 20px; margin: 0; padding: 0; }
@@ -109,6 +113,7 @@
             .partner-logo { width: 52px; height: 52px; flex-basis: 52px; }
             .partner-edit-form .step { grid-template-columns: 1fr; padding: 16px; }
             .partner-edit-form .step > p:first-child,
+            .partner-edit-form .subscription-duration-card,
             .partner-edit-form .subscription-step #market_price_preview,
             .partner-edit-form .subscription-step .form-check { grid-column: 1; }
             .partner-edit-form .form-footer { display: grid !important; grid-template-columns: 1fr 1fr; bottom: 5px; }

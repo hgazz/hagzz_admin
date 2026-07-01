@@ -504,6 +504,7 @@ return [
         'plan_in_use' => 'This plan is assigned to customers and cannot be deleted.', 'no_plan' => 'No plan', 'billing_cycle' => 'Billing Cycle',
         'monthly' => 'Monthly', 'annual' => 'Annual', 'custom_price' => 'Custom Price', 'starts_at' => 'Subscription Starts',
         'ends_at' => 'Subscription Ends', 'trial_ends_at' => 'Trial Ends', 'auto_renew' => 'Auto Renew', 'cancel' => 'Cancel',
+        'subscription_duration' => 'Subscription Duration', 'days' => 'days', 'duration_not_set' => 'Set the start and end dates', 'invalid_duration' => 'End date must be after start date',
         'market_prices' => 'Country Pricing', 'market_prices_hint' => 'Enable the countries where this plan is sold and set an independent local price.',
         'enable_market' => 'Enable', 'currency' => 'Currency', 'tax_rate' => 'Tax Rate', 'tax_included' => 'Price includes tax',
         'no_market_prices' => 'No country prices', 'market_country' => 'Customer Country', 'select_country' => 'Select country',
