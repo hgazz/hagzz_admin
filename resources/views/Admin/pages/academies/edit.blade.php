@@ -9,7 +9,7 @@
         ['name','commercial_name_en','commercial_name_ar','trade_license_number','trade_license_expire_date','tax_number','commission_percentage'],
         ['bank_account_type','bank_name','beneficiary_name','bank_account_number'],
         ['contract_date','start_date','end_date','contract_number','account_manager','settlement_days_count','non_refund_days_count','contract_link','image','status'],
-        ['saas_plan_id','billing_cycle','custom_price','subscription_starts_at','subscription_ends_at','trial_ends_at','auto_renew'],
+        ['saas_plan_id','billing_cycle','custom_price','offer_name','free_months','discount_type','discount_value','discount_starts_at','discount_ends_at','subscription_starts_at','subscription_ends_at','billing_starts_at','grace_days','billing_notes','subscription_status','auto_renew'],
     ];
     $initialTab = 0;
     foreach ($errorGroups as $tabIndex => $fields) {

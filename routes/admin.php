@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\SubscriptionRevenueController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AcademiesController;
 use App\Http\Controllers\BannerController;
@@ -204,6 +205,14 @@ Route::group(
                         Route::get('coach/export', 'coachExport')->name('coach.export');
                         Route::put('settlement/change/{settlement}', 'change')->name('settlement.change');
                     });
+
+                Route::prefix('report/subscriptions')->as('report.subscriptions.')->controller(SubscriptionRevenueController::class)->group(function () {
+                    Route::get('/', 'index')->name('index');
+                    Route::get('/export', 'export')->name('export');
+                    Route::post('/generate', 'generate')->name('generate');
+                    Route::post('/invoices/{invoice}/payments', 'payment')->name('payments.store');
+                    Route::put('/invoices/{invoice}/void', 'void')->name('invoices.void');
+                });
             });
         });
 });

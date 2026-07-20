@@ -20,6 +20,7 @@ use App\Services\TranslatableService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -189,6 +190,19 @@ class AcademiesController extends Controller
     private function saveSubscription(Academies $academy, Request $request): void
     {
         if (!$request->saas_plan_id) {
+            $subscription = $academy->currentSubscription()->first();
+            if ($subscription && $subscription->status !== 'cancelled') {
+                $before = $subscription->only(['status']);
+                $subscription->update(['status' => 'cancelled']);
+                DB::table('tenant_subscription_revisions')->insert([
+                    'tenant_subscription_id' => $subscription->id,
+                    'academy_id' => $academy->id,
+                    'before' => json_encode($before),
+                    'after' => json_encode(['status' => 'cancelled']),
+                    'changed_by' => auth('admin')->id(),
+                    'created_at' => now(), 'updated_at' => now(),
+                ]);
+            }
             return;
         }
 
@@ -197,27 +211,82 @@ class AcademiesController extends Controller
         if (!$marketPrice) {
             throw ValidationException::withMessages(['saas_plan_id' => trans('admin.saas.price_not_available')]);
         }
+        $listPrice = (float) ($request->billing_cycle === 'annual' ? $marketPrice->annual_price : $marketPrice->monthly_price);
         $contractPrice = $request->filled('custom_price')
             ? (float) $request->custom_price
-            : (float) ($request->billing_cycle === 'annual' ? $marketPrice->annual_price : $marketPrice->monthly_price);
+            : $listPrice;
+        $startsAt = Carbon::parse($request->subscription_starts_at);
+        $freeMonths = (int) $request->input('free_months', 0);
+        $billingStartsAt = $request->filled('billing_starts_at')
+            ? Carbon::parse($request->billing_starts_at)
+            : ($request->filled('trial_ends_at')
+                ? Carbon::parse($request->trial_ends_at)->addDay()
+                : $startsAt->copy()->addMonthsNoOverflow($freeMonths));
+        $trialEndsAt = $billingStartsAt->gt($startsAt) ? $billingStartsAt->copy()->subDay() : null;
+        if ($request->filled('subscription_ends_at') && $billingStartsAt->gt(Carbon::parse($request->subscription_ends_at))) {
+            throw ValidationException::withMessages(['billing_starts_at' => trans('admin.saas.billing_after_end')]);
+        }
+        if ($request->discount_type === 'percentage' && (float) $request->discount_value > 100) {
+            throw ValidationException::withMessages(['discount_value' => trans('admin.saas.percentage_max')]);
+        }
 
-        TenantSubscription::updateOrCreate(
-            ['academy_id' => $academy->id, 'status' => 'active'],
-            [
-                'saas_plan_id' => $request->saas_plan_id,
-                'saas_plan_price_id' => $marketPrice->id,
-                'billing_cycle' => $request->billing_cycle,
-                'custom_price' => $request->custom_price,
-                'price_amount' => $contractPrice,
-                'currency_code' => $marketPrice->currency_code,
-                'tax_rate' => $marketPrice->tax_rate,
-                'tax_included' => $marketPrice->tax_included,
-                'starts_at' => $request->subscription_starts_at,
-                'ends_at' => $request->subscription_ends_at,
-                'trial_ends_at' => $request->trial_ends_at,
-                'auto_renew' => $request->boolean('auto_renew'),
-            ]
-        );
+        $data = [
+            'saas_plan_id' => $request->saas_plan_id,
+            'saas_plan_price_id' => $marketPrice->id,
+            'billing_cycle' => $request->billing_cycle,
+            'status' => $request->input('subscription_status', 'active'),
+            'custom_price' => $request->custom_price,
+            'price_amount' => $contractPrice,
+            'list_price_amount' => $listPrice,
+            'currency_code' => $marketPrice->currency_code,
+            'tax_rate' => $marketPrice->tax_rate,
+            'tax_included' => $marketPrice->tax_included,
+            'offer_name' => $request->offer_name,
+            'free_months' => $freeMonths,
+            'discount_type' => (float) $request->discount_value > 0 ? $request->discount_type : null,
+            'discount_value' => $request->input('discount_value', 0),
+            'discount_starts_at' => $request->discount_starts_at,
+            'discount_ends_at' => $request->discount_ends_at,
+            'starts_at' => $startsAt->toDateString(),
+            'ends_at' => $request->subscription_ends_at,
+            'trial_ends_at' => $trialEndsAt?->toDateString(),
+            'billing_starts_at' => $billingStartsAt->toDateString(),
+            'grace_days' => $request->input('grace_days', 7),
+            'billing_notes' => $request->billing_notes,
+            'auto_renew' => $request->boolean('auto_renew'),
+        ];
+
+        $subscription = $academy->currentSubscription()->first();
+        if (!$subscription) {
+            $subscription = $academy->subscriptions()->create($data + ['next_billing_at' => $billingStartsAt->toDateString()]);
+            DB::table('tenant_subscription_revisions')->insert([
+                'tenant_subscription_id' => $subscription->id,
+                'academy_id' => $academy->id,
+                'before' => null,
+                'after' => json_encode($data, JSON_UNESCAPED_UNICODE),
+                'changed_by' => auth('admin')->id(),
+                'created_at' => now(), 'updated_at' => now(),
+            ]);
+            return;
+        }
+
+        $before = $subscription->only(array_keys($data));
+        $billingDateChanged = optional($subscription->billing_starts_at)->toDateString() !== $billingStartsAt->toDateString();
+        if ($billingDateChanged && !$subscription->invoices()->exists()) {
+            $data['next_billing_at'] = $billingStartsAt->toDateString();
+        }
+        $subscription->update($data);
+        $after = $subscription->fresh()->only(array_keys($data));
+        if (json_encode($before) !== json_encode($after)) {
+            DB::table('tenant_subscription_revisions')->insert([
+                'tenant_subscription_id' => $subscription->id,
+                'academy_id' => $academy->id,
+                'before' => json_encode($before, JSON_UNESCAPED_UNICODE),
+                'after' => json_encode($after, JSON_UNESCAPED_UNICODE),
+                'changed_by' => auth('admin')->id(),
+                'created_at' => now(), 'updated_at' => now(),
+            ]);
+        }
     }
 
     public function delete(Request $request)

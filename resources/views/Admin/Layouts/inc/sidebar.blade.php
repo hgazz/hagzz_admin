@@ -193,6 +193,11 @@
                     <x-feather-icon name="chevron-right" class="admin-menu-chevron" />
                 </a>
                 <ul class="collapse submenu list-unstyled {{ $reportsOpen ? 'show' : '' }}" id="report" data-bs-parent="#accordionExample">
+                    <li class="menu {{ Request::routeIs('admin.report.subscriptions.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.report.subscriptions.index') }}" class="dropdown-toggle">
+                            <div class="admin-menu-label"><x-feather-icon name="trending-up" class="admin-menu-icon" /><span>{{ trans('admin.subscription_revenue.menu') }}</span></div>
+                        </a>
+                    </li>
                     <li class="menu {{ Request::routeIs('admin.report.settlement') ? 'active' : '' }}">
                         <a href="{{ route('admin.report.settlement') }}" class="dropdown-toggle">
                             <div class="admin-menu-label"><x-feather-icon name="credit-card" class="admin-menu-icon" /><span>{{ trans('admin.settlement') }}</span></div>

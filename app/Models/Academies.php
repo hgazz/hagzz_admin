@@ -97,4 +97,9 @@ class Academies extends Model
     {
         return $this->hasOne(TenantSubscription::class, 'academy_id')->latestOfMany();
     }
+
+    public function subscriptionInvoices()
+    {
+        return $this->hasMany(TenantSubscriptionInvoice::class, 'academy_id');
+    }
 }
