@@ -10,8 +10,9 @@
 {{--    </form>--}}
 
 <div class="d-inline-flex align-items-center gap-2">
-    <a href="{{ route('admin.invoices.bookings.print', ['invoice' => $invoice, 'paper' => 'a4']) }}" target="_blank" class="text-primary" title="{{ app()->getLocale() === 'ar' ? 'طباعة الفاتورة' : 'Print invoice' }}">
-        <i class="fa-solid fa-print"></i>
+    <a href="{{ route('admin.invoices.bookings.print', ['invoice' => $invoice, 'paper' => 'a4']) }}" target="_blank" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1" title="{{ app()->getLocale() === 'ar' ? 'طباعة الفاتورة' : 'Print invoice' }}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+        <span>{{ app()->getLocale() === 'ar' ? 'طباعة' : 'Print' }}</span>
     </a>
 @if(!$invoice->is_canceled)
 
@@ -32,4 +33,3 @@
     {{trans('admin.bookings.cancelled') }}
 @endif
 </div>
-
