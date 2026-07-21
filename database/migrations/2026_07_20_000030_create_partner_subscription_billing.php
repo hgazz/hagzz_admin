@@ -2,28 +2,55 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('tenant_subscriptions', function (Blueprint $table) {
-            $table->decimal('list_price_amount', 12, 2)->nullable()->after('price_amount');
-            $table->string('offer_name')->nullable()->after('tax_included');
-            $table->unsignedSmallInteger('free_months')->default(0)->after('offer_name');
-            $table->string('discount_type', 20)->nullable()->after('free_months');
-            $table->decimal('discount_value', 12, 2)->default(0)->after('discount_type');
-            $table->date('discount_starts_at')->nullable()->after('discount_value');
-            $table->date('discount_ends_at')->nullable()->after('discount_starts_at');
-            $table->date('billing_starts_at')->nullable()->after('trial_ends_at');
-            $table->date('next_billing_at')->nullable()->after('billing_starts_at');
-            $table->unsignedSmallInteger('grace_days')->default(7)->after('next_billing_at');
-            $table->text('billing_notes')->nullable()->after('grace_days');
-            $table->index(['status', 'next_billing_at'], 'tenant_subscriptions_billing_idx');
-        });
+        $hasForeign = function (string $table, string $column): bool {
+            if (Schema::getConnection()->getDriverName() !== 'mysql') {
+                return false;
+            }
 
-        Schema::create('tenant_subscription_revisions', function (Blueprint $table) {
+            return DB::table('information_schema.KEY_COLUMN_USAGE')
+                ->where('TABLE_SCHEMA', DB::raw('DATABASE()'))
+                ->where('TABLE_NAME', $table)
+                ->where('COLUMN_NAME', $column)
+                ->whereNotNull('REFERENCED_TABLE_NAME')
+                ->exists();
+        };
+        $hasIndex = function (string $table, string $index): bool {
+            if (Schema::getConnection()->getDriverName() !== 'mysql') {
+                return false;
+            }
+
+            return DB::table('information_schema.STATISTICS')
+                ->where('TABLE_SCHEMA', DB::raw('DATABASE()'))
+                ->where('TABLE_NAME', $table)
+                ->where('INDEX_NAME', $index)
+                ->exists();
+        };
+
+        Schema::table('tenant_subscriptions', function (Blueprint $table) {
+            if (!Schema::hasColumn('tenant_subscriptions', 'list_price_amount')) $table->decimal('list_price_amount', 12, 2)->nullable()->after('price_amount');
+            if (!Schema::hasColumn('tenant_subscriptions', 'offer_name')) $table->string('offer_name')->nullable()->after('tax_included');
+            if (!Schema::hasColumn('tenant_subscriptions', 'free_months')) $table->unsignedSmallInteger('free_months')->default(0)->after('offer_name');
+            if (!Schema::hasColumn('tenant_subscriptions', 'discount_type')) $table->string('discount_type', 20)->nullable()->after('free_months');
+            if (!Schema::hasColumn('tenant_subscriptions', 'discount_value')) $table->decimal('discount_value', 12, 2)->default(0)->after('discount_type');
+            if (!Schema::hasColumn('tenant_subscriptions', 'discount_starts_at')) $table->date('discount_starts_at')->nullable()->after('discount_value');
+            if (!Schema::hasColumn('tenant_subscriptions', 'discount_ends_at')) $table->date('discount_ends_at')->nullable()->after('discount_starts_at');
+            if (!Schema::hasColumn('tenant_subscriptions', 'billing_starts_at')) $table->date('billing_starts_at')->nullable()->after('trial_ends_at');
+            if (!Schema::hasColumn('tenant_subscriptions', 'next_billing_at')) $table->date('next_billing_at')->nullable()->after('billing_starts_at');
+            if (!Schema::hasColumn('tenant_subscriptions', 'grace_days')) $table->unsignedSmallInteger('grace_days')->default(7)->after('next_billing_at');
+            if (!Schema::hasColumn('tenant_subscriptions', 'billing_notes')) $table->text('billing_notes')->nullable()->after('grace_days');
+        });
+        if (!$hasIndex('tenant_subscriptions', 'tenant_subscriptions_billing_idx')) {
+            Schema::table('tenant_subscriptions', fn (Blueprint $table) => $table->index(['status', 'next_billing_at'], 'tenant_subscriptions_billing_idx'));
+        }
+
+        if (!Schema::hasTable('tenant_subscription_revisions')) Schema::create('tenant_subscription_revisions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tenant_subscription_id')->constrained('tenant_subscriptions')->cascadeOnDelete();
             $table->foreignId('academy_id')->constrained('academies')->cascadeOnDelete();
@@ -34,7 +61,7 @@ return new class extends Migration
             $table->index(['academy_id', 'created_at']);
         });
 
-        Schema::create('tenant_subscription_invoices', function (Blueprint $table) {
+        if (!Schema::hasTable('tenant_subscription_invoices')) Schema::create('tenant_subscription_invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tenant_subscription_id')->constrained('tenant_subscriptions')->cascadeOnDelete();
             $table->foreignId('academy_id')->constrained('academies')->cascadeOnDelete();
@@ -60,20 +87,37 @@ return new class extends Migration
             $table->index(['academy_id', 'issued_at']);
         });
 
-        Schema::create('tenant_subscription_payments', function (Blueprint $table) {
+        $paymentsTableExisted = Schema::hasTable('tenant_subscription_payments');
+        if (!$paymentsTableExisted) Schema::create('tenant_subscription_payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tenant_subscription_invoice_id')->constrained('tenant_subscription_invoices')->cascadeOnDelete();
-            $table->foreignId('academy_id')->constrained('academies')->cascadeOnDelete();
+            $table->foreignId('tenant_subscription_invoice_id');
+            $table->foreignId('academy_id');
             $table->decimal('amount', 12, 2);
             $table->char('currency_code', 3);
             $table->dateTime('paid_at');
             $table->string('payment_method', 30)->default('bank_transfer');
             $table->string('reference')->nullable();
             $table->text('notes')->nullable();
-            $table->foreignId('recorded_by')->nullable()->constrained('admins')->nullOnDelete();
+            $table->foreignId('recorded_by')->nullable();
             $table->timestamps();
-            $table->index(['academy_id', 'paid_at']);
+            $table->foreign('tenant_subscription_invoice_id', 'ts_payments_invoice_fk')->references('id')->on('tenant_subscription_invoices')->cascadeOnDelete();
+            $table->foreign('academy_id', 'ts_payments_academy_fk')->references('id')->on('academies')->cascadeOnDelete();
+            $table->foreign('recorded_by', 'ts_payments_admin_fk')->references('id')->on('admins')->nullOnDelete();
+            $table->index(['academy_id', 'paid_at'], 'ts_payments_academy_paid_idx');
         });
+
+        if ($paymentsTableExisted && !$hasForeign('tenant_subscription_payments', 'tenant_subscription_invoice_id')) {
+            Schema::table('tenant_subscription_payments', fn (Blueprint $table) => $table->foreign('tenant_subscription_invoice_id', 'ts_payments_invoice_fk')->references('id')->on('tenant_subscription_invoices')->cascadeOnDelete());
+        }
+        if ($paymentsTableExisted && !$hasForeign('tenant_subscription_payments', 'academy_id')) {
+            Schema::table('tenant_subscription_payments', fn (Blueprint $table) => $table->foreign('academy_id', 'ts_payments_academy_fk')->references('id')->on('academies')->cascadeOnDelete());
+        }
+        if ($paymentsTableExisted && !$hasForeign('tenant_subscription_payments', 'recorded_by')) {
+            Schema::table('tenant_subscription_payments', fn (Blueprint $table) => $table->foreign('recorded_by', 'ts_payments_admin_fk')->references('id')->on('admins')->nullOnDelete());
+        }
+        if ($paymentsTableExisted && !$hasIndex('tenant_subscription_payments', 'ts_payments_academy_paid_idx')) {
+            Schema::table('tenant_subscription_payments', fn (Blueprint $table) => $table->index(['academy_id', 'paid_at'], 'ts_payments_academy_paid_idx'));
+        }
     }
 
     public function down(): void
