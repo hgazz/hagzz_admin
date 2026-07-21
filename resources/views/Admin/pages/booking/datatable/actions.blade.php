@@ -9,6 +9,10 @@
 {{--        </button>--}}
 {{--    </form>--}}
 
+<div class="d-inline-flex align-items-center gap-2">
+    <a href="{{ route('admin.invoices.bookings.print', ['invoice' => $invoice, 'paper' => 'a4']) }}" target="_blank" class="text-primary" title="{{ app()->getLocale() === 'ar' ? 'طباعة الفاتورة' : 'Print invoice' }}">
+        <i class="fa-solid fa-print"></i>
+    </a>
 @if(!$invoice->is_canceled)
 
 
@@ -27,5 +31,5 @@
 @else
     {{trans('admin.bookings.cancelled') }}
 @endif
-
+</div>
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SubscriptionRevenueController;
+use App\Http\Controllers\Admin\InvoicePrintController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AcademiesController;
 use App\Http\Controllers\BannerController;
@@ -51,6 +52,8 @@ Route::group(
             Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', 'as' => 'admin.'], function () {
                 Route::get('/', [DashboardController::class, 'index'])->name('index');
                 Route::resource('saas-plans', SaasPlanController::class)->except(['show']);
+                Route::get('invoices/bookings/{invoice}/print', [InvoicePrintController::class, 'booking'])->name('invoices.bookings.print');
+                Route::get('invoices/subscriptions/{invoice}/print', [InvoicePrintController::class, 'subscription'])->name('invoices.subscriptions.print');
                 Route::get('booking/filter', [DashboardController::class, 'filterBookings'])->name('filter-bookings');
                 Route::get('/revenue-data', [DashboardController::class, 'getRevenueDataByMonth'])->name('revenue-data');
                 Route::get('/chart/users-by-month', [DashboardController::class, 'getUserDataByMonthAjax'])->name('getUserDataByMonth');
