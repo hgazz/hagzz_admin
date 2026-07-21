@@ -53,7 +53,7 @@
                     <div class="card-header">
 
                         <div class="row">
-                            <form method="GET" action="{{ route('admin.report.invoice.filter') }}">
+                            <form method="GET" action="{{ route('admin.booking.filter') }}">
                                 @include('Admin.pages.filter._form_filter')
                             </form>
                         </div>

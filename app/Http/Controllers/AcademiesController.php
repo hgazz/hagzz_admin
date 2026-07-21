@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\DataTables\AcademiesDataTable;
 use App\DataTables\AddressDataTable;
-use App\DataTables\CoachDataTable;
 use App\Exports\AcademiesExport;
 use App\Http\Requests\Academies\AcademiesRequest;
 use App\Http\Traits\FileUpload;
@@ -352,8 +351,8 @@ class AcademiesController extends Controller
         return to_route("admin.academies.locations");
     }
 
-    public function partnerCoach(CoachDataTable $dataTable)
+    public function partnerCoach()
     {
-        return $dataTable->render('Admin.pages.partnerLocation.coaches');
+        return redirect()->route('admin.report.coach');
     }
 }

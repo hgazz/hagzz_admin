@@ -165,6 +165,7 @@ Route::group(
 
                 Route::controller(BookingController::class)->group(function () {
                     Route::get('bookings', 'index')->name('booking.index');
+                    Route::get('bookings/filter', 'filter')->name('booking.filter');
                     Route::get('bookings/cancel/', 'cancelBooking')->name('booking.cancel');
                 });
 
@@ -194,6 +195,7 @@ Route::group(
                         Route::get('settlement/filter', 'filter')->name('settlement.filter');
                         Route::get('settlement/export', 'export')->name('settlement.export');
                         Route::get('transactions', 'transactions')->name('transactions');
+                        Route::get('transactions/filter', 'transactionFilter')->name('transactions.filter');
                         Route::get('invoice', 'invoice')->name('invoice.filter');
                         Route::get('bookings/export', 'bookingExport')->name('booking.export');
                         Route::get('joins', 'joins')->name('joins');

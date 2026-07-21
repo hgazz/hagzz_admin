@@ -59,18 +59,7 @@ class ReportController extends Controller
 
     public function invoice(Request $request, InvoiceDataTable $dataTable)
     {
-        if ($request->has('start_date') && $request->has('end_date')) {
-            $startDate = $request->input('start_date');
-            $endDate = $request->input('end_date');
-
-            $booking = Invoice::whereBetween('created_at', [$startDate, $endDate]);
-            $invoiceData = $booking->get();
-
-            session(['invoiceData' => $invoiceData]);
-            return $dataTable->with('query', $booking)->render('Admin.pages.booking.index');
-        }
-
-        return $dataTable->render('Admin.pages.booking.index');
+        return redirect()->route('admin.booking.filter', $request->query());
     }
 
     public function bookingExport()
@@ -81,6 +70,18 @@ class ReportController extends Controller
     public function transactions(InvoiceDataTable $dataTable)
     {
         return $dataTable->render('Admin.pages.booking.transactions');
+    }
+
+    public function transactionFilter(Request $request, InvoiceDataTable $dataTable)
+    {
+        $query = Invoice::query()->with(['user', 'training.academy']);
+
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->whereDate('created_at', '>=', $request->input('start_date'))
+                ->whereDate('created_at', '<=', $request->input('end_date'));
+        }
+
+        return $dataTable->with('query', $query)->render('Admin.pages.booking.transactions');
     }
 
     public function joins(JoinDataTable $dataTable)

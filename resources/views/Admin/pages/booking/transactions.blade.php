@@ -1,6 +1,8 @@
 @extends('Admin.Layouts.master')
 
-@section('title', trans('admin.transaction'))
+@php($transactionTitle = app()->getLocale() === 'ar' ? 'فواتير ومدفوعات الحجوزات' : 'Booking invoices & payments')
+
+@section('title', $transactionTitle)
 
 @push('css')
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
@@ -33,7 +35,7 @@
                             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ trans('admin.dashboard') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('admin.bookings.bookings') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ $transactionTitle }}</li>
                                 </ol>
                             </nav>
 
@@ -53,7 +55,7 @@
                     <div class="card-header">
 
                         <div class="row">
-                            <form method="GET" action="{{ route('admin.report.invoice.filter') }}">
+                            <form method="GET" action="{{ route('admin.report.transactions.filter') }}">
                                 @include('Admin.pages.filter._form_filter')
                             </form>
                         </div>
