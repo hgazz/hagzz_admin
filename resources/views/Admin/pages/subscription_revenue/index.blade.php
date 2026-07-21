@@ -38,6 +38,20 @@
     .subscription-report .status-pill.suspended,.subscription-report .status-pill.expired,.subscription-report .status-pill.void { background:#f2f4f7;color:#475467; }
     .subscription-report .amount { font-variant-numeric:tabular-nums; white-space:nowrap; font-weight:650; }
     .subscription-report .empty { padding:40px 15px; text-align:center; color:var(--sr-muted); }
+    .subscription-report .payment-modal { color-scheme:light; }
+    .subscription-report .payment-modal .modal-content { background:#fff!important; color:#172033!important; border:1px solid #dfe5ee; border-radius:16px; box-shadow:0 24px 70px rgba(15,23,42,.22); overflow:hidden; }
+    .subscription-report .payment-modal .modal-header { background:#f8fafc!important; border-bottom:1px solid #e5eaf1; padding:18px 20px; }
+    .subscription-report .payment-modal .modal-title { color:#172033!important; font-weight:750; }
+    .subscription-report .payment-modal .btn-close { filter:none!important; opacity:.65; }
+    .subscription-report .payment-modal .modal-body { background:#fff!important; color:#344054!important; padding:20px; }
+    .subscription-report .payment-modal .modal-body label { display:block; color:#344054!important; font-size:13px; font-weight:700; margin-bottom:7px; }
+    .subscription-report .payment-modal .form-control { background:#fff!important; color:#172033!important; border:1px solid #cfd7e3!important; box-shadow:none!important; min-height:44px; }
+    .subscription-report .payment-modal .form-control:focus { background:#fff!important; color:#172033!important; border-color:#2563eb!important; box-shadow:0 0 0 3px rgba(37,99,235,.12)!important; }
+    .subscription-report .payment-modal select.form-control option { background:#fff; color:#172033; }
+    .subscription-report .payment-modal textarea.form-control { min-height:82px; resize:vertical; }
+    .subscription-report .payment-modal .alert-info { background:#eff6ff!important; color:#1e3a5f!important; border:1px solid #bfdbfe!important; border-radius:10px; }
+    .subscription-report .payment-modal .modal-footer { background:#f8fafc!important; border-top:1px solid #e5eaf1; padding:14px 20px; }
+    .subscription-report .payment-modal .modal-footer .btn-light { background:#fff!important; color:#344054!important; border:1px solid #cfd7e3!important; }
     @media(max-width:991px){ .subscription-report .filter-grid{grid-template-columns:1fr 1fr}.subscription-report .hero-actions{justify-content:flex-start;margin-top:16px}.subscription-report .currency-grid{grid-template-columns:repeat(2,1fr)} }
     @media(max-width:575px){ .subscription-report .filter-grid{grid-template-columns:1fr}.subscription-report .currency-grid{grid-template-columns:1fr}.subscription-report .hero .card-body{padding:18px} }
 </style>
@@ -103,7 +117,7 @@
         @empty<tr><td colspan="9" class="empty">{{ trans('admin.subscription_revenue.no_invoices') }}</td></tr>@endforelse</tbody></table></div></div>
 
     @foreach($invoices->where('status','!=','void')->filter(fn($invoice) => $invoice->balance > 0) as $invoice)
-    <div class="modal fade" id="payment-{{ $invoice->id }}" tabindex="-1"><div class="modal-dialog"><form method="POST" action="{{ route('admin.report.subscriptions.payments.store',$invoice) }}" class="modal-content">@csrf<div class="modal-header"><h5 class="modal-title">{{ trans('admin.subscription_revenue.record_payment') }} — {{ $invoice->invoice_number }}</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body">
+    <div class="modal fade payment-modal" id="payment-{{ $invoice->id }}" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><form method="POST" action="{{ route('admin.report.subscriptions.payments.store',$invoice) }}" class="modal-content">@csrf<div class="modal-header"><h5 class="modal-title">{{ trans('admin.subscription_revenue.record_payment') }} — {{ $invoice->invoice_number }}</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body">
         <div class="alert alert-info">{{ trans('admin.subscription_revenue.remaining') }}: <strong>{{ number_format($invoice->balance,2) }} {{ $invoice->currency_code }}</strong></div>
         <div class="mb-3"><label>{{ trans('admin.subscription_revenue.amount') }}</label><input class="form-control" type="number" name="amount" min="0.01" max="{{ $invoice->balance }}" step="0.01" value="{{ $invoice->balance }}" required></div>
         <div class="mb-3"><label>{{ trans('admin.subscription_revenue.payment_date') }}</label><input class="form-control" type="datetime-local" name="paid_at" value="{{ now()->format('Y-m-d\TH:i') }}" required></div>
