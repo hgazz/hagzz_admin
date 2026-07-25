@@ -322,22 +322,30 @@ body.dark .metric-icon {
 }
 
 .chart-slot {
-    min-height: 350px;
+    min-height: 360px;
     padding: 16px 20px 24px;
     position: relative;
 }
 
 .chart-slot-large {
-    min-height: 440px;
+    min-height: 460px;
 }
 
 .apexcharts-canvas {
     margin: 0 auto;
 }
 
+.apexcharts-yaxis-title,
+.apexcharts-xaxis-title,
 .apexcharts-yaxis-title text,
 .apexcharts-xaxis-title text {
     display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+.apexcharts-xaxis-texts-g {
+    transform: translateY(14px) !important;
 }
 
 .apexcharts-xaxis-label tspan {

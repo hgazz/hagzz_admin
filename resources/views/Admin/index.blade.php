@@ -343,7 +343,7 @@
             const noData = { text: @json($copy['noData']), align: 'center', verticalAlign: 'middle', style: { color: textColor } };
 
             new ApexCharts(document.querySelector('#performanceChart'), {
-                chart: { ...commonChart, type: 'line', height: 440, stacked: false },
+                chart: { ...commonChart, type: 'line', height: 460, stacked: false },
                 series: [
                     { name: labels.bookings, type: 'column', data: dashboardData.bookings },
                     { name: labels.revenue, type: 'area', data: dashboardData.revenue }
@@ -356,16 +356,16 @@
                 grid: {
                     borderColor: gridColor,
                     strokeDashArray: 4,
-                    padding: { top: 30, right: 45, bottom: 45, left: 45 }
+                    padding: { top: 30, right: 50, bottom: 65, left: 50 }
                 },
                 xaxis: {
                     categories: dashboardData.labels,
                     axisBorder: { show: false },
                     axisTicks: { show: false },
                     labels: {
-                        rotate: -40,
+                        rotate: -45,
                         rotateAlways: true,
-                        offsetY: 8,
+                        minHeight: 70,
                         style: { colors: textColor, fontSize: '11px', fontWeight: 600 }
                     }
                 },
@@ -401,7 +401,7 @@
             }).render();
 
             new ApexCharts(document.querySelector('#userGrowthChart'), {
-                chart: { ...commonChart, type: 'area', height: 360 },
+                chart: { ...commonChart, type: 'area', height: 380 },
                 series: [{ name: labels.users, data: dashboardData.users }],
                 colors: ['#7c3aed'],
                 stroke: { curve: 'smooth', width: 3 },
@@ -410,16 +410,16 @@
                 grid: {
                     borderColor: gridColor,
                     strokeDashArray: 4,
-                    padding: { top: 25, right: 40, bottom: 45, left: 40 }
+                    padding: { top: 25, right: 40, bottom: 65, left: 40 }
                 },
                 xaxis: {
                     categories: dashboardData.labels,
                     axisBorder: { show: false },
                     axisTicks: { show: false },
                     labels: {
-                        rotate: -40,
+                        rotate: -45,
                         rotateAlways: true,
-                        offsetY: 8,
+                        minHeight: 70,
                         style: { colors: textColor, fontSize: '11px', fontWeight: 600 }
                     }
                 },
@@ -466,7 +466,7 @@
             }).render();
 
             new ApexCharts(document.querySelector('#sportsChart'), {
-                chart: { ...commonChart, type: 'bar', height: 360 },
+                chart: { ...commonChart, type: 'bar', height: 380 },
                 series: [{ name: labels.bookings, data: dashboardData.sportBookings }],
                 colors: ['#f97316'],
                 plotOptions: {
