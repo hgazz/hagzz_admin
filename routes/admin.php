@@ -20,6 +20,7 @@ use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\SaasPlanController;
+use App\Http\Controllers\AdminCampController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -112,6 +113,12 @@ Route::group(
                     Route::get('/banners/edit/{banner}', 'edit')->name('banners.edit');
                     Route::put('/banners/update/{banner}', 'update')->name('banners.update');
                     Route::delete('/banners/delete', 'destroy')->name('banners.delete');
+                });
+
+                // Training Camps Monitoring routes
+                Route::controller(AdminCampController::class)->group(function () {
+                    Route::get('camps', 'index')->name('camps.index');
+                    Route::get('camps/{id}', 'show')->name('camps.show');
                 });
 
                 Route::controller(SportController::class)->group(function () {

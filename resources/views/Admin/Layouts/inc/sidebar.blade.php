@@ -88,6 +88,7 @@
                     <li class="menu {{ Request::routeIs('admin.gallery.*') ? 'active' : '' }}"><a href="{{ route('admin.gallery.index') }}" class="dropdown-toggle"><div class="admin-menu-label"><x-feather-icon name="image" class="admin-menu-icon" /><span>{{ trans('admin.gallery.gallery') }}</span></div></a></li>
                 </ul>
             </li>
+            <li class="menu {{ Request::routeIs('admin.camps.*') ? 'active' : '' }}"><a href="{{ route('admin.camps.index') }}" class="dropdown-toggle"><div class="admin-menu-label"><x-feather-icon name="send" class="admin-menu-icon" /><span>{{ $isArabic ? 'المعسكرات التدريبية' : 'Training Camps' }}</span></div></a></li>
             <li class="menu {{ Request::routeIs('admin.sport.*') ? 'active' : '' }}"><a href="{{ route('admin.sport.index') }}" class="dropdown-toggle"><div class="admin-menu-label"><x-feather-icon name="award" class="admin-menu-icon" /><span>{{ trans('admin.sport.sport') }}</span></div></a></li>
 
             <li class="navigation-section"><span>{{ $isArabic ? 'الاشتراكات والتقارير' : 'Billing & reports' }}</span></li>
