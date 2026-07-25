@@ -356,21 +356,21 @@
                 grid: {
                     borderColor: gridColor,
                     strokeDashArray: 4,
-                    padding: { top: 30, right: 35, bottom: 35, left: 35 }
+                    padding: { top: 30, right: 45, bottom: 45, left: 45 }
                 },
                 xaxis: {
                     categories: dashboardData.labels,
                     axisBorder: { show: false },
                     axisTicks: { show: false },
                     labels: {
-                        rotate: -45,
+                        rotate: -40,
                         rotateAlways: true,
+                        offsetY: 8,
                         style: { colors: textColor, fontSize: '11px', fontWeight: 600 }
                     }
                 },
                 yaxis: [
                     {
-                        title: { text: labels.bookings, style: { color: '#2563eb', fontSize: '12px', fontWeight: 700 } },
                         min: 0,
                         forceNiceScale: true,
                         labels: {
@@ -380,7 +380,6 @@
                     },
                     {
                         opposite: true,
-                        title: { text: labels.revenue + ' (' + labels.currency + ')', style: { color: '#14b8a6', fontSize: '12px', fontWeight: 700 } },
                         min: 0,
                         labels: {
                             style: { colors: textColor, fontSize: '12px' },
@@ -411,15 +410,16 @@
                 grid: {
                     borderColor: gridColor,
                     strokeDashArray: 4,
-                    padding: { top: 25, right: 30, bottom: 35, left: 30 }
+                    padding: { top: 25, right: 40, bottom: 45, left: 40 }
                 },
                 xaxis: {
                     categories: dashboardData.labels,
                     axisBorder: { show: false },
                     axisTicks: { show: false },
                     labels: {
-                        rotate: -45,
+                        rotate: -40,
                         rotateAlways: true,
+                        offsetY: 8,
                         style: { colors: textColor, fontSize: '11px', fontWeight: 600 }
                     }
                 },
@@ -489,7 +489,7 @@
                 grid: {
                     borderColor: gridColor,
                     strokeDashArray: 4,
-                    padding: { top: 20, right: 35, bottom: 15, left: 25 }
+                    padding: { top: 20, right: 40, bottom: 20, left: 110 }
                 },
                 xaxis: {
                     categories: dashboardData.sportLabels,
@@ -500,9 +500,8 @@
                 yaxis: {
                     labels: {
                         show: true,
-                        minWidth: 120,
-                        maxWidth: 200,
-                        style: { colors: textColor, fontSize: '12px', fontWeight: 700 }
+                        align: 'left',
+                        style: { colors: textColor, fontSize: '13px', fontWeight: 700 }
                     }
                 },
                 noData

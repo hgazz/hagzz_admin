@@ -322,21 +322,37 @@ body.dark .metric-icon {
 }
 
 .chart-slot {
-    min-height: 340px;
-    padding: 12px 18px 18px;
+    min-height: 350px;
+    padding: 16px 20px 24px;
     position: relative;
 }
 
 .chart-slot-large {
-    min-height: 420px;
+    min-height: 440px;
+}
+
+.apexcharts-canvas {
+    margin: 0 auto;
+}
+
+.apexcharts-yaxis-title text,
+.apexcharts-xaxis-title text {
+    display: none !important;
+}
+
+.apexcharts-xaxis-label tspan {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+}
+
+.apexcharts-yaxis-label tspan {
+    font-size: 12px !important;
+    font-weight: 600 !important;
 }
 
 .apexcharts-legend {
-    gap: 16px !important;
-}
-
-.apexcharts-text tspan {
-    font-family: inherit !important;
+    gap: 20px !important;
+    padding: 0 10px 10px !important;
 }
 
 .filter-panel {
