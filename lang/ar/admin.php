@@ -516,7 +516,11 @@ return [
         'statuses' => ['active'=>'نشط','not_started'=>'لم يبدأ التحصيل','ready_to_invoice'=>'جاهز للفوترة','due'=>'مستحق','overdue'=>'متأخر','paying'=>'منتظم في الدفع','suspended'=>'موقوف','cancelled'=>'ملغي','expired'=>'منتهي','issued'=>'صادرة','partial'=>'مدفوعة جزئيًا','paid'=>'مدفوعة','void'=>'ملغاة'],
         'methods' => ['bank_transfer'=>'تحويل بنكي','cash'=>'نقدي','card'=>'بطاقة','online'=>'دفع إلكتروني','other'=>'أخرى'],
     ],
+    'add_booking' => 'إضافة حجز جديد',
+    'services_management' => 'التدريبات والأنشطة',
+    'bokit' => 'منصة Hagzz',
     'bookings' => [
+        'bookings' => 'الحجوزات',
         'paid_amount' => 'المبلغ المدفوع',
         'remaining_amount' => 'المبلغ المتبقي',
         'paid_amount_exceeds_total' => 'المبلغ المدفوع يتجاوز إجمالي سعر الحجز',
