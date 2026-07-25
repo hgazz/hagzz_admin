@@ -23,21 +23,30 @@
         border-radius: 12px;
         background: #fff;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
+        height: 100%;
     }
     .info-card:hover {
         box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        border-color: rgba(37, 99, 235, 0.2);
     }
     .info-label {
-        font-size: 0.8rem;
+        font-size: 0.82rem;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         color: #64748b;
         font-weight: 700;
-        margin-bottom: 4px;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .info-label i {
+        color: #2563eb;
+        font-size: 1rem;
     }
     .info-value {
-        font-size: 0.98rem;
-        color: #1e293b;
+        font-size: 1rem;
+        color: #0f172a;
         font-weight: 600;
         word-break: break-word;
     }
@@ -54,6 +63,44 @@
         border-bottom-color: #2563eb;
         background: transparent;
     }
+
+    /* PRINT STYLES */
+    @media print {
+        body {
+            background: #fff !important;
+            color: #000 !important;
+            font-size: 12pt;
+        }
+        .secondary-nav, .sidebar-wrapper, header, .nav-tabs, .btn, .no-print {
+            display: none !important;
+        }
+        .main-content, .middle-content, .container-xxl {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .partner-profile-header {
+            background: #f8fafc !important;
+            color: #000 !important;
+            border: 2px solid #cbd5e1 !important;
+            box-shadow: none !important;
+        }
+        .partner-profile-header h3, .partner-profile-header span, .partner-profile-header div {
+            color: #000 !important;
+        }
+        .tab-pane {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+        .info-card {
+            border: 1px solid #cbd5e1 !important;
+            box-shadow: none !important;
+        }
+    }
 </style>
 @endpush
 
@@ -61,7 +108,7 @@
 <div class="middle-content container-xxl p-0">
 
     <!-- BREADCRUMBS -->
-    <div class="secondary-nav mb-4">
+    <div class="secondary-nav mb-4 no-print">
         <div class="breadcrumbs-container">
             <header class="header navbar navbar-expand-sm">
                 <a href="javascript:void(0);" class="btn-toggle sidebarCollapse">
@@ -86,9 +133,9 @@
             <div class="d-flex align-items-center gap-3">
                 <img src="{{ $academies->image }}" class="partner-logo-img" alt="{{ $academies->commercial_name }}" onerror="this.src='{{ asset('assetsAdmin/logo/Icon-Primary.svg') }}'">
                 <div>
-                    <h3 class="fw-bold mb-1 text-white">{{ $academies->commercial_name }}</h3>
+                    <h3 class="fw-bold mb-1 text-white"><i class="fa-solid fa-building-circle-check text-primary me-2"></i> {{ $academies->commercial_name }}</h3>
                     <div class="d-flex flex-wrap align-items-center gap-2 text-white-50 small">
-                        <span><i class="fa-solid fa-store me-1"></i> {{ $academies->app_name ?: 'اسم التطبيق غير محدد' }}</span>
+                        <span><i class="fa-solid fa-mobile-screen-button me-1"></i> {{ $academies->app_name ?: 'اسم التطبيق غير محدد' }}</span>
                         <span>•</span>
                         <span><i class="fa-solid fa-user-tie me-1"></i> المالك: {{ $academies->owner_name ?: $academies->first_name . ' ' . $academies->last_name }}</span>
                         <span>•</span>
@@ -100,17 +147,22 @@
                             {{ $academies->status === 'active' ? 'حساب نشط' : 'حساب غير نشط' }}
                         </span>
                         <span class="badge bg-primary px-3 py-1">
-                            <i class="fa-solid fa-building me-1"></i> {{ ucfirst($academies->business_type ?: 'academy') }}
+                            <i class="fa-solid fa-store me-1"></i> {{ ucfirst($academies->business_type ?: 'academy') }}
                         </span>
                         @if($academies->country)
                             <span class="badge bg-secondary px-3 py-1">
-                                <i class="fa-solid fa-globe me-1"></i> {{ $academies->country->name }}
+                                <i class="fa-solid fa-earth-americas me-1"></i> {{ $academies->country->name }}
                             </span>
                         @endif
                     </div>
                 </div>
             </div>
-            <div class="d-flex align-items-center gap-2">
+
+            <!-- ACTION BUTTONS -->
+            <div class="d-flex align-items-center gap-2 no-print">
+                <button onclick="window.print()" class="btn btn-light btn-sm fw-bold">
+                    <i class="fa-solid fa-print me-1 text-primary"></i> طباعة الملف
+                </button>
                 <a href="{{ route('admin.academies.edit', $academies->id) }}" class="btn btn-warning btn-sm fw-bold">
                     <i class="fa-solid fa-pen-to-square me-1"></i> تعديل الشريك
                 </a>
@@ -119,7 +171,7 @@
                     @method('PUT')
                     <button class="btn btn-sm fw-bold {{ $academies->status === 'active' ? 'btn-danger' : 'btn-success' }}">
                         <i class="fa-solid {{ $academies->status === 'active' ? 'fa-ban' : 'fa-check' }} me-1"></i>
-                        {{ $academies->status === 'active' ? 'تجميد الشريك' : 'تفعيل الشريك' }}
+                        {{ $academies->status === 'active' ? 'تجميد الحساب' : 'تفعيل الحساب' }}
                     </button>
                 </form>
             </div>
@@ -127,24 +179,24 @@
     </div>
 
     <!-- TABS NAVIGATION -->
-    <ul class="nav nav-tabs nav-tabs-custom mb-4 bg-white rounded-3 shadow-sm px-3" id="partnerTabs" role="tablist">
+    <ul class="nav nav-tabs nav-tabs-custom mb-4 bg-white rounded-3 shadow-sm px-3 no-print" id="partnerTabs" role="tablist">
         <li class="nav-item">
-            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab"><i class="fa-solid fa-circle-info me-1"></i> البيانات الأساسية والتجارية</button>
+            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab"><i class="fa-solid fa-id-card me-1 text-primary"></i> البيانات الأساسية والتجارية</button>
         </li>
         <li class="nav-item">
-            <button class="nav-link" id="legal-tab" data-bs-toggle="tab" data-bs-target="#legal" type="button" role="tab"><i class="fa-solid fa-file-contract me-1"></i> التفاصيل القانونية والبنكية</button>
+            <button class="nav-link" id="legal-tab" data-bs-toggle="tab" data-bs-target="#legal" type="button" role="tab"><i class="fa-solid fa-scale-balanced me-1 text-success"></i> التفاصيل القانونية والبنكية</button>
         </li>
         <li class="nav-item">
-            <button class="nav-link" id="saas-tab" data-bs-toggle="tab" data-bs-target="#saas" type="button" role="tab"><i class="fa-solid fa-receipt me-1"></i> اشتراك SaaS والتراخيص</button>
+            <button class="nav-link" id="saas-tab" data-bs-toggle="tab" data-bs-target="#saas" type="button" role="tab"><i class="fa-solid fa-file-invoice-dollar me-1 text-warning"></i> اشتراك SaaS والتراخيص</button>
         </li>
         <li class="nav-item">
-            <button class="nav-link" id="team-tab" data-bs-toggle="tab" data-bs-target="#team" type="button" role="tab"><i class="fa-solid fa-users-gear me-1"></i> طاقم العمل والـ Roles ({{ $academies->users->count() }})</button>
+            <button class="nav-link" id="team-tab" data-bs-toggle="tab" data-bs-target="#team" type="button" role="tab"><i class="fa-solid fa-users-gear me-1 text-info"></i> طاقم العمل والـ Roles ({{ $academies->users->count() }})</button>
         </li>
         <li class="nav-item">
-            <button class="nav-link" id="branches-tab" data-bs-toggle="tab" data-bs-target="#branches" type="button" role="tab"><i class="fa-solid fa-code-branch me-1"></i> الفروع التابعة ({{ $academies->branches->count() }})</button>
+            <button class="nav-link" id="branches-tab" data-bs-toggle="tab" data-bs-target="#branches" type="button" role="tab"><i class="fa-solid fa-code-branch me-1 text-purple"></i> الفروع التابعة ({{ $academies->branches->count() }})</button>
         </li>
         <li class="nav-item">
-            <button class="nav-link" id="logs-tab" data-bs-toggle="tab" data-bs-target="#logs" type="button" role="tab"><i class="fa-solid fa-list-check me-1"></i> سجل الأنشطة والـ Audit Logs</button>
+            <button class="nav-link" id="logs-tab" data-bs-toggle="tab" data-bs-target="#logs" type="button" role="tab"><i class="fa-solid fa-clock-rotate-left me-1 text-secondary"></i> سجل الأنشطة والـ Audit Logs</button>
         </li>
     </ul>
 
@@ -159,80 +211,80 @@
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">الاسم التجاري (Commercial Name)</div>
+                                <div class="info-label"><i class="fa-solid fa-signature"></i> الاسم التجاري (Commercial Name)</div>
                                 <div class="info-value">{{ $academies->getTranslation('commercial_name', 'ar') }} | {{ $academies->getTranslation('commercial_name', 'en') }}</div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">اسم التطبيق (App Name)</div>
+                                <div class="info-label"><i class="fa-solid fa-mobile-screen-button"></i> اسم التطبيق (App Name)</div>
                                 <div class="info-value">{{ $academies->getTranslation('app_name', 'ar') ?? $academies->app_name }}</div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">البريد الإلكتروني</div>
+                                <div class="info-label"><i class="fa-solid fa-envelope"></i> البريد الإلكتروني الرئيسي</div>
                                 <div class="info-value"><a href="mailto:{{ $academies->email }}">{{ $academies->email }}</a></div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">رقم الهاتف / الجوال</div>
+                                <div class="info-label"><i class="fa-solid fa-phone-volume"></i> رقم الهاتف / الجوال</div>
                                 <div class="info-value"><a href="tel:{{ $academies->phone }}">{{ $academies->phone }}</a></div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">مدير الحساب في المنصة (Account Manager)</div>
+                                <div class="info-label"><i class="fa-solid fa-user-tie"></i> مدير الحساب في المنصة</div>
                                 <div class="info-value">{{ $academies->account_manager ?: '-' }}</div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">العنوان والموقع</div>
+                                <div class="info-label"><i class="fa-solid fa-location-dot"></i> العنوان والموقع</div>
                                 <div class="info-value">{{ $academies->address ?: 'المملكة العربية السعودية' }}</div>
                             </div>
                         </div>
                     </div>
 
-                    <h5 class="fw-bold text-dark mt-4 mb-3 border-bottom pb-2"><i class="fa-solid fa-share-nodes text-primary me-2"></i> روئية التواصل الاجتماعي والموقع</h5>
+                    <h5 class="fw-bold text-dark mt-4 mb-3 border-bottom pb-2"><i class="fa-solid fa-share-nodes text-primary me-2"></i> وسائل التواصل والموقع الإلكتروني</h5>
                     <div class="row g-3">
                         <div class="col-md-3">
                             <div class="info-card p-3 text-center">
-                                <div class="info-label">الموقع الإلكتروني</div>
-                                <div class="info-value">
+                                <div class="info-label justify-content-center"><i class="fa-solid fa-globe"></i> الموقع الإلكتروني</div>
+                                <div class="info-value mt-2">
                                     @if($academies->website)
-                                        <a href="{{ $academies->website }}" target="_blank" class="btn btn-sm btn-outline-primary mt-1"><i class="fa-solid fa-globe me-1"></i> زيارة الموقع</a>
+                                        <a href="{{ $academies->website }}" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-arrow-up-right-from-square me-1"></i> زيارة الموقع</a>
                                     @else - @endif
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="info-card p-3 text-center">
-                                <div class="info-label">فيسبوك (Facebook)</div>
-                                <div class="info-value">
+                                <div class="info-label justify-content-center"><i class="fa-brands fa-facebook"></i> فيسبوك</div>
+                                <div class="info-value mt-2">
                                     @if($academies->facebook)
-                                        <a href="{{ $academies->facebook }}" target="_blank" class="btn btn-sm btn-outline-primary mt-1"><i class="fa-brands fa-facebook me-1"></i> الصفحة</a>
+                                        <a href="{{ $academies->facebook }}" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fa-brands fa-facebook me-1"></i> الصفحة</a>
                                     @else - @endif
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="info-card p-3 text-center">
-                                <div class="info-label">انستغرام (Instagram)</div>
-                                <div class="info-value">
+                                <div class="info-label justify-content-center"><i class="fa-brands fa-instagram"></i> انستغرام</div>
+                                <div class="info-value mt-2">
                                     @if($academies->instagram)
-                                        <a href="{{ $academies->instagram }}" target="_blank" class="btn btn-sm btn-outline-danger mt-1"><i class="fa-brands fa-instagram me-1"></i> الحساب</a>
+                                        <a href="{{ $academies->instagram }}" target="_blank" class="btn btn-sm btn-outline-danger"><i class="fa-brands fa-instagram me-1"></i> الحساب</a>
                                     @else - @endif
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="info-card p-3 text-center">
-                                <div class="info-label">لينكد إن (LinkedIn)</div>
-                                <div class="info-value">
+                                <div class="info-label justify-content-center"><i class="fa-brands fa-linkedin"></i> لينكد إن</div>
+                                <div class="info-value mt-2">
                                     @if($academies->linkedin)
-                                        <a href="{{ $academies->linkedin }}" target="_blank" class="btn btn-sm btn-outline-info mt-1"><i class="fa-brands fa-linkedin me-1"></i> الملف</a>
+                                        <a href="{{ $academies->linkedin }}" target="_blank" class="btn btn-sm btn-outline-info"><i class="fa-brands fa-linkedin me-1"></i> الملف</a>
                                     @else - @endif
                                 </div>
                             </div>
@@ -246,41 +298,41 @@
         <div class="tab-pane fade" id="legal" role="tabpanel">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body p-4">
-                    <h5 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-solid fa-scale-balanced text-primary me-2"></i> التفاصيل القانونية والضريبية</h5>
+                    <h5 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-solid fa-file-certificate text-success me-2"></i> التفاصيل القانونية والضريبية</h5>
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">رقم السجل التجاري / الترخيص</div>
+                                <div class="info-label"><i class="fa-solid fa-hashtag"></i> رقم السجل التجاري / الترخيص</div>
                                 <div class="info-value">{{ $academies->trade_license_number ?: '-' }}</div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">تاريخ انتهاء الترخيص</div>
+                                <div class="info-label"><i class="fa-solid fa-calendar-xmark"></i> تاريخ انتهاء الترخيص</div>
                                 <div class="info-value">{{ $academies->trade_license_expire_date ?: '-' }}</div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">الرقم الضريبي (Tax Number)</div>
+                                <div class="info-label"><i class="fa-solid fa-percent"></i> الرقم الضريبي (Tax Number)</div>
                                 <div class="info-value">{{ $academies->tax_number ?: '-' }}</div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">نسبة العمولة (Commission %)</div>
+                                <div class="info-label"><i class="fa-solid fa-chart-line-up"></i> نسبة العمولة (Commission %)</div>
                                 <div class="info-value">{{ $academies->commission_percentage ?: 0 }}%</div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">عدد أيام التسوية (Settlement Days)</div>
+                                <div class="info-label"><i class="fa-solid fa-business-time"></i> عدد أيام التسوية (Settlement Days)</div>
                                 <div class="info-value">{{ $academies->settlement_days_count ?: 0 }} يوم</div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">مهلة عدم الاسترداد (Non-refund Days)</div>
+                                <div class="info-label"><i class="fa-solid fa-hand-holding-dollar"></i> مهلة عدم الاسترداد (Non-refund Days)</div>
                                 <div class="info-value">{{ $academies->non_refund_days_count ?: 0 }} يوم</div>
                             </div>
                         </div>
@@ -290,50 +342,50 @@
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">اسم البنك</div>
+                                <div class="info-label"><i class="fa-solid fa-building-bank"></i> اسم البنك</div>
                                 <div class="info-value">{{ $academies->bank_name ?: '-' }}</div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">اسم المستفيد (Beneficiary)</div>
+                                <div class="info-label"><i class="fa-solid fa-user-check"></i> اسم المستفيد (Beneficiary)</div>
                                 <div class="info-value">{{ $academies->beneficiary_name ?: '-' }}</div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label">رقم الحساب / الأيبان (IBAN)</div>
+                                <div class="info-label"><i class="fa-solid fa-credit-card"></i> رقم الحساب / الأيبان (IBAN)</div>
                                 <div class="info-value"><code>{{ $academies->bank_account_number ?: '-' }}</code></div>
                             </div>
                         </div>
                     </div>
 
-                    <h5 class="fw-bold text-dark mt-4 mb-3 border-bottom pb-2"><i class="fa-solid fa-file-contract text-primary me-2"></i> بيانات العقد</h5>
+                    <h5 class="fw-bold text-dark mt-4 mb-3 border-bottom pb-2"><i class="fa-solid fa-file-signature text-warning me-2"></i> بيانات وثائق العقد</h5>
                     <div class="row g-3">
                         <div class="col-md-3">
                             <div class="info-card p-3">
-                                <div class="info-label">رقم العقد</div>
+                                <div class="info-label"><i class="fa-solid fa-file-contract"></i> رقم العقد</div>
                                 <div class="info-value">{{ $academies->contract_number ?: '-' }}</div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="info-card p-3">
-                                <div class="info-label">تاريخ توقيع العقد</div>
+                                <div class="info-label"><i class="fa-solid fa-calendar-check"></i> تاريخ توقيع العقد</div>
                                 <div class="info-value">{{ $academies->contract_date ?: '-' }}</div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="info-card p-3">
-                                <div class="info-label">تاريخ بداية العمل بالعقد</div>
+                                <div class="info-label"><i class="fa-solid fa-calendar-days"></i> تاريخ بداية سريان العقد</div>
                                 <div class="info-value">{{ $academies->start_date ?: '-' }}</div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="info-card p-3">
-                                <div class="info-label">رابط العقد الموثق</div>
+                                <div class="info-label"><i class="fa-solid fa-cloud-arrow-down"></i> وثيقة العقد الموثقة</div>
                                 <div class="info-value">
                                     @if($academies->contract_link)
-                                        <a href="{{ $academies->contract_link }}" target="_blank" class="btn btn-sm btn-primary"><i class="fa-solid fa-download me-1"></i> تحميل العقد</a>
+                                        <a href="{{ $academies->contract_link }}" target="_blank" class="btn btn-sm btn-primary mt-1"><i class="fa-solid fa-file-pdf me-1"></i> تحميل العقد</a>
                                     @else - @endif
                                 </div>
                             </div>
@@ -347,50 +399,50 @@
         <div class="tab-pane fade" id="saas" role="tabpanel">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body p-4">
-                    <h5 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-solid fa-receipt text-primary me-2"></i> تفاصيل اشتراك باقة SaaS</h5>
+                    <h5 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-solid fa-receipt text-warning me-2"></i> تفاصيل اشتراك باقة SaaS والتراخيص</h5>
                     @if($academies->currentSubscription)
                         @php $sub = $academies->currentSubscription; @endphp
                         <div class="row g-3">
                             <div class="col-md-4">
                                 <div class="info-card p-3">
-                                    <div class="info-label">اسم الباقة المسجلة</div>
+                                    <div class="info-label"><i class="fa-solid fa-box-open"></i> اسم الباقة المسجلة</div>
                                     <div class="info-value text-primary fw-bold">{{ $sub->plan?->name ?: 'باقة مخصصة' }}</div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="info-card p-3">
-                                    <div class="info-label">دورة الفوترة (Cycle)</div>
-                                    <div class="info-value"><span class="badge bg-info text-dark">{{ ucfirst($sub->billing_cycle) }}</span></div>
+                                    <div class="info-label"><i class="fa-solid fa-arrows-rotate"></i> دورة الفوترة (Cycle)</div>
+                                    <div class="info-value"><span class="badge bg-info text-dark fs-6">{{ ucfirst($sub->billing_cycle) }}</span></div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="info-card p-3">
-                                    <div class="info-label">حالة الاشتراك الحالية</div>
-                                    <div class="info-value"><span class="badge {{ $sub->status === 'active' ? 'bg-success' : 'bg-danger' }}">{{ ucfirst($sub->status) }}</span></div>
+                                    <div class="info-label"><i class="fa-solid fa-signal"></i> حالة الاشتراك الحالية</div>
+                                    <div class="info-value"><span class="badge {{ $sub->status === 'active' ? 'bg-success' : 'bg-danger' }} fs-6">{{ ucfirst($sub->status) }}</span></div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="info-card p-3">
-                                    <div class="info-label">قيمة الاشتراك المعتمدة</div>
+                                    <div class="info-label"><i class="fa-solid fa-money-bill-wave"></i> قيمة الاشتراك المعتمدة</div>
                                     <div class="info-value fs-5 fw-bold text-success">{{ number_format($sub->price_amount, 2) }} {{ $sub->currency_code }}</div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="info-card p-3">
-                                    <div class="info-label">تاريخ بدء الاشتراك</div>
+                                    <div class="info-label"><i class="fa-solid fa-calendar-plus"></i> تاريخ بدء الاشتراك</div>
                                     <div class="info-value">{{ $sub->starts_at }}</div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="info-card p-3">
-                                    <div class="info-label">تاريخ انتهاء الاشتراك</div>
+                                    <div class="info-label"><i class="fa-solid fa-calendar-minus"></i> تاريخ انتهاء الاشتراك</div>
                                     <div class="info-value text-danger fw-bold">{{ $sub->ends_at ?: 'غير محدد' }}</div>
                                 </div>
                             </div>
                         </div>
                     @else
                         <div class="alert alert-warning text-center py-4">
-                            <i class="fa-solid fa-circle-exclamation fa-2x mb-2 d-block"></i>
+                            <i class="fa-solid fa-triangle-exclamation fa-2x mb-2 d-block text-warning"></i>
                             لا يوجد اشتراك SaaS نشط مسجل لهذه المنشأة حالياً.
                         </div>
                     @endif
@@ -402,7 +454,7 @@
         <div class="tab-pane fade" id="team" role="tabpanel">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                    <h5 class="card-title m-0 fw-bold"><i class="fa-solid fa-users-gear text-primary me-2"></i> مستخدمو الشريك وحسابات طاقم العمل</h5>
+                    <h5 class="card-title m-0 fw-bold"><i class="fa-solid fa-users-gear text-info me-2"></i> مستخدمو الشريك وحسابات طاقم العمل</h5>
                     <span class="badge bg-primary fs-6">{{ $academies->users->count() }} مستخدم</span>
                 </div>
                 <div class="card-body p-0">
@@ -424,27 +476,27 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td class="fw-bold">
-                                            {{ $user->name }}
+                                            <i class="fa-solid fa-user-circle text-secondary me-1"></i> {{ $user->name }}
                                             @if($user->is_owner)
                                                 <span class="badge bg-warning text-dark ms-1"><i class="fa-solid fa-crown me-1"></i> المالك الرئيسي</span>
                                             @endif
                                         </td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->phone ?? '-' }}</td>
+                                        <td><i class="fa-solid fa-envelope text-muted me-1"></i> {{ $user->email }}</td>
+                                        <td><i class="fa-solid fa-phone text-muted me-1"></i> {{ $user->phone ?? '-' }}</td>
                                         <td>
                                             @foreach($user->roles as $role)
-                                                <span class="badge bg-info text-dark me-1">{{ app()->getLocale() == 'ar' ? $role->display_name_ar : $role->display_name_en }}</span>
+                                                <span class="badge bg-info text-dark me-1"><i class="fa-solid fa-user-shield me-1"></i> {{ app()->getLocale() == 'ar' ? $role->display_name_ar : $role->display_name_en }}</span>
                                             @endforeach
                                             @if($user->is_owner && $user->roles->isEmpty())
-                                                <span class="badge bg-warning text-dark">مالك الشريك</span>
+                                                <span class="badge bg-warning text-dark"><i class="fa-solid fa-crown me-1"></i> مالك الشريك</span>
                                             @endif
                                         </td>
                                         <td>
                                             @if($user->is_owner || $user->access_all_branches)
-                                                <span class="badge bg-success">كافة الفروع</span>
+                                                <span class="badge bg-success"><i class="fa-solid fa-globe me-1"></i> كافة الفروع</span>
                                             @else
                                                 <span class="badge bg-secondary" title="{{ $user->assignedBranches->pluck('commercial_name')->join(', ') }}">
-                                                    {{ $user->assignedBranches->count() }} فرع مخصص
+                                                    <i class="fa-solid fa-code-branch me-1"></i> {{ $user->assignedBranches->count() }} فرع مخصص
                                                 </span>
                                             @endif
                                         </td>
@@ -473,7 +525,7 @@
         <div class="tab-pane fade" id="branches" role="tabpanel">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                    <h5 class="card-title m-0 fw-bold"><i class="fa-solid fa-code-branch text-primary me-2"></i> الفروع المباشرة التابعة لـ {{ $academies->commercial_name }}</h5>
+                    <h5 class="card-title m-0 fw-bold"><i class="fa-solid fa-code-branch text-purple me-2"></i> الفروع المباشرة التابعة لـ {{ $academies->commercial_name }}</h5>
                     <span class="badge bg-primary fs-6">{{ $academies->branches->count() }} فرع</span>
                 </div>
                 <div class="card-body p-0">
@@ -494,11 +546,11 @@
                                 @forelse($academies->branches as $branch)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td class="fw-bold">{{ $branch->commercial_name }}</td>
+                                        <td class="fw-bold"><i class="fa-solid fa-store text-primary me-1"></i> {{ $branch->commercial_name }}</td>
                                         <td>{{ $branch->app_name }}</td>
-                                        <td>{{ $branch->email }}</td>
-                                        <td>{{ $branch->phone }}</td>
-                                        <td>{{ $branch->created_at?->format('Y-m-d') }}</td>
+                                        <td><i class="fa-solid fa-envelope text-muted me-1"></i> {{ $branch->email }}</td>
+                                        <td><i class="fa-solid fa-phone text-muted me-1"></i> {{ $branch->phone }}</td>
+                                        <td><i class="fa-solid fa-calendar me-1"></i> {{ $branch->created_at?->format('Y-m-d') }}</td>
                                         <td>
                                             <a href="{{ route('admin.academies.show', $branch->id) }}" class="btn btn-sm btn-outline-primary">
                                                 <i class="fa-solid fa-eye me-1"></i> عرض التفاصيل
@@ -524,7 +576,7 @@
         <div class="tab-pane fade" id="logs" role="tabpanel">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                    <h5 class="card-title m-0 fw-bold"><i class="fa-solid fa-list-check text-primary me-2"></i> سجل أحداث وأنشطة الشريك (Audit Trail Log)</h5>
+                    <h5 class="card-title m-0 fw-bold"><i class="fa-solid fa-clock-rotate-left text-secondary me-2"></i> سجل أحداث وأنشطة الشريك (Audit Trail Log)</h5>
                     <span class="badge bg-secondary fs-6">{{ $academies->activityLogs->count() }} سجل</span>
                 </div>
                 <div class="card-body p-0">
@@ -544,11 +596,11 @@
                                 @forelse($academies->activityLogs->take(50) as $log)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td class="fw-bold">{{ $log->user_name ?? 'الشريك' }}</td>
-                                        <td><span class="badge bg-primary px-2 py-1">{{ $log->action }}</span></td>
+                                        <td class="fw-bold"><i class="fa-solid fa-user-gear text-secondary me-1"></i> {{ $log->user_name ?? 'الشريك' }}</td>
+                                        <td><span class="badge bg-primary px-2 py-1"><i class="fa-solid fa-bolt me-1"></i> {{ $log->action }}</span></td>
                                         <td>{{ $log->description }}</td>
-                                        <td><code>{{ $log->ip_address ?: '-' }}</code></td>
-                                        <td>{{ $log->created_at?->format('Y-m-d H:i:s') }}</td>
+                                        <td><code><i class="fa-solid fa-network-wired me-1"></i> {{ $log->ip_address ?: '-' }}</code></td>
+                                        <td><i class="fa-solid fa-clock text-muted me-1"></i> {{ $log->created_at?->format('Y-m-d H:i:s') }}</td>
                                     </tr>
                                 @empty
                                     <tr>
