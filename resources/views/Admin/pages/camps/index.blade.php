@@ -150,7 +150,7 @@
                                     <span class="badge {{ $camp->type === 'international' ? 'bg-purple text-white' : 'bg-info text-white' }} px-2 py-1">
                                         {{ $camp->type === 'international' ? ($isArabic ? '✈️ دولي' : 'International') : ($isArabic ? '🇪🇬 محلي' : 'Domestic') }}
                                     </span>
-                                    <small class="d-block text-muted mt-1">{{ $camp->country?->name_ar ?: ($camp->city_name ?: '-') }}</small>
+                                    <small class="d-block text-muted mt-1">{{ $camp->country?->name ?: ($camp->city_name ?: '-') }}</small>
                                 </td>
                                 <td>
                                     <small class="d-block text-dark fw-bold">{{ $camp->starts_on?->format('d M') }} - {{ $camp->ends_on?->format('d M Y') }}</small>
