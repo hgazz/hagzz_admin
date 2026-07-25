@@ -3,20 +3,21 @@
 @section('title', trans('admin.academies.show') . " | " . $academies->commercial_name)
 
 @push('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
     .partner-profile-header {
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         color: #fff;
         border-radius: 16px;
-        padding: 24px;
+        padding: 28px;
     }
     .partner-logo-img {
-        width: 100px;
-        height: 100px;
+        width: 110px;
+        height: 110px;
         object-fit: cover;
         border-radius: 16px;
         border: 4px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
     .info-card {
         border: 1px solid rgba(0, 0, 0, 0.08);
@@ -63,6 +64,32 @@
         border-bottom-color: #2563eb;
         background: transparent;
     }
+
+    /* SOCIAL MEDIA BADGES */
+    .social-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 50px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        text-decoration: none;
+        color: #fff !important;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .social-badge:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        opacity: 0.95;
+    }
+    .social-facebook { background: #1877f2; }
+    .social-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+    .social-linkedin { background: #0a66c2; }
+    .social-twitter { background: #000000; }
+    .social-whatsapp { background: #25d366; }
+    .social-website { background: #2563eb; }
 
     /* PRINT STYLES */
     @media print {
@@ -141,16 +168,16 @@
                         <span>•</span>
                         <span><i class="fa-solid fa-envelope me-1"></i> {{ $academies->email }}</span>
                     </div>
-                    <div class="mt-2 d-flex flex-wrap gap-2">
-                        <span class="badge {{ $academies->status === 'active' ? 'bg-success' : 'bg-danger' }} px-3 py-1">
+                    <div class="mt-2 d-flex flex-wrap align-items-center gap-2">
+                        <span class="badge {{ $academies->status === 'active' ? 'bg-success' : 'bg-danger' }} px-3 py-1 fs-6">
                             <i class="fa-solid {{ $academies->status === 'active' ? 'fa-circle-check' : 'fa-ban' }} me-1"></i>
                             {{ $academies->status === 'active' ? 'حساب نشط' : 'حساب غير نشط' }}
                         </span>
-                        <span class="badge bg-primary px-3 py-1">
+                        <span class="badge bg-primary px-3 py-1 fs-6">
                             <i class="fa-solid fa-store me-1"></i> {{ ucfirst($academies->business_type ?: 'academy') }}
                         </span>
                         @if($academies->country)
-                            <span class="badge bg-secondary px-3 py-1">
+                            <span class="badge bg-secondary px-3 py-1 fs-6">
                                 <i class="fa-solid fa-earth-americas me-1"></i> {{ $academies->country->name }}
                             </span>
                         @endif
@@ -160,16 +187,16 @@
 
             <!-- ACTION BUTTONS -->
             <div class="d-flex align-items-center gap-2 no-print">
-                <button onclick="window.print()" class="btn btn-light btn-sm fw-bold">
+                <button onclick="window.print()" class="btn btn-light btn-sm fw-bold shadow-sm">
                     <i class="fa-solid fa-print me-1 text-primary"></i> طباعة الملف
                 </button>
-                <a href="{{ route('admin.academies.edit', $academies->id) }}" class="btn btn-warning btn-sm fw-bold">
+                <a href="{{ route('admin.academies.edit', $academies->id) }}" class="btn btn-warning btn-sm fw-bold shadow-sm">
                     <i class="fa-solid fa-pen-to-square me-1"></i> تعديل الشريك
                 </a>
                 <form method="POST" action="{{ route('admin.academies.updateStatus', $academies->id) }}" class="d-inline">
                     @csrf
                     @method('PUT')
-                    <button class="btn btn-sm fw-bold {{ $academies->status === 'active' ? 'btn-danger' : 'btn-success' }}">
+                    <button class="btn btn-sm fw-bold {{ $academies->status === 'active' ? 'btn-danger' : 'btn-success' }} shadow-sm">
                         <i class="fa-solid {{ $academies->status === 'active' ? 'fa-ban' : 'fa-check' }} me-1"></i>
                         {{ $academies->status === 'active' ? 'تجميد الحساب' : 'تفعيل الحساب' }}
                     </button>
@@ -247,48 +274,54 @@
                         </div>
                     </div>
 
-                    <h5 class="fw-bold text-dark mt-4 mb-3 border-bottom pb-2"><i class="fa-solid fa-share-nodes text-primary me-2"></i> وسائل التواصل والموقع الإلكتروني</h5>
-                    <div class="row g-3">
-                        <div class="col-md-3">
-                            <div class="info-card p-3 text-center">
-                                <div class="info-label justify-content-center"><i class="fa-solid fa-globe"></i> الموقع الإلكتروني</div>
-                                <div class="info-value mt-2">
-                                    @if($academies->website)
-                                        <a href="{{ $academies->website }}" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-arrow-up-right-from-square me-1"></i> زيارة الموقع</a>
-                                    @else - @endif
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="info-card p-3 text-center">
-                                <div class="info-label justify-content-center"><i class="fa-brands fa-facebook"></i> فيسبوك</div>
-                                <div class="info-value mt-2">
-                                    @if($academies->facebook)
-                                        <a href="{{ $academies->facebook }}" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fa-brands fa-facebook me-1"></i> الصفحة</a>
-                                    @else - @endif
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="info-card p-3 text-center">
-                                <div class="info-label justify-content-center"><i class="fa-brands fa-instagram"></i> انستغرام</div>
-                                <div class="info-value mt-2">
-                                    @if($academies->instagram)
-                                        <a href="{{ $academies->instagram }}" target="_blank" class="btn btn-sm btn-outline-danger"><i class="fa-brands fa-instagram me-1"></i> الحساب</a>
-                                    @else - @endif
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="info-card p-3 text-center">
-                                <div class="info-label justify-content-center"><i class="fa-brands fa-linkedin"></i> لينكد إن</div>
-                                <div class="info-value mt-2">
-                                    @if($academies->linkedin)
-                                        <a href="{{ $academies->linkedin }}" target="_blank" class="btn btn-sm btn-outline-info"><i class="fa-brands fa-linkedin me-1"></i> الملف</a>
-                                    @else - @endif
-                                </div>
-                            </div>
-                        </div>
+                    <!-- SOCIAL MEDIA CHANNELS BAR -->
+                    <h5 class="fw-bold text-dark mt-4 mb-3 border-bottom pb-2"><i class="fa-solid fa-share-nodes text-primary me-2"></i> قنوات التواصل الاجتماعي والموقع الإلكتروني</h5>
+                    <div class="d-flex flex-wrap align-items-center gap-3 py-2">
+                        @if($academies->website)
+                            <a href="{{ $academies->website }}" target="_blank" class="social-badge social-website">
+                                <i class="fa-solid fa-globe fa-lg"></i>
+                                <span>الموقع الإلكتروني</span>
+                            </a>
+                        @endif
+
+                        @if($academies->facebook)
+                            <a href="{{ $academies->facebook }}" target="_blank" class="social-badge social-facebook">
+                                <i class="fa-brands fa-facebook-f fa-lg"></i>
+                                <span>فيسبوك (Facebook)</span>
+                            </a>
+                        @endif
+
+                        @if($academies->instagram)
+                            <a href="{{ $academies->instagram }}" target="_blank" class="social-badge social-instagram">
+                                <i class="fa-brands fa-instagram fa-lg"></i>
+                                <span>انستغرام (Instagram)</span>
+                            </a>
+                        @endif
+
+                        @if($academies->linkedin)
+                            <a href="{{ $academies->linkedin }}" target="_blank" class="social-badge social-linkedin">
+                                <i class="fa-brands fa-linkedin-in fa-lg"></i>
+                                <span>لينكد إن (LinkedIn)</span>
+                            </a>
+                        @endif
+
+                        @if($academies->twitter)
+                            <a href="{{ $academies->twitter }}" target="_blank" class="social-badge social-twitter">
+                                <i class="fa-brands fa-x-twitter fa-lg"></i>
+                                <span>تويتر / منصة X</span>
+                            </a>
+                        @endif
+
+                        @if($academies->phone)
+                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $academies->phone) }}" target="_blank" class="social-badge social-whatsapp">
+                                <i class="fa-brands fa-whatsapp fa-lg"></i>
+                                <span>واتساب (WhatsApp)</span>
+                            </a>
+                        @endif
+
+                        @if(!$academies->website && !$academies->facebook && !$academies->instagram && !$academies->linkedin && !$academies->twitter)
+                            <span class="text-muted small"><i class="fa-solid fa-circle-info me-1"></i> لم يتم إضافة روابط تواصل اجتماعي لهذا الشريك بعد.</span>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -320,7 +353,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="info-card p-3">
-                                <div class="info-label"><i class="fa-solid fa-chart-line-up"></i> نسبة العمولة (Commission %)</div>
+                                <div class="info-label"><i class="fa-solid fa-chart-line"></i> نسبة العمولة (Commission %)</div>
                                 <div class="info-value">{{ $academies->commission_percentage ?: 0 }}%</div>
                             </div>
                         </div>
