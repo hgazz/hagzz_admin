@@ -71,10 +71,10 @@
 
             <li class="navigation-section"><span>{{ $isArabic ? 'التشغيل اليومي' : 'Daily operations' }}</span></li>
             <li class="menu {{ Request::routeIs('admin.offline.create') ? 'active' : '' }}">
-                <a href="{{ route('admin.offline.create') }}" class="dropdown-toggle"><div class="admin-menu-label"><x-feather-icon name="plus-circle" class="admin-menu-icon" /><span>{{ trans('admin.bookings.add_new_booking') }}</span></div></a>
+                <a href="{{ route('admin.offline.create') }}" class="dropdown-toggle"><div class="admin-menu-label"><x-feather-icon name="plus-circle" class="admin-menu-icon" /><span>{{ $isArabic ? 'إضافة حجز أوفلاين جديد' : 'Add New Offline Booking' }}</span></div></a>
             </li>
             <li class="menu {{ Request::routeIs('admin.booking.*') ? 'active' : '' }}">
-                <a href="{{ route('admin.booking.index') }}" class="dropdown-toggle"><div class="admin-menu-label"><x-feather-icon name="calendar" class="admin-menu-icon" /><span>{{ trans('admin.bookings.bookings') }}</span></div></a>
+                <a href="{{ route('admin.booking.index') }}" class="dropdown-toggle"><div class="admin-menu-label"><x-feather-icon name="calendar" class="admin-menu-icon" /><span>{{ $isArabic ? 'الحجوزات والأنشطة' : 'Bookings & Activities' }}</span></div></a>
             </li>
 
             <li class="navigation-section"><span>{{ $isArabic ? 'الشركاء والخدمات' : 'Partners & services' }}</span></li>
