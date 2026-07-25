@@ -50,17 +50,18 @@
     </div>
 
     <!-- PRICING & PAYMENT BREAKDOWN -->
+    @php($ar = app()->getLocale() === 'ar')
     <div class="col-md-4 mb-3">
-        <label for="price_display" class="form-label fw-bold"><i class="fa-solid fa-money-bill-wave text-success me-1"></i> إجمالي سعر التدريب</label>
+        <label for="price_display" class="form-label fw-bold"><i class="fa-solid fa-money-bill-wave text-success me-1"></i> {{ $ar ? 'إجمالي سعر التدريب' : 'Total Price' }}</label>
         <input id="price_display" class="form-control bg-light fw-bold text-dark" type="number" step="0.01" readonly placeholder="0.00">
     </div>
     <div class="col-md-4 mb-3">
-        <label for="paid_amount" class="form-label fw-bold"><i class="fa-solid fa-hand-holding-dollar text-primary me-1"></i> {{ trans('admin.bookings.paid_amount') }} <code>*</code></label>
+        <label for="paid_amount" class="form-label fw-bold"><i class="fa-solid fa-hand-holding-dollar text-primary me-1"></i> {{ $ar ? 'المبلغ المدفوع' : 'Paid Amount' }} <code>*</code></label>
         <input id="paid_amount" name="paid_amount" class="form-control fw-bold" type="number" min="0" step="0.01" value="{{ old('paid_amount', 0) }}" required>
         @error('paid_amount') <span class="text-danger small">{{ $message }}</span> @enderror
     </div>
     <div class="col-md-4 mb-3">
-        <label for="remaining_amount" class="form-label fw-bold"><i class="fa-solid fa-scale-unbalanced text-danger me-1"></i> {{ trans('admin.bookings.remaining_amount') }}</label>
+        <label for="remaining_amount" class="form-label fw-bold"><i class="fa-solid fa-scale-unbalanced text-danger me-1"></i> {{ $ar ? 'المبلغ المتبقي' : 'Remaining Amount' }}</label>
         <input id="remaining_amount" class="form-control bg-light fw-bold text-danger" type="number" step="0.01" readonly placeholder="0.00">
     </div>
 

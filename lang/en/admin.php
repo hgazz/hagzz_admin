@@ -537,4 +537,11 @@ return [
         'statuses' => ['active'=>'Active','not_started'=>'Collection not started','ready_to_invoice'=>'Ready to invoice','due'=>'Due','overdue'=>'Overdue','paying'=>'Paying','suspended'=>'Suspended','cancelled'=>'Cancelled','expired'=>'Expired','issued'=>'Issued','partial'=>'Partially paid','paid'=>'Paid','void'=>'Void'],
         'methods' => ['bank_transfer'=>'Bank transfer','cash'=>'Cash','card'=>'Card','online'=>'Online payment','other'=>'Other'],
     ],
+    'bookings' => [
+        'paid_amount' => 'Paid Amount',
+        'remaining_amount' => 'Remaining Amount',
+        'paid_amount_exceeds_total' => 'Paid amount exceeds total booking price',
+        'offline_bookings' => 'Offline Bookings',
+        'booking_created_successfully' => 'Booking created successfully',
+    ],
 ];
