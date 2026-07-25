@@ -343,7 +343,7 @@
             const noData = { text: @json($copy['noData']), align: 'center', verticalAlign: 'middle', style: { color: textColor } };
 
             new ApexCharts(document.querySelector('#performanceChart'), {
-                chart: { ...commonChart, type: 'line', height: 360, stacked: false },
+                chart: { ...commonChart, type: 'line', height: 420, stacked: false },
                 series: [
                     { name: labels.bookings, type: 'column', data: dashboardData.bookings },
                     { name: labels.revenue, type: 'area', data: dashboardData.revenue }
@@ -351,44 +351,96 @@
                 colors: ['#2563eb', '#14b8a6'],
                 stroke: { width: [0, 3], curve: 'smooth' },
                 fill: { type: ['solid', 'gradient'], gradient: { opacityFrom: 0.35, opacityTo: 0.04 } },
-                plotOptions: { bar: { borderRadius: 4, columnWidth: '42%' } },
+                plotOptions: { bar: { borderRadius: 5, columnWidth: '40%' } },
                 dataLabels: { enabled: false },
-                grid: { borderColor: gridColor, strokeDashArray: 4 },
-                xaxis: { categories: dashboardData.labels, axisBorder: { show: false }, axisTicks: { show: false } },
+                grid: {
+                    borderColor: gridColor,
+                    strokeDashArray: 4,
+                    padding: { top: 25, right: 35, bottom: 15, left: 35 }
+                },
+                xaxis: {
+                    categories: dashboardData.labels,
+                    axisBorder: { show: false },
+                    axisTicks: { show: false },
+                    labels: { style: { colors: textColor, fontSize: '12px', fontWeight: 600 } }
+                },
                 yaxis: [
-                    { title: { text: labels.bookings }, min: 0, forceNiceScale: true },
-                    { opposite: true, title: { text: labels.revenue }, min: 0, labels: { formatter: value => Math.round(value).toLocaleString() } }
+                    {
+                        title: { text: labels.bookings, style: { color: '#2563eb', fontSize: '12px', fontWeight: 700 } },
+                        min: 0,
+                        forceNiceScale: true,
+                        labels: {
+                            style: { colors: textColor, fontSize: '12px' },
+                            formatter: value => Math.round(value).toLocaleString()
+                        }
+                    },
+                    {
+                        opposite: true,
+                        title: { text: labels.revenue + ' (' + labels.currency + ')', style: { color: '#14b8a6', fontSize: '12px', fontWeight: 700 } },
+                        min: 0,
+                        labels: {
+                            style: { colors: textColor, fontSize: '12px' },
+                            formatter: value => Math.round(value).toLocaleString()
+                        }
+                    }
                 ],
-                legend: { position: 'top', horizontalAlign: '{{ $isArabic ? 'right' : 'left' }}' },
+                legend: {
+                    position: 'top',
+                    horizontalAlign: 'center',
+                    offsetY: -5,
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    itemMargin: { horizontal: 15, vertical: 8 },
+                    markers: { radius: 12 }
+                },
                 tooltip: { shared: true, intersect: false },
                 noData
             }).render();
 
             new ApexCharts(document.querySelector('#userGrowthChart'), {
-                chart: { ...commonChart, type: 'area', height: 300 },
+                chart: { ...commonChart, type: 'area', height: 340 },
                 series: [{ name: labels.users, data: dashboardData.users }],
                 colors: ['#7c3aed'],
                 stroke: { curve: 'smooth', width: 3 },
                 fill: { type: 'gradient', gradient: { opacityFrom: 0.35, opacityTo: 0.03 } },
                 dataLabels: { enabled: false },
-                grid: { borderColor: gridColor, strokeDashArray: 4 },
-                xaxis: { categories: dashboardData.labels, axisBorder: { show: false }, axisTicks: { show: false } },
-                yaxis: { min: 0, forceNiceScale: true },
+                grid: {
+                    borderColor: gridColor,
+                    strokeDashArray: 4,
+                    padding: { top: 20, right: 25, bottom: 10, left: 25 }
+                },
+                xaxis: {
+                    categories: dashboardData.labels,
+                    axisBorder: { show: false },
+                    axisTicks: { show: false },
+                    labels: { style: { colors: textColor, fontSize: '12px', fontWeight: 600 } }
+                },
+                yaxis: {
+                    min: 0,
+                    forceNiceScale: true,
+                    labels: { style: { colors: textColor, fontSize: '12px' } }
+                },
                 noData
             }).render();
 
             new ApexCharts(document.querySelector('#bookingStatusChart'), {
-                chart: { ...commonChart, type: 'donut', height: 360 },
+                chart: { ...commonChart, type: 'donut', height: 380 },
                 series: dashboardData.statuses,
                 labels: [labels.paid, labels.pending, labels.canceled],
                 colors: ['#14b8a6', '#f59e0b', '#ef4444'],
                 stroke: { width: 0 },
                 dataLabels: { enabled: false },
-                legend: { position: 'bottom', markers: { radius: 8 } },
+                legend: {
+                    position: 'bottom',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    itemMargin: { horizontal: 10, vertical: 6 },
+                    markers: { radius: 8 }
+                },
                 plotOptions: {
                     pie: {
                         donut: {
-                            size: '72%',
+                            size: '68%',
                             labels: {
                                 show: true,
                                 total: {
@@ -406,13 +458,25 @@
             }).render();
 
             new ApexCharts(document.querySelector('#sportsChart'), {
-                chart: { ...commonChart, type: 'bar', height: 300 },
+                chart: { ...commonChart, type: 'bar', height: 340 },
                 series: [{ name: labels.bookings, data: dashboardData.sportBookings }],
                 colors: ['#f97316'],
-                plotOptions: { bar: { horizontal: true, borderRadius: 4, barHeight: '48%', distributed: false } },
+                plotOptions: { bar: { horizontal: true, borderRadius: 5, barHeight: '52%', distributed: false } },
                 dataLabels: { enabled: false },
-                grid: { borderColor: gridColor, strokeDashArray: 4 },
-                xaxis: { categories: dashboardData.sportLabels, min: 0, forceNiceScale: true },
+                grid: {
+                    borderColor: gridColor,
+                    strokeDashArray: 4,
+                    padding: { top: 20, right: 25, bottom: 10, left: 25 }
+                },
+                xaxis: {
+                    categories: dashboardData.sportLabels,
+                    min: 0,
+                    forceNiceScale: true,
+                    labels: { style: { colors: textColor, fontSize: '12px' } }
+                },
+                yaxis: {
+                    labels: { style: { colors: textColor, fontSize: '12px', fontWeight: 600 } }
+                },
                 noData
             }).render();
 

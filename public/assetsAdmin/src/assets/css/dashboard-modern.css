@@ -322,12 +322,21 @@ body.dark .metric-icon {
 }
 
 .chart-slot {
-    min-height: 300px;
-    padding: 0 8px 8px;
+    min-height: 340px;
+    padding: 12px 18px 18px;
+    position: relative;
 }
 
 .chart-slot-large {
-    min-height: 360px;
+    min-height: 420px;
+}
+
+.apexcharts-legend {
+    gap: 16px !important;
+}
+
+.apexcharts-text tspan {
+    font-family: inherit !important;
 }
 
 .filter-panel {
