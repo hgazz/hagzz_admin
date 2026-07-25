@@ -65,15 +65,17 @@
     </div>
 
     <!-- PAYMENT METHOD -->
-    <div class="col-md-6 mb-3">
-        <label for="payment_method" class="form-label fw-bold"><i class="fa-solid fa-credit-card text-info me-1"></i> {{ trans('admin.payment_method') }} <code>*</code></label>
-        <select id="payment_method" name="payment_method" class="form-select" required>
-            <option value="cash" @selected(old('payment_method','cash') === 'cash')>كاش / نقدي</option>
-            <option value="instapay" @selected(old('payment_method') === 'instapay')>إينستا باي (InstaPay)</option>
-            <option value="fawry" @selected(old('payment_method') === 'fawry')>فوري (Fawry)</option>
-            <option value="app_online" @selected(old('payment_method') === 'app_online')>دفع إلكتروني اونلاين</option>
-            <option value="other" @selected(old('payment_method') === 'other')>طريقة أخرى</option>
-        </select>
+    <div class="col-12 mb-3">
+        <label class="form-label fw-bold"><i class="fa-solid fa-credit-card text-info me-1"></i> {{ trans('admin.payment_method') }} <code>*</code></label>
+        <div class="d-flex flex-wrap gap-2 mt-2">
+            @foreach(App\Helpers\PaymentMethodHelper::getMethodsForCountry('SA') as $pm)
+                <label class="btn btn-outline-light border shadow-sm p-2 d-flex align-items-center gap-2">
+                    <input type="radio" name="payment_method" value="{{ $pm['id'] }}" @checked(old('payment_method', 'cash') === $pm['id']) required>
+                    <img src="{{ $pm['logo'] }}" alt="{{ $pm['name_ar'] }}" style="height: 26px; width: 50px; object-fit: contain;">
+                    <span class="fw-bold text-dark small">{{ app()->getLocale() == 'ar' ? $pm['name_ar'] : $pm['name_en'] }}</span>
+                </label>
+            @endforeach
+        </div>
     </div>
     <div class="col-md-6 mb-3 d-none" id="other_wrap">
         <label for="payment_method_other" class="form-label fw-bold">{{ trans('admin.payment_method_other') }}</label>
