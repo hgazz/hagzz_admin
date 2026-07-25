@@ -5,7 +5,7 @@
 @push('css')
     <link href="{{ asset('assetsAdmin/src/plugins/src/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assetsAdmin/src/plugins/src/flatpickr/flatpickr.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('assetsAdmin/src/assets/css/dashboard-modern.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assetsAdmin/src/assets/css/dashboard-modern.css') }}?v={{ time() }}" rel="stylesheet" type="text/css">
 @endpush
 
 @php
@@ -343,7 +343,7 @@
             const noData = { text: @json($copy['noData']), align: 'center', verticalAlign: 'middle', style: { color: textColor } };
 
             new ApexCharts(document.querySelector('#performanceChart'), {
-                chart: { ...commonChart, type: 'line', height: 430, stacked: false },
+                chart: { ...commonChart, type: 'line', height: 440, stacked: false },
                 series: [
                     { name: labels.bookings, type: 'column', data: dashboardData.bookings },
                     { name: labels.revenue, type: 'area', data: dashboardData.revenue }
@@ -356,16 +356,15 @@
                 grid: {
                     borderColor: gridColor,
                     strokeDashArray: 4,
-                    padding: { top: 25, right: 35, bottom: 25, left: 35 }
+                    padding: { top: 30, right: 35, bottom: 35, left: 35 }
                 },
                 xaxis: {
                     categories: dashboardData.labels,
                     axisBorder: { show: false },
                     axisTicks: { show: false },
                     labels: {
-                        rotate: -35,
-                        rotateAlways: false,
-                        hideOverlappingLabels: true,
+                        rotate: -45,
+                        rotateAlways: true,
                         style: { colors: textColor, fontSize: '11px', fontWeight: 600 }
                     }
                 },
@@ -403,7 +402,7 @@
             }).render();
 
             new ApexCharts(document.querySelector('#userGrowthChart'), {
-                chart: { ...commonChart, type: 'area', height: 350 },
+                chart: { ...commonChart, type: 'area', height: 360 },
                 series: [{ name: labels.users, data: dashboardData.users }],
                 colors: ['#7c3aed'],
                 stroke: { curve: 'smooth', width: 3 },
@@ -412,16 +411,15 @@
                 grid: {
                     borderColor: gridColor,
                     strokeDashArray: 4,
-                    padding: { top: 20, right: 30, bottom: 25, left: 30 }
+                    padding: { top: 25, right: 30, bottom: 35, left: 30 }
                 },
                 xaxis: {
                     categories: dashboardData.labels,
                     axisBorder: { show: false },
                     axisTicks: { show: false },
                     labels: {
-                        rotate: -35,
-                        rotateAlways: false,
-                        hideOverlappingLabels: true,
+                        rotate: -45,
+                        rotateAlways: true,
                         style: { colors: textColor, fontSize: '11px', fontWeight: 600 }
                     }
                 },
@@ -468,14 +466,14 @@
             }).render();
 
             new ApexCharts(document.querySelector('#sportsChart'), {
-                chart: { ...commonChart, type: 'bar', height: 350 },
+                chart: { ...commonChart, type: 'bar', height: 360 },
                 series: [{ name: labels.bookings, data: dashboardData.sportBookings }],
                 colors: ['#f97316'],
                 plotOptions: {
                     bar: {
                         horizontal: true,
-                        borderRadius: 5,
-                        barHeight: '50%',
+                        borderRadius: 6,
+                        barHeight: '52%',
                         distributed: false
                     }
                 },
@@ -491,7 +489,7 @@
                 grid: {
                     borderColor: gridColor,
                     strokeDashArray: 4,
-                    padding: { top: 20, right: 30, bottom: 15, left: 20 }
+                    padding: { top: 20, right: 35, bottom: 15, left: 25 }
                 },
                 xaxis: {
                     categories: dashboardData.sportLabels,
@@ -502,8 +500,8 @@
                 yaxis: {
                     labels: {
                         show: true,
-                        minWidth: 100,
-                        maxWidth: 160,
+                        minWidth: 120,
+                        maxWidth: 200,
                         style: { colors: textColor, fontSize: '12px', fontWeight: 700 }
                     }
                 },
