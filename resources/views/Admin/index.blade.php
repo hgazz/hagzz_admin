@@ -343,7 +343,7 @@
             const noData = { text: @json($copy['noData']), align: 'center', verticalAlign: 'middle', style: { color: textColor } };
 
             new ApexCharts(document.querySelector('#performanceChart'), {
-                chart: { ...commonChart, type: 'line', height: 420, stacked: false },
+                chart: { ...commonChart, type: 'line', height: 430, stacked: false },
                 series: [
                     { name: labels.bookings, type: 'column', data: dashboardData.bookings },
                     { name: labels.revenue, type: 'area', data: dashboardData.revenue }
@@ -351,18 +351,23 @@
                 colors: ['#2563eb', '#14b8a6'],
                 stroke: { width: [0, 3], curve: 'smooth' },
                 fill: { type: ['solid', 'gradient'], gradient: { opacityFrom: 0.35, opacityTo: 0.04 } },
-                plotOptions: { bar: { borderRadius: 5, columnWidth: '40%' } },
+                plotOptions: { bar: { borderRadius: 5, columnWidth: '38%' } },
                 dataLabels: { enabled: false },
                 grid: {
                     borderColor: gridColor,
                     strokeDashArray: 4,
-                    padding: { top: 25, right: 35, bottom: 15, left: 35 }
+                    padding: { top: 25, right: 35, bottom: 25, left: 35 }
                 },
                 xaxis: {
                     categories: dashboardData.labels,
                     axisBorder: { show: false },
                     axisTicks: { show: false },
-                    labels: { style: { colors: textColor, fontSize: '12px', fontWeight: 600 } }
+                    labels: {
+                        rotate: -35,
+                        rotateAlways: false,
+                        hideOverlappingLabels: true,
+                        style: { colors: textColor, fontSize: '11px', fontWeight: 600 }
+                    }
                 },
                 yaxis: [
                     {
@@ -398,7 +403,7 @@
             }).render();
 
             new ApexCharts(document.querySelector('#userGrowthChart'), {
-                chart: { ...commonChart, type: 'area', height: 340 },
+                chart: { ...commonChart, type: 'area', height: 350 },
                 series: [{ name: labels.users, data: dashboardData.users }],
                 colors: ['#7c3aed'],
                 stroke: { curve: 'smooth', width: 3 },
@@ -407,13 +412,18 @@
                 grid: {
                     borderColor: gridColor,
                     strokeDashArray: 4,
-                    padding: { top: 20, right: 25, bottom: 10, left: 25 }
+                    padding: { top: 20, right: 30, bottom: 25, left: 30 }
                 },
                 xaxis: {
                     categories: dashboardData.labels,
                     axisBorder: { show: false },
                     axisTicks: { show: false },
-                    labels: { style: { colors: textColor, fontSize: '12px', fontWeight: 600 } }
+                    labels: {
+                        rotate: -35,
+                        rotateAlways: false,
+                        hideOverlappingLabels: true,
+                        style: { colors: textColor, fontSize: '11px', fontWeight: 600 }
+                    }
                 },
                 yaxis: {
                     min: 0,
@@ -458,15 +468,30 @@
             }).render();
 
             new ApexCharts(document.querySelector('#sportsChart'), {
-                chart: { ...commonChart, type: 'bar', height: 340 },
+                chart: { ...commonChart, type: 'bar', height: 350 },
                 series: [{ name: labels.bookings, data: dashboardData.sportBookings }],
                 colors: ['#f97316'],
-                plotOptions: { bar: { horizontal: true, borderRadius: 5, barHeight: '52%', distributed: false } },
-                dataLabels: { enabled: false },
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        borderRadius: 5,
+                        barHeight: '50%',
+                        distributed: false
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    textAnchor: 'start',
+                    style: { colors: ['#ffffff'], fontSize: '11px', fontWeight: 700 },
+                    formatter: function (val) {
+                        return val > 0 ? val : '';
+                    },
+                    offsetX: 5
+                },
                 grid: {
                     borderColor: gridColor,
                     strokeDashArray: 4,
-                    padding: { top: 20, right: 25, bottom: 10, left: 25 }
+                    padding: { top: 20, right: 30, bottom: 15, left: 20 }
                 },
                 xaxis: {
                     categories: dashboardData.sportLabels,
@@ -475,7 +500,12 @@
                     labels: { style: { colors: textColor, fontSize: '12px' } }
                 },
                 yaxis: {
-                    labels: { style: { colors: textColor, fontSize: '12px', fontWeight: 600 } }
+                    labels: {
+                        show: true,
+                        minWidth: 100,
+                        maxWidth: 160,
+                        style: { colors: textColor, fontSize: '12px', fontWeight: 700 }
+                    }
                 },
                 noData
             }).render();
