@@ -78,6 +78,21 @@ class Academies extends Model
         return $this->belongsToMany(Sport::class,'academy_sport','academy_id','sport_id');
     }
 
+    public function users()
+    {
+        return $this->hasMany(PartnerUser::class, 'academy_id');
+    }
+
+    public function branches()
+    {
+        return $this->hasMany(Academies::class, 'branch_to');
+    }
+
+    public function parentAcademy()
+    {
+        return $this->belongsTo(Academies::class, 'branch_to');
+    }
+
     public function academy()
     {
         return $this->belongsTo(Academies::class , 'branch_to');

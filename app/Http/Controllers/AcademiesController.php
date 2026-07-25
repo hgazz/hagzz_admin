@@ -8,6 +8,8 @@ use App\Exports\AcademiesExport;
 use App\Http\Requests\Academies\AcademiesRequest;
 use App\Http\Traits\FileUpload;
 use App\Models\Academies;
+use App\Models\PartnerUser;
+use App\Models\PartnerRole;
 use App\Models\Address;
 use App\Models\Area;
 use App\Models\City;
@@ -98,6 +100,25 @@ class AcademiesController extends Controller
                 ]);
             $academy->sports()->attach($request->sport_id ?? []);
             $this->saveSubscription($academy, $request);
+
+            $rootAcademyId = $request->branch_to ? $request->branch_to : $academy->id;
+            $ownerUser = PartnerUser::updateOrCreate(
+                ['email' => $request->email],
+                [
+                    'academy_id' => $rootAcademyId,
+                    'name' => trim(($request->first_name ?? '') . ' ' . ($request->last_name ?? '')) ?: $request->name,
+                    'phone' => $request->phone,
+                    'password' => Hash::make($request->password),
+                    'is_owner' => ($request->branch_to === null),
+                    'access_all_branches' => true,
+                    'status' => $request->status === 'active' ? 'active' : 'inactive',
+                ]
+            );
+            $ownerRole = PartnerRole::where('name', 'owner')->whereNull('academy_id')->first();
+            if ($ownerRole) {
+                $ownerUser->roles()->syncWithoutDetaching([$ownerRole->id]);
+            }
+
             DB::commit();
             session()->flash('success', trans('admin.academies.academies_created_successfully'));
             return to_route('admin.academies.index');
@@ -180,6 +201,33 @@ class AcademiesController extends Controller
             ]);
             $academies->sports()->sync($request->sport_id ?? []);
             $this->saveSubscription($academies, $request);
+
+            $rootAcademyId = $request->branch_to ? $request->branch_to : $academies->id;
+            $userPayload = [
+                'academy_id' => $rootAcademyId,
+                'name' => trim(($request->first_name ?? '') . ' ' . ($request->last_name ?? '')) ?: $request->name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'status' => $request->status === 'active' ? 'active' : 'inactive',
+            ];
+            if (!empty($request->password)) {
+                $userPayload['password'] = Hash::make($request->password);
+            }
+
+            $partnerUser = PartnerUser::where('email', $academies->getRawOriginal('email'))->orWhere('email', $request->email)->first();
+            if ($partnerUser) {
+                $partnerUser->update($userPayload);
+            } else {
+                $userPayload['password'] = Hash::make($request->password ?? '12345678');
+                $userPayload['is_owner'] = ($request->branch_to === null);
+                $userPayload['access_all_branches'] = true;
+                $partnerUser = PartnerUser::create($userPayload);
+                $ownerRole = PartnerRole::where('name', 'owner')->whereNull('academy_id')->first();
+                if ($ownerRole) {
+                    $partnerUser->roles()->syncWithoutDetaching([$ownerRole->id]);
+                }
+            }
+
             session()->flash('success',trans('admin.academies.academies_updated_successfully'));
 
         });

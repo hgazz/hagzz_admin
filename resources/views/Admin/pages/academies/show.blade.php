@@ -340,6 +340,67 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row mt-4 px-3">
+                                    <div class="col-12">
+                                        <div class="card border">
+                                            <div class="card-header bg-light d-flex justify-content-between align-items-center py-2">
+                                                <h6 class="card-title m-0 fw-bold text-dark"><i class="fa-solid fa-users-gear me-2"></i> طاقم العمل والمستخدمين (Team Members)</h6>
+                                                <span class="badge bg-primary">{{ $academies->users->count() }} مستخدم</span>
+                                            </div>
+                                            <div class="card-body p-0">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-bordered align-middle mb-0">
+                                                        <thead class="table-light">
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>الاسم</th>
+                                                                <th>البريد الإلكتروني</th>
+                                                                <th>الهاتف</th>
+                                                                <th>الدور (Role)</th>
+                                                                <th>نطاق الفروع</th>
+                                                                <th>الحالة</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @forelse($academies->users as $user)
+                                                                <tr>
+                                                                    <td>{{ $loop->iteration }}</td>
+                                                                    <td class="fw-bold">
+                                                                        {{ $user->name }}
+                                                                        @if($user->is_owner) <span class="badge bg-warning text-dark ms-1">المالك</span> @endif
+                                                                    </td>
+                                                                    <td>{{ $user->email }}</td>
+                                                                    <td>{{ $user->phone ?? '-' }}</td>
+                                                                    <td>
+                                                                        @foreach($user->roles as $role)
+                                                                            <span class="badge bg-info text-dark me-1">{{ app()->getLocale() == 'ar' ? $role->display_name_ar : $role->display_name_en }}</span>
+                                                                        @endforeach
+                                                                        @if($user->is_owner && $user->roles->isEmpty()) <span class="badge bg-warning text-dark">مالك الشريك</span> @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        @if($user->is_owner || $user->access_all_branches)
+                                                                            <span class="badge bg-success">كافة الفروع</span>
+                                                                        @else
+                                                                            <span class="badge bg-secondary">{{ $user->assignedBranches->count() }} فرع</span>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        <span class="badge @if($user->status === 'active') bg-success @else bg-danger @endif">{{ $user->status }}</span>
+                                                                    </td>
+                                                                </tr>
+                                                            @empty
+                                                                <tr>
+                                                                    <td colspan="7" class="text-center text-muted py-3">لا يوجد مستخدمون مسجلون لهذا الشريك بعد.</td>
+                                                                </tr>
+                                                            @endforelse
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
 
