@@ -8,8 +8,25 @@
     $invoice = $join->invoice;
     $training = $join->training;
     $student = $join->user;
+
+    // Resolve academy safely
     $academy = $training?->academy;
-    $currency = $academy?->currency_symbol ?: ($ar ? 'ر.س' : 'SAR');
+    if (!$academy && auth('academy')->check()) {
+        $userAuth = auth('academy')->user();
+        $academy = ($userAuth instanceof \App\Models\PartnerUser && $userAuth->academy) ? $userAuth->academy : $userAuth;
+    }
+
+    $currency = 'SAR';
+    if ($academy) {
+        $currency = $academy->currency_symbol;
+    } elseif ($training && $training->academy_id) {
+        $ac = \App\Models\Academies::with('country')->find($training->academy_id);
+        if ($ac) {
+            $currency = $ac->currency_symbol;
+        }
+    } else {
+        $currency = $ar ? 'ر.س' : 'SAR';
+    }
 
     // Amounts calculation
     $totalAmount = (float) ($invoice?->amount ?: ($join->price ?: 0));
