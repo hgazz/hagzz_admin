@@ -45,7 +45,7 @@ class AcademiesController extends Controller
 
     public function create()
     {
-        $roles = ['manager', 'owner', 'partner'];
+        $roles = PartnerRole::whereNull('academy_id')->get();
         $sports = $this->sportModel::get(['id', 'name']);
         $allAcademies = $this->academicModels->where('branch_to', null)->get(['id','commercial_name']);
         $countries = $this->countryModel->get(['id', 'name', 'iso2', 'currency_code']);
@@ -148,7 +148,7 @@ class AcademiesController extends Controller
     }
     public function edit(Academies $academies)
     {
-        $roles = ['manager', 'owner', 'partner'];
+        $roles = PartnerRole::whereNull('academy_id')->get();
         $sports = $this->sportModel->get(['id','name']);
         $allAcademies = $this->academicModels->where('id','!=',$academies->id)->get(['id','commercial_name']);
         $countries = $this->countryModel->get(['id', 'name', 'iso2', 'currency_code']);

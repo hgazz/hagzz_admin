@@ -398,10 +398,52 @@
                                                     </table>
                                                 </div>
                                             </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4 px-3">
+                                <div class="col-12">
+                                    <div class="card border">
+                                        <div class="card-header bg-light d-flex justify-content-between align-items-center py-2">
+                                            <h6 class="card-title m-0 fw-bold text-dark"><i class="fa-solid fa-list-check me-2"></i> سجل أحداث وأنشطة الشريك (Partner Activity Log)</h6>
+                                            <span class="badge bg-secondary">{{ $academies->activityLogs->count() }} حدث</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-bordered align-middle mb-0">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>المستخدم</th>
+                                                            <th>الحدث (Action)</th>
+                                                            <th>التفاصيل</th>
+                                                            <th>عنوان IP</th>
+                                                            <th>التاريخ والتوقيت</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @forelse($academies->activityLogs->take(20) as $log)
+                                                            <tr>
+                                                                <td>{{ $loop->iteration }}</td>
+                                                                <td class="fw-bold">{{ $log->user_name ?? 'الشريك' }}</td>
+                                                                <td><span class="badge bg-primary">{{ $log->action }}</span></td>
+                                                                <td>{{ $log->description }}</td>
+                                                                <td><code>{{ $log->ip_address ?? '-' }}</code></td>
+                                                                <td>{{ $log->created_at?->format('Y-m-d H:i:s') }}</td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="6" class="text-center text-muted py-3">لا يوجد أنشطة مسجلة لهذا الشريك حتى الآن.</td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
 
 <div class="card-footer">

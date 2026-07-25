@@ -48,7 +48,11 @@
         <label for="role">{{ trans('admin.academies.role') }}<code>*</code></label>
         <select id="role" name="role" class="form-control formInput basic">
             @foreach($roles as $role)
-                <option value="{{$role}}" @selected(old('role', isset($academies) ? $academies->role : '') == $role)>{{$role}}</option>
+                @if(is_object($role))
+                    <option value="{{ $role->name }}" @selected(old('role', isset($academies) ? $academies->role : '') == $role->name)>{{ app()->getLocale() == 'ar' ? $role->display_name_ar : $role->display_name_en }}</option>
+                @else
+                    <option value="{{ $role }}" @selected(old('role', isset($academies) ? $academies->role : '') == $role)>{{ $role }}</option>
+                @endif
             @endforeach
         </select>
         @error('role')
