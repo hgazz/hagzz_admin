@@ -11,6 +11,7 @@ use App\Models\City;
 use App\Models\Coach;
 use App\Models\Country;
 use App\Models\Follow;
+use App\Models\AcademyStudent;
 use App\Models\Invoice;
 use App\Models\Join;
 use App\Models\Training;
@@ -60,66 +61,73 @@ class TrainingController extends Controller
 
     public function createBooking()
     {
-        $countries = Country::get(['id','name']);
-        $trainings = Training::get(['id', 'name']);
-        return view('Admin.pages.training.booking', get_defined_vars());
+        $trainings = Training::get(['id', 'name', 'price', 'academy_id']);
+        $students = AcademyStudent::orderBy('name')->get(['id', 'name', 'phone', 'guardian_name']);
+        return view('Admin.pages.training.booking', compact('trainings', 'students'));
     }
 
     public function storeBooking(BookingRequest $request)
     {
-
         try {
             $training = Training::findOrFail($request->training_id);
-            DB::beginTransaction();
-            $user = User::updateOrCreate(
-                // Attributes to search for an existing user
-                ['phone' => $request->phone],
-                // Data to update or create
-                [
+
+            if ($request->filled('academy_student_id')) {
+                $student = AcademyStudent::findOrFail($request->academy_student_id);
+            } else {
+                $student = AcademyStudent::create([
+                    'academy_id' => $training->academy_id ?: 1,
                     'name' => $request->name,
-                    'gender' => $request->gender,
-                    'country_code' => $request->country_code,
-                    'country_id' => $request->country_id,
-                    'city_id' => $request->city_id,
-                    'area_id' => $request->area_id,
-                    'user_type'=> 'system',
-                    'birth_date'=> $request->birth_date,
-                    'email' => $request->email,
-                    'child_type' => $request->child_type,
-                    'school_name' => $request->school_name,
-                    'parent_name' => $request->parent_name,
-                    'parent_phone' => $request->parent_phone,
-                    'club_member' => $request->club_member,
-                    'coach_preference' =>  $request->coach_preference,
-                    'frequent_attendance' => $request->frequent_attendance,
-                    'relation_with_child' => $request->relation_with_child,
-                    'referral_source' => $request->referral_source,
-                    'delivery_service' => $request->delivery_service,
-                    'medical_condition' => $request->medical_condition,
-                    'start_date' => $request->start_date,
-                    'medical_condition_details' => $request->medical_condition == 'yes' ? $request->medical_condition_details : null,
-                    'additional_information' => $request->has('additional_information') ? $request->additional_information : null
-                ]
-            );
+                    'phone' => $request->phone,
+                    'gender' => $request->gender ?: 'male',
+                    'status' => 'active',
+                ]);
+            }
+
+            $totalAmount = round((float) $training->price, 2);
+            $paidAmount = round((float) $request->paid_amount, 2);
+
+            DB::beginTransaction();
+
+            $user = $student->user ?: User::where('phone', $student->phone)->first();
+            if (!$user) {
+                $user = User::create([
+                    'name' => $student->name,
+                    'phone' => $student->phone,
+                    'gender' => $student->gender ?: 'male',
+                    'user_type' => 'system',
+                ]);
+            }
+            if ((int) $student->user_id !== (int) $user->id) {
+                $student->update(['user_id' => $user->id]);
+            }
+
             $booking = Invoice::create([
                 'user_id' => $user->id,
                 'training_id' => $request->training_id,
-                'amount' => $request->price,
+                'amount' => $totalAmount,
+                'paid_amount' => $paidAmount,
                 'order_number' => uniqid(),
-                'status' => 'paid',
-                'user_type' => 'offline'
+                'status' => $paidAmount >= $totalAmount ? 'paid' : 'pending',
+                'user_type' => 'offline',
+                'payment_method' => $request->payment_method ?: 'cash',
             ]);
+
             Join::create([
                 'user_id' => $user->id,
                 'training_id' => $request->training_id,
+                'academy_student_id' => $student->id,
                 'price' => $booking->amount,
+                'paid_amount' => $paidAmount,
                 'invoice_id' => $booking->id,
             ]);
+
             DB::commit();
+
             session()->flash('success', __('admin.training.Booking created successfully'));
-            return to_route('admin.booking.index');
-        }catch (\Exception $e) {
-            return back()->with('error', $e->getMessage());
+            return redirect()->route('admin.report.joins-offline');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with(['error' => $e->getMessage()])->withInput();
         }
     }
 

@@ -2,52 +2,26 @@
 
 namespace App\Http\Requests\Booking;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BookingRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array|string>
-     */
     public function rules(): array
     {
         return [
             'training_id' => 'required|exists:trainings,id',
-            'price' =>'required|numeric|min:1',
-            'name' =>'required|string',
-            'country_code' =>'required|regex:/^\+?[0-9]+$/',
-            'phone' =>'required|string',
-            'gender' =>'required|in:male,female',
-            'country_id' =>'required|string|exists:countries,id',
-            'city_id' =>'required|string|exists:cities,id',
-            'area_id' =>'required|string|exists:areas,id',
-            'birth_date' =>'required|date',
-            'email' => 'required|email',
-            'child_type' => 'required|in:parent,child,athlete',
-            'school_name' => 'required|string',
-            'parent_name' => 'required|string',
-            'parent_phone' => 'required|string|min:7|max:15',
-            'coach_preference' => 'required|in:male,female,not_important',
-            'frequent_attendance' => 'required|in:daily,weekly,monthly',
-            'relation_with_child' => 'required|in:father,mother,brother,sister,guardian',
-            'referral_source' => 'required|in:friends,facebook,hagzz_app',
-            'medical_condition' => 'required|in:yes,no',
-            'medical_condition_details' => 'required_if:medical_condition,yes',
-            'additional_information' => 'nullable',
-            'delivery_service' => 'required|in:yes,no',
-            'club_member' => 'required|in:yes,no',
-            'start_date' => 'required|date',
+            'academy_student_id' => 'nullable|exists:academy_students,id',
+            'name' => 'required_without:academy_student_id|nullable|string|max:255',
+            'phone' => 'required_without:academy_student_id|nullable|string|max:50',
+            'gender' => 'nullable|in:male,female',
+            'paid_amount' => 'required|numeric|min:0',
+            'payment_method' => 'required|string',
+            'payment_method_other' => 'nullable|string',
         ];
     }
 }
