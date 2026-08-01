@@ -6,7 +6,7 @@
 @endphp
 
 <style>
-    .sidebar-wrapper { height: calc(100vh - 60px - 54px) !important; position: sticky !important; top: 60px !important; border-inline-end: 1px solid rgba(15, 23, 42, .07); z-index: 99; }
+    .sidebar-wrapper { height: 100vh !important; }
     #sidebar { height: 100%; overflow: hidden !important; display: flex; flex-direction: column; position: relative; }
     #sidebar .theme-brand { flex: 0 0 auto; z-index: 5; background: inherit; }
     #sidebar > .shadow-bottom { flex: 0 0 auto; }
@@ -14,7 +14,7 @@
         flex: 1 1 auto; min-height: 0; overflow-y: auto !important; overflow-x: hidden !important;
         overscroll-behavior: contain; scroll-behavior: smooth; scrollbar-gutter: stable;
         scrollbar-width: thin; scrollbar-color: rgba(27, 85, 226, .45) transparent;
-        padding-bottom: 88px !important;
+        padding-bottom: 110px !important;
     }
     #sidebar > .menu-categories::-webkit-scrollbar { width: 6px; }
     #sidebar > .menu-categories::-webkit-scrollbar-track { background: transparent; }

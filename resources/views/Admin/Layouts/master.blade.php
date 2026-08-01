@@ -11,65 +11,14 @@
     <meta name="lang" content="{{ $__locale }}" />
     @include('Admin.Layouts.inc.head')
     <style>
-        /* ─── CORE LAYOUT & SAFE-AREA FIX ───────────────────────────────── */
-        html, body {
-            height: auto !important;
-            min-height: 100vh !important;
-            overflow-x: hidden !important;
-            overflow-y: auto !important;
-        }
-
-        .main-container {
-            min-height: 100vh;
-            height: auto !important;
-        }
-
-        .secondary-nav {
-            position: relative !important;
-            top: auto !important;
-            left: auto !important;
-            right: auto !important;
-            width: 100% !important;
-            z-index: auto !important;
-            background: #fafafa;
-            box-shadow: 0 4px 6px -2px rgba(126,142,177,.10);
-            min-height: 52px;
-            display: flex;
-            margin-bottom: 16px;
-        }
-
-        #content.main-content {
-            margin-top: 60px !important;
-            height: auto !important;
-        }
-
+        /* Safe-Area Spacing */
         .layout-px-spacing {
-            min-height: auto !important;
-            padding-bottom: 32px !important;
+            padding-bottom: 60px !important;
         }
 
-        /* Full-width footer below sidebar + content */
         .footer-wrapper {
-            width: 100% !important;
-            margin-top: 0 !important;
-            border-top: 1px solid rgba(15, 23, 42, .07);
-            background: #fafafa;
-            padding: 14px 24px !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .sidebar-wrapper {
-            position: sticky !important;
-            top: 60px !important;
-            height: calc(100vh - 60px - 54px) !important;
-        }
-
-        @media (max-width: 767.98px) {
-            .layout-px-spacing {
-                padding-bottom: 48px !important;
-            }
+            margin-top: 30px !important;
+            padding-bottom: 25px !important;
         }
     </style>
 </head>
@@ -103,19 +52,18 @@
         <div class="layout-px-spacing">
             @yield('content')
         </div>
+        <!--  BEGIN FOOTER  -->
+        <div class="footer-wrapper">
+            <div class="footer-section f-section-1">
+                <p>Copyright &copy; <span class="dynamic-year">{{ date('Y') }}</span> <a target="_blank" href="https://hagzz.com">Hagzz</a>, All rights reserved.</p>
+            </div>
+        </div>
+        <!--  END FOOTER  -->
     </div>
     <!--  END CONTENT AREA  -->
 
 </div>
 <!-- END MAIN CONTAINER -->
-
-<!--  BEGIN FOOTER (full-width, below sidebar + content)  -->
-<div class="footer-wrapper">
-    <div class="footer-section f-section-1">
-        <p>Copyright &copy; <span class="dynamic-year">{{ date('Y') }}</span> <a target="_blank" href="https://hagzz.com">Hagzz</a>, All rights reserved.</p>
-    </div>
-</div>
-<!--  END FOOTER  -->
 
 <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
 @include('Admin.Layouts.inc.footerJs')
