@@ -2,11 +2,11 @@
     $locationOpen = Request::routeIs('admin.country.*', 'admin.cities.*', 'admin.areas.*', 'admin.academies.locations');
     $academyOpen = Request::routeIs('admin.academies.*', 'admin.training.*', 'admin.gallery.*');
     $reportsOpen = Request::routeIs('admin.report.*');
-    $isArabic = app()->getLocale() === 'ar';
+    $isArabic = session('locale', app()->getLocale()) === 'ar';
 @endphp
 
 <style>
-    .sidebar-wrapper { height: 100vh !important; }
+    .sidebar-wrapper { height: calc(100vh - 60px - 54px) !important; position: sticky !important; top: 60px !important; border-inline-end: 1px solid rgba(15, 23, 42, .07); z-index: 99; }
     #sidebar { height: 100%; overflow: hidden !important; display: flex; flex-direction: column; position: relative; }
     #sidebar .theme-brand { flex: 0 0 auto; z-index: 5; background: inherit; }
     #sidebar > .shadow-bottom { flex: 0 0 auto; }
