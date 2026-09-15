@@ -152,4 +152,19 @@ class Academies extends Model
     {
         return $this->hasMany(TenantSubscriptionInvoice::class, 'academy_id');
     }
+
+    public function hasVenueModule(?TenantSubscription $subscription = null): bool
+    {
+        if (!in_array($this->business_type, ['venue', 'hybrid'], true)) {
+            return false;
+        }
+
+        $subscription ??= $this->currentSubscription()->with('plan')->first();
+
+        return $subscription
+            && in_array($subscription->status, ['active', 'trial'], true)
+            && (!$subscription->ends_at || $subscription->ends_at->isToday() || $subscription->ends_at->isFuture())
+            && $subscription->plan?->active
+            && (int) $subscription->plan->max_venues > 0;
+    }
 }
