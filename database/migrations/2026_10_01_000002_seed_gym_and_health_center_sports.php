@@ -108,6 +108,7 @@ return new class extends Migration
                         'ar' => $item['ar'],
                         'en' => $item['en'],
                     ],
+                    'icon' => 'default.png',
                     'status' => 'active',
                 ]);
             }
