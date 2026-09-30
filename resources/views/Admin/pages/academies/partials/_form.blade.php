@@ -129,9 +129,9 @@
 
     @endforeach
     <div class="mb-3 d-flex flex-column align-items-start" id="sports_wrap">
-        <label for="sports">{{ trans('admin.sport.sport') }}<code>*</code></label>
+        <label for="sports">{{ trans('admin.sport.sport') }}</label>
         <div>
-            <select class="js-example-basic-multiple w-100 form-select form-control formInput basic" name="sport_id[]" multiple id="sports">
+            <select class="js-example-basic-multiple w-100 form-select form-control basic" name="sport_id[]" multiple id="sports">
                 @foreach($sports as $sport)
                     <option value="{{ $sport->id }}"
                         @selected(
@@ -404,12 +404,12 @@
             const sportsWrap = document.getElementById('sports_wrap');
             const sports = document.getElementById('sports');
             function toggleSports() {
-                const venueOnly = businessType.value === 'venue';
-                sportsWrap.classList.toggle('d-none', venueOnly);
-                sports.required = !venueOnly;
-                sports.classList.toggle('formInput', !venueOnly);
+                if (sports) {
+                    sports.required = false;
+                    sports.classList.remove('formInput', 'invalid');
+                }
             }
-            businessType.addEventListener('change', toggleSports);
+            businessType?.addEventListener('change', toggleSports);
             toggleSports();
             const planSelect = document.getElementById('saas_plan_id');
             const countrySelect = document.getElementById('country_id');

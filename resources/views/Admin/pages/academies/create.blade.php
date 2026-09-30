@@ -106,6 +106,10 @@
                     y = x[currentTab].getElementsByClassName("formInput");
                     // A loop that checks every input field in the current tab:
                     for (i = 0; i < y.length; i++) {
+                        // Skip if disabled or hidden
+                        if (y[i].disabled || y[i].closest('.d-none') || y[i].offsetParent === null) {
+                            continue;
+                        }
                         // If a field is empty...
                         if (y[i].value == "") {
                             // add an "invalid" class to the field:
