@@ -34,7 +34,7 @@
         <label for="first_name">{{trans('admin.academies.First Name')}}<code>*</code></label>
         <input id="first_name" type="text" class="formInput" placeholder="{{trans('admin.academies.First Name')}}" value="{{old('first_name',isset($academies) ? $academies->first_name : '')}}" oninput="this.className = ''" name="first_name">
     </div>
-    @error('firs_name')
+    @error('first_name')
         <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
@@ -216,22 +216,22 @@
 
     @endforeach
     <div class="mb-3">
-        <label for="trade_license_number">{{ trans('admin.academies.trade_license_number') }}<code>*</code></label>
-        <input id="trade_license_number" type="text" class="formInput" value="{{(old('trade_license_number', isset($academies) ? $academies->trade_license_number : ''))}}" placeholder="{{trans('admin.academies.trade_license_number')}}" oninput="this.className = ''" name="trade_license_number">
+        <label for="trade_license_number">{{ trans('admin.academies.trade_license_number') }} <span class="badge bg-light text-muted ms-1" style="font-size:11px;font-weight:normal;">({{ app()->getLocale() == 'ar' ? 'اختياري' : 'Optional' }})</span></label>
+        <input id="trade_license_number" type="text" class="form-control" value="{{(old('trade_license_number', isset($academies) ? $academies->trade_license_number : ''))}}" placeholder="{{trans('admin.academies.trade_license_number')}}" oninput="this.className = 'form-control'" name="trade_license_number">
     </div>
     @error('trade_license_number')
         <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="license_expire">{{ trans('admin.academies.trade_license_expire_date') }}<code>*</code></label>
-        <input id="license_expire" type="date" class="formInput" placeholder="{{trans('admin.academies.trade_license_expire_date')}}" oninput="this.className = ''" value="{{(old('trade_license_expire_date', isset($academies) ? $academies->trade_license_expire_date : ''))}}" name="trade_license_expire_date">
+        <label for="license_expire">{{ trans('admin.academies.trade_license_expire_date') }} <span class="badge bg-light text-muted ms-1" style="font-size:11px;font-weight:normal;">({{ app()->getLocale() == 'ar' ? 'اختياري' : 'Optional' }})</span></label>
+        <input id="license_expire" type="date" class="form-control" placeholder="{{trans('admin.academies.trade_license_expire_date')}}" oninput="this.className = 'form-control'" value="{{(old('trade_license_expire_date', isset($academies) ? $academies->trade_license_expire_date : ''))}}" name="trade_license_expire_date">
     </div>
     @error('trade_license_expire_date')
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="mb-3">
-        <label for="tax_number">{{ trans('admin.academies.tax_number') }}<code>*</code></label>
-        <input id="tax_number" type="text" placeholder="{{trans('admin.academies.tax_number')}}" oninput="this.className = ''" value="{{(old('tax_number', isset($academies) ? $academies->tax_number : ''))}}" name="tax_number">
+        <label for="tax_number">{{ trans('admin.academies.tax_number') }} <span class="badge bg-light text-muted ms-1" style="font-size:11px;font-weight:normal;">({{ app()->getLocale() == 'ar' ? 'اختياري' : 'Optional' }})</span></label>
+        <input id="tax_number" type="text" class="form-control" placeholder="{{trans('admin.academies.tax_number')}}" oninput="this.className = 'form-control'" value="{{(old('tax_number', isset($academies) ? $academies->tax_number : ''))}}" name="tax_number">
     </div>
     @error('tax_number')
     <p class="text-danger">{{$message}}</p>
