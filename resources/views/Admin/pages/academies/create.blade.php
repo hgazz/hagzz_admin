@@ -31,24 +31,24 @@
             --create-success: #10b981;
         }
         .academy-create-page svg { stroke-width: 2; }
-        
-        /* Header Hero */
+
+        /* Top Header */
         .create-page-head {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 18px;
-            margin-bottom: 22px;
-            padding: 20px 24px;
+            margin-bottom: 20px;
+            padding: 18px 22px;
             background: #fff;
             border: 1px solid var(--create-border);
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(23, 32, 51, 0.04);
+            box-shadow: 0 4px 18px rgba(23, 32, 51, 0.04);
         }
         .create-page-head h3 {
             color: var(--create-ink);
             font-weight: 700;
-            font-size: 20px;
+            font-size: 19px;
             margin: 0 0 4px;
             display: flex;
             align-items: center;
@@ -88,6 +88,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 16px;
+            box-shadow: 0 2px 10px rgba(23, 32, 51, 0.03);
         }
         .stepper-progress-text {
             font-size: 13px;
@@ -106,7 +107,7 @@
             height: 100%;
             background: linear-gradient(90deg, #2563eb, #3b82f6);
             border-radius: 99px;
-            transition: width 0.3s ease;
+            transition: width 0.35s ease;
         }
         .stepper-progress-pct {
             font-size: 12px;
@@ -114,6 +115,25 @@
             color: var(--create-primary);
             min-width: 38px;
             text-align: end;
+        }
+
+        /* Global Alert */
+        .create-global-alert {
+            margin-bottom: 20px;
+            padding: 16px 20px;
+            border-radius: 10px;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.08);
+        }
+        .create-global-alert ul {
+            margin: 6px 0 0;
+            padding-inline-start: 22px;
+        }
+        .create-global-alert li {
+            margin-bottom: 3px;
+            font-size: 13px;
         }
 
         /* Form Grid Layout */
@@ -128,11 +148,6 @@
             border-radius: 0;
             background: transparent;
             box-shadow: none;
-        }
-        .partner-edit-form > .alert {
-            grid-column: 1 / -1;
-            margin: 0;
-            border-radius: 10px;
         }
 
         /* Sidebar Stepper */
@@ -262,9 +277,6 @@
             font-size: 18px;
             font-weight: 700;
             text-align: start !important;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
         .partner-edit-form .step > .mb-3 {
             min-width: 0;
@@ -360,10 +372,12 @@
         }
         .partner-edit-form #sports_wrap > div { width: 100%; }
         .partner-edit-form .password-toggle-eye {
+            position: absolute;
             top: 36px;
-            right: 14px;
+            inset-inline-end: 14px;
             color: var(--create-muted);
             cursor: pointer;
+            z-index: 5;
         }
 
         /* SaaS Subscription styling */
@@ -526,20 +540,22 @@
         <span class="stepper-progress-pct" id="stepperProgressPct">17%</span>
     </div>
 
-    <form id="signUpForm" class="partner-edit-form" action="{{ route('admin.academies.store') }}" method="post" enctype="multipart/form-data">
-        @if ($errors->any())
-            <div class="alert alert-danger d-flex align-items-start gap-2 mb-3">
-                <x-feather-icon name="alert-circle" />
-                <div>
-                    <strong>{{ app()->getLocale() === 'ar' ? 'يوجد أخطاء في البيانات المدخلة، تم فتح الخطوة التي تحتوي على الخطأ تلقائياً:' : 'Validation errors found, automatically opened the step with errors:' }}</strong>
-                    <ul class="mb-0 mt-1">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+    <!-- Clean Global Alert Outside the Grid -->
+    @if ($errors->any())
+        <div class="create-global-alert d-flex align-items-start gap-3">
+            <x-feather-icon name="alert-triangle" class="text-danger flex-shrink-0 mt-1" style="width:22px;height:22px;" />
+            <div class="w-100">
+                <strong class="d-block mb-1 text-danger font-size-14">{{ app()->getLocale() === 'ar' ? 'تعذر حفظ البيانات لوجود أخطاء (تم فتح الخطوة المعنية تلقائياً لتصحيحها):' : 'Could not save data due to errors (automatically opened the relevant step to fix):' }}</strong>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-        @endif
+        </div>
+    @endif
+
+    <form id="signUpForm" class="partner-edit-form" action="{{ route('admin.academies.store') }}" method="post" enctype="multipart/form-data">
         @include('Admin.pages.academies.partials._form')
     </form>
 </div>
@@ -549,10 +565,10 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('signUpForm');
+    if (!form) return;
+
     const steps = Array.from(form.querySelectorAll('.step'));
     const indicators = Array.from(form.querySelectorAll('.stepIndicator'));
-    const previousButton = document.getElementById('prevBtn');
-    const nextButton = document.getElementById('nextBtn');
     const progressBar = document.getElementById('stepperProgressBar');
     const progressLabel = document.getElementById('stepperProgressLabel');
     const progressPct = document.getElementById('stepperProgressPct');
@@ -561,7 +577,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const nextLabel = @json(trans('admin.academies.Next'));
     const submitLabel = @json(trans('admin.submit'));
 
-    // Step titles for progress indicator
     const stepTitles = [
         isAr ? 'البيانات الأساسية' : 'Basic Information',
         isAr ? 'تفاصيل الشريك' : 'Partner Details',
@@ -571,19 +586,21 @@ document.addEventListener('DOMContentLoaded', function () {
         isAr ? 'باقة الاشتراك' : 'Subscription'
     ];
 
-    // Explicit list of required field names per step
+    // Explicit required field names per step
     const requiredFields = {
         0: ['first_name', 'last_name', 'role', 'business_type', 'country_id', 'email', 'password', 'phone'],
         1: ['app_name_en', 'app_name_ar'],
         2: ['name', 'commercial_name_en', 'commercial_name_ar', 'commission_percentage'],
         3: ['bank_account_type', 'bank_name', 'beneficiary_name', 'bank_account_number'],
         4: ['contract_date', 'start_date', 'end_date', 'contract_number', 'account_manager', 'settlement_days_count', 'non_refund_days_count', 'status'],
-        5: [] // Subscription is optional
+        5: []
     };
+
+    const min3Fields = ['first_name', 'last_name', 'commercial_name_en', 'commercial_name_ar', 'app_name_en', 'app_name_ar', 'name', 'account_manager'];
 
     let currentTab = {{ $initialTab }};
 
-    // Replace footer with responsive footer buttons wrapper
+    // Replace footer with clean responsive buttons
     const footer = form.querySelector('.form-footer');
     if (footer) {
         footer.innerHTML = `
@@ -631,12 +648,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Validation helper
     function getFieldLabel(field) {
         const parent = field.closest('.mb-3');
         const lbl = parent ? parent.querySelector('label, span:first-child') : null;
         if (lbl) {
-            // Strip code and badges
             const clone = lbl.cloneNode(true);
             clone.querySelectorAll('code, .badge, svg').forEach(el => el.remove());
             return clone.textContent.trim();
@@ -688,6 +703,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        // Min 3 characters check
+        if (min3Fields.includes(cleanName) && val !== '' && val.length < 3) {
+            const label = getFieldLabel(field);
+            showFieldError(field, isAr ? `${label} يجب ألا يقل عن 3 أحرف` : `${label} must be at least 3 characters`);
+            return false;
+        }
+
         // Email validation
         if (cleanName === 'email' || field.type === 'email') {
             if (val !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
@@ -705,7 +727,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Password validation (create only)
+        // Password validation
         if (cleanName === 'password') {
             if (val !== '' && val.length < 8) {
                 showFieldError(field, isAr ? 'كلمة المرور يجب أن تتكون من 8 خانات على الأقل' : 'Password must be at least 8 characters');
@@ -731,6 +753,15 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        // Discount type check if discount value > 0
+        if (cleanName === 'discount_value' && val !== '' && Number(val) > 0) {
+            const discType = steps[currentTab].querySelector('select[name="discount_type"]');
+            if (discType && discType.value === '') {
+                showFieldError(discType, isAr ? 'يرجى اختيار نوع الخصم عند إدخال قيمة للخصم' : 'Please select discount type');
+                return false;
+            }
+        }
+
         clearFieldError(field);
         return true;
     }
@@ -748,7 +779,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Step warning banner
         let warningAlert = step.querySelector('.step-warning-alert');
         if (invalidCount > 0) {
             if (!warningAlert) {
@@ -763,7 +793,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 <span>${isAr ? `يوجد ${invalidCount} حقل به خطأ في هذه الخطوة، يرجى استكمالها للمتابعة.` : `There are ${invalidCount} invalid fields in this step. Please correct them to proceed.`}</span>
             `;
 
-            // Mark sidebar step indicator
             indicators[currentTab]?.classList.add('has-error');
             let badge = indicators[currentTab]?.querySelector('.step-err-badge');
             if (!badge) {
@@ -773,7 +802,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             badge.textContent = invalidCount;
 
-            // Scroll & focus first invalid
             if (firstInvalid) {
                 firstInvalid.focus();
                 firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -788,7 +816,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Attach instant clearing listeners to all form inputs
+    // Attach instant clearing listeners
     form.querySelectorAll('input, select, textarea').forEach(field => {
         const handler = function () {
             if (field.classList.contains('invalid') || field.classList.contains('is-invalid')) {
@@ -803,7 +831,6 @@ document.addEventListener('DOMContentLoaded', function () {
     indicators.forEach((indicator, idx) => {
         indicator.addEventListener('click', function () {
             if (idx === currentTab) return;
-            // If trying to move forward, validate current step first
             if (idx > currentTab) {
                 if (!validateCurrentStep()) return;
             }
