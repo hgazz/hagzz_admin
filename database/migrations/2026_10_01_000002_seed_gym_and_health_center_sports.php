@@ -109,7 +109,6 @@ return new class extends Migration
                         'en' => $item['en'],
                     ],
                     'status' => 'active',
-                    'academy_id' => null,
                 ]);
             }
         }
