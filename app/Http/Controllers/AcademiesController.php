@@ -56,6 +56,34 @@ class AcademiesController extends Controller
         return view('Admin.pages.academies.create',get_defined_vars());
     }
 
+    public function checkUnique(\Illuminate\Http\Request $request)
+    {
+        $field = $request->query('field');
+        $value = trim($request->query('value', ''));
+        $excludeId = $request->query('exclude_id');
+
+        if (!in_array($field, ['phone', 'email'], true) || empty($value)) {
+            return response()->json(['exists' => false]);
+        }
+
+        $query = $this->academicModels->where($field, $value);
+        if ($excludeId) {
+            $query->where('id', '!=', $excludeId);
+        }
+
+        $exists = $query->exists();
+
+        return response()->json([
+            'exists' => $exists,
+            'field' => $field,
+            'message' => $exists ? (
+                $field === 'phone'
+                    ? (app()->getLocale() === 'ar' ? 'رقم الهاتف مسجل بالفعل لشريك آخر، يرجى كتابة رقم مختلف' : 'Phone number is already registered for another partner')
+                    : (app()->getLocale() === 'ar' ? 'البريد الإلكتروني مسجل بالفعل لشريك آخر، يرجى كتابة بريد مختلف' : 'Email address is already registered for another partner')
+            ) : null
+        ]);
+    }
+
     public function store(AcademiesRequest $request)
     {
         try {

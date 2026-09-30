@@ -762,9 +762,81 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        // Check if async uniqueness check failed
+        if (field.dataset.uniqueError === 'true') {
+            const msg = cleanName === 'phone' 
+                ? (isAr ? 'رقم الهاتف مسجل بالفعل لشريك آخر، يرجى كتابة رقم مختلف' : 'Phone number is already registered')
+                : (isAr ? 'البريد الإلكتروني مسجل بالفعل لشريك آخر، يرجى كتابة بريد مختلف' : 'Email is already registered');
+            showFieldError(field, msg);
+            return false;
+        }
+
         clearFieldError(field);
         return true;
     }
+
+    // Real-time asynchronous uniqueness checker for phone and email
+    const checkUniqueUrl = @json(route('admin.academies.checkUnique'));
+    const debounceTimers = {};
+
+    function checkFieldUniqueness(field, fieldName) {
+        const val = String(field.value || '').trim();
+        if (val.length < 5) return;
+
+        const parent = field.closest('.mb-3') || field.parentElement;
+        clearTimeout(debounceTimers[fieldName]);
+        
+        debounceTimers[fieldName] = setTimeout(() => {
+            fetch(`${checkUniqueUrl}?field=${encodeURIComponent(fieldName)}&value=${encodeURIComponent(val)}`)
+                .then(res => res.json())
+                .then(data => {
+                    let succDiv = parent.querySelector('.field-success-text');
+                    if (data.exists) {
+                        showFieldError(field, data.message);
+                        field.dataset.uniqueError = 'true';
+                        if (succDiv) succDiv.remove();
+                    } else {
+                        field.dataset.uniqueError = 'false';
+                        if (!field.classList.contains('invalid') && !field.classList.contains('is-invalid')) {
+                            if (!succDiv) {
+                                succDiv = document.createElement('div');
+                                succDiv.className = 'field-success-text text-success small mt-1 fw-semibold d-flex align-items-center gap-1';
+                                parent.appendChild(succDiv);
+                            }
+                            succDiv.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> ${isAr ? 'متاح للاستخدام' : 'Available for use'}`;
+                        }
+                    }
+                })
+                .catch(() => {});
+        }, 350);
+    }
+
+    ['phone', 'email'].forEach(fName => {
+        const field = form.querySelector(`input[name="${fName}"]`);
+        if (field) {
+            field.addEventListener('input', function () {
+                const parent = field.closest('.mb-3') || field.parentElement;
+                const succDiv = parent ? parent.querySelector('.field-success-text') : null;
+                if (succDiv) succDiv.remove();
+                delete field.dataset.uniqueError;
+                checkFieldUniqueness(field, fName);
+            });
+            field.addEventListener('blur', function () {
+                checkFieldUniqueness(field, fName);
+            });
+        }
+    });
+
+    // Attach instant clearing listeners
+    form.querySelectorAll('input, select, textarea').forEach(field => {
+        const handler = function () {
+            if (field.classList.contains('invalid') || field.classList.contains('is-invalid')) {
+                validateField(field);
+            }
+        };
+        field.addEventListener('input', handler);
+        field.addEventListener('change', handler);
+    });
 
     function validateCurrentStep() {
         const step = steps[currentTab];
@@ -815,17 +887,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return true;
         }
     }
-
-    // Attach instant clearing listeners
-    form.querySelectorAll('input, select, textarea').forEach(field => {
-        const handler = function () {
-            if (field.classList.contains('invalid') || field.classList.contains('is-invalid')) {
-                validateField(field);
-            }
-        };
-        field.addEventListener('input', handler);
-        field.addEventListener('change', handler);
-    });
 
     // Step indicator click navigation
     indicators.forEach((indicator, idx) => {

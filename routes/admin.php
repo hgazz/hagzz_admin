@@ -87,6 +87,7 @@ Route::group(
                 Route::controller(AcademiesController::class)->group(function () {
                     Route::get('/academies', 'index')->name('academies.index');
                     Route::get('/academies/create', 'create')->name('academies.create');
+                    Route::get('/academies/check-unique', 'checkUnique')->name('academies.checkUnique');
                     Route::post('/academies/store', 'store')->name('academies.store');
                     Route::get('/academies/edit/{academies}', 'edit')->name('academies.edit');
                     Route::put('/academies/update/{academies}', 'update')->name('academies.update');

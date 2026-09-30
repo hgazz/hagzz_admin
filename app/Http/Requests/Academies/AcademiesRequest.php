@@ -144,4 +144,12 @@ class AcademiesRequest extends FormRequest
         return request()->isMethod('POST') ? 'required|string|min:6' : 'nullable|string|min:6';
     }
 
+    public function messages(): array
+    {
+        return [
+            'phone.unique' => app()->getLocale() === 'ar' ? 'رقم الهاتف مسجل بالفعل لشريك آخر، يرجى كتابة رقم مختلف.' : 'Phone number is already registered for another partner.',
+            'email.unique' => app()->getLocale() === 'ar' ? 'البريد الإلكتروني مسجل بالفعل لشريك آخر، يرجى كتابة بريد مختلف.' : 'Email address is already registered for another partner.',
+            'account_manager.min' => app()->getLocale() === 'ar' ? 'اسم مدير الحساب يجب ألا يقل عن 3 أحرف.' : 'Account manager must be at least 3 characters.',
+        ];
+    }
 }
