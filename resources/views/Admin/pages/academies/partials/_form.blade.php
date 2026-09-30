@@ -62,11 +62,15 @@
     <div class="mb-3">
         <label for="business_type">{{ trans('admin.saas.business_type') }}<code>*</code></label>
         <select id="business_type" name="business_type" class="form-control formInput basic">
-            @foreach(['academy','venue','hybrid'] as $type)
-                <option value="{{ $type }}" @selected(old('business_type', $academies->business_type ?? 'academy') === $type)>{{ trans('admin.saas.business_types.'.$type) }}</option>
+            @foreach(['academy','gym','health_center','venue','hybrid'] as $type)
+                <option value="{{ $type }}" @selected(old('business_type', $academies->business_type ?? 'academy') === $type)>
+                    {{ ['academy'=>'⚽','gym'=>'🏋️','health_center'=>'🩺','venue'=>'🎾','hybrid'=>'🏢'][$type] }}
+                    {{ trans('admin.saas.business_types.'.$type) }}
+                </option>
             @endforeach
         </select>
     </div>
+
     <div class="mb-3">
         <label for="country_id">{{ trans('admin.saas.market_country') }}<code>*</code></label>
         <select id="country_id" name="country_id" class="form-control formInput basic">

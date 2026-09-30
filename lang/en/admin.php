@@ -496,7 +496,13 @@ return [
     'saas' => [
         'plans' => 'SaaS Plans', 'plans_hint' => 'Manage subscription pricing, limits and enabled modules.', 'add_plan' => 'Add Plan', 'edit_plan' => 'Edit Plan',
         'plan' => 'Plan', 'subscription' => 'SaaS Subscription', 'business_type' => 'Business Type',
-        'business_types' => ['academy' => 'Academy', 'venue' => 'Venues only', 'hybrid' => 'Academy and venues'],
+        'business_types' => [
+            'academy'       => 'Sports Academy',
+            'gym'           => 'Gym & Fitness Center',
+            'health_center' => 'Health & Rehabilitation Center',
+            'venue'         => 'Venues & Bookings Only',
+            'hybrid'        => 'Hybrid Facility (Gym + Academy + Venues)',
+        ],
         'code' => 'Code', 'name_ar' => 'Arabic Name', 'name_en' => 'English Name', 'monthly_price' => 'Monthly Price', 'annual_price' => 'Annual Price',
         'max_venues' => 'Maximum Locations', 'max_spaces' => 'Maximum Spaces', 'max_staff' => 'Maximum Staff', 'limits' => 'Locations / Spaces / Staff', 'zero_means_unavailable' => 'Use zero when a resource is not included in this plan.',
         'features' => 'Enabled Modules', 'feature_names' => ['academy' => 'Academy Management', 'venues' => 'Venue Management', 'reports' => 'Advanced Reports', 'mobile_marketplace' => 'Mobile Marketplace'],

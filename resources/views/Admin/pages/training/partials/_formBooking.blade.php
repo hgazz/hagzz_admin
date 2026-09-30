@@ -70,10 +70,12 @@
         <label class="form-label fw-bold"><i class="fa-solid fa-credit-card text-info me-1"></i> {{ trans('admin.payment_method') }} <code>*</code></label>
         <div class="d-flex flex-wrap gap-2 mt-2">
             @foreach(App\Helpers\PaymentMethodHelper::getMethodsForCountry('SA') as $pm)
-                <label class="btn btn-outline-light border shadow-sm p-2 d-flex align-items-center gap-2">
-                    <input type="radio" name="payment_method" value="{{ $pm['id'] }}" @checked(old('payment_method', 'cash') === $pm['id']) required>
-                    <img src="{{ $pm['logo'] }}" alt="{{ $pm['name_ar'] }}" style="height: 26px; width: 50px; object-fit: contain;">
-                    <span class="fw-bold text-dark small">{{ app()->getLocale() == 'ar' ? $pm['name_ar'] : $pm['name_en'] }}</span>
+                <label class="btn btn-outline-light border shadow-sm p-1 px-2 d-flex align-items-center justify-content-center"
+                       title="{{ app()->getLocale() == 'ar' ? $pm['name_ar'] : $pm['name_en'] }}"
+                       data-bs-toggle="tooltip"
+                       style="min-width: 58px; height: 38px; border-radius: 10px;">
+                    <input type="radio" name="payment_method" value="{{ $pm['id'] }}" @checked(old('payment_method', 'cash') === $pm['id']) required class="d-none">
+                    <img src="{{ $pm['logo'] }}" alt="{{ $pm['name_ar'] }}" style="height: 22px; max-width: 48px; object-fit: contain;">
                 </label>
             @endforeach
         </div>
