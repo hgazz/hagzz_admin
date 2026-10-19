@@ -60,11 +60,10 @@ class AcademiesDataTable extends DataTable
                     ->setTableId('academies-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfltip')
+                    ->dom("Bfl<'partners-table-scroll't>ip")
                     ->selectStyleSingle()
                     ->parameters([
-                        'scrollX' => true,
-                        'scrollY' => true,
+                        // Keep one table for both header and rows; split scroll tables drift in RTL.
                         'autoWidth' => true,
                         'responsive' => false,
                         'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
@@ -109,7 +108,7 @@ class AcademiesDataTable extends DataTable
             ['name' => 'account_manager', 'data' => 'account_manager', 'title' => trans('admin.academies.account_manager')],
             ['name' => 'balance', 'data' => 'balance', 'title' => trans('admin.academies.balance'),false, 'orderable' => false, 'searchable' => false],
             ['name' => 'status', 'data' => 'status', 'title' => trans('admin.academies.status')],
-            ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
+            ['name' => 'action', 'data' => 'action', 'title' => trans('admin.actions'), 'className' => 'text-center partner-actions', 'exportable' => false, 'printable' => false, 'orderable' => false, 'searchable' => false],
 
         ];
     }

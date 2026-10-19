@@ -9,6 +9,25 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assetsAdmin/src/plugins/css/dark/table/datatable/dt-global_style.css') }}">
     <link rel="stylesheet" type="text/css"
           href="{{ asset('assetsAdmin/src/plugins/css/dark/table/datatable/custom_dt_miscellaneous.css') }}">
+    <style>
+        #academies-table_wrapper .partners-table-scroll {
+            width: 100%;
+            overflow-x: auto;
+        }
+        #academies-table {
+            width: 100% !important;
+            margin: 0 !important;
+        }
+        #academies-table th,
+        #academies-table td {
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        #academies-table .partner-actions {
+            min-width: 130px;
+            text-align: center;
+        }
+    </style>
 @endpush
 @section('content')
     <div class="middle-content container-xxl p-0">
@@ -73,8 +92,6 @@
 
 
 @push('js')
-{{--    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/datatables.min.js"></script>--}}
-<script src="{{ asset('assetsAdmin/src/plugins/src/table/datatable/datatables.js') }}"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
