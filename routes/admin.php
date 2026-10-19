@@ -52,6 +52,7 @@ Route::group(
 
             Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', 'as' => 'admin.'], function () {
                 Route::get('/', [DashboardController::class, 'index'])->name('index');
+                Route::get('audit-logs', [\App\Http\Controllers\AdminAuditLogController::class, 'index'])->name('audit-logs.index');
                 Route::resource('saas-plans', SaasPlanController::class)->except(['show']);
                 Route::get('invoices/bookings/{invoice}/print', [InvoicePrintController::class, 'booking'])->name('invoices.bookings.print');
                 Route::get('invoices/subscriptions/{invoice}/print', [InvoicePrintController::class, 'subscription'])->name('invoices.subscriptions.print');

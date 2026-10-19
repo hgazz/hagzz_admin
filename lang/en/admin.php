@@ -1,6 +1,26 @@
 <?php
 
 return [
+    'audit' => [
+        'title' => 'Admin audit log',
+        'intro' => 'Records admin operations from activation onward. Completed means the request finished without a detected error; it does not prove a data change occurred. Before/after field values are not recorded.',
+        'actor' => 'Administrator',
+        'actor_id' => 'Administrator ID',
+        'action' => 'Action (route name)',
+        'result' => 'Request result',
+        'completed' => 'Completed',
+        'rejected' => 'Rejected / error',
+        'targets' => 'Record IDs',
+        'ip' => 'IP address',
+        'time' => 'Time',
+        'empty' => 'No matching operations.',
+        'all' => 'All',
+        'filter' => 'Filter',
+        'reset' => 'Reset',
+        'from' => 'From date',
+        'to' => 'To date',
+        'status' => 'HTTP',
+    ],
     'home' => 'Home',
     'latest_settlement_amount'=>'latest settlement amount',
     'next_settlement_date'=>'next settlement date',
