@@ -54,11 +54,47 @@ class CatalogProposalTest extends TestCase
                     $this->assertSame('proposal', $training['status']);
                     $this->assertGreaterThan(0, $training['proposed_price']);
                     $this->assertEquals($training['proposed_price'], $training['price_per_session'] * $training['proposed_sessions']);
-                    $this->assertNull($training['start_date']);
-                    $this->assertSame([], $training['weekdays']);
+                    $this->assertNotNull($training['start_date']);
+                    $this->assertNotEmpty($training['weekdays']);
                 }
             }
         }
+    }
+
+    public function test_demo_operations_have_consistent_calendars_and_no_coach_conflicts(): void
+    {
+        $sessions = 0;
+        $coachKeys = [];
+        foreach ($this->catalog()['academies'] as $academy) {
+            $this->assertSame('fictional_unverified', $academy['demo_coach']['status']);
+            $this->assertSame('demo_unverified', $academy['demo_location']['status']);
+            $this->assertNull($academy['demo_location']['latitude']);
+            $this->assertNull($academy['demo_location']['longitude']);
+            $coachKeys[] = $academy['demo_coach']['key'];
+            $intervals = [];
+            foreach ($academy['trainings'] as $training) {
+                $this->assertSame($academy['country'] === 'eg' ? 'Africa/Cairo' : 'Asia/Qatar', $training['timezone']);
+                $this->assertCount($training['proposed_sessions'], $training['proposed_sessions_calendar']);
+                $this->assertSame('demo_unverified', $training['operational_details_status']);
+                foreach ($training['proposed_sessions_calendar'] as $session) {
+                    $start = new \DateTimeImmutable($session['start_at']);
+                    $end = new \DateTimeImmutable($session['end_at']);
+                    $local = $start->setTimezone(new \DateTimeZone($training['timezone']));
+                    $this->assertSame($start->format('H:iP'), $local->format('H:iP'));
+                    $this->assertSame(3600, $end->getTimestamp() - $start->getTimestamp());
+                    $this->assertContains((int) $local->format('N'), $training['weekdays_iso']);
+                    $this->assertSame($training['start_time'], $local->format('H:i'));
+                    $intervals[] = [$start->getTimestamp(), $end->getTimestamp()];
+                    $sessions++;
+                }
+            }
+            usort($intervals, fn ($left, $right) => $left[0] <=> $right[0]);
+            for ($i = 1; $i < count($intervals); $i++) {
+                $this->assertGreaterThanOrEqual($intervals[$i - 1][1], $intervals[$i][0]);
+            }
+        }
+        $this->assertCount(30, array_unique($coachKeys));
+        $this->assertSame(600, $sessions);
     }
 
     public function test_guest_cannot_view_or_download_the_internal_proposals(): void

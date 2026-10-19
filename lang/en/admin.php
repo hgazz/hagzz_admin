@@ -2,8 +2,11 @@
 
 return [
     'catalog' => [
+        'demo_schedule' => 'Demo schedule, not confirmed by the academy',
+        'demo_coach' => 'Fictional coach',
+        'demo_location' => 'Demo location',
         'title' => 'App content proposals',
-        'notice' => 'Selected from the leads export. Programs and prices are Hagzz proposals for review, not academy-approved offers. This internal page does not publish academies or trainings to the app, and enables no bookings or payments.',
+        'notice' => 'Academy names come from the leads export. Programs, prices, coaches, locations and schedules are Hagzz proposals or demo data, not academy-confirmed operations. This internal page enables no booking or payment.',
         'eg' => 'Egypt',
         'qa' => 'Qatar',
         'trainings' => 'training proposals',
@@ -20,7 +23,7 @@ return [
         'sessions' => 'proposed sessions',
         'package' => 'Price for the full package',
         'not_bookable' => 'Not bookable',
-        'missing_details' => 'Schedule, ages, coach, capacity and branch details require confirmation.',
+        'missing_details' => 'Locations, coaches and schedules are fictional and need verification before booking. Ages and capacity are unspecified.',
         'empty' => 'No matching proposals.',
     ],
     'audit' => [

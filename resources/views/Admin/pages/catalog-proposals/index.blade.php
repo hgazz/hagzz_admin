@@ -53,12 +53,17 @@ body.dark .catalog-proposals .proposal-price {color:#b7f580}
             <h2>{{ app()->getLocale() === 'ar' ? $academy['name_ar_proposed'] : $academy['name'] }}</h2>
             <div class="proposal-name" dir="auto">{{ $academy['name'] }}</div>
             <div class="proposal-meta">{{ trans('admin.catalog.'.$academy['country']) }} · <span dir="auto">{{ $academy['city_region_from_lead'] }}</span></div>
+            <div class="proposal-meta">{{ trans('admin.catalog.demo_location') }}: {{ $academy['demo_location']['name_ar'] }}</div>
+            <div class="proposal-meta">{{ trans('admin.catalog.demo_coach') }}: {{ $academy['demo_coach']['name_ar'] }}</div>
             <span class="proposal-tag">{{ app()->getLocale() === 'ar' ? $academy['sport_ar'] : $academy['sport_en'] }}</span>
             @foreach($academy['trainings'] as $training)
                 <section class="training-proposal">
                     <h3>{{ app()->getLocale() === 'ar' ? $training['name_ar'] : $training['name_en'] }}</h3>
                     <div><span class="proposal-price">{{ number_format($training['proposed_price']) }} {{ $training['currency'] }}</span><span class="proposal-price-label">{{ trans('admin.catalog.price_proposal') }}</span></div>
                     <div class="proposal-meta">{{ $training['proposed_sessions'] }} {{ trans('admin.catalog.sessions') }} · {{ trans('admin.catalog.package') }} · {{ trans('admin.catalog.not_bookable') }}</div>
+                    <div class="proposal-meta">{{ $training['weekdays_ar'] }} · <span dir="ltr">{{ $training['start_time'] }}–{{ $training['end_time'] }}</span></div>
+                    <div class="proposal-meta"><span dir="ltr">{{ $training['start_date'] }} → {{ $training['end_date'] }}</span> · {{ $training['timezone'] }}</div>
+                    <div class="proposal-meta">{{ trans('admin.catalog.demo_schedule') }}</div>
                 </section>
             @endforeach
             <p class="proposal-meta mt-3">{{ trans('admin.catalog.missing_details') }}</p>
