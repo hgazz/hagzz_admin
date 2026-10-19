@@ -82,6 +82,8 @@ return [
         'deleted_successfully' => 'Area deleted successfully',
     ],
     'academies'=>[
+        'members_count' => 'Players / members',
+        'members_count_help' => 'Total registered player and member profiles for each partner, including inactive profiles. An active subscription is not required.',
         'academies'=>'Academies',
         'create'=>'Add New Academy',
         'first_name'=>'First name',

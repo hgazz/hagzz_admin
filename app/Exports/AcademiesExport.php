@@ -12,7 +12,7 @@ class AcademiesExport implements FromView
 
     public function view(): View
     {
-        $academies = Academies::with(['country','city','area','academy'])->get();
+        $academies = Academies::with(['country','city','area','academy','sports'])->withCount('students as members_count')->get();
         return  view('Admin.pages.academies.export',compact('academies'));
     }
 }

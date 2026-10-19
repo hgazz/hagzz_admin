@@ -23,6 +23,7 @@ class AcademiesDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('commercial_name_en', fn($raw) => $raw->getTranslation('commercial_name', 'en'))
             ->addColumn('commercial_name_ar', fn($raw) => $raw->getTranslation('commercial_name', 'ar'))
+            ->editColumn('members_count', fn (Academies $academy) => (int) $academy->members_count)
             ->addColumn('sports', function ($query) {
                 return $query->sports->pluck('name')->implode(', ');
             })
@@ -45,7 +46,7 @@ class AcademiesDataTable extends DataTable
      */
     public function query(Academies $model): QueryBuilder
     {
-        return $model->newQuery()->with('sports');
+        return $model->newQuery()->with('sports')->withCount('students as members_count');
     }
 
     /**
@@ -94,6 +95,7 @@ class AcademiesDataTable extends DataTable
             ['name' => 'id', 'data' => 'id', 'title' => trans('admin.id')],
             ['name' => 'commercial_name->en', 'data' => 'commercial_name.en', 'title' => trans('admin.academies.commercial_name_en')],
             ['name' => 'commercial_name->ar', 'data' => 'commercial_name.ar', 'title' => trans('admin.academies.commercial_name_ar')],
+            ['name' => 'members_count', 'data' => 'members_count', 'title' => trans('admin.academies.members_count'), 'searchable' => false, 'orderable' => true, 'className' => 'text-center', 'type' => 'num'],
             ['name' => 'email', 'data' => 'email', 'title' => trans('admin.academies.email')],
             ['name' => 'phone', 'data' => 'phone', 'title' => trans('admin.academies.phone')],
             ['name' => 'role', 'data' => 'role', 'title' => trans('admin.academies.role')],

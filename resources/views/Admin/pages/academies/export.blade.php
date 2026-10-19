@@ -7,6 +7,7 @@
         <th>status</th>
         <th>role</th>
         <th>commercial_name</th>
+        <th>{{ trans('admin.academies.members_count') }}</th>
         <th>trade_license_number</th>
         <th>trade_license_expire_date</th>
         <th>tax_number</th>
@@ -30,6 +31,7 @@
             <td>{{ $academy->status }}</td>
             <td>{{ $academy->role }}</td>
             <td>{{ $academy->commercial_name }}</td>
+            <td>{{ (int) $academy->members_count }}</td>
             <td>{{ $academy->trade_license_number }}</td>
             <td>{{ $academy->trade_license_expire_date }}</td>
             <td>{{ $academy->tax_number }}</td>

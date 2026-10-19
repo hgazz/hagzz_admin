@@ -59,6 +59,8 @@
 
             <div class="card-body">
 
+                <p class="small text-muted mb-3">{{ trans('admin.academies.members_count_help') }}</p>
+
                 {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
 
             </div>
