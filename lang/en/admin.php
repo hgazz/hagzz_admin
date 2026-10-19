@@ -1,6 +1,28 @@
 <?php
 
 return [
+    'catalog' => [
+        'title' => 'App content proposals',
+        'notice' => 'Selected from the leads export. Programs and prices are Hagzz proposals for review, not academy-approved offers. This internal page does not publish academies or trainings to the app, and enables no bookings or payments.',
+        'eg' => 'Egypt',
+        'qa' => 'Qatar',
+        'trainings' => 'training proposals',
+        'sports' => 'sports',
+        'country' => 'Country',
+        'all' => 'All',
+        'sport' => 'Sport',
+        'search' => 'Academy or city',
+        'filter' => 'Filter',
+        'reset' => 'Reset',
+        'download' => 'Download all 90 proposals (CSV)',
+        'logo_pending' => 'Official logo awaiting verification',
+        'price_proposal' => 'Unapproved proposed price',
+        'sessions' => 'proposed sessions',
+        'package' => 'Price for the full package',
+        'not_bookable' => 'Not bookable',
+        'missing_details' => 'Schedule, ages, coach, capacity and branch details require confirmation.',
+        'empty' => 'No matching proposals.',
+    ],
     'audit' => [
         'title' => 'Admin audit log',
         'intro' => 'Records admin operations from activation onward. Completed means the request finished without a detected error; it does not prove a data change occurred. Before/after field values are not recorded.',

@@ -124,6 +124,9 @@
                 </ul>
             </li>
             <li class="menu {{ Request::routeIs('admin.setting.*') ? 'active' : '' }}"><a href="{{ route('admin.setting.index') }}" class="dropdown-toggle"><div class="admin-menu-label"><x-feather-icon name="settings" class="admin-menu-icon" /><span>{{ trans('admin.setting.setting') }}</span></div></a></li>
+            <li class="menu {{ Request::routeIs('admin.catalog-proposals.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.catalog-proposals.index') }}"><span class="admin-menu-label"><x-feather-icon name="file-text" class="admin-menu-icon" /><span>{{ trans('admin.catalog.title') }}</span></span></a>
+            </li>
             <li class="menu {{ Request::routeIs('admin.audit-logs.*') ? 'active' : '' }}">
                 <a href="{{ route('admin.audit-logs.index') }}"><span class="admin-menu-label"><x-feather-icon name="clock" class="admin-menu-icon" /><span>{{ trans('admin.audit.title') }}</span></span></a>
             </li>
